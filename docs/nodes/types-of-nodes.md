@@ -1,0 +1,3 @@
+---
+id: 'Types of Nodes'
+---
