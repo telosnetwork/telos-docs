@@ -1,3 +1,1 @@
----
-id: Starting with Native Eosio
----
+# Native EOSIO

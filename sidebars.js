@@ -33,8 +33,9 @@ const sidebars = {
   // Quick Start Layout A basic launch with native and EVM
   quickStart: [
     'quickstart/README',
-    'quickstart/Launch your Ethereum Dapp on Telos EVM',
-    'quickstart/Starting with Native Eosio',
+    'quickstart/launch-dapp-on-evm',
+    'quickstart/native-eosio',
+    'quickstart/mint_nfts_on_telos',
   ],
 
   // DApps
