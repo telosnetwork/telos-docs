@@ -84,6 +84,24 @@ const config = {
             sidebarId: 'nodes',
             label: 'Nodes',
           },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'native',
+            label: 'Telos Native',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'learn',
+            label: 'Learn',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'faq',
+            label: 'FAQ',
+          },
           // {
           //   type: 'docSidebar',
           //   position: 'left',
