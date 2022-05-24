@@ -1,3 +1,0 @@
----
-id: Installing client software
----

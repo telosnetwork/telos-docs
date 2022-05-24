@@ -27,13 +27,14 @@ const sidebars = {
       collapsed: false,
       items: [
         'overview/getting-started/Overview',
+        'overview/getting-started/resources',
       ],
     },
   ],
   // Quick Start Layout A basic launch with native and EVM
   quickStart: [
     'quickstart/README',
-    'quickstart/launch-dapp-on-evm',
+    'quickstart/metamask_remix',
     'quickstart/native-eosio',
     'quickstart/mint_nfts_on_telos',
   ],
@@ -43,7 +44,7 @@ const sidebars = {
   'dapps/launch-dapp-on-tEVM',
   {
       type: 'category',
-      label: 'Smart Contract',
+      label: 'Smart Contracts',
       collapsed: false,
       items: [
       {
@@ -51,13 +52,13 @@ const sidebars = {
         dirName: 'dapps/smart-contracts',
       },
     ],
-  },
+  }
 ],
 
 
   // Nodes
   nodes: [
-    'nodes/Installing client software',
+    'nodes/Telos nodes',
     'nodes/Types of Nodes'
   ],
 

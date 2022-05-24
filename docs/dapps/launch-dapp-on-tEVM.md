@@ -1,11 +1,6 @@
-# Smart Contracts Overview
+# DApps on Telos EVM
 
-
-_**The purpose of this document is to help you with launching your existing Ethereum dapp on Telos, get the basics of Telos Platform and how it works.**_
-
-
-
-# Launch Your Ethereum dApp on Telos
+# Launch Your Ethereum DApp on Telos
 
 ## Overview
 
@@ -13,17 +8,7 @@ The purpose of this document is to help you with launching your existing dapp on
 
 ## Platform Basics
 
-Describe our blockchain network implementation 
- -Native
-    -- How does the netowrk meet consensus
-        -- Block times
-            -- Th
-
-
-
-
-
-As far as your dapp is concerned, it will be running the same as on Ethereum, just quicker and cheaper. Let's find out how.
+Telos EVM is an implementation of the Ethereum EVM written as a Smart Contract in EOSIO(C++) that simply runs ontop of the native network. As far as your dapp is concerned, it will be running the same as on Ethereum, just quicker and cheaper. Let's find out how.
 
 ## Accessing Telos 
 
@@ -49,7 +34,11 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 * **Symbol**: `TLOS`
 * **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
 
+#### **Telos Websockets:**
 
+* **Testnet : wss://testnet.telos.net/evm**
+
+* **Mainnet: wss://mainnet.telos.net/evm**
 
 ## Running Your Own Node
 
@@ -59,5 +48,5 @@ For development and experimental purposes...
 
 ### Node Configuration
 
-Node configuration options are explained [
+Coming soon..
 
