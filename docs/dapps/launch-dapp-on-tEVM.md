@@ -40,13 +40,4 @@ You can access C-Chain through MetaMask, by defining a custom network. Go to Met
 
 * **Mainnet: wss://mainnet.telos.net/evm**
 
-## Running Your Own Node
-
-If you don't want your dapp to depend on a centralized service you don't control, or have specific needs that cannot be met through the public API, you can run your own node and access the network that way. Running your own node also avoids potential issues with public API congestion and rate-limiting.
-
-For development and experimental purposes...
-
-### Node Configuration
-
-Coming soon..
 

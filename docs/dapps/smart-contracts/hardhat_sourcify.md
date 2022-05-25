@@ -34,8 +34,12 @@ Don't forget to add: ``` require("@nomiclabs/hardhat-ethers"); ``` at the top of
 
 ### Deploy
 
-Deploy
+Using the hardhat sourcify command you can easily verify smart contracts with the
 
-Deployment scripts are kept in the **scripts** folder inside of deploy.js 
 
-Here is the deployment script for deploying the Token contract given by Hardhat getting started 
+Once you have you deploy scripts simply run the following
+
+```
+hardhat --network telos_testnet sourcify
+```
+

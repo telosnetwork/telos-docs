@@ -36,7 +36,9 @@ const sidebars = {
     'quickstart/README',
     'quickstart/metamask_remix',
     'quickstart/native-eosio',
-    'quickstart/mint_nfts_on_telos',
+    'quickstart/launch_on_telos',
+    'quickstart/testnet_tutorial'
+
   ],
 
   // DApps
@@ -58,7 +60,7 @@ const sidebars = {
 
   // Nodes
   nodes: [
-    'nodes/Telos nodes',
+    'nodes/Telos Nodes',
     'nodes/Types of Nodes'
   ],
 
