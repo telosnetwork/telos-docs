@@ -6,7 +6,7 @@ sidebar_positon: 1
 
 __Considerations and coverage for launching a DApp live on the Telos mainnet.__
 
-**Disclaimer**: This tutorial is for those already familiar with developing smart contracts on EVM-compatible chains and using tools like Solidity, Ethers.js, and Hardhat or Truffle. If you are not used to these tools then please visit our [DApps tools section](/smart-contracts/README.md)
+**Disclaimer**: This tutorial is for those already familiar with developing smart contracts on EVM-compatible chains and using tools like Solidity, Ethers.js, and Hardhat or Truffle. If you are not used to these tools then please visit our [DApps tools section](/dapps/smart-contracts/README.md)
 
 ## Test Smart Contracts on Testnet
 The Telos testnet tokens can be aquired in the [Testnet Faucet](https://app.telos.net/testnet/developers).
@@ -80,4 +80,6 @@ Now run code below.
 
 
 
-To set check the gas price set by telos resources go to [teloscan](9https://www.teloscan.io/)
+To set check the gas price set by telos resources go to [teloscan](https://www.teloscan.io/)
+
+When you deploy using hardhat, it automatically drains your wallet of the funds that it needs to perform the request. In other words, there is no pop up confirmation from metamask. Once you run the deploy script command then Boom! Your charged for gas fees and your contract is deployed. 

@@ -2,7 +2,7 @@
 
 Hardhat is a development environment to compile, deploy, test, and debug contracts for EVM compatible blockchains. 
 
-This tutorial will cover how to use the [hardhat-deploy plugin](https://github.com/wighawag/hardhat-deploy) for hardhat, specifically to verify deployed contracts on the Telos explorer on mainnet. 
+This tutorial will cover how to use the [hardhat-deploy plugin](https://github.com/wighawag/hardhat-deploy), specifically to verify deployed contracts on the Telos explorer on mainnet. 
 
 
 1. Setup Hardhat project with the hardhat-deploy plugin
@@ -40,6 +40,6 @@ Using the hardhat sourcify command you can easily verify smart contracts with th
 Once you have you deploy scripts simply run the following
 
 ```
-hardhat --network telos_testnet sourcify
+npx hardhat --network telos_testnet sourcify
 ```
 

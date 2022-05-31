@@ -10,10 +10,18 @@ Telos native is a platform that supports the blockchain at a lower level than wo
 # Toolkit
 
 **The Telos platform at protocol level is made out of the following components and toolchain:
+
 **Nodeos**
+
 **Cleos**
+
 **Keosd**
+
 **EOSIO.CDT**
+
+# Telos Decide Engine
+
+Learn how Telos Governance Engine works and why its one of the most powerful governance platforms in the world! 
 
 
 
