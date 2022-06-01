@@ -8,15 +8,36 @@ slug: /
 
 ## Introduction
 
-Telos is an open source platform built for launching decentralized applications with a variety of features powered by Smart Contracts. Telos is the first EVM built on top of an EOSIO blockchain powering EVM developers to quickly build on Telos as Solidity based Dapps work out-of-the-box. 
+Telos is an open source platform built for launching decentralized applications with a variety of features powered by Smart Contracts. Telos is the first EVM built on top of an EOSIO blockchain powering web3 developers to quickly build on Telos as Solidity based Dapps work out-of-the-box. 
 
 
-A key difference between Telos and other decentralized networks is the consensus protocol. Over time, people have come to a false understanding that blockchains have to be slow and not scalable. The Telos protocol employs a novel approach to consensus to achieve a quick finality, energy efficient, and high throughput blockchain with strong safety guarentees. 
+A key difference between Telos and other decentralized networks is the EVM architecture. Over time, people have come to a false understanding that layer 1 blockchains have to be forked off of Ethereum EVM client implementations, this is not the case for Telos EVM as it has been built from the ground up. The Telos protocol employs a novel approach to consensus to achieve a quick finality, energy efficient, and high throughput blockchain with strong safety guarentees and robust governance features. 
 
 
-## TELOS
+## TELOS Native
 
-TLOS is the native token of Telos. It’s a hard-capped, scarce asset that is used to pay for fees, secure the platform through staking, and provide a basic unit of account between the native network and EVM. 
+TLOS is the native token of Telos. It’s a hard-capped coin with a max supply of 355,208,371 ever to be circulating. TLOS accounts are 12 character long accounts able to send coins across the network with no fees. The native Telos coin is mostly used for Resources and Governance in its modern days. 
+
+**Resource Overview**
+- RAM: A size-based resource an account can use to store data within smart contracts.
+- CPU: A time-based resource an account uses while performing smart contract actions.
+- NET: A size-based resource an account uses while sending data to the blockchain.
+
+**Governance Overview**
+TLOS holders are responsible for providing the network judgement to come to aggreement on the future of the blockchain revolution. It is encouraged for users to vote with their native TLOS using the on-chain governance engine that Telos has built to support a truly democratic blockchain revolution.
+
+[Vote](https://app.telos.net/)
+
+## Telos EVM
+
+- Telos EVM is a Smart Contract that inherits classes from EOSIO and uses them to construct a global decentralized computer that computes state executable objects & actions, each with its own permanent data store.
+
+### Telos native to Telos EVM
+- The Telos EVM account's are mapped to the native network account's so that users can bridge between the Native netowrk and Telos EVM to reap benefits of both sides of the network. 
+
+1. TLOS is the native currency for executing transactions on the EVM platform also known as gas almost identical to native RAM. 
+2. When a transaction is called it results in smart contract execution that is initially controlled by Externally Owned accounts comprising of an TLOS EVM balance to pay for the transaction to be executed across the network of Telos blockproducers
+3. Account and code tables match the specification in the Ethereum Yellow Paper
 
 ## Core layer Consensus Protocol aBFT
 
@@ -51,7 +72,7 @@ __Telos block producer voting is "inverse weighted" meaning that the less votes 
 
 ## Telos EVM
 
-Telos has an EVM encapsulated into its native network that simulates the same composability and programming language as Ethereum and other EVMs, but has substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running so that large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mem pool. 
+Telos has an EVM encapsulated into a smart contract on it's native network that meets JSON-RPC specification that Ethereum uses. Telos had made substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running so that large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mempool. 
 
 
 ## Key Features & Performance Metrics
