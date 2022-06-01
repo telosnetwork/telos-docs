@@ -64,7 +64,8 @@ const sidebars = {
     'nodes/Nodeos',
     'nodes/Run-A-Node',
     'nodes/TEVM-local-guide',
-    'nodes/Telos-BP-Requirements',
+    'nodes/Telos_BP_Requirements',
+    'nodes/types-of-nodes',
     ],
 
   // Native Telos 

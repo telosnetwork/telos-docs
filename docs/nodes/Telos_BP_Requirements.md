@@ -1,6 +1,6 @@
 ---
 sidebarId: 4
-id: "Telos-BP-Requirements"
+id: "Telos_BP_Requirements"
 ---
 
 # Telos Block Producer Requirements
