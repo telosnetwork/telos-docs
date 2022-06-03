@@ -21,6 +21,22 @@ The Telos testnet tokens can be aquired in the [Testnet Faucet](https://app.telo
 * **Symbol**: `TLOS`
 * **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
 
+## Telos Mainnet 
+
+#### **Telos Mainnet Settings:**
+
+* **Network Name**: Telos Mainnet 
+* **New RPC URL**: [https://mainnet.telos.net/evm](https://mainnet.telos.net/evm)
+* **ChainID**: `40`
+* **Symbol**: `TLOS`
+* **Explorer**: [https://www.teloscan.io/](https://www.teloscan.io/)
+
+#### Websocket connections
+
+* **Testnet : wss://testnet.telos.net/evm**
+
+* **Mainnet: wss://mainnet.telos.net/evm**
+
 
 ## Audit and Optimize Smart Contracts
 Optimize the contract to make sure that it is safe as possible and efficient as well. 
