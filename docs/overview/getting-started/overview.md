@@ -8,10 +8,10 @@ slug: /
 
 ## Introduction
 
-Telos is an open source platform built for launching decentralized applications with a variety of features powered by Smart Contracts. Telos is the first EVM built on top of an EOSIO blockchain powering web3 developers to quickly build on Telos as Solidity based Dapps work out-of-the-box. 
+Telos is an open source platform built for launching decentralized applications with a variety of features powered by Smart Contracts. Telos is the first EVM built on top of EOSIO blockchain software empowering web3 developers and node operators to leverage a swift and distributed web3 platform. Telos is EVM compatible meaning that Solidity and Viper compiled into Byte code works on the EVM making this a very inviting platform for developers. 
 
 
-A key difference between Telos and other decentralized networks is the EVM architecture. Over time, people have come to a false understanding that layer 1 blockchains have to be forked off of Ethereum EVM client implementations, this is not the case for Telos EVM as it has been built from the ground up. The Telos protocol employs a novel approach to consensus to achieve a quick finality, energy efficient, and high throughput blockchain with strong safety guarentees and robust governance features. 
+A key difference between Telos and other touring complete blockchains is the EVM architecture. The Telos EVM lives on a Smart Contract ontop of the native network which makes it unique to its competitors. The Telos protocol employs a novel approach to consensus to achieve a quick finality, energy efficient, and high throughput blockchain with strong safety guarentees and robust governance features. 
 
 
 ## TELOS Native
@@ -24,7 +24,7 @@ TLOS is the native token of Telos. It’s a hard-capped coin with a max supply o
 - NET: A size-based resource an account uses while sending data to the blockchain.
 
 **Governance Overview**
-TLOS holders are responsible for providing the network judgement to come to aggreement on the future of the blockchain revolution. It is encouraged for users to vote with their native TLOS using the on-chain governance engine that Telos has built to support a truly democratic blockchain revolution.
+TLOS holders are responsible for providing the network judgement to come to aggreement on the future of how blocks are made and verified on the network. This is unique because ultimately the community is responsible for which direction the network moves not capital like seen with POW and POS blockchains. It is encouraged for users to vote with their native TLOS using the on-chain governance engine that Telos has built to support a truly democratic blockchain revolution.
 
 [Vote](https://app.telos.net/)
 
@@ -33,7 +33,7 @@ TLOS holders are responsible for providing the network judgement to come to aggr
 - Telos EVM is a Smart Contract that inherits classes from EOSIO and uses them to construct a global decentralized computer that computes state executable objects & actions, each with its own permanent data store.
 
 ### Telos native to Telos EVM
-- The Telos EVM account's are mapped to the native network account's so that users can bridge between the Native netowrk and Telos EVM to reap benefits of both sides of the network. 
+- The Telos EVM account's are mapped to the native network account's so that users can bridge between the Native netowrk and Telos EVM to leverage tools and DApps on both sides of the network. 
 
 1. TLOS is the native currency for executing transactions on the EVM platform also known as gas almost identical to native RAM. 
 2. When a transaction is called it results in smart contract execution that is initially controlled by Externally Owned accounts comprising of an TLOS EVM balance to pay for the transaction to be executed across the network of Telos blockproducers

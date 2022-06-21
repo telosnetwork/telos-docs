@@ -3,7 +3,7 @@ docId: Telos Testnet Tutorial
 sidebar_positon: 2
 ---
 
-# Telos Testnet Walkthrough
+# Telos Testnet Faucet
 
 **This tutorial demonstrates how to get Telos Testnet from the Testnet Faucet for development purposes**
 

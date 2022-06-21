@@ -37,7 +37,8 @@ const sidebars = {
     'quickstart/metamask_remix',
     'quickstart/native-eosio',
     'quickstart/launch_on_telos',
-    'quickstart/testnet_tutorial'
+    'quickstart/testnet_tutorial',
+    'quickstart/erc20_mintable',
 
   ],
 
