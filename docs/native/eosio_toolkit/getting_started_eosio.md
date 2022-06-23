@@ -5,7 +5,13 @@ sidebar_position: 2
 
 # Getting Started with EOSIO
 
-### Overview
+### Prerequisites
+----     -----
 
+![eosioStart](/img/EOSIO_start.png)
 
-### Installation
+## EOSIO Versions  
+
+The subsequent tutorials are up to date with the following EOSIO components.
+
+EOSIO V2.0

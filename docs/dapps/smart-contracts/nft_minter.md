@@ -1,8 +1,7 @@
-# NFT Minting
+# ERC721 NFT
 
 We are going to write an NFT minting smart contract that encapsulates all of the logic based on the NFTs you want to mint. Then we are going to be hosting all of our images and metadata on decentralized file storage. 
 
-Lastly we are going to upload our NFTs to AreaXNFT collection to host our NFTS! 
 
 ## Set up local Dev environment
 
