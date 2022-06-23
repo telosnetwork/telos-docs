@@ -7,7 +7,7 @@ sidebar_position: 1
 
 | Title | Description |
 | :--- | :--- |
-| [**Getting Started with EOSIO**](nodeos.md) | Installation and overview of EOSIO. |
+| [**Getting Started with EOSIO**](getting_started_eosio.md) | Installation and overview of EOSIO. |
 | [**Nodeos**](nodeos.md) | Simple walkthrough using Nodeos to handle blockchain data. |
 | [**Cleos**](cleos.md) | Simple walkthrough using Cleos CLI to interact with the blockchain and to manage wallets. |
 | [**Keosd**](keosd.md) | Simple walkthrough using Keosd to safely secure EOSIO keys in wallets. |
