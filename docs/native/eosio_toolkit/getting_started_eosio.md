@@ -10,8 +10,8 @@ sidebar_position: 2
 
 ![eosioStart](/img/EOSIO_start.png)
 
-## EOSIO Versions  
 
-The subsequent tutorials are up to date with the following EOSIO components.
+## Workflows
 
-EOSIO V2.0
+1. Set up local development environment
+2. Build and deploy a basic Hello World smart contract 
