@@ -3,28 +3,32 @@ sidebar_position: 2
 ---
 
 
-# Getting Started/Installation
+# Installating EOSIO
 
-### Prerequisites
 ----     -----
 
-![eosioStart](/img/EOSIO_start.png)
-
-
-## Workflows
-
-1. Set up local development environment
-2. Build and deploy a basic Hello World smart contract 
-
-## Set Up Local Development Environment
-
-1. Download EOSIO software. 
-    - Install EOSIO Binaries: Steps to install EOSIO pre-built binaries
+__This page is intended to walkthrough the necessary steps for installing EOSIO software using pre-built binaries__
 
 ## Prebuilt Binaries
 
 Prebuilt EOSIO software packages are available for the operating systems below. Find and follow the instructions for your OS:
 
+
+## Supported Operating Systems
+**macOS**
+- macOS (Mojave)
+- macOS (Catalina)
+- macOS (Monterey)
+
+**Linux**
+- Amazon Linux 2
+- CentOS Linux 8.x
+- CentOS Linux 7.x
+- Ubuntu 20.04
+- Ubuntu 18.04
+
+## Install EOSIO Binaries
+----             -----
 ### Mac OS X:
 
 #### Mac OS X Brew Install
