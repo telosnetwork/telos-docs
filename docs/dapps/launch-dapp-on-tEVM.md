@@ -16,7 +16,7 @@ There are multiple ways of working with the Telos. We are creating more ways to 
 
 ### Through MetaMask
 
-You can access C-Chain through MetaMask, by defining a custom network. Go to MetaMask, log in, click the network dropdown, and select 'Custom RPC'. Data for Avalanche is as follows.
+You can access TelosEVM through MetaMask, by defining a custom network. Go to MetaMask, log in, click the network dropdown, and select 'Custom RPC'. Data for Telos is as follows.
 
 #### **Telos Mainnet Settings:**
 

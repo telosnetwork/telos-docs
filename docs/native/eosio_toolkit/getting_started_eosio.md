@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ----     -----
 
-__This page is intended to walkthrough the necessary steps for installing EOSIO software using pre-built binaries__
+__This page is intended to walkthrough the necessary steps for installing EOSIO software using pre-built binaries and download from source repository at bottom of page for experienced developers.__
 
 ## Prebuilt Binaries
 
@@ -104,3 +104,75 @@ cleos version client
 ```
 
 output: ```- v2.1.0```
+
+__Now its time to build on Telos using the EOSIO platform head over to [get started with Telos Development Wallet creation!](/docs/native/eosio_toolkit/cleos)__
+
+------------                                            ------------
+
+## Download From Source Code Install Method #2
+
+**For experienced devs and BPs**
+
+Clone the [EOS repo](https://github.com/EOSIO/eos) and its submodules in a local folder. 
+
+```
+mkdir -p ~/eosio && cd ~/eosio
+git clone --recursive https://github.com/EOSIO/eos
+```
+
+
+**Update Submodules** 
+```
+cd ~/eosio/eos
+git submodule update --init --recursive
+```
+
+**Pull Changes**
+
+```
+[git checkout <branch>]  (optional)
+git pull --recurse-submodules
+```
+
+
+### Build EOSIO Binaries
+Using shell scripts from source code we downloaded above.
+
+The build script first installs all dependencies and then builds EOSIO. The script supports these Operating Systems. To run it, first change to the ~/eosio/eos folder, then launch the script:
+
+```
+cd ~/eosio/eos
+./scripts/eosio_build.sh
+```
+
+We now have a temporary build binary that is executable
+
+### Install EOSIO Binaries
+
+Execute install script
+
+```
+cd ~/eosio/eos
+./scripts/eosio_install.sh
+```
+
+ALTERNATIVELY YOU CAN DO EOSIO MANUAL INSTALL 
+
+**EOSIO manual install** 
+
+```
+cd ~/eosio/eos/build
+make install
+```
+
+
+**Test EOSIO Binaries** 
+Validate the software has been installed successfully.
+
+Run test sweet via
+
+```
+cd ~/eosio/eos/build
+make test
+```
+
