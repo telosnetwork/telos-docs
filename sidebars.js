@@ -67,6 +67,7 @@ const sidebars = {
     'nodes/TEVM-local-guide',
     'nodes/Telos_BP_Requirements',
     'nodes/types-of-nodes',
+    'nodes/EOSIO-network-spinup',
     ],
 
   // Native Telos 
