@@ -1,6 +1,6 @@
 # Remix Smart Contract Tutorial ERC20
 
-__Prerequisites: MetaMask__
+__Prerequisites: MetaMask Wallet__
 
 ### Set Up MetaMask
 1. If you dont already have MetaMask then download it [here](https://metamask.io/download/) 
@@ -51,9 +51,9 @@ Open [Remix](http://remix.ethereum.org/)
 
 1. Load or create the smart contracts that we want to compile and deploy using Remix file explorer. Go under contracts tab and create a file named MyEpicToken.sol. 
 
-2. For this example, we will deploy an ERC20 contract from [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc20)
+2. For this example, we will deploy this ERC20 contract from [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc20)
 
-3. Paste the Smart Contract from Open Zeppelin under the contracts folder into MyEpicToken.sol file. 
+3. Copy and Paste the Smart Contract from Open Zeppelin under the contracts folder into MyEpicToken.sol file. 
 ![ERC20 Token Pic](/img/My_EPIC_ERC.png)
 4. **Change network to Web3Injected to integrate Telos Testnet Through MetaMask**
 Click on Ethereum Deploy Logo on the side

@@ -14,10 +14,6 @@ Answers to frequently asked questions about Telos.
 
 ### What is Telos?
 
-
-
-**Open**
-
 - Telos is an decentralized blockchain system that provides scalable solutions and resources for developers to build the future of web3.  
 
 
@@ -77,21 +73,26 @@ Telos uses Delegated proof-of-stake +aBFT to maintain consensus. Holders of TLOS
 
 
 ### How does Telos handle Governance?
+The Telos blockchain is a highly inclusive platform consisting of contributors such as node operators, builders, and users responsible for the future development and process for approving on-chain business decisions. To operate these processes, Telos created the Telos Decide Governance Engine, a governance system designed to support upgrading the Telos native and EVM protocol utilities and other voting functionalities such as delegating funds to works proposals and voting on Block Producers, proposals, amendments, and elections.
+
+
 Check out [Telos Decide Governance System](/native/eosio_toolkit/decide_engine.md)
 
 
 
 ### How do I add Telos to MetaMask?
-
+Guide is over [here](/docs/dapps/launch-dapp-on-tEVM.md)
 ### What is REX and how does it work?
+REX is the resource exchange powered by the Telos native network. Users can stake REX for an API up to 14%. REX is responsible for all the actions on EOSIO that enable users and builders to buy, sell, stake resources in order to perform actions on-chain and acrue TLOS tokens. 
 
-### How does Telos prevent spammers from 
 ---
 
 ## Staking Questions
 
 ### How do I stake TELOS?
-
+- Stake Telos on the [Web Wallet](https://wallet.telos.net/balance)
+- Stake Telos on an [EOSIO block explorer](https://www.telos.net/ecosystem-apps-filter/block-explorer)
+- Coming soon stake TLOS on EVM on our WebWallet, Block Explorer or a DEX. 
 
 ---
 
