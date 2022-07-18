@@ -8,10 +8,11 @@ slug: /
 
 ## Introduction
 
-Telos is an open source platform built for launching decentralized applications with a variety of features powered by Smart Contracts. Telos is the first EVM built on top of EOSIO blockchain software empowering web3 developers and node operators to leverage a swift and distributed web3 platform. Telos is EVM compatible meaning that Solidity and Viper compiled into Byte code works on the EVM making this a very inviting platform for developers. 
+Telos is an open source platform built for launching decentralized applications with a variety of features powered by Smart Contracts. Telos is the first EVM built on top of EOSIO blockchain software empowering web3 developers and node operators to leverage a swift and distributed web3 platform. Telos is EVM compatible meaning that Solidity and Viper compiled into Byte code works on the EVM making it one of fastest and scalable platforms for Web3. 
 
 
-A key difference between Telos and other touring complete blockchains is the EVM architecture. The Telos EVM lives on a Smart Contract ontop of the native network which makes it unique to its competitors. The Telos protocol employs a novel approach to consensus to achieve a quick finality, energy efficient, and high throughput blockchain with strong safety guarentees and robust governance features. 
+A key difference between Telos and other touring complete blockchains is the EVM architecture. The Telos EVM lives on a Smart Contract ontop of the native network which makes it unique to its competitors. The Telos Native protocol employs a novel approach to consensus to achieve a quick finality, energy efficient, and high throughput blockchain with strong safety guarentees and robust governance features. Having an EVM that lies on top of EOSIO helps Telos reach ligtning finality, scalability, energy efficient, and no front running in the process of block validation. 
+
 
 
 ## TELOS Native
