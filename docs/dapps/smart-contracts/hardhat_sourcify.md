@@ -1,7 +1,6 @@
 # How to Verify Smart Contracts with Hardhat Deploy plugin
 
-__ Refer to [this](https://github.com/nathanduft44/telos_hardhat_deploy) repository if you want extra guidance on
-project set up. __
+__ Refer to [this](https://github.com/nathanduft44/telos_hardhat_deploy) repository for project setup. __
 
 Hardhat is a development environment to compile, deploy, test, and debug contracts for EVM compatible blockchains. 
 
