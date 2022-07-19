@@ -26,23 +26,18 @@ const config = {
 
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/telosnetwork/telos-docs/tree/master/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/telosnetwork/telos-docs/tree/master/',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -137,11 +132,24 @@ const config = {
             ],
           },
           {
+            title: 'Block Explorers',
+            items: [
+              {
+                label: 'Native',
+                href: 'https://explorer.telos.net',
+              },
+              {
+                label: 'EVM - Teloscan',
+                href: 'https://teloscan.io',
+              },
+            ]
+          },
+          {
             title: 'More',
             items: [
               {
                 label: 'News',
-                to: 'https://www.telos.net/news',
+                href: 'https://www.telos.net/news',
               },
               {
                 label: 'GitHub',
