@@ -26,23 +26,18 @@ const config = {
 
   presets: [
     [
-      'classic',
+      '@docusaurus/preset-classic',
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+            'https://github.com/telosnetwork/telos-docs/tree/master/',
         },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-        },
+        blog: false,
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -84,6 +79,24 @@ const config = {
             sidebarId: 'nodes',
             label: 'Nodes',
           },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'native',
+            label: 'Telos Native',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'learn',
+            label: 'Learn',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
+            sidebarId: 'faq',
+            label: 'FAQ',
+          },
           // {
           //   type: 'docSidebar',
           //   position: 'left',
@@ -109,17 +122,34 @@ const config = {
                 href: 'https://twitter.com/HelloTelos',
               },
               {
+                label: 'Developer Twitter',
+                href: 'https://twitter.com/TelosDevelopers',
+              },
+              {
                 label: 'Telegram',
-                href: 'https://twitter.com/HelloTelos',
+                href: 'https://t.me/HelloTelos',
               },
             ],
+          },
+          {
+            title: 'Block Explorers',
+            items: [
+              {
+                label: 'Native',
+                href: 'https://explorer.telos.net',
+              },
+              {
+                label: 'EVM - Teloscan',
+                href: 'https://teloscan.io',
+              },
+            ]
           },
           {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
+                label: 'News',
+                href: 'https://www.telos.net/news',
               },
               {
                 label: 'GitHub',
