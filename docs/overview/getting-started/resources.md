@@ -4,28 +4,30 @@
 
 ## Community Channels
 
-[Telos Community Chat](https://t.me/HelloTelos)
+- [Telos Community Chat](https://t.me/HelloTelos)
 
-[Telos Governance Chat](https://t.me/telosgovernance)
+- [Telos Governance Chat](https://t.me/telosgovernance)
 
-[Telos Works Chat](https://t.me/TelosWPS)
+- [Telos Works Chat](https://t.me/TelosWPS)
 
-[Telos DApp Development Chat](https://t.me/dappstelos)
+- [Telos DApp Development Chat](https://t.me/dappstelos)
 
-[Telos Testnet Chat](https://t.me/TelosTestnet)
+- [Telos Testnet Chat](https://t.me/TelosTestnet)
 
-[Hyperion (API) Chat](https://t.me/EOSHyperion)
+- [Hyperion (API) Chat](https://t.me/EOSHyperion)
 
-[Telos on Twitter](https://twitter.com/HelloTelos)
+- [Telos on Twitter](https://twitter.com/HelloTelos)
 
-
-Our [knowledge-base](https://help.telos.net/) is also ready to assist with any questions you might have.
+- [Telos UX Support Team](https://help.telos.net/)
 
 
 ## Available Libraries
 
-[Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
-[Ethers.js](https://docs.ethers.io/v5/)
+- [Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
+
+- [Ethers.js](https://docs.ethers.io/v5/)
+
+- [Open Zeppelin](https://www.openzeppelin.com/)
 
 
 
