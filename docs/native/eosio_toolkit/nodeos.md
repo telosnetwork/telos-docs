@@ -16,4 +16,4 @@ Running a local node will enable you to test transactions in a truly self-suffic
 - Boost RPC callback performance and network security. 
 
 
-If you are looking to learn more about how to configure Telos nodes and understand them deeply. Take a look at the [Telos Nodes Section](/docs/nodes)
+If you are looking to learn more about how to configure Telos nodes and understand them deeply. Take a look at the [Telos Nodes Section](/nodes)

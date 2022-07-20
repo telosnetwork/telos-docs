@@ -3,7 +3,7 @@
 __Overview of the Telos Governance System__
 -----                       --------
 
-__NOTE:__ If you are specifically interested in Voting go to [HERE](/docs/learn)
+__NOTE:__ If you are specifically interested in Voting go to [HERE](/learn)
 
 
 Telos Decide™ is an on-chain governance engine exclusively for the Telos® Blockchain Network that offers an extensive suite of voting services and DAC/DAO tools for both users and developers.
@@ -60,4 +60,4 @@ For **organizations**, this means they can confidently track crucial ownership a
 
 ## Resources
 
-Looking to vote, check out the guide [here](/docs/learn)
+Looking to vote, check out the guide [here](/learn)

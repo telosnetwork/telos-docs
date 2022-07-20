@@ -13,4 +13,4 @@ The Telos platform is made up of the following components and toolchain:
 
 ![EOSIO](/img/eosio_development_lifecycle.png)
 
-__If you are interested in learning more about the Native Telos platform please head over to our Native section__ [Telos Native Overview](/docs/native/native_telos)
+__If you are interested in learning more about the Native Telos platform please head over to our Native section__ [Telos Native Overview](/native/native_telos)

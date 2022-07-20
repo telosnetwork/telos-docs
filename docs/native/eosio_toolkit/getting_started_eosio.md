@@ -105,7 +105,7 @@ cleos version client
 
 output: ```- v2.1.0```
 
-__Now its time to build on Telos using the EOSIO platform head over to [get started with Telos Development Wallet creation!](/docs/native/eosio_toolkit/cleos)__
+__Now its time to build on Telos using the EOSIO platform head over to [get started with Telos Development Wallet creation!](/native/eosio_toolkit/cleos)__
 
 ------------                                            ------------
 
