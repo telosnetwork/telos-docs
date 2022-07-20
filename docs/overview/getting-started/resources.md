@@ -22,4 +22,10 @@
 Our [knowledge-base](https://help.telos.net/) is also ready to assist with any questions you might have.
 
 
+## Available Libraries
+
+[Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
+[Ethers.js](https://docs.ethers.io/v5/)
+
+
 
