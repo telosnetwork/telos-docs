@@ -10,44 +10,43 @@ slug: /
 
 #### What is Telos? 
 
-Telos is a high performing blockchain network that provides access to a suite of tools for developing smart contracts with robust governance features and an vibrant community. Building a fairer, faster future with a community of contributors and users that are passionate about the future of web3. 
+Telos is a high performing blockchain network that provides access to a suite of tools for developing smart contracts with robust governance features and a vibrant community. Building a fairer, faster future with a community of contributors and users that are passionate about the future of web3. 
 
 ![Telos Performance Flex](/img/Telos_Infographic.png)
 
 
 #### Establishment
 
-The Telos blockchain network was launched in late 2018, ever since it has iterated through several different stages of development and focuses within the syncronized vision shared between the foundation and community. 
+The Telos blockchain network was launched in late 2018, ever since it has iterated through several different stages of development and focuses within the synchronized vision shared between the foundation and community. 
 
 - **Early Days** 
     - Telos founders and developers inherited EOSIO software that originated from the EOS massive ICO(4 Billion) to create a fairer distribution of tokens across the network without an ICO and improve governance features. Telos capped the amount of tokens an account could have in the early days at a 40,000 upper limit. The Telos Launch Group is still building on Telos today and has now led the blockchain into a much more improved and mature network as you will learn about below. 
 
 - **November 2021 - Present**
-    - In November 2021 Telos launched the first EVM on EOSIO software in the form of a smart contract. This feature was a huge uplift for Telos core development as it suddenly became compatible with all of the existing EVM chains like Ethreum, Avalanche, Polygon etc and utilizes the most popular Smart Contract programming language - Solidity and frameworks. Learn more about the Telos EVM below as it stands out in terms of architecture and perfomance when compared side to side to other leading EVMS in the crypto market. 
+    - In November 2021 Telos launched the first EVM on EOSIO software in the form of a smart contract. This feature was a huge uplift for Telos core development as it suddenly became compatible with all of the existing EVM chains like Ethereum, Avalanche, Polygon etc and utilizes the most popular Smart Contract programming language - Solidity and frameworks. Learn more about the Telos EVM below as it stands out in terms of architecture and perfomance when compared side to side to other leading EVMS in the crypto market. 
 
 #### Distinctive Attributes Telos provides
 
 - **No Front Running**
-    - Front running is eliminated by the block times being .5 seconds. There is no Mempool, transactions behave "First in First Out" discipline. 
-- **Finality:** Fast Block Times - .5s
+    - Front running is eliminated, there is no mempool, transactions are processed on a "First in First Out" basis. 
+- **Block time:** Fast Block Times - .5s
 - **Transaction Throughput:** Telos scales with a throughput of 10,000+ transactions per second. 
-- **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos is protected against 2/3s + 1. 
+- **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos requires 2/3s + 1 of the validators to sign blocks. 
 - **Fixed Gas Rate**: Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
-- **Sustainable:** - Low emission blockchain, currently only uses 0.000001 kWh to execute one transaction.
+- **Sustainable:** - Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
 - **Smart Contract Support:** - Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. 
-
-
 
 
 ## TELOS Native
 
-#### Inherited EOSIO SDK
+#### Base Layer
 
-EOSIO is the open source software platform that Telos inherited from EOS. EOSIO is the backbone of Telos as it provides functionalities such as accounts, authentication, databases, asynchronous communication, and the scheduling of applications across multiple CPU cores and clusters. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of EOSIO base layer.
+EOSIO is the open source software platform that Telos is built upon. EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of EOSIO base layer.
+
 
 #### TLOS currency
 
-TLOS is the native currency of Telos. TLOS is hard-capped with a max supply of 355,208,371 ever to be circulating. The native Telos coin is important for governing the network and allocating system resources such as staking for annual returns in Resource Exchange(REX). 
+TLOS is the native currency of Telos.  The native Telos coin is important for governing the network and allocating system resources such as staking for annual returns in Resource Exchange(REX). 
 
 
 **Resource Overview**
@@ -56,20 +55,18 @@ TLOS is the native currency of Telos. TLOS is hard-capped with a max supply of 3
 - NET: A size-based resource an account uses while sending data to the blockchain.
 
 **Governance Overview**
-The Telos blockchain is a highly inclusive platform consisting of contributors such as node operators, builders, and users responsible for the future development and process for approving on-chain business decisions with TLOS. To operate these processes, Telos created the Telos Decide Governance Engine, a governance system designed to support upgrading the Telos native and EVM protocol utilities and other voting functionalities such as delegating funds to works proposals and voting on Block Producers, proposals, amendments, and elections.
 
-[Vote](https://app.telos.net/)
+The Telos blockchain is a highly inclusive platform consisting of contributors such as node operators, builders, and users responsible for the future development and process for approving on-chain business decisions with TLOS. To operate these processes, Telos created the Telos Decide Governance Engine, a governance system designed to support upgrading the Telos native and EVM protocol utilities and other voting functionalities such as delegating funds to worker proposals and voting on Block Producers, proposals, amendments, and elections.
 
 ## Telos EVM
 
 ### Overview
 
-- Telos had made substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running so that large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mempool.
+Telos has made substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running so that large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mempool.
 
-
-- **Architecture:** Telos EVM is a Smart Contract that inherits classes from EOSIO and uses them to construct a global decentralized computer that computes state executable objects & actions, each with its own permanent data store.
+- **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer, the EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
 - **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS. 
-- **RPC Specification:** Every Telos client implements a JSON-RPC specification that is identical to Ethereums making it easy to read blockchain data and/or send transactions to the network. 
+- **RPC Specification:** Every Telos client implements a JSON-RPC specification that is identical to Ethereum's making it easy to read blockchain data and/or send transactions to the network. 
 - **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js. **NOTE:** Indexers are coming soon. 
 
 #### Bridging Native to EVM
