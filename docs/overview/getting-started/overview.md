@@ -76,7 +76,7 @@ Bridge from Native to EVM with our [Telos Station](https://wallet.telos.net/bala
 - The Telos EVM account's are mapped to the native network account's so that users can bridge between the Native netowrk and Telos EVM to leverage tools and DApps on both sides of the network. 
 
 1. TLOS is the native currency for executing transactions on the EVM platform also known as gas almost identical to native RAM. 
-2. When a transaction is called it results in smart contract execution that is initially controlled by Externally Owned accounts comprising of an TLOS EVM balance to pay for the transaction to be executed across the network of Telos blockproducers
+2. When a transaction is called it results in smart contract(contract account) execution that is initially controlled by Externally Owned accounts(signed with private keys) comprising of an TLOS EVM balance to pay for the transaction to be executed across the network of Telos blockproducers
 3. Account and code tables match the specification in the Ethereum Yellow Paper
 
 ## Core layer Consensus Protocol aBFT
@@ -93,7 +93,7 @@ The DPoS consensus decides its block producers according to the votes of the ent
 
 1. Phase 1 Block Producer Election: 
     - 21 block producers are elected for block production.
-    - By EOSIO open network nature anyone with hardware resources can become BP
+    - To become a BP in the Telos network there is a node operator form with a list of requirements.
     - Top 21 candidates with the highest voting weight can become block producers and obtain block production rewards accordingly. 
 
 2. Block Production
