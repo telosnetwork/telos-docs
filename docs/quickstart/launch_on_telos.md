@@ -2,7 +2,7 @@
 sidebar_positon: 1
 ---
 
-# Deploy an Existing DApp on Telos Mainnet
+# Deploy an Existing DApp on Telos EVM Mainnet
 
 __Considerations and coverage for launching a DApp live on the Telos mainnet.__
 
@@ -40,17 +40,16 @@ The Telos testnet tokens can be aquired in the [Testnet Faucet](https://app.telo
 
 ## Audit and Optimize Smart Contracts
 Optimize the contract to make sure that it is safe as possible and efficient as well. 
-Resources for Audit
-- [solidity.finance](https://solidity.finance/)
 - It is best to look into audit reports and old hacks to see mistakes that have been made in Solidity
+- Paid audits from firms like [Sentnl](https://sentnl.io/), [solidity.finance](https://solidity.finance/), or others
 
 ## Estimate Cost of Deployment
-- Telos is a inexpensive chain to build on as transactions average  $.01
-- Gas price is fixed at 500 GWEI. 
+- Telos is an inexpensive chain to build on as transactions average $.01
+- Gas price is currently fixed at ~500 GWEI. 
 - To calculate the cost of deployment on mainnet, all you need to do is multiply gas consumed with the gas price using the Ethers library. 
 
 ## Acquiring TLOS for mainnet
-The easiet way to acquire the Telos native currency is to purchase through an exchange. After you purchase native Telos you will have to bridge it over to the EVM contract by using https://wallet.telos.net/
+The easiest way to acquire the Telos native currency is to purchase through an exchange. After you purchase native Telos you will have to bridge it over to the EVM contract by using https://wallet.telos.net/
 
 **Cheapest Way** Purchase Telos on Centralized Exchange then send it to Telos web wallet or Anchor wallet. (12 character public key aka username)
 - Go on Telos web wallet and bridge to Telos EVM. 
@@ -96,6 +95,6 @@ Now run code below.
 
 
 
-To set check the gas price set by telos resources go to [teloscan](https://www.teloscan.io/)
+To set check the gas price set by Telos resources go to [teloscan](https://www.teloscan.io/)
 
 When you deploy using hardhat, it automatically drains your wallet of the funds that it needs to perform the request. In other words, there is no pop up confirmation from metamask. Once you run the deploy script command then Boom! Your charged for gas fees and your contract is deployed. 

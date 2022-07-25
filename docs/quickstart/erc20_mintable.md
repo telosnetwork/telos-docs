@@ -36,7 +36,7 @@ Commands used below work on recent Linux or Windows versions but have not been v
 - Interact with your contract using the hardhat console, our [block explorer](https://testnet.teloscan.io/), wallets like metamask or by deploying our example wallet repo
 
 ## VERIFY (OPTIONAL)
-- Verify your new token contract with ```npx hardhat --network testnet sourcify.
+- Verify your new token contract with ```npx hardhat --network testnet sourcify```
 - You may run into a "gateway timeout" error message, do not worry, the contract will still be verified
 - Make sure your contract is verified by running the command again, you should get this message back: 
 

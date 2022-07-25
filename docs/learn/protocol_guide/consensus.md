@@ -39,19 +39,9 @@ These two processes are independent and can be executed in parallel, except for 
 The voting of the active producers to be included in the next schedule is implemented by the DPoS layer. Strictly speaking, a token holder must first stake some tokens to become a stakeholder and thus be able to vote with a given staking power.
 
 #### Voting Process
-Each EOSIO stakeholder can vote for up to 30 block producers in one voting action. The top 21 elected producers will then act as DPoS delegates to produce and sign blocks on behalf of the stakeholders. The remaining producers are placed in a standby list in the order of votes obtained. The voting process repeats every schedule round by adding up the number of votes obtained by each producer. Producers not voted on get to keep their old votes, albeit depreciated due to vote decay. Producers voted on also get to keep their old votes, except for the contribution of the last voting weight for each voter, which gets replaced by their new voting weight.
+Each EOSIO stakeholder can vote for up to 30 block producers in one voting action. The top 21 elected producers will then act as DPoS delegates to produce and sign blocks on behalf of the stakeholders. The remaining producers are placed in a standby list in the order of votes obtained. The voting process repeats every schedule round by adding up the number of votes obtained by each producer. Producers not voted on get to keep their old votes.
 
-#### Voting Weight
-The voting weight of each stakeholder is computed as a function of the number of tokens staked and the time elapsed since the EOSIO block timestamp epoch, defined as January 1, 2000. In the current implementation, the voting weight is directly proportional to the number of tokens staked and base-2 exponentially proportional to the time elapsed in years since the year 2000. The actual weight increases at a rate of 2^{1/52} = 1.0134192 
-1/52
- =1.013419 per week. This means that the voting weight changes weekly and doubles each year for the same amount of tokens staked.
-
-#### Vote Decay
-Increasing the voting weight produces depreciation of the current votes held by each producer. Such vote decay is intentional and its reason is twofold:
-
-Encourage participation by allowing newer votes to have more weight than older votes.
-Give more voice to those users actively involved on important governance matters.
-4.2. Producers schedule
+#### Producers schedule
 After the producers are voted on and selected for the next schedule, they are simply sorted alphabetically by producer name. This determines the production order. Each producer receives the proposed set of producers for the next schedule round within the very first block to be validated from the current schedule round that is about to start. When the first block that contains the proposed schedule is deemed irreversible by a supermajority of producers plus one, the proposed schedule becomes active for the next schedule round.
 
 #### Production Parameters

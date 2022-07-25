@@ -10,7 +10,9 @@
 
 - [Telos Works Chat](https://t.me/TelosWPS)
 
-- [Telos DApp Development Chat](https://t.me/dappstelos)
+- [Telos Native Dev Chat](https://t.me/dappstelos)
+
+- [Telos EVM Dev Chat](https://t.me/TelosEVMDevs)
 
 - [Telos Testnet Chat](https://t.me/TelosTestnet)
 
@@ -21,7 +23,16 @@
 - [Telos UX Support Team](https://help.telos.net/)
 
 
-## EVM Libraries
+## Native Tools
+
+- [eosjs](https://developers.eos.io/manuals/eosjs/latest/index)
+
+- [node-template](https://github.com/telosnetwork/node-template)
+
+- [DUNE](https://github.com/eosnetworkfoundation/DUNE)
+
+
+## EVM Tools
 
 - [Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
 
@@ -38,13 +49,17 @@
 
 ## Infrastructure Tools (Oracles, Indexers, Bridge SDKs)
 
+- [Testnet Faucet](https://app.telos.net/testnet/developers)
+
+- [Native Price & RNG Oracles](https://oracles.telos.net)
+
 - [Rubic Bridge Widget SDK](https://docs.rubic.finance/rubic-sdk/integration-of-sdk)
 
-- [DIA Oracle](https://www.diadata.org/)
+- [DIA Oracle (EVM)](https://www.diadata.org/)
 
 - **TELOS INDEXER API COMING SOON**   
 
 
 ## Demos
 
-- [Demo](demo.telos.finance)
+- [Testnet DEX Demo](https://demo.telos.finance)

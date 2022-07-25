@@ -27,57 +27,59 @@ The Telos blockchain network was launched in late 2018, ever since it has iterat
 
 #### Distinctive Attributes Telos provides
 
-- **No Front Running**
-    - Front running is eliminated, there is no mempool, transactions are processed on a "First in First Out" basis. 
+- **No Front Running:** Front running is eliminated, there is no mempool, transactions are processed on a "First in First Out" basis. 
 - **Block time:** Fast Block Times - .5s
 - **Transaction Throughput:** Telos scales with a throughput of 10,000+ transactions per second. 
 - **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos requires 2/3s + 1 of the validators to sign blocks. 
 - **Fixed Gas Rate**: Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
-- **Sustainable:** - Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
+- **Sustainable:** Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
 - **Smart Contract Support:** - Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. 
 
 
-## TELOS Native
+## Telos Native
 
 #### Base Layer
 
-EOSIO is the open source software platform that Telos is built upon. EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of EOSIO base layer.
-
+EOSIO is the open source software platform that Telos is built upon.  EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of the EOSIO base layer.
 
 #### TLOS currency
 
 TLOS is the native currency of Telos.  The native Telos coin is important for governing the network and allocating system resources such as staking for annual returns in Resource Exchange(REX). 
 
-
 **Resource Overview**
-- RAM: A size-based resource an account can use to store data within smart contracts.
-- CPU: A time-based resource an account uses while performing smart contract actions.
-- NET: A size-based resource an account uses while sending data to the blockchain.
+- **RAM:** A size-based resource an account can use to store data within smart contracts.
+- **CPU:** A time-based resource an account uses while performing smart contract actions.
+- **NET:** A size-based resource an account uses while sending data to the blockchain.
 
 **Governance Overview**
 
-The Telos blockchain is a highly inclusive platform consisting of contributors such as node operators, builders, and users responsible for the future development and process for approving on-chain business decisions with TLOS. To operate these processes, Telos created the Telos Decide Governance Engine, a governance system designed to support upgrading the Telos native and EVM protocol utilities and other voting functionalities such as delegating funds to worker proposals and voting on Block Producers, proposals, amendments, and elections.
+The Telos blockchain is a highly inclusive network consisting of contributors such as node operators, builders, and users responsible for participating in on-chain governance 
+decisions with TLOS. To ensure strong governance and decentralization, Telos created the Telos Decide Governance Engine, a governance system designed to support on-chain voting with TLOS and any user created tokens as well.
+Via Telos Decide, the tokenholders all contribute to decisions around upgrading the Telos native and EVM protocol, voting on Block Producers, proposals, amendments and elections.
 
 ## Telos EVM
 
 ### Overview
 
-Telos has made substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running so that large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mempool.
+Telos has made substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running
+so that transactions from large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mempool.
 
 - **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer, the EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
-- **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS. 
+- **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS, no modifications are needed. 
 - **RPC Specification:** Every Telos client implements a JSON-RPC specification that is identical to Ethereum's making it easy to read blockchain data and/or send transactions to the network. 
-- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js. **NOTE:** Indexers are coming soon. 
+- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js
+- **Custom indexing COMING SOON**: A public API which will offer improved data over the standard RPC, such as token holder lists, NFTs, approvals and more.
 
 #### Bridging Native to EVM
-Bridge from Native to EVM with our [Telos Station](https://wallet.telos.net/balance) to use the EVM DApps. 
+Bridge from Native to EVM with our [web wallet](https://wallet.telos.net) to use the EVM DApps. 
 
 ### Telos native to Telos EVM
-- The Telos EVM account's are mapped to the native network account's so that users can bridge between the Native netowrk and Telos EVM to leverage tools and DApps on both sides of the network. 
+The Telos EVM accounts can be mapped to the native network accounts so that users can bridge between the Native network and Telos EVM to leverage tools and DApps on both sides of the network. 
 
-1. TLOS is the native currency for executing transactions on the EVM platform also known as gas almost identical to native RAM. 
-2. When a transaction is called it results in smart contract(contract account) execution that is initially controlled by Externally Owned accounts(signed with private keys) comprising of an TLOS EVM balance to pay for the transaction to be executed across the network of Telos blockproducers
-3. Account and code tables match the specification in the Ethereum Yellow Paper
+1. TLOS is the native currency for executing transactions on the EVM platform also known as the "gas token". 
+2. When an EVM transaction is executed the RPC relays the raw transaction data to the native Telos smart contract, which executes the contract in the C++ WASM runtime. The RPC is responsible from translating the Ethereum JSON-RPC methods to
+the APIs of the Telos native network, as well as for storing the historical transaction data to satisfy other JSON-RPC methods such as `eth_getTransactionReceipt`
+3. Account and code tables match the specification in the Ethereum Yellow Paper but are implemented in the EOSIO smart contract.
 
 ## Core layer Consensus Protocol aBFT
 
@@ -99,11 +101,14 @@ The DPoS consensus decides its block producers according to the votes of the ent
 2. Block Production
     - Block producers validate the transactions, construct the valid transactions into blocks and then produce blocks orderly linking prev block hash to new appended block
         - Missed blocks do not affect the subsequent block production
-        - Round of block produciton lasts 63 seconds(each BP has 3 seconds to produce 6 blocks)
+        - Round of block production lasts 126 seconds(each BP has 6 seconds to produce 12 blocks)
+    - Every 12hrs a standby Block Producer from ranks 22-42 is rotated into the production schedule to test their readiness to sign blocks.
+    - If a Block Producer misses blocks for more than a certain threshold (2hrs on average) then they are automatically kicked by the system for 2 days, this kick is recorded on chain.
+      - This combined with the auto-rotation of standbys ensures all Block Producers are in compliance and ready to produce blocks.
     - A new block is confirmed once 15 block producers approve through signed messages. This block is then chained to the network. 
 
  
 
-__Telos block producer voting is "inverse weighted" meaning that the less votes a user makes reduces voting power. This takes away blockproducers voting for themselves.__
+__Telos block producer voting is "inverse weighted" meaning that the less votes a user makes reduces voting power. This takes away Block Producers voting for themselves.__
 
-**Documentation Purpose:** The Telos docs is aimed to provide a list of comprehensive guides in building on Telos for web2 and web3 developers. If you have any suggestions please list visit our [Telos EVM Channel](https://t.me/TelosEVMDevs). If you want to contribute visit our [documentation repository](https://github.com/telosnetwork/telos-docs) and do Pull Request in an area where you can apply specific information/knowledge. 
+**Documentation Purpose:** The Telos docs is aimed to provide a list of comprehensive guides in building on Telos for web2 and web3 developers. If you have any suggestions please list visit our [EVM](https://t.me/TelosEVMDevs) or [Native](https://t.me/dappstelos) development channels. If you want to contribute visit our [documentation repository](https://github.com/telosnetwork/telos-docs) and do Pull Request in an area where you can apply specific information/knowledge. 

@@ -8,6 +8,10 @@ __Prerequisites: MetaMask Wallet__
 **Note** Make a dev wallet for development purposes. This will reduce risk in short and long term. 
 
 ### Step 1: Set up Network configuration
+You can setup Telos Mainnet or Testnet at [Chainlist](https://chainlist.org) or [Teloscan](https://teloscan.io) 
+([testnet](https://testnet.teloscan.io)) by clicking "Connect Wallet".  The network settings in Metamask can be added manually as seen here:
+
+
 ![Metamask Network Config](/img/metamask_config.png)
 
 #### **Telos Mainnet Settings:**
@@ -16,7 +20,7 @@ __Prerequisites: MetaMask Wallet__
 * **New RPC URL**: [https://mainnet.telos.net/evm](https://mainnet.telos.net/evm)
 * **ChainID**: `40`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://www.teloscan.io/](https://www.teloscan.io/)
+* **Explorer**: [https://teloscan.io](https://teloscan.io)
 
 #### **Telos Testnet Settings:**
 
@@ -24,7 +28,7 @@ __Prerequisites: MetaMask Wallet__
 * **New RPC URL**: [https://testnet.telos.net/evm](https://testnet.telos.net/evm)
 * **ChainID**: `41`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
+* **Explorer**: [https://testnet.teloscan.io](https://testnet.teloscan.io)
 
 #### **Telos Websockets:**
 
@@ -55,8 +59,10 @@ Open [Remix](http://remix.ethereum.org/)
 
 3. Copy and Paste the Smart Contract from Open Zeppelin under the contracts folder into MyEpicToken.sol file. 
 ![ERC20 Token Pic](/img/My_EPIC_ERC.png)
+
 4. **Change network to Web3Injected to integrate Telos Testnet Through MetaMask**
 Click on Ethereum Deploy Logo on the side
+
 ![web3injected pic](/img/Injectedweb3.png)
 Then MetaMask will pop up, Click Next & allow the wallet to connect to Remix 
 
