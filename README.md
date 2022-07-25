@@ -1,6 +1,8 @@
-# Website
+# Telos Docs
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+Our docs are built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+
+https://docs.telos.net will auto-update based on commits to the `master` branch, it is hosted in Cloudflare Pages.
 
 ### Installation
 
@@ -37,5 +39,3 @@ Not using SSH:
 ```
 $ GIT_USER=<Your GitHub username> yarn deploy
 ```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
