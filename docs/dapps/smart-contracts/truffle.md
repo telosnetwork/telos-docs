@@ -69,10 +69,105 @@ __The compile produces artifact files which are saved within the ./build directo
 
 **Build Artifacts:** Inside the build folder we have json files with ABI information, contract bytecode(For EVM), deployment details, compiler version etc. The ABI can be used by the front end of DApp in order to interact with the Smart Contract. 
 
-5. 
+#### Interacting With Your Contracts
+Writing data is called a transaction whereas reading data is called a call.
+
+Transactions change the state of the network, whereas calls just view the state of the network(specific data); they return a value immediately.
 
 
+#### Contract Abstractions
+Using either ethers.js or web3.js we can interact with a Telos node directly with a JavaScript library making it easy to read and write data to/from the blockchain. Truffle uses its own contract abstration via the @truffle/contract module, and it is this contract abrastraction that's described below. 
 
+5. Testing Contracts
+    - Ganache 
+    test.js using ethers.js
+
+```jsx title="/truffle_tutorial/test/simpleStorage.js"
+const SimpleStorage = artifacts.require('SimpleStorage.sol');
+
+contract('SimpleStorage', () => {
+    it('Should update data', async () => {
+        const storage = await SimpleStorage.new();
+        await storage.writeData(10);
+        const data = await storage.readData();
+        assert(data.toString() === '10');
+    });
+});
+```
+
+Test the Contract using the test script abstraction:
+
+```truffle test```
+
+Truffle effecitively is creating a local test chain to test this contract.
+
+
+```jsx "Output:"
+Contract: SimpleStorage
+    ✔ Should update data (2075ms)
+
+
+  1 passing (2s)
+
+```
+
+
+6. Migrations for deploying Contracts.
+    We will need to make a few adjustments to truffle-config.js
+
+    - Open truffle.config.js
+    - We will be using a private key provider method to connect to a Telos RPC node. 
+    - NOTE: Use a Dev Wallet for safety purposes. 
+```jsx title="/truffle_tutorial/truffle-config.js"
+// require('dotenv').config(); If you want to use a dotenv file use this plugin. 
+var PrivateKeyProvider = require("truffle-privatekey-provider");
+var privateKey = "private key";// NOTE: Only use a Dev Wallet with Telos testnet otherwise in production or with real value use .env file and make sure to add .env to gitignore it so its not commited into github. 
+var provider = new PrivateKeyProvider(privateKey, "https://testnet.telos.net/evm");
+
+
+module.exports = {
+
+
+  networks: {
+
+    telos_testnet: {
+      provider: () => new PrivateKeyProvider(privateKey, `https://testnet.telos.net/evm`),
+      network_id: 41,       // Ropsten's id
+    },
+
+  },
+
+  mocha: {
+    // timeout: 100000
+  },
+
+  // Configure your compilers
+  compilers: {
+    solc: {
+      version: "0.8.14",      // Fetch exact version from solc-bin (default: truffle's version)
+      // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
+      // settings: {          // See the solidity docs for advice about optimization and evmVersion
+      //  optimizer: {
+      //    enabled: false,
+      //    runs: 200
+      //  },
+      //  evmVersion: "byzantium"
+      // }
+    }
+  },
+
+};
+```
+
+7. Deploy the contract on Telos Testnet
+
+Run the command 
+
+```truffle migrate --network telos_testnet```
+
+After deployment the output will show all the block information such as transaction hash, block number etc. 
+
+Now that you know a tutorial with Truffle goahead and learn more [here](https://trufflesuite.com/docs/truffle/getting-started/creating-a-project/)
 
 
 
