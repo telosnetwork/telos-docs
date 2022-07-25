@@ -81,7 +81,7 @@ Bridge from Native to EVM with our [Telos Station](https://wallet.telos.net/bala
 
 ## Core layer Consensus Protocol aBFT
 
-At the core layer of block confirmation, Telos uses a asynchronous Byzantine Fault Tolerance consensus mechanism that allows transactions to be processed asynchronously and continue to operate if some of the networks nodes fail or act malicously. 
+At the core layer of block confirmation, Telos uses a asynchronous Byzantine Fault Tolerance consensus mechanism that processes transactions asynchronously and continue to operate if some of the networks nodes fail or act malicously. 
 
 
 
