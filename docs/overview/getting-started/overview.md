@@ -22,8 +22,8 @@ The Telos Network is a real world ready blockchain which, through the culminatio
 #### Distinctive Attributes Telos provides
 - **Uptime:** Operational integritiy of the Telos network has maintained a 100% uptime, meaning that nodes have been consistently producing blocks since genesis block.  
 - **No Front Running:**  Telos is architected to not have a mempool and allows for transactions to be processed in a "First in First Out" basis, eliminating the ability for transactions to be front run.
-- **Block time:** Fast Block Times - .5s, effectively a transaction is terminated and immutable in only half a second. 
-- **Transaction Throughput:** TELOS has successfully proven in excess of 10,000 Transactions Per Second in multiple back to back blocks
+- **Transaction Finality:** .5 second block times. It takes half a second to complete a transaction.
+- **Transaction Throughput:** TELOS has successfully proven in excess of 10,000 Transactions Per Second in 2 blocks(1 second)
 - **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos requires 2/3s + 1 of the validators to sign blocks. 
 - **Fixed Gas Rate:** Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
 - **Sustainable:** Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
