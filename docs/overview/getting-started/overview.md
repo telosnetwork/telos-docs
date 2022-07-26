@@ -20,14 +20,14 @@ Telos is a high performing blockchain network that provides access to a suite of
 The Telos Network is a real world ready blockchain which, through the culmination of years of challenges, innovation and web3 firsts has grown to be a network capable of supporting the extreme demands of the decentralized world of tomorrow. Launched in 2018 without an ICO and through a fair token distribution, the lead development team initially took the open source eos.io software and launched a specialized version with additional layers governance, tooling, and node configuration requirements. Through the years, the development team has been continuing to innovate based on the needs of builders and in late 2021 launched the first bespoke/ ground up Ethereum Virtual Machine (tEVM) which runs using a smart contract on the native chain's quick finality and node infrastructure.  The launch of the tEVM has given builders and users two networks, native supporting C++ based applications and the tEVM allowing for complete compatibility from any traditional EVM/solidity based applications.  Telos is continuing to push continuous advancement in the capabilities in what web3.0 networks can achieve and builders can look forward to additional performance and language capabilities as the Telos Network continues to grow.
 
 #### Distinctive Attributes Telos provides
-- **Uptime:**Operational integritiy of the Telos network has maintained a 100% uptime, meaning that nodes have been consistently producing blocks since genesis block.  
+- **Uptime:** Operational integritiy of the Telos network has maintained a 100% uptime, meaning that nodes have been consistently producing blocks since genesis block.  
 - **No Front Running:**  Telos is architected to not have a mempool and allows for transactions to be processed in a "First in First Out" basis, eliminating the ability for transactions to be front run.
 - **Block time:** Fast Block Times - .5s, effectively a transaction is terminated and immutable in only half a second. 
 - **Transaction Throughput:** TELOS has successfully proven in excess of 10,000 Transactions Per Second in multiple back to back blocks
 - **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos requires 2/3s + 1 of the validators to sign blocks. 
-- **Fixed Gas Rate**: Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
+- **Fixed Gas Rate:** Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
 - **Sustainable:** Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
-- **Smart Contract Support:** - Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. NOTE: Additional langauge support coming.
+- **Smart Contract Support:** Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. NOTE: Additional langauge support coming.
 
 
 ## Telos Native
