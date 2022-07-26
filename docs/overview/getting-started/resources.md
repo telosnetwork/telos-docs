@@ -4,23 +4,19 @@
 
 ## Community Channels
 
-- [Telos Community Chat](https://t.me/HelloTelos)
+- [EVM Dev Chat](https://t.me/TelosEVMDevs)
 
-- [Telos Governance Chat](https://t.me/telosgovernance)
+- [Twitter](https://twitter.com/TelosDevelopers)
 
-- [Telos Works Chat](https://t.me/TelosWPS)
+- [Community Chat](https://t.me/HelloTelos)
 
-- [Telos Native Dev Chat](https://t.me/dappstelos)
+- [Native Dev Chat](https://t.me/dappstelos)
 
-- [Telos EVM Dev Chat](https://t.me/TelosEVMDevs)
-
-- [Telos Testnet Chat](https://t.me/TelosTestnet)
+- [Testnet Chat](https://t.me/TelosTestnet)
 
 - [Hyperion (API) Chat](https://t.me/EOSHyperion)
 
-- [Telos on Twitter](https://twitter.com/HelloTelos)
-
-- [Telos UX Support Team](https://help.telos.net/)
+- [UX Support Team](https://help.telos.net/)
 
 
 ## Native Tools
