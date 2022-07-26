@@ -19,15 +19,6 @@
 - [UX Support Team](https://help.telos.net/)
 
 
-## Native Tools
-
-- [eosjs](https://developers.eos.io/manuals/eosjs/latest/index)
-
-- [node-template](https://github.com/telosnetwork/node-template)
-
-- [DUNE](https://github.com/eosnetworkfoundation/DUNE)
-
-
 ## EVM Tools
 
 - [Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
@@ -41,6 +32,16 @@
 - [Remix](https://remix-project.org/)
 
 - [Open Zeppelin](https://www.openzeppelin.com/)
+
+
+## Native Tools
+
+- [eosjs](https://developers.eos.io/manuals/eosjs/latest/index)
+
+- [node-template](https://github.com/telosnetwork/node-template)
+
+- [DUNE](https://github.com/eosnetworkfoundation/DUNE)
+
 
 
 ## Infrastructure Tools (Oracles, Indexers, Bridge SDKs)
