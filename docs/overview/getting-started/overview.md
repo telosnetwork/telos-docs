@@ -17,34 +17,28 @@ Telos is a high performing blockchain network that provides access to a suite of
 
 #### Establishment
 
-The Telos blockchain network was launched in late 2018, ever since it has iterated through several different stages of development and focuses within the synchronized vision shared between the foundation and community. 
-
-- **Early Days** 
-    - Telos founders and developers inherited EOSIO software that originated from the EOS massive ICO(4 Billion) to create a fairer distribution of tokens across the network without an ICO and improve governance features. Telos capped the amount of tokens an account could have in the early days at a 40,000 upper limit. The Telos Launch Group is still building on Telos today and has now led the blockchain into a much more improved and mature network as you will learn about below. 
-
-- **November 2021 - Present**
-    - In November 2021 Telos launched the first EVM on EOSIO software in the form of a smart contract. This feature was a huge uplift for Telos core development as it suddenly became compatible with all of the existing EVM chains like Ethereum, Avalanche, Polygon etc and utilizes the most popular Smart Contract programming language - Solidity and frameworks. Learn more about the Telos EVM below as it stands out in terms of architecture and perfomance when compared side to side to other leading EVMS in the crypto market. 
+The Telos Network is a real world ready blockchain which, through the culmination of years of challenges, innovation and web3 firsts has grown to be a network capable of supporting the extreme demands of the decentralized world of tomorrow. Launched in 2018 without an ICO and through a fair token distribution, the lead development team initially took the open source eos.io software and launched a specialized version with additional layers governance, tooling, and node configuration requirements. Through the years, the development team has been continuing to innovate based on the needs of builders and in late 2021 launched the first bespoke/ ground up Ethereum Virtual Machine (tEVM) which runs using a smart contract on the native chain's quick finality and node infrastructure.  The launch of the tEVM has given builders and users two networks, native supporting C++ based applications and the tEVM allowing for complete compatibility from any traditional EVM/solidity based applications.  Telos is continuing to push continuous advancement in the capabilities in what web3.0 networks can achieve and builders can look forward to additional performance and language capabilities as the Telos Network continues to grow.
 
 #### Distinctive Attributes Telos provides
-
-- **No Front Running:** Front running is eliminated, there is no mempool, transactions are processed on a "First in First Out" basis. 
-- **Block time:** Fast Block Times - .5s
-- **Transaction Throughput:** Telos scales with a throughput of 10,000+ transactions per second. 
+- **Uptime:**Operational integritiy of the Telos network has maintained a 100% uptime, meaning that nodes have been consistently producing blocks since genesis block.  
+- **No Front Running:**  Telos is architected to not have a mempool and allows for transactions to be processed in a "First in First Out" basis, eliminating the ability for transactions to be front run.
+- **Block time:** Fast Block Times - .5s, effectively a transaction is terminated and immutable in only half a second. 
+- **Transaction Throughput:** TELOS has successfully proven in excess of 10,000 Transactions Per Second in multiple back to back blocks
 - **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos requires 2/3s + 1 of the validators to sign blocks. 
 - **Fixed Gas Rate**: Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
 - **Sustainable:** Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
-- **Smart Contract Support:** - Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. 
+- **Smart Contract Support:** - Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. NOTE: Additional langauge support coming.
 
 
 ## Telos Native
 
 #### Base Layer
 
-EOSIO is the open source software platform that Telos is built upon.  EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of the EOSIO base layer.
+EOSIO is the open source software platform that Telos is built upon.  EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of the EOSIO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently there are compilers for C, C++, RUST, and Typescrypt fitting needs of a diverse range of developers building smart contracts on the native layer of Telos. 
 
-#### TLOS currency
+#### TLOS Coin
 
-TLOS is the native currency of Telos.  The native Telos coin is important for governing the network and allocating system resources such as staking for annual returns in Resource Exchange(REX). 
+TLOS is the native currency of Telos.  The native Telos coin is important for governing the network and allocating system resources such as staking for annual returns in Resource Exchange(REX). TLOS is utilized to unlock bandwidth on the network in order to execute and interact with contracts, send tokens, and stake for network resources. TLOS is also used as the voting currency in on-chain goverancne. TLOS has a total supply of 355.2 million coins.
 
 **Resource Overview**
 - **RAM:** A size-based resource an account can use to store data within smart contracts.
