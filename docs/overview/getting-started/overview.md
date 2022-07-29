@@ -10,17 +10,17 @@ slug: /
 
 #### What is Telos? 
 
-Telos is a high performing blockchain network that provides access to a suite of tools for developing smart contracts with robust governance features and a vibrant community. Building a fairer, faster future with a community of contributors and users that are passionate about the future of web3. 
+Telos is a Layer-1 blockchain network that consistently strives to achieve new pinnacles of cutting-edge innovation. Developers building on Telos can access a suite of tools and onboarding support to develop smart contracts with robust governance features and a vibrant community. Telos aims to build a fairer, faster future with a community of passionate contributors and users about the future of web3. 
 
 ![Telos Performance Flex](/img/Telos_Infographic.png)
 
 
 #### Establishment
 
-The Telos Network is a real world ready blockchain which, through the culmination of years of challenges, innovation and web3 firsts has grown to be a network capable of supporting the extreme demands of the decentralized world of tomorrow. Launched in 2018 without an ICO and through a fair token distribution, the lead development team initially took the open source eos.io software and launched a specialized version with additional layers governance, tooling, and node configuration requirements. Through the years, the development team has been continuing to innovate based on the needs of builders and in late 2021 launched the first bespoke/ ground up Ethereum Virtual Machine (tEVM) which runs using a smart contract on the native chain's quick finality and node infrastructure.  The launch of the tEVM has given builders and users two networks, native supporting C++ based applications and the tEVM allowing for complete compatibility from any traditional EVM/solidity based applications.  Telos is continuing to push continuous advancement in the capabilities in what web3.0 networks can achieve and builders can look forward to additional performance and language capabilities as the Telos Network continues to grow.
+The Telos Network is a real-world ready blockchain which, through the culmination of years of challenges, innovation, and web3 firsts, has grown into a network capable of supporting the extreme demands of the decentralized world of tomorrow. Launched in 2018 without an ICO and through a fair token distribution, the lead development team initially took the open source eos.io software and debuted a specialized version with additional layers of governance, tooling, and node configuration requirements. Through the years, the development team has continued to innovate based on the needs of builders and, in late 2021, launched the first bespoke/ground-up Ethereum Virtual Machine (tEVM), which runs using a smart contract on the native chain's quick finality and node infrastructure. The launch of the tEVM has given builders and users two networks, native supporting C++ based applications and the tEVM allowing for complete compatibility from any traditional EVM/solidity-based applications. Telos continues to push beyond the boundaries of what web3.0 networks can achieve, and builders can look forward to additional performance and language capabilities as the Telos Network continues on its sharp growth trajectory.
 
 #### Distinctive Attributes Telos provides
-- **Uptime:** Operational integritiy of the Telos network has maintained a 100% uptime, meaning that nodes have been consistently producing blocks since genesis block.  
+- **Uptime:** Operational integritiy of the Telos network has maintained a 100% uptime since December 2018 without any break, forks or outages.  
 - **No Front Running:**  Telos is architected to not have a mempool and allows for transactions to be processed in a "First in First Out" basis, eliminating the ability for transactions to be front run.
 - **Transaction Finality:** .5 second block times. It takes half a second to complete a transaction.
 - **Transaction Throughput:** TELOS has successfully proven in excess of 10,000 Transactions Per Second in 2 blocks(1 second)
