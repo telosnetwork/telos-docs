@@ -6,6 +6,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+
+
+
   title: 'Telos Docs',
   tagline: 'Documentation and Tutorials for Telos',
   url: 'https://docs.telos.network',
@@ -41,6 +44,10 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+        googleAnalytics: {
+          trackingID: 'UA-154600181-4',
+          anonymizeIP: true,
+        },      
       }),
     ],
   ],
@@ -48,6 +55,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+
       navbar: {
         title: '',
         logo: {
@@ -164,6 +172,12 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        appId: 'M49QB996FG',
+        apiKey: '781dec423a50110abbe2e262dec95659',
+        indexName: 'telos',
+        contextualSearch: true,     
+     },
     }),
 };
 
