@@ -48,6 +48,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+
       navbar: {
         title: '',
         logo: {
@@ -164,6 +165,12 @@ const config = {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
       },
+      algolia: {
+        appId: 'M49QB996FG',
+        apiKey: '781dec423a50110abbe2e262dec95659',
+        indexName: 'telos',
+        contextualSearch: true,     
+     },
     }),
 };
 
