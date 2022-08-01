@@ -79,7 +79,7 @@ const config = {
             type: 'docSidebar',
             position: 'left',
             sidebarId: 'dapps',
-            label: 'DApps',
+            label: 'Telos EVM',
           },
           {
             type: 'docSidebar',
@@ -105,13 +105,6 @@ const config = {
             sidebarId: 'faq',
             label: 'FAQ',
           },
-          // {
-          //   type: 'docSidebar',
-          //   position: 'left',
-          //   sidebarId: 'nodes',
-          //   label: 'Nodes',
-          // }
-          //{to: '/blog', label: 'Blog', position: 'left'},
 
         ],
       },
