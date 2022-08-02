@@ -62,7 +62,7 @@ The following is an example using [@telosnetwork/telosevm-js](https://github.com
 
 `const gasPrice = BigNumber.from('0x${await evmApi.telos.getGasPrice()}')`
 
-#### A - Using a contract
+#### A - Using a smart contract
 
 You can get the EVM gas price from the __eosio.evm__ `config` singleton
 
