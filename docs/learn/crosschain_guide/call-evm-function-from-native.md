@@ -40,6 +40,18 @@ The following is an example using [@telosnetwork/telosevm-js](https://github.com
 
 #### B - Using a smart contract
 
+You can get the nonce of a linked EVM address from the eosio.evm accounts table, like so:
+
+```
+// find account
+account_table _accounts("eosio.evm", "eosio.evm"_n);
+auto accounts_byaccount = _accounts.get_index<"byaccount"_n>();
+auto account = accounts_byaccount.require_find("MY NATIVE ACCOUNT", "Account not found");
+```
+
+// Get the nonce
+const nonce = account->nonce;
+
 ### 4) Get the encoded transaction data
 
 #### A - Using a script
