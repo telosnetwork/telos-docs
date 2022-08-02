@@ -3,7 +3,7 @@
 The __Telos EVM__ runs in one smart contract on the __Telos Native__ blockchain, the __eosio.evm__ contract.
 Calling a function of a Telos EVM smart contract from Telos Native requires the use of the __eosio.evm__ contract's `raw(eosio::name &ram_payer,std::vector<int8_t> &tx, bool &estimate_gas,std::optional<eosio::checksum160> &sender)` action.
 
-This action takes in the serialized EVM Transaction data, the native account that will pay the RAM and the sender address which the transaction will be sent from on EVM.
+This action takes in the native account that will pay the RAM, the serialized EVM Transaction data and the sender address which the transaction will be sent from on EVM.
 
 __/!\ Make sure that the sender address has sufficient TLOS to pay for the gas of that function call__
 
@@ -28,9 +28,11 @@ The following is an example using ethersJS, for a `reply(uint, uint)` EVM functi
 The gas limit can be derived by doing tests calling the EVM function. Adding a margin to it is always recommended.
 You could also estimate that gas limit at runtime.
 
+
+
 ## Required dynamic variables
 
-### 3) Get the sender's nonce
+### 1) Get the sender's nonce
 
 #### A - Using a script
 
@@ -52,19 +54,33 @@ auto account = accounts_byaccount.require_find("MY NATIVE ACCOUNT", "Account not
 const nonce = account->nonce;
 ```
 
-### 4) Get the encoded transaction data
+### 2) Get the gas price
 
 #### A - Using a script
 
-Using the previously obtained __function signature__, __nonce__ and __gas limit__ values, get the encoded transaction data using a script. Libraries such as web3js and ethers have utilities that help a lot here.
+The following is an example using [@telosnetwork/telosevm-js](https://github.com/telosnetwork/telosevm-js):
+
+`const gasPrice = BigNumber.from('0x${await evmApi.telos.getGasPrice()}')`
+
+#### A - Using a contract
+
+You can get the EVM gas price from the __eosio.evm__ `config` singleton
+
+### 3) Get the encoded transaction data
+
+#### A - Using a script
+
+Using the previously obtained __function signature__, __nonce__, __gas price__ and __gas limit__ values, get the encoded transaction data using a script. Libraries such as web3js and ethers have utilities that help a lot here.
 
 _Refer to our native-to-evm-transaction repository's [generateEVMTransaction script](https://github.com/telosnetwork/native-to-evm-transaction/blob/main/generateEVMTransaction.js) for an example._
 
 #### B - Using a smart contract
 
-Save the previously obtained __function signature__ and __gas limit__ in your native contract, for example in a singleton (recommended) or by hard coding them as constants.
+Using the previously obtained __function signature__ and __gas limit__ saved in your native contract, for example in a singleton (recommended) or by hard coding them as constants, as well as the dynamic __nonce__ and __gas price__  variable you can get the encoded transaction data using the [__RLP__ library](https://github.com/telosnetwork/telos.evm/tree/master/eosio.evm/external/rlp) included in __eosio.evm__
 
-Use those saved values as well as the __contract EVM address__ and the __EVM sender address nonce__ to get the encoded transaction data using the __RLP__ library
+`rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0)`
+
+`uint256_t(0)` is the value of the EVM transaction, here set at 0 (no value sent)
 
 _Refer to our [rng-oracle-bridge repository](https://github.com/telosnetwork/rng-oracle-bridge/blob/ad255b872a238e4d3a3f59cdff44a206208ab67d/native/src/rng.bridge.cpp#L193) for an example._
 
@@ -94,7 +110,7 @@ action(
     permission_level {get_self(), "active"_n},
     EVM_SYSTEM_CONTRACT,
     "raw"_n,
-    std::make_tuple(get_self(), rlp::encode(account->nonce, evm_conf.gas_price, GAS_LIMIT, to, uint256_t(0), data, 41, 0, 0),  false, std::optional<eosio::checksum160> (account->address))
+    std::make_tuple(NATIVE_RAM_PAYER, TX_DATA, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
 ).send();
 ```
 
