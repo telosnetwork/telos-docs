@@ -99,11 +99,11 @@ const tx = rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAI
 
 `GAS_PRICE` and `GAS_LIMIT` are the corresponding variables we retreived
 
-`to` is our EVM contract address
+`to` is our EVM contract address formatted to a vector
 
 `uint256_t(0)` is the value of the EVM transaction, here set at 0 (no value sent)
 
-`data` is our encoded EVM transaction data we retreived
+`data` is our EVM transaction data we retreived and formatted to a vector
 
 `CHAIN_ID` is the ID of our chain (41 for Telos EVM Testnet, 40 for Telos EVM Mainnet)
 
@@ -124,13 +124,12 @@ _Refer to our native-to-evm-transaction repository's [generateEVMTransaction scr
 ### B - Using a smart contract
 
 ```
-
 // Send it using eosio.evm
 action(
     permission_level {get_self(), "active"_n},
     EVM_SYSTEM_CONTRACT,
     "raw"_n,
-    std::make_tuple(NATIVE_RAM_PAYER, tx, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
+    std::make_tuple(NATIVE_RAM_PAYER, ENCODED_TX_DATA, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
 ).send();
 ```
 
