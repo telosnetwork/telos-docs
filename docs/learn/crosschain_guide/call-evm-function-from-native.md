@@ -34,6 +34,8 @@ You could also estimate that gas limit at runtime.
 
 ### 1) Get the sender's nonce
 
+The nonce of an address being incremented at each transaction, you need to retreive it right before your call to __eosio.evm__ `raw()` method
+
 #### A - Using a script
 
 The following is an example using [@telosnetwork/telosevm-js](https://github.com/telosnetwork/telosevm-js):
