@@ -109,12 +109,14 @@ std::vector<uint8_t> data;
 data.insert(data.end(), fnsig.begin(), fnsig.end());
 data.insert(data.end(), call_id.begin(), call_id.end());
 
+const tx = rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0);
+
 // Send it using eosio.evm
 action(
     permission_level {get_self(), "active"_n},
     EVM_SYSTEM_CONTRACT,
     "raw"_n,
-    std::make_tuple(NATIVE_RAM_PAYER, TX_DATA, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
+    std::make_tuple(NATIVE_RAM_PAYER, tx, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
 ).send();
 ```
 
