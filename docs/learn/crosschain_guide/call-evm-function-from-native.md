@@ -117,7 +117,7 @@ Use that __encoded transaction data__, as well as the  __ram payer__ native acco
 
 ### A - Using cleos
 
-`cleos --url https://testnet.telos.net/ push action eosio.evm raw '{"ram_payer": 'NATIVE ACCOUNT HERE', "tx": "ENCODED TX DATA HERE" , "estimate_gas": false, "sender": "EVM SENDER ADDRESS HERE"' -p ' + nativeAccount`
+`cleos --url https://testnet.telos.net/ push action eosio.evm raw '{"ram_payer": 'NATIVE_ACCOUNT', "tx": "RLP_ENCODED_TX_DATA" , "estimate_gas": false, "sender": "EVM_SENDER_ADDRESS"' -p NATIVE_ACCOUNT`
 
 Note that both the `tx` and `sender` arguments take hashes without '0x'
 
@@ -131,7 +131,7 @@ action(
     permission_level {get_self(), "active"_n},
     EVM_SYSTEM_CONTRACT,
     "raw"_n,
-    std::make_tuple(NATIVE_RAM_PAYER, ENCODED_TX_DATA, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
+    std::make_tuple(NATIVE_RAM_PAYER, RLP_ENCODED_TX_DATA, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
 ).send();
 ```
 
