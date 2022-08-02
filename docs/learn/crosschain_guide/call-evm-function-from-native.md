@@ -94,6 +94,8 @@ Use that __encoded transaction data__, as well as the  __ram payer__ native acco
 
 Note that both the `tx` and `sender` arguments take hashes without '0x'
 
+_Refer to our native-to-evm-transaction repository's [generateEVMTransaction script](https://github.com/telosnetwork/native-to-evm-transaction/blob/main/generateEVMTransaction.js) for an example._
+
 ### B - Using a smart contract
 
 ```
@@ -113,4 +115,6 @@ action(
     std::make_tuple(NATIVE_RAM_PAYER, TX_DATA, false, std::optional<eosio::checksum160> (SENDER_EVM_ADDRESS))
 ).send();
 ```
+
+_Refer to our [rng-oracle-bridge repository](https://github.com/telosnetwork/rng-oracle-bridge/blob/ad255b872a238e4d3a3f59cdff44a206208ab67d/native/src/rng.bridge.cpp#L193) for an example._
 
