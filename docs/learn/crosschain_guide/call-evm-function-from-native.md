@@ -78,7 +78,7 @@ _Refer to our native-to-evm-transaction repository's [generateEVMTransaction scr
 
 #### B - Using a smart contract
 
-Using the previously obtained __function signature__ and __gas limit__ saved in your native contract, for example in a singleton (recommended) or by hard coding them as constants, as well as the dynamic __nonce__ and __gas price__  variable you can get the encoded transaction data using the [__RLP__ library](https://github.com/telosnetwork/telos.evm/tree/master/eosio.evm/external/rlp) included in __eosio.evm__
+Using the previously obtained __function signature__ and __gas limit__ saved in your native contract, for example in a singleton (recommended) or by hard coding them as constants, as well as the dynamic __nonce__ and __gas price__  variable retreived in your contract at runtime you can get the encoded transaction data using the [__RLP__ library](https://github.com/telosnetwork/telos.evm/tree/master/eosio.evm/external/rlp) included in __eosio.evm__
 
 `rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0)`
 
