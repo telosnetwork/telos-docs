@@ -117,7 +117,7 @@ Use that __encoded transaction data__, as well as the  __ram payer__ native acco
 
 ### A - Using cleos
 
-`cleos --url https://testnet.telos.net/ push action eosio.evm raw '{"ram_payer": 'NATIVE_ACCOUNT', "tx": "RLP_ENCODED_TX_DATA" , "estimate_gas": false, "sender": "EVM_SENDER_ADDRESS"' -p NATIVE_ACCOUNT`
+`cleos --url https://testnet.telos.net/ push action eosio.evm raw '{"ram_payer": 'NATIVE_ACCOUNT', "tx": "ENCODED_TX_DATA" , "estimate_gas": false, "sender": "EVM_SENDER_ADDRESS"' -p NATIVE_ACCOUNT`
 
 Note that both the `tx` and `sender` arguments take hashes without '0x'
 
