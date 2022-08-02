@@ -5,7 +5,7 @@ Calling a function of a Telos EVM smart contract from Telos Native requires the 
 
 This action takes in the native account that will pay the RAM, the serialized EVM Transaction data and the sender address which the transaction will be sent from on EVM.
 
-This guide will go over preparing and sending a Telos Native transaction that can call a function of an EVM contract. Example implementations are available in our [native-to-evm-transaction](https://github.com/telosnetwork/native-to-evm-transaction) and [rng-oracle-bridge repository](https://github.com/telosnetwork/rng-oracle-bridge) repositories.
+This guide will go over preparing and sending a Telos Native transaction that can call a function of an EVM contract. Example implementations are available in our [native-to-evm-transaction](https://github.com/telosnetwork/native-to-evm-transaction) and [rng-oracle-bridge](https://github.com/telosnetwork/rng-oracle-bridge) repositories.
 
 __/!\ Make sure that the sender address has sufficient TLOS to pay for the gas of that function call__
 
