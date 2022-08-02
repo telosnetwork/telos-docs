@@ -13,9 +13,13 @@ This requires a Telos Native account with a linked EVM address (hereby refered t
 
 ## Get required static variables
 
-You first need to get the __function signature__ of the EVM function you need to call, as well as its __gas limit__.
+You first need to get the __address__ of the EVM contract and the __function signature__ of the EVM function you need to call, as well as its __gas limit__.
 
-### 1) Get the function signature
+### 1) Get the EVM contract address
+
+Save the address after deployment of the contract on EVM or copy it from a block explorer
+
+### 2) Get the function signature
 
 _Function calls in the Ethereum Virtual Machine are specified by the first four bytes of data sent with a transaction. These 4-byte signatures are defined as the first four bytes of the Keccak hash (SHA3) of the canonical representation of the function signature._
 
@@ -23,12 +27,10 @@ The following is an example using ethersJS, for a `reply(uint, uint)` EVM functi
 
 `cont fnSig = await contract.interface.getSighash("reply(uint, uint)")`
 
-### 2) Get the gas limit
+### 3) Get the gas limit
 
 The gas limit can be derived by doing tests calling the EVM function. Adding a margin to it is always recommended.
 You could also estimate that gas limit at runtime.
-
-
 
 ## Get required dynamic variables
 
@@ -72,27 +74,37 @@ You can get the EVM gas price from the __eosio.evm__ `config` singleton
 
 #### A - Using a script
 
-Using the previously obtained __function signature__, __nonce__, __gas price__ and __gas limit__ values, get the encoded transaction data using a script. Libraries such as web3js and ethers have utilities that help a lot here.
+Using the previously obtained EVM contract __address__ and __function signature__ as well as the sender's __nonce__, the __gas price__ and the __gas limit__ values, get the encoded transaction data using a script. Libraries such as web3js and ethers have utilities that help a lot here.
 
 _Refer to our native-to-evm-transaction repository's [generateEVMTransaction script](https://github.com/telosnetwork/native-to-evm-transaction/blob/main/generateEVMTransaction.js) for an example._
 
 #### B - Using a smart contract
 
-Using the previously obtained __function signature__ and __gas limit__ saved in your native contract, for example in a singleton (recommended) or by hard coding them as constants, as well as the dynamic __nonce__ and __gas price__  variable retreived in your contract at runtime you can get the encoded transaction data using the [__RLP__ library](https://github.com/telosnetwork/telos.evm/tree/master/eosio.evm/external/rlp) included in __eosio.evm__
+Using the previously obtained EVM contract __address__, __function signature__ and __gas limit__ saved in your native contract, for example in a singleton (recommended) or by hard coding them as constants, as well as the dynamic __nonce__ and __gas price__  variable retreived in your contract at runtime you can get the encoded transaction data using the [__RLP__ library](https://github.com/telosnetwork/telos.evm/tree/master/eosio.evm/external/rlp) included in __eosio.evm__
 
 ```
+// CONTRACT ADDRESS
 std::vector<uint8_t> to;
-to.insert(to.end(),  evm_contract.begin(), evm_contract.end());
+to.insert(to.end(),  evm_contract.begin(), evm_contract.end()); // Our evm contract address
 
-// Prepare solidity function parameters (function signature + call_id argument)
+// FUNCTION PARAMETERS (function signature + argument)
 std::vector<uint8_t> data;
-data.insert(data.end(), fnsig.begin(), fnsig.end());
-data.insert(data.end(), call_id.begin(), call_id.end());
+data.insert(data.end(), fnsig.begin(), fnsig.end()); // Our function signature
+data.insert(data.end(), argument.begin(), argument.end()); // Our argument for that function
 
 const tx = rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0);
 ```
 
+`NONCE` is the nonce of the sender EVM address we retreived
+
+`GAS_PRICE` and `GAS_LIMIT` are the corresponding variables we retreived
+
+`to` is our EVM contract address
+
 `uint256_t(0)` is the value of the EVM transaction, here set at 0 (no value sent)
+
+`data` is our encoded EVM transaction data we retreived
+
 `CHAIN_ID` is the ID of our chain (41 for Telos EVM Testnet, 40 for Telos EVM Mainnet)
 
 _Refer to our [rng-oracle-bridge repository](https://github.com/telosnetwork/rng-oracle-bridge/blob/ad255b872a238e4d3a3f59cdff44a206208ab67d/native/src/rng.bridge.cpp#L193) for an example._
