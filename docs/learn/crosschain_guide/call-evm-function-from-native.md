@@ -80,9 +80,20 @@ _Refer to our native-to-evm-transaction repository's [generateEVMTransaction scr
 
 Using the previously obtained __function signature__ and __gas limit__ saved in your native contract, for example in a singleton (recommended) or by hard coding them as constants, as well as the dynamic __nonce__ and __gas price__  variable retreived in your contract at runtime you can get the encoded transaction data using the [__RLP__ library](https://github.com/telosnetwork/telos.evm/tree/master/eosio.evm/external/rlp) included in __eosio.evm__
 
-`rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0)`
+```
+std::vector<uint8_t> to;
+to.insert(to.end(),  evm_contract.begin(), evm_contract.end());
+
+// Prepare solidity function parameters (function signature + call_id argument)
+std::vector<uint8_t> data;
+data.insert(data.end(), fnsig.begin(), fnsig.end());
+data.insert(data.end(), call_id.begin(), call_id.end());
+
+const tx = rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0);
+```
 
 `uint256_t(0)` is the value of the EVM transaction, here set at 0 (no value sent)
+`CHAIN_ID` is the ID of our chain (41 for Telos EVM Testnet, 40 for Telos EVM Mainnet)
 
 _Refer to our [rng-oracle-bridge repository](https://github.com/telosnetwork/rng-oracle-bridge/blob/ad255b872a238e4d3a3f59cdff44a206208ab67d/native/src/rng.bridge.cpp#L193) for an example._
 
@@ -101,15 +112,6 @@ _Refer to our native-to-evm-transaction repository's [generateEVMTransaction scr
 ### B - Using a smart contract
 
 ```
-std::vector<uint8_t> to;
-to.insert(to.end(),  evm_contract.begin(), evm_contract.end());
-
-// Prepare solidity function parameters (function signature + call_id argument)
-std::vector<uint8_t> data;
-data.insert(data.end(), fnsig.begin(), fnsig.end());
-data.insert(data.end(), call_id.begin(), call_id.end());
-
-const tx = rlp::encode(NONCE, GAS_PRICE, GAS_LIMIT, to, uint256_t(0), data, CHAIN_ID, 0, 0);
 
 // Send it using eosio.evm
 action(
