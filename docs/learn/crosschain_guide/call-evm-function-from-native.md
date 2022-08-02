@@ -11,7 +11,7 @@ __/!\ Make sure that the sender address has sufficient TLOS to pay for the gas o
 
 This requires a Telos Native account with a linked EVM address (hereby refered to as the __sender__)
 
-## Required static variables
+## Get required static variables
 
 You first need to get the __function signature__ of the EVM function you need to call, as well as its __gas limit__.
 
@@ -30,7 +30,7 @@ You could also estimate that gas limit at runtime.
 
 
 
-## Required dynamic variables
+## Get required dynamic variables
 
 ### 1) Get the sender's nonce
 
