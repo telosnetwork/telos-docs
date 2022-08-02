@@ -47,10 +47,10 @@ You can get the nonce of a linked EVM address from the eosio.evm accounts table,
 account_table _accounts("eosio.evm", "eosio.evm"_n);
 auto accounts_byaccount = _accounts.get_index<"byaccount"_n>();
 auto account = accounts_byaccount.require_find("MY NATIVE ACCOUNT", "Account not found");
-```
 
 // Get the nonce
 const nonce = account->nonce;
+```
 
 ### 4) Get the encoded transaction data
 
