@@ -6,4 +6,4 @@ This action takes in the native account that will pay the RAM, the serialized EV
 
 This guide will go over preparing and send a Telos Native multisig that can call a function of an EVM contract. An example implementation is available in our [native-to-evm-multisig-example repository](https://github.com/telosnetwork/native-to-evm-escrow-example) and will serve for our examples here.
 
-/!\ Make sure that the sender address has sufficient TLOS to pay for the gas of that function call
+__/!\ Make sure that the sender address has sufficient TLOS to pay for the gas of that function call__
