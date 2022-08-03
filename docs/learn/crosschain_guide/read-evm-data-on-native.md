@@ -51,23 +51,14 @@ try {
     request_id = await provider.getStorageAt(addr, slot);
 } catch (e) {}
 console.log(call_id);
-
-// Increment array slot to get the second variable, caller_address, of first Request
-var slot_caller_address = BigNumber.from(slot).add(1);
-
-const caller_address = await provider.getStorageAt(addr, slot_caller_address);
-console.log(caller_address)
 ```
 
 To get the following members, you just need to increment that slot
 ```
-// If a value is set to 0 it won't be saved as a row in the table
-// Call ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
-let call_id = 0;
-let slot_call_id = slot_caller_address.add(1);
-try {
-    call_id = await provider.getStorageAt(addr, slot_call_id);
-} catch (e) {}
+var slot_caller_address = BigNumber.from(slot).add(1);
+
+const caller_address = await provider.getStorageAt(addr, slot_caller_address);
+console.log(caller_address)
 ```
 
 ## Using a smart contract
