@@ -49,7 +49,7 @@ let request_id = 0;
 try {
     request_id = await provider.getStorageAt(addr, slot);
 } catch (e) {}
-console.log(call_id);
+console.log(request_id);
 ```
 
 To get the following members, you just need to increment that slot
