@@ -24,6 +24,7 @@ const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
 
 const addr =  "0x10b95d422f2c9714c331b1a14829886b0910f55d"; // Our contract address
 const slot = "0x00"; // Our slot index
+
 const value =  await provider.getStorageAt(addr, slot); // Read the storage
 ```
 
