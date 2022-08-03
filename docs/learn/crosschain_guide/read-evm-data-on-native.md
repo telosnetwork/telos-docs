@@ -7,7 +7,7 @@ As each EVM contract stores its data at different slots depending on the order a
 
 [Solidity documentation page](https://docs.soliditylang.org/en/v0.8.13/internals/layout_in_storage.html)
 
-[Hackernoon Medium article](https://medium.com/hackernoon/getting-deep-into-ethereum-how-data-is-stored-in-ethereum-e3f669d96033)
+[Hackernoon's Medium article](https://medium.com/hackernoon/getting-deep-into-ethereum-how-data-is-stored-in-ethereum-e3f669d96033)
 
 [Program The Blockchain blog post](https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/)
 
