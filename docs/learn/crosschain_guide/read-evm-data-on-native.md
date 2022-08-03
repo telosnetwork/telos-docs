@@ -49,8 +49,8 @@ const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
 
 const addr = "0x10b95d422f2c9714c331b1a14829886b0910f55d";
 
-// Get the array slot
-const slot = ethers.utils.keccak256(
+// Get the id slot
+const id_slot = ethers.utils.keccak256(
         ethers.utils.hexZeroPad("0x02", 32),
 );
 
@@ -59,17 +59,17 @@ const length = await provider.getStorageAt(addr, "0x02");
 console.log(length)
 
 // If a value is set to 0 it won't be saved as a row in the table
-// Request ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
-let request_id = 0;
+// A request ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
+let id = 0;
 try {
-    request_id = await provider.getStorageAt(addr, slot);
+    id = await provider.getStorageAt(addr, id_slot);
 } catch (e) {}
-console.log(request_id);
+console.log(id);
 ```
 
 To get the following members, you just need to increment that slot
 ```
-var slot_caller_address = BigNumber.from(slot).add(1);
+var slot_caller_address = BigNumber.from(id_slot).add(1);
 
 const caller_address = await provider.getStorageAt(addr, slot_caller_address);
 console.log(caller_address)
