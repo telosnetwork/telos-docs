@@ -14,7 +14,7 @@ When funds are withdrawn from the STLOS contract, they are automatically sent ov
 
 The [STLOS contract](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol) is based on the [ERC4262 tokenized vault standard](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626) which implements ERC20. 
 
-- Users deposit their TLOS and get equivalent STLOS tokens in return that represent their deposit. 
+- Users deposit their TLOS and get equivalent STLOS tokens in return that represent their share of the total TLOS staked. 
 - Rewards are sent to the contract every 30 minutes by the native [exrsrv.tf contract](https://github.com/telosnetwork/telos-distribute/blob/stlos/src/eosio.tedp.cpp) which increase the TLOS price of STLOS over time. 
 - Users can use their STLOS tokens like any other ERC20 token.
 - On withdrawl from the contract, STLOS shares are converted back to TLOS which is then deposited, under the user address, directly to the __TelosEscrow contract__ (see below). 
