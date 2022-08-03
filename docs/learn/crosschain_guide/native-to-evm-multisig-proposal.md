@@ -63,7 +63,7 @@ raw = raw.replace(/^0x/, '');
 
 To send a multisig, we need to setup the list of the needed signers' permissions. In our case, we will set our active BPs as the signer which requires a script, but you could just as well skip that step and use a static array of permission on step 3. 
 
-We can refer to our [native-to-evm-escrow-example](https://github.com/telosnetwork/native-to-evm-escrow-example) repository for an example, with the `generatePermissions.js ` script that fetches active BPs and add their permissions to a file on disk.
+We will refer to our [native-to-evm-escrow-example](https://github.com/telosnetwork/native-to-evm-escrow-example) example repository here, with its `generatePermissions.js ` script that fetches active BPs and writes their permission to a file on disk for later use.
 
 ```
 import axios from 'axios';
