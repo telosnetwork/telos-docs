@@ -23,9 +23,9 @@ You can use a library like ethers or web3js to call `getStorageAt`.
 const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
 
 const addr =  "0x10b95d422f2c9714c331b1a14829886b0910f55d"; // Our contract address
-const slot = "0x00"; // Our slot index
+const owner_slot = "0x00"; // Our first slot index "owner"
 
-const value =  await provider.getStorageAt(addr, slot); // Read the storage
+const owner =  await provider.getStorageAt(addr, owner_slot); // Read the storage
 ```
 
 If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member and each of its properties in order to access all the values. For example with the array of Request struct in our [RNGOracleBridge](https://github.com/telosnetwork/rng-oracle-bridge/blob/main/evm/contracts/RNGOracleBridge.sol) contract:
