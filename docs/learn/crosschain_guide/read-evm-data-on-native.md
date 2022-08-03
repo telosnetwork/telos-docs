@@ -64,9 +64,9 @@ To get the following members, you just need to increment that slot
 // If a value is set to 0 it won't be saved as a row in the table
 // Call ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
 let call_id = 0;
-var slot_call_id = slot_caller_address.add(1);
+let slot_call_id = slot_caller_address.add(1);
 try {
-    const caller_address2 = await provider.getStorageAt(addr, slot_call_id);
+    call_id = await provider.getStorageAt(addr, slot_call_id);
 } catch (e) {}
 ```
 
