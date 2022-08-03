@@ -17,7 +17,7 @@ Once you got the slot index you are looking for you can use a library like ether
 
 ## Using a script
 
-You can use a library like ethers to compute the slot you need.
+You can use a library like ethers or web3js to call `getStorageAt`.
 
 ```
 const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
