@@ -31,8 +31,13 @@ If you are looking for a dynamic array or mapping this first slot will only hold
 For example, this will give you the first member of an array at `slot = 0x02`
 
 ```
-const first_member = ethers.utils.keccak256(slot);
-const first_value =  await provider.getStorageAt(addr, first_member); // Read the storage
+const first_member_slot = ethers.utils.keccak256(slot);
+const first_member_value =  await provider.getStorageAt(addr, first_member_slot); // Read the storage
+```
+To get the following members, you just need to increment that slot
+```
+const second_member_slot = ethers.utils.keccak256(BigNumber.from(first_member_slot).add(1));
+const second_member_value =  await provider.getStorageAt(addr, second_member_slot); // Read the storage
 ```
 
 ## Using a smart contract
