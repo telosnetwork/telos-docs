@@ -28,11 +28,11 @@ const value =  await provider.getStorageAt(addr, slot); // Read the storage
 ```
 
 If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member to access all the values.
+For example, this will give you the first member of an array at `slot = 0x02`
 
 ```
 const first_member = ethers.utils.keccak256(slot);
 const first_value =  await provider.getStorageAt(addr, first_member); // Read the storage
-
 ```
 
 ## Using a smart contract
