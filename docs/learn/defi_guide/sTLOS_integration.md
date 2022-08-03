@@ -43,6 +43,9 @@ Preview methods are available to help with frontend integrations, such as:
 
 `previewRedeem(uint256 shares): uint256`
 
+#### Testnet address:
+#### Mainnet address:
+
 ### TelosEscrow Contract
 
 The [TelosEscrow](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol) contract receives TLOS and locks them for a configurable amount of time `lockDuration`. Deposits are limited to `maxDeposits` per address in order to keep gas fees in check. The main functions are:
@@ -66,3 +69,6 @@ Get total unlocked TLOS in Escrow for an address
 `depositsOf(address depositor): array`
 
 Returns the array of deposits of an address
+
+#### Testnet address:
+#### Mainnet address:
