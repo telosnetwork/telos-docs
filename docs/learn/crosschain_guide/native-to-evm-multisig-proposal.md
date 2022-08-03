@@ -61,10 +61,47 @@ raw = raw.replace(/^0x/, '');
 
 ## 2. Prepare the permissions
 
-To send a multisig, we need to setup the list of the needed signers' permissions. In our case, we will set our active BPs as the signer. 
+To send a multisig, we need to setup the list of the needed signers' permissions. In our case, we will set our active BPs as the signer which requires a script, but you could just as well skip that step and use a static array of permission on step 3. 
 
-We can refer to our [native-to-evm-escrow-example](https://github.com/telosnetwork/native-to-evm-escrow-example) repository for an example, with the `generatePermissions.js ` script
+We can refer to our [native-to-evm-escrow-example](https://github.com/telosnetwork/native-to-evm-escrow-example) repository for an example, with the `generatePermissions.js ` script that fetches active BPs and add their permissions to a file on disk.
 
+```
+import axios from 'axios';
+import fs from 'fs';
 
+const opts = [
+  'telos.caleos.io', 
+  '/v1/chain/get_table_rows?code=eosio&scope=eosio&table=producers', 
+  {
+    'accept': 'application/json',
+    'content-type':'application/json'
+  }
+]
+
+axios({
+  method: 'post',
+  url: 'https://telos.caleos.io/v1/chain/get_producers',
+  data: {
+    'limit':'20000',
+    'json':true
+  }
+}).then((res) => {
+  let bps = [];
+  for (let i = 0; i < res.data.rows.length; i++) {
+    let row = res.data.rows[i];
+    if (row.is_active !== 1)
+      continue
+
+    bps.push({actor: row.owner, permission: 'active'})
+  }
+  fs.writeFile('output/permissions.json', JSON.stringify(bps, null, 4), {flag: 'a'}, err => {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('Permissions written to output/permissions.json')
+    }
+  });
+})
+```
 
 ## 3. Send your proposal using cleos
