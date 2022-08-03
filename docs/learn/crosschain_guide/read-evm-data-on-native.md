@@ -5,7 +5,7 @@ This contract holds the state storage of the Telos EVM on the `accountstates` ta
 
 _Note that when reading that table the scope needs to be the index of your EVM contract in the __accounts__ eosio.evm table._
 
-As each EVM contract stores its data at different slots depending on the order and size of the contract's variables, the first step to be able to read EVM data from Native is to understand how ETH key => value storage works, there are several resources available for this:
+As each EVM contract stores its data at different slots depending on the order and size of the contract's variables, the first step to be able to read EVM data from Native is to understand how ETH's key => value storage works, there are several resources available for this:
 
 [Solidity documentation page](https://docs.soliditylang.org/en/v0.8.13/internals/layout_in_storage.html)
 
