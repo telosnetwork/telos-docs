@@ -31,13 +31,43 @@ If you are looking for a dynamic array or mapping this first slot will only hold
 For example, this will give you the first member of an array at `slot = 0x02`
 
 ```
-const first_member_slot = ethers.utils.keccak256(slot);
-const first_member_value =  await provider.getStorageAt(addr, first_member_slot); // Read the storage
+const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
+
+const addr = "0x10b95d422f2c9714c331b1a14829886b0910f55d";
+
+// Get the array slot
+const slot = ethers.utils.keccak256(
+        ethers.utils.hexZeroPad("0x02", 32),
+);
+
+// Get the array length
+const length = await provider.getStorageAt(addr, "0x02");
+console.log(length)
+
+// If a value is set to 0 it won't be saved as a row in the table
+// Request ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
+let request_id = 0;
+try {
+    request_id = await provider.getStorageAt(addr, slot);
+} catch (e) {}
+console.log(call_id);
+
+// Increment array slot to get the second variable, caller_address, of first Request
+var slot_caller_address = BigNumber.from(slot).add(1);
+
+const caller_address = await provider.getStorageAt(addr, slot_caller_address);
+console.log(caller_address)
 ```
+
 To get the following members, you just need to increment that slot
 ```
-const second_member_slot = ethers.utils.keccak256(BigNumber.from(first_member_slot).add(1));
-const second_member_value =  await provider.getStorageAt(addr, second_member_slot); // Read the storage
+// If a value is set to 0 it won't be saved as a row in the table
+// Call ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
+let call_id = 0;
+var slot_call_id = slot_caller_address.add(1);
+try {
+    const caller_address2 = await provider.getStorageAt(addr, slot_call_id);
+} catch (e) {}
 ```
 
 ## Using a smart contract
