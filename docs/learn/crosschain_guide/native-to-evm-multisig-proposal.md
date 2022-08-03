@@ -8,6 +8,10 @@ This guide will go over preparing and send a Telos Native multisig that can call
 
 __/!\ Make sure that the sender address has sufficient TLOS to pay for the gas of that function call__
 
+## Requirements
+
+This guide makes use of nodeJS, ethers, telos-evmjs as well as cleos.
+
 ## 1. Prepare the data using a script
 
 The script will use a library like ethers or web3js to populate & serialize the EVM transaction into a hash which we need in order call to eosio.evm `raw(...)` method. 
@@ -61,7 +65,7 @@ encodedTrx = encodedTrx.replace(/^0x/, '');
 
 You can print the `encodedTrx` variable and use cleos to call __eosio.evm__ `raw()` method with it in order to check if your settings are correct.
 
-For our purpose we need that encoded transaction string into a native transaction and a JSON file, which takes some tinkering. We will continue following our [example repository](https://github.com/telosnetwork/native-to-evm-escrow-example) to do just that next.
+For our purpose we need that encoded transaction string into a native transaction then exported to a JSON file, which takes some tinkering. We will continue following our [example repository](https://github.com/telosnetwork/native-to-evm-escrow-example) to do just that next.
 
 ```
 // We first save the native transaction to file using cleos
