@@ -79,7 +79,7 @@ If you need to loop over all members and not just retreive the first member's pr
 
 ## Using a smart contract
 
-You can use __eosio.evm__ utils to read EVM data from a Native Telos smart contract more easily.
+You can use __eosio.evm__ utils to read EVM data from a Native Telos smart contract more easily. You will also need to integrate the intx library for the uint256 type.
 
 We will base this example on our [rng-oracle-bridge](https://github.com/telosnetwork/rng-oracle-bridge/tree/main/native) repository, the variable we want to read is an array of Request structs.
 
@@ -114,5 +114,13 @@ for(uint256_t i = 0; i < array_length->value;i=i+1){
     // Get min variable
     auto min_checksum = account_states_bykey.find(getArrayMemberSlot(array_slot, 5, 7, position));
     auto min = (min_checksum == account_states_bykey.end()) ? 0 : min_checksum->value;
+}
+```
+
+This loop makes use of a getArrayMemberSlot function that you can find here:
+
+```
+inline const eosio::checksum256 getArrayMemberSlot(uint256_t array_slot, uint256_t position, uint256_t property_count, uint256_t array_length){
+        return toChecksum256(array_slot + position + (property_count * (array_length - uint256_t(1))));
 }
 ```
