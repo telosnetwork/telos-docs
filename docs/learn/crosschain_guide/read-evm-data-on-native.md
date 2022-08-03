@@ -13,7 +13,7 @@ As each EVM contract stores its data at different slots depending on the order a
 
 [Program The Blockchain's blog post](https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/)
 
-Once you got the slot index you are looking for you can use a library like ethers to compute the slot you need in a script or compute it from a smart contract using __eosio.evm__ utils. Below is an example that reads the storage of our RNGOracleBridge contract (0x10b95d422f2c9714c331b1a14829886b0910f55d).
+Once you got the slot index you are looking for you can use a library like ethers to compute the slot you need in a script or compute it from a smart contract using __eosio.evm__ utils. Below is an example that reads the storage of our [RNGOracleBridge](https://github.com/telosnetwork/rng-oracle-bridge/blob/main/evm/contracts/RNGOracleBridge.sol) contract (0x10b95d422f2c9714c331b1a14829886b0910f55d).
 
 ## Using a script
 
@@ -63,9 +63,9 @@ console.log(caller_address)
 
 ## Using a smart contract
 
-You can use __eosio.evm__ utils to read EVM data from a smart contract more easily.
+You can use __eosio.evm__ utils to read EVM data from a Native Telos smart contract more easily.
 
-We will base this example on our [rng-oracle-bridge](https://github.com/telosnetwork/rng-oracle-bridge) repository, the variable we want to read is an array of Request structs.
+We will base this example on our [rng-oracle-bridge](https://github.com/telosnetwork/rng-oracle-bridge/tree/main/native) repository, the variable we want to read is an array of Request structs.
 
 First we need the array length and array content slot key
 ```
