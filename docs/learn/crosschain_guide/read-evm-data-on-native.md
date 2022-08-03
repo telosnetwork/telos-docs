@@ -75,7 +75,7 @@ const caller_address = await provider.getStorageAt(addr, slot_caller_address);
 console.log(caller_address)
 ```
 
-If you need to loop over all members and not just retreive the first member you can use the `array_length` value we retreived earlier to do so.
+If you need to loop over all members and not just retreive the first member's properties you can use the `array_length` value we retreived earlier to do so.
 
 ## Using a smart contract
 
