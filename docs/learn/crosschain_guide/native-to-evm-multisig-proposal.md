@@ -60,6 +60,7 @@ encodedTrx = encodedTrx.replace(/^0x/, '');
 ```
 
 You can print the `encodedTrx` variable and use cleos to call __eosio.evm__ `raw()` method with it in order to check if your settings are correct.
+
 For our purpose we need that encoded transaction string into a native transaction and a JSON file, which takes some tinkering. We will continue following our [example repository](https://github.com/telosnetwork/native-to-evm-escrow-example) to do just that next.
 
 ```
