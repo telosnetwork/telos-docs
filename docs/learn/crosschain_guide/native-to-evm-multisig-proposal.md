@@ -10,7 +10,7 @@ __/!\ Make sure that the sender address has sufficient TLOS to pay for the gas o
 
 ## Requirements
 
-This guide makes use of nodeJS, ethers, telos-evmjs as well as cleos.
+This guide makes use of nodeJS, ethers, [telosevm-js](https://github.com/telosnetwork/telosevm-js) as well as cleos.
 
 ## 1. Prepare the data using a script
 
