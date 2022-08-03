@@ -150,8 +150,8 @@ axios({
 
 ## 3. Send your proposal using cleos
 
-Run the following cleos command, replacing YOUR_NATIVE_ACCOUNT with your Telos native account name and PROPOSAL by your proposal's name.
+Using the files generated in the last 2 steps you can now run the following cleos command, replacing __YOUR_NATIVE_ACCOUNT__ with your Telos native account name and __PROPOSAL__ by your proposal's name.
 
-cleos --url https://testnet.telos.net multisig propose_trx PROPOSAL ./output/permissions.json ./output/transaction.json YOUR_NATIVE_ACCOUNT
+`cleos --url https://testnet.telos.net multisig propose_trx PROPOSAL ./output/permissions.json ./output/transaction.json YOUR_NATIVE_ACCOUNT`
 
 You could also use the EOSJS library to create the Multisig proposal directly from your script.
