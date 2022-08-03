@@ -27,8 +27,7 @@ const slot = "0x02"; // Our slot index
 const value =  await provider.getStorageAt(addr, slot); // Read the storage
 ```
 
-If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member to access all the values.
-For example, this will give you the first member of an array at `slot = 0x02`
+If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member and each of its properties in order to access all the values.
 
 ```
 const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
