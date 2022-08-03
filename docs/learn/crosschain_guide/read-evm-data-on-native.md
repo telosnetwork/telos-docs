@@ -3,7 +3,7 @@
 The Telos EVM runs on one smart contract on Telos Native: the __eosio.evm__ contract
 This contract holds the state storage of the Telos EVM on the `accountstates` table that can be read to retreive all stored EVM data. This enables trustless communication from EVM to Native !
 
-_Note that when reading that table the scope needs to be the index of your EVM contract in the __accounts__ eosio.evm table._
+_Note that when reading that table the scope needs to be the index of your EVM contract in the __accounts__ eosio.evm table. In our example, on testnet, the scope to use is 35485_
 
 As each EVM contract stores its data at different slots depending on the order and size of the contract's variables, the first step to be able to read EVM data from Native is to understand how ETH's key => value storage works, there are several resources available for this:
 
@@ -22,8 +22,8 @@ You can use a library like ethers or web3js to call `getStorageAt`.
 ```
 const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
 
-const addr =  "0x5a9b40a59109a848b82a0ff153910bb595082e09"; // Our contract address
-const slot = "0x02"; // Our slot index
+const addr =  "0x10b95d422f2c9714c331b1a14829886b0910f55d"; // Our contract address
+const slot = "0x00"; // Our slot index
 const value =  await provider.getStorageAt(addr, slot); // Read the storage
 ```
 
