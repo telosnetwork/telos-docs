@@ -51,12 +51,51 @@ unsignedTrx.gasLimit = gasLimit;
 unsignedTrx.gasPrice = gasPrice;
 
 try {
-    var raw = await ethers.utils.serializeTransaction(unsignedTrx);
+    var encodedTrx = await ethers.utils.serializeTransaction(unsignedTrx);
 } catch(e) {
     console.log(e.message);
     return;
 }
-raw = raw.replace(/^0x/, '');
+encodedTrx = encodedTrx.replace(/^0x/, '');
+```
+
+You can print the `encodedTrx` variable and use cleos to call __eosio.evm__ `raw()` method with it in order to check if your settings are correct.
+For our purpose we need that encoded transaction string into a native transaction and a JSON file, which takes some tinkering. We will continue following our [example repository](https://github.com/telosnetwork/native-to-evm-escrow-example) to do just that next.
+
+```
+// We first save the native transaction to file using cleos
+exec('cleos --url '+ process.env.NETWORK_ENDPOINT +' push action eosio.evm raw \'{"ram_payer": '+nativeAccount+', "tx": "'+ raw +'" , "estimate_gas": false, "sender": "'+ evmAddress.replace(/^0x/, '') +'"}\' --expiration 86400 -sjd --json-file output/transaction.json', (err, stdout, stderr) => {
+    if (err) {
+        console.error(err)
+    } else {
+        // We wait to let the command we launched finish
+        await new Promise((resolve) => {
+            setTimeout(resolve, 5000);
+        });
+        // We open and edit the transaction file
+        fs.readFile('output/transaction.json', 'utf8', (err, data) => {
+            if (err) {
+                console.error(err);
+            } else {
+                // We parse the data to JSON and correct some rows
+                var jsonData = JSON.parse(data);
+                jsonData.actions[0].data = jsonData.actions[0].hex_data;
+                delete jsonData.actions[0].hex_data;
+                jsonData.transaction_extensions = [];
+                
+                // We write the file to disk
+                fs.writeFile('output/transaction.json', JSON.stringify(jsonData), (err) => {
+                    if (err) {
+                        console.error(err);
+                    } else {
+                        console.log('Transaction JSON generated in output/transaction.json')
+                    }
+
+                });
+            }
+        });
+    }
+});
 ```
 
 ## 2. Prepare the permissions
@@ -105,3 +144,9 @@ axios({
 ```
 
 ## 3. Send your proposal using cleos
+
+Run the following cleos command, replacing YOUR_NATIVE_ACCOUNT with your Telos native account name and PROPOSAL by your proposal's name.
+
+cleos --url https://testnet.telos.net multisig propose_trx PROPOSAL ./output/permissions.json ./output/transaction.json YOUR_NATIVE_ACCOUNT
+
+You could also use the EOSJS library to create the Multisig proposal directly from your script.
