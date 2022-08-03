@@ -9,7 +9,7 @@ As each EVM contract stores its data at different slots depending on the order a
 
 [Hackernoon's Medium article](https://medium.com/hackernoon/getting-deep-into-ethereum-how-data-is-stored-in-ethereum-e3f669d96033)
 
-[Program The Blockchain blog post](https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/)
+[Program The Blockchain's blog post](https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/)
 
 ## Using a script
 
