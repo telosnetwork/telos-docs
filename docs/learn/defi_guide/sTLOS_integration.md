@@ -1,6 +1,6 @@
 # Staked TLOS (STLOS) integration
 
-__A look at our Staked TLOS token on Telos EVM__
+__A look at our Staked TLOS token and TelosEscrow contract on Telos EVM__
 
 ## RUNDOWN
 
