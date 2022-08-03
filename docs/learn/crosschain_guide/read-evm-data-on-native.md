@@ -23,22 +23,16 @@ You can use a library like ethers to compute the slot you need.
 const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
 
 const addr =  "0x5a9b40a59109a848b82a0ff153910bb595082e09"; // Our contract address
-const index = "0x03"; // Our slot index
-
-const slot = ethers.utils.keccak256(
-  ethers.utils.concat([
-      ethers.utils.hexZeroPad(addr, 32),
-      ethers.utils.hexZeroPad(index, 32),
-  ])
-);
-
+const slot = "0x02"; // Our slot index
 const value =  await provider.getStorageAt(addr, slot); // Read the storage
 ```
 
 If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member to access all the values.
 
 ```
-const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
+const first_member = ethers.utils.keccak256(slot);
+const first_value =  await provider.getStorageAt(addr, first_member); // Read the storage
+
 ```
 
 ## Using a smart contract
@@ -51,7 +45,7 @@ First we need the array length and array content slot key
 ```
 // Get array slot to find array length
 auto account_states_bykey = account_states.get_index<"bykey"_n>();
-auto storage_key = toChecksum256(uint256_t(STORAGE_INDEX));
+auto storage_key = toChecksum256(uint256_t(2));
 auto array_length = account_states_bykey.require_find(storage_key, "No requests");
 // Get array content slot 
 auto array_slot = checksum256ToValue(keccak_256(storage_key.extract_as_byte_array()));
