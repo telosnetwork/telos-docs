@@ -28,8 +28,22 @@ const slot = "0x00"; // Our slot index
 const value =  await provider.getStorageAt(addr, slot); // Read the storage
 ```
 
-If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member and each of its properties in order to access all the values.
+If you are looking for a dynamic array or mapping this first slot will only hold the length. You need to compute a key for each member and each of its properties in order to access all the values. For example with the array of Request struct in our RNGOracleBridge contract:
 
+```  
+struct Request {
+        uint id;
+        address caller_address;
+        uint caller_id;
+        uint requested_at;
+        uint64 seed;
+        uint min;
+        uint max;
+}
+Request[] public requests;
+```  
+ 
+We can access each member of that array and its properties like so:
 ```
 const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
 
