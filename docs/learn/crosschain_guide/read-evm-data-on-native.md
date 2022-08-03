@@ -117,15 +117,4 @@ for(uint256_t i = 0; i < array_length->value;i=i+1){
 }
 ```
 
-This loop makes use of a getArrayMemberSlot function that you can find here:
-
-```
-inline const eosio::checksum256 getArrayMemberSlot(
-        uint256_t array_slot, 
-        uint256_t position, 
-        uint256_t property_count, 
-        uint256_t array_length
-){
-        return toChecksum256(array_slot + position + (property_count * (array_length - uint256_t(1))));
-}
-```
+This loop makes use of functions inside our [utils class](https://github.com/telosnetwork/rng-oracle-bridge/blob/main/native/include/util.hpp) like `getArrayMemberSlot`
