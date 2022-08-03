@@ -5,6 +5,10 @@ This contract holds the state storage of the Telos EVM and can be read to retrei
 
 As each EVM contract stores its data at different slots depending on the order and size of the contract's variable, the first step to be able to read EVM data from Native is hence to understand how ETH storage works, there are several resources available for this:
 
+[Solidity Docs](https://docs.soliditylang.org/en/v0.8.13/internals/layout_in_storage.html)
+[Hackernoon Medium article](https://medium.com/hackernoon/getting-deep-into-ethereum-how-data-is-stored-in-ethereum-e3f669d96033)
+[Program The Blockchain blog post](https://programtheblockchain.com/posts/2018/03/09/understanding-ethereum-smart-contract-storage/)
+
 ## Using a script
 
 ## Using a smart contract
