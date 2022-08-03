@@ -1,7 +1,7 @@
 # Read EVM data from Telos Native
 
 The Telos EVM runs on one smart contract on Telos Native: the __eosio.evm__ contract
-This contract holds the state storage of the Telos EVM on the `accountstates` table that can be read to retreive all stored EVM data. 
+This contract holds the state storage of the Telos EVM on the `accountstates` table that can be read to retreive all stored EVM data. This enables trustless communication from EVM to Native using a smart contract's storage.
 
 _Note that when reading that table the scope needs to be the index of your EVM contract in the __accounts__ eosio.evm table._
 
