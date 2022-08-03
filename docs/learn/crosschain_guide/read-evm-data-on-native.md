@@ -55,8 +55,8 @@ const id_slot = ethers.utils.keccak256(
 );
 
 // Get the array length
-const length = await provider.getStorageAt(addr, "0x02");
-console.log(length)
+const array_length = await provider.getStorageAt(addr, "0x02");
+console.log(array_length)
 
 // If a value is set to 0 it won't be saved as a row in the table
 // A request ID can be set to 0, hence we need to set it to 0 if the row doesn't exist
@@ -67,13 +67,15 @@ try {
 console.log(id);
 ```
 
-To get the following members, you just need to increment that slot
+To get the following members, you just need to increment that slot as many times as needed
 ```
 var slot_caller_address = BigNumber.from(id_slot).add(1);
 
 const caller_address = await provider.getStorageAt(addr, slot_caller_address);
 console.log(caller_address)
 ```
+
+If you need to loop over all members and not just retreive the first member you can use the `array_length` value we retreived earlier to do so.
 
 ## Using a smart contract
 
