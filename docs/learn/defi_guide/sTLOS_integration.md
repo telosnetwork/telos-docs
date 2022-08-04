@@ -19,7 +19,7 @@ The [sTLOS contract](https://github.com/telosnetwork/stlos/blob/dev/contracts/St
 - Users can use their sTLOS tokens like any other ERC20 token.
 - On withdrawl from the contract, sTLOS shares are converted back to TLOS which is then deposited, under the user address, directly to the __TelosEscrow contract__ (see below). 
 
-The main functions are:
+#### Main functions
 
 `depositTLOS(): uint256`
 
@@ -48,7 +48,9 @@ Preview methods are available to help with frontend integrations, such as:
 
 ### TelosEscrow Contract
 
-The [TelosEscrow](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol) contract receives TLOS and locks them for a configurable amount of time `lockDuration`. Deposits are limited to `maxDeposits` per address in order to keep gas fees in check. The main functions are:
+The [TelosEscrow](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol) contract receives TLOS and locks them for a configurable amount of time `lockDuration`. Deposits are limited to `maxDeposits` per address in order to keep gas fees in check. 
+
+#### Main functions
 
 `deposit(address depositor)`
 
@@ -69,6 +71,16 @@ Get total unlocked TLOS in Escrow for an address
 `depositsOf(address depositor): array`
 
 Returns the array of deposits of an address
+
+#### Events
+
+`Withdraw(address _from, address _to, uint _amount)`
+
+Emitted on sucessfull call to withdraw()
+
+`Deposit(address _from, address _depositor, uint _amount)`
+
+Emitted on sucessfull call to deposit(address depositor)
 
 #### Testnet address:
 #### Mainnet address:
