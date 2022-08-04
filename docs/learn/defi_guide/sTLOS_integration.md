@@ -4,7 +4,7 @@ __A look at our Staked TLOS token and TelosEscrow contract on Telos EVM__
 
 ## RUNDOWN
 
-The Telos EVM staking functionality revolves around 2 EVM smart contracts: the [__sTLOS contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol), which represent shares of the deposited TLOS, and the [__TelosEscrow contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol), which locks up any TLOS deposited for a configurable amount of time.
+The Telos EVM staking functionality revolves around 2 EVM smart contracts: the [__sTLOS contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol), a ERC20 token that represents shares of deposited TLOS, and the [__TelosEscrow contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol), which locks up any TLOS deposited for a configurable amount of time.
 
 When funds are withdrawn from the sTLOS contract, they are automatically sent over to the TelosEscrow contract and will only be withdrawable from there after a defined amount of time has passed.
 
