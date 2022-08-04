@@ -10,5 +10,13 @@
 
 | Title | Description |
 | :--- | :--- |
-| [**Telos Decide Mobile App**](voting_guide/telos_mobile_app.md) | Learn about Telos Voting on Mobile App. |
+| [**Telos Decide Mobile App**](voting_guide/telos_mobile_app) | Learn about Telos Voting on Mobile App. |
 | [**Telos Web App Voting**](protocol_guide/Transactions) | Telos Decide Web App Guide. |
+
+# Telos Crosschain
+
+| Title | Description |
+| :--- | :--- |
+| [**Calling EVM functions from Native**](crosschain_guide/call-evm-function-from-native) | Call a EVM function from Native side. |
+| [**Native Multisig**](crosschain_guide/native-to-evm-multisig-proposal) | Native Multisig proposal example. |
+| [**Read EVM data from Telos Native**](crosschain_guide/read-evm-data-on-native) | Read EVM state from native. |

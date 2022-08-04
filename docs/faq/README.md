@@ -57,7 +57,7 @@ Kucoin, Huobi, Gate.io, Uniswap, SushiSwap, Cryptolocally, BitFinex, Bitget, Ape
 - [Multichain](https://app.multichain.org/#/router)
 
 ### How do I get Testnet Telos
-Checkout our guide [here](/quickstart/testnet_tutorial.md)
+Checkout our guide [here](/quickstart/evm/testnet_tutorial.md)
 
 ---
 
