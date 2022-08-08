@@ -10,7 +10,7 @@ slug: /
 
 #### What is Telos? 
 
-Telos is a Layer-1 blockchain network that consistently strives to achieve new pinnacles of cutting-edge innovation. Developers building on Telos can access a suite of tools and onboarding support to develop smart contracts with robust governance features and a vibrant community. Telos aims to build a fairer, faster future with a community of passionate contributors and users about the future of web3. 
+Telos is a next-generation Delegated Proof of Stake (DPOS) Layer-1 blockchain network. It is designed to feature unsurpassed compatibility for developers and provides an extensive suite of tools and onboarding support to develop and deploy and smart contracts on the world's fastest, most scalable, and affordable Telos EVM. The network is backed by robust governance features and a vibrant community of contributors and users that are passionate about the future of Web3 
 
 ![Telos Performance Flex](/img/Telos_Infographic.png)
 
@@ -21,13 +21,13 @@ The Telos Network is a real-world ready blockchain which, through the culminatio
 
 #### Distinctive Attributes Telos provides
 - **Uptime:** Operational integritiy of the Telos network has maintained a 100% uptime since December 2018 without any break, forks or outages.  
-- **No Front Running:**  Telos is architected to not have a mempool and allows for transactions to be processed in a "First in First Out" basis, eliminating the ability for transactions to be front run.
+- **No Front Running:**  Telos is architected not to have a mempool and allows for transactions to be processed in a "First in First Out" basis, eliminating the ability for transactions to be front run.
 - **Transaction Finality:** .5 second block times. It takes half a second to complete a transaction.
 - **Transaction Throughput:** TELOS has successfully proven in excess of 10,000 Transactions Per Second in 2 blocks(1 second)
 - **Security:** DPOS consensus mechanism provides strong security protection against a 51% attack. Telos requires 2/3s + 1 of the validators to sign blocks. 
-- **Fixed Gas Rate:** Telos Gas Fees average in at .01, gas fees don't fluctuate with network volumes. Costs are more predictable and affordable for users and infrastructure. 
-- **Sustainable:** Low carbon footprint, currently only uses 0.000001 kWh to execute one transaction.
-- **Smart Contract Support:** Developers have the option to build smart contracts in multiple languages such as Solidity, C++, Go, and Rust making it one of the most flexible blockchains for builders. NOTE: Additional langauge support coming.
+- **Fixed Gas Rate:** Telos Gas Fees average .01 per transaction. In addition, gas fees do not fluctuate with network volumes. As a result, costs are more predictable and affordable for users and infrastructure.
+- **Sustainable:** Low carbon footprint. A typical transaction currently only consumes 0.000001 kWh to execute.
+- **Smart Contract Support:** Smart Contract Support: Developers can build smart contracts on Telos in multiple languages. This includes Solidity, C++, Go, and Rust, making Telos the most compatible and versatile blockchain to build on (Additional language support to be added soon).
 
 
 ## Telos Native
@@ -55,8 +55,7 @@ Via Telos Decide, the tokenholders all contribute to decisions around upgrading 
 
 ### Overview
 
-Telos has made substantial improvements that address problems other Layer 1 blockchains are facing such as performance, scalability, and energy consumption. The Telos EVM is designed to combat front running
-so that transactions from large institutions or whales performing Defi transactions can't be pushed on top of retail traders in a mempool.
+Telos provides cutting-edge solutions to address the drawbacks developers and users face with other Layer 1 blockchains such as lagging performance (high latency times & network congestion), limited scalability, and energy consumption. The Telos EVM also implements a fixed gas free on all transactions, rendering it impossible for whales or any other user to front run their transaction in a mempool. 
 
 - **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer, the EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
 - **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS, no modifications are needed. 
