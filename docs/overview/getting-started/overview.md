@@ -60,7 +60,7 @@ Telos provides cutting-edge solutions to address the drawbacks developers and us
 - **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer, the EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
 - **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS, no modifications are needed. 
 - **RPC Specification:** Every Telos client implements a JSON-RPC specification that is identical to Ethereum's making it easy to read blockchain data and/or send transactions to the network. 
-- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js
+- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js.
 - **Custom indexing COMING SOON**: A public API which will offer improved data over the standard RPC, such as token holder lists, NFTs, approvals and more.
 
 #### Bridging Native to EVM
