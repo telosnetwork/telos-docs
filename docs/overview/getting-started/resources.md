@@ -60,3 +60,7 @@
 ## Demos
 
 - [Testnet DEX Demo](https://demo.telos.finance)
+
+## Learning Resources
+
+- [Solidity by Example](https://solidity-by-example.org)
