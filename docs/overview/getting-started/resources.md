@@ -16,8 +16,6 @@
 
 - [Hyperion (API) Chat](https://t.me/EOSHyperion)
 
-- [UX Support Team](https://help.telos.net/)
-
 
 ## EVM Tools
 
