@@ -34,11 +34,11 @@ The Telos Network is a real-world ready blockchain which, through the culminatio
 
 #### Base Layer
 
-EOSIO is the open source software platform that Telos is built upon.  EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has made a mark as an EOSIO chain and was the first to build an EVM on top of the EOSIO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently there are compilers for C, C++, RUST, and Typescrypt fitting needs of a diverse range of developers building smart contracts on the native layer of Telos. 
+EOSIO is the open source software platform that Telos is built upon. EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has established itself as a high-powered open source EOSIO chain and was the first to build an EVM on top of the EOSIO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently there are compilers for C, C++, RUST, and Typescrypt, catering to the needs of a diverse range of developers building smart contracts on the native layer of Telos.
 
 #### TLOS Coin
 
-TLOS is the native currency of Telos.  The native Telos coin is important for governing the network and allocating system resources such as staking for annual returns in Resource Exchange(REX). TLOS is utilized to unlock bandwidth on the network in order to execute and interact with contracts, send tokens, and stake for network resources. TLOS is also used as the voting currency in on-chain goverancne. TLOS has a total supply of 355.2 million coins.
+TLOS is the native currency of Telos. The native Telos coin is important for network governance and allocation of system resources such as staking for annual returns in Resource Exchange (REX). TLOS is utilized to unlock bandwidth on the network in order to execute and interact with contracts, send tokens, and stake for network resources. TLOS is also used as the voting currency in on-chain governance. The total supply of TLOS is 355.2 million coins.
 
 **Resource Overview**
 - **RAM:** A size-based resource an account can use to store data within smart contracts.
@@ -47,9 +47,7 @@ TLOS is the native currency of Telos.  The native Telos coin is important for go
 
 **Governance Overview**
 
-The Telos blockchain is a highly inclusive network consisting of contributors such as node operators, builders, and users responsible for participating in on-chain governance 
-decisions with TLOS. To ensure strong governance and decentralization, Telos created the Telos Decide Governance Engine, a governance system designed to support on-chain voting with TLOS and any user created tokens as well.
-Via Telos Decide, the tokenholders all contribute to decisions around upgrading the Telos native and EVM protocol, voting on Block Producers, proposals, amendments and elections.
+The Telos blockchain is a highly inclusive network. It comprises contributors such as node operators, builders, and users responsible for on-chain governance decisions with TLOS. To ensure transparent governance and decentralization, Telos created the Telos Decide Governance Engine, a system designed to support on-chain voting with TLOS and any user-created tokens. Via Telos Decide, the token holders contribute to decisions around upgrading the Telos native and EVM protocol, voting on Block Producers, proposals, amendments and elections.
 
 ## Telos EVM
 
@@ -60,29 +58,29 @@ Telos provides cutting-edge solutions to address the drawbacks developers and us
 - **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer, the EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
 - **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS, no modifications are needed. 
 - **RPC Specification:** Every Telos client implements a JSON-RPC specification that is identical to Ethereum's making it easy to read blockchain data and/or send transactions to the network. 
-- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js
+- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js.
 - **Custom indexing COMING SOON**: A public API which will offer improved data over the standard RPC, such as token holder lists, NFTs, approvals and more.
+
 
 #### Bridging Native to EVM
 Bridge from Native to EVM with our [web wallet](https://wallet.telos.net) to use the EVM DApps. 
 
 ### Telos native to Telos EVM
-The Telos EVM accounts can be mapped to the native network accounts so that users can bridge between the Native network and Telos EVM to leverage tools and DApps on both sides of the network. 
+The Telos EVM accounts can be mapped to the native network accounts so users can bridge between the Native network and Telos EVM to leverage tools and DApps on both sides of the network
 
-1. TLOS is the native currency for executing transactions on the EVM platform also known as the "gas token". 
-2. When an EVM transaction is executed the RPC relays the raw transaction data to the native Telos smart contract, which executes the contract in the C++ WASM runtime. The RPC is responsible from translating the Ethereum JSON-RPC methods to
-the APIs of the Telos native network, as well as for storing the historical transaction data to satisfy other JSON-RPC methods such as `eth_getTransactionReceipt`
+1. TLOS, also known as the "gas token,” is the native currency for executing transactions on the EVM platform.
+2. When an EVM transaction is executed, the RPC relays the raw transaction data to the native Telos smart contract, which executes the contract in the C++ WASM runtime. The RPC is responsible for translating the Ethereum JSON-RPC methods to the APIs of the Telos native network, as well as for storing the historical transaction data to satisfy other JSON-RPC methods such as ```eth_getTransactionReceipt```.
 3. Account and code tables match the specification in the Ethereum Yellow Paper but are implemented in the EOSIO smart contract.
 
 ## Core layer Consensus Protocol aBFT
 
-At the core layer of block confirmation, Telos uses a asynchronous Byzantine Fault Tolerance consensus mechanism that processes transactions asynchronously and continue to operate if some of the networks nodes fail or act malicously. 
+Telos uses an asynchronous Byzantine Fault Tolerance consensus mechanism at the core layer of block confirmation that processes transactions asynchronously and continues to operate if some of the network nodes fail or act maliciously.
 
 
 
 ## Delegated Proof of Stake Mechanism
 
-The DPoS consensus decides its block producers according to the votes of the entire community holding TLOS, thus achieving high scalibility in block production. 
+The DPoS consensus decides its block producers according to the votes of the entire community of TLOS holders, which allows the network to achieve high scalability in block production.
 
 **DPoS can be summarized into two phases:**
 
@@ -105,3 +103,4 @@ The DPoS consensus decides its block producers according to the votes of the ent
 __Telos block producer voting is "inversely weighted," meaning a user will have their voting power reduced for voting less. It also prevents Block Producers from voting for themselves.__
 
 **Documentation Purpose:** The Telos docs provides a list of comprehensive guides for building on Telos dedicated to web2 and web3 developers. If you have any suggestions please list visit our [EVM](https://t.me/TelosEVMDevs) or [Native](https://t.me/dappstelos) development channels. To contribute, please visit our [documentation repository](https://github.com/telosnetwork/telos-docs) and do Pull Request in an area where you can apply specific information/knowledge. 
+

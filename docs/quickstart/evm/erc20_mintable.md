@@ -1,6 +1,6 @@
 # ERC20 Mintable Token
 
-An ERC20 token contract keeps track of fungible tokens: any one token is exactly equal to any other token; no tokens have special rights or behavior associated with them. This makes ERC20 tokens useful for things like a medium of exchagne, currecny, voting rights, staking, and more.
+An ERC20 token contract keeps track of fungible tokens: any one token is exactly equal to any other token; no tokens have special rights or behavior associated with them. This makes ERC20 tokens useful for things like a medium of exchange, currency, voting rights, staking, and more.
 
 
 __See this repository for a template to follow along this guide in minting a ERC20 token on the Telos network.__ [ERC20 Mintable](https://github.com/telosnetwork/erc20-mintable-example).

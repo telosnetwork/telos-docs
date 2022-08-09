@@ -16,8 +16,6 @@
 
 - [Hyperion (API) Chat](https://t.me/EOSHyperion)
 
-- [UX Support Team](https://help.telos.net/)
-
 
 ## EVM Tools
 
@@ -60,3 +58,7 @@
 ## Demos
 
 - [Testnet DEX Demo](https://demo.telos.finance)
+
+## Learning Resources
+
+- [Solidity by Example](https://solidity-by-example.org)
