@@ -79,7 +79,7 @@ Telos uses an asynchronous Byzantine Fault Tolerance consensus mechanism at the 
 
 ## Delegated Proof of Stake Mechanism
 
-The DPoS consensus decides its block producers according to the votes of the entire community holding TLOS, thus achieving high scalibility in block production. 
+The DPoS consensus decides its block producers according to the votes of the entire community of TLOS holders, which allows the network to achieve high scalability in block production.
 
 **DPoS can be summarized into two phases**
 
