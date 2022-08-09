@@ -2,7 +2,6 @@
 
 | Title | Description |
 | :--- | :--- |
-
 | [**Remix Smart Contract Intro**](quickstart/evm/metamask_remix.md) | Deploy a ERC20 Smart Contract using Remix and MetaMask. |
 | [**ERC20 Mintable Smart Contract**](quickstart/evm/erc20_mintable.md) | Deploy a ERC20 Smart Contract using Hardhat on Telos EVM. |
 | [**Starting With Native EOSIO**](quickstart/native/native-eosio.md)| How to run a Node |
