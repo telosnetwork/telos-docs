@@ -84,24 +84,24 @@ At the core layer of block confirmation, Telos uses a asynchronous Byzantine Fau
 
 The DPoS consensus decides its block producers according to the votes of the entire community holding TLOS, thus achieving high scalibility in block production. 
 
-**DPoS can be summarized into two phases**
+**DPoS can be summarized into two phases:**
 
 1. Phase 1 Block Producer Election: 
     - 21 block producers are elected for block production.
-    - To become a BP in the Telos network there is a node operator form with a list of requirements.
-    - Top 21 candidates with the highest voting weight can become block producers and obtain block production rewards accordingly. 
+    - Applicants must fill out a node operator form with a list of requirements to become a BP in the Telos network.
+    - The top 21 candidates with the highest voting weight can become block producers and obtain block production rewards accordingly. 
 
 2. Block Production
-    - Block producers validate the transactions, construct the valid transactions into blocks and then produce blocks orderly linking prev block hash to new appended block
-        - Missed blocks do not affect the subsequent block production
-        - Round of block production lasts 126 seconds(each BP has 6 seconds to produce 12 blocks)
+    - Block producers validate transactions, construct valid transactions into blocks, and then produce blocks in order to link the previous block hash to the new appended block.
+        - Missed blocks do not affect the subsequent block production.
+        - Round of block production lasts 126 seconds (each BP has 6 seconds to produce 12 blocks).
     - Every 12hrs a standby Block Producer from ranks 22-42 is rotated into the production schedule to test their readiness to sign blocks.
-    - If a Block Producer misses blocks for more than a certain threshold (2hrs on average) then they are automatically kicked by the system for 2 days, this kick is recorded on chain.
+    - If a Block Producer misses blocks for more than a certain threshold (2hrs on average), they are automatically kicked by the system for 2 days. This kick is recorded on chain.
       - This combined with the auto-rotation of standbys ensures all Block Producers are in compliance and ready to produce blocks.
     - A new block is confirmed once 15 block producers approve through signed messages. This block is then chained to the network. 
 
  
 
-__Telos block producer voting is "inverse weighted" meaning that the less votes a user makes reduces voting power. This takes away Block Producers voting for themselves.__
+__Telos block producer voting is "inversely weighted," meaning a user will have their voting power reduced for voting less. It also prevents Block Producers from voting for themselves.__
 
-**Documentation Purpose:** The Telos docs is aimed to provide a list of comprehensive guides in building on Telos for web2 and web3 developers. If you have any suggestions please list visit our [EVM](https://t.me/TelosEVMDevs) or [Native](https://t.me/dappstelos) development channels. If you want to contribute visit our [documentation repository](https://github.com/telosnetwork/telos-docs) and do Pull Request in an area where you can apply specific information/knowledge. 
+**Documentation Purpose:** The Telos docs provides a list of comprehensive guides for building on Telos dedicated to web2 and web3 developers. If you have any suggestions please list visit our [EVM](https://t.me/TelosEVMDevs) or [Native](https://t.me/dappstelos) development channels. To contribute, please visit our [documentation repository](https://github.com/telosnetwork/telos-docs) and do Pull Request in an area where you can apply specific information/knowledge. 
