@@ -55,11 +55,12 @@ The Telos blockchain is a highly inclusive network. It comprises contributors su
 
 Telos provides cutting-edge solutions to address the drawbacks developers and users face with other Layer 1 blockchains such as lagging performance (high latency times & network congestion), limited scalability, and energy consumption. The Telos EVM also implements a fixed gas free on all transactions, rendering it impossible for whales or any other user to front run their transaction in a mempool. 
 
-- **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer. The EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
-- **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS. Modifications are not required.
-- **RPC Specification:** Every Telos client implements a JSON-RPC specification identical to Ethereum's. This allows for easy-to-read blockchain data and sending transactions to the network.
-- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js
-- **Custom indexing COMING SOON**: A public API which will offer improved data over the standard RPC, such as token holder lists, NFTs, approvals, and more.
+- **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer, the EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods so all EVM tools and wallets are compatible.
+- **Solidity & Viper:** Telos EVM processes the same code as Ethereum's EVM and other EVMS, no modifications are needed. 
+- **RPC Specification:** Every Telos client implements a JSON-RPC specification that is identical to Ethereum's making it easy to read blockchain data and/or send transactions to the network. 
+- **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API such as ethers.js & web3.js.
+- **Custom indexing COMING SOON**: A public API which will offer improved data over the standard RPC, such as token holder lists, NFTs, approvals and more.
+
 
 #### Bridging Native to EVM
 Bridge from Native to EVM with our [web wallet](https://wallet.telos.net) to use the EVM DApps. 
