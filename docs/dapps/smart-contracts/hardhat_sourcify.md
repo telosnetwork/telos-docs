@@ -2,26 +2,26 @@
 
 __ Refer to [this](https://github.com/nathanduft44/telos_hardhat_deploy) repository for project setup. __
 
-Hardhat is a development environment to compile, deploy, test, and debug contracts for EVM compatible blockchains. 
+Hardhat is a development environment to compile, deploy, test, and debug smart contracts for EVM compatible blockchains. 
 
-This tutorial will cover how to use the [hardhat-deploy plugin](https://github.com/wighawag/hardhat-deploy), specifically to verify deployed contracts on the Telos explorer on mainnet. 
+This tutorial will cover how to use the [hardhat-deploy plugin](https://github.com/wighawag/hardhat-deploy) and verify deployed contracts on the Telos explorer on mainnet. 
 
 
-1. Setup Hardhat project with the hardhat-deploy plugin
-2. Deploy contracts using the plugin
+1. Setup Hardhat project with the Hardhat-deploy plug-in
+2. Deploy contracts using the plug-in
 3. Verify the contracts on sourcify
 
-### Verify contracts using hardhat-deploy plugin
+### Verify contracts using hardhat-deploy plug-in
 
 **Setup**
 
-First, we need to setup our local environment. If you don't already know how to set up a local hardhat project refer to [this page](https://hardhat.org/tutorial/setting-up-the-environment.html) to get your environment setup. 
+The first step is to set up the local environment. If you are not familiar with how to set up a local hardhat project, refer to [this page](https://hardhat.org/tutorial/setting-up-the-environment.html). 
 
 
 
-1. Add a deploy folder in primary directory
+1. Add a deploy folder in the primary directory
 
-Past the following code block into the deploy folder under filename - deploy.js
+Insert the following code block into the deploy folder under filename - deploy.js
 
 ```js title="hardhat_project/deploy/00_deploy_my_contract.js"
 module.exports = async ({getNamedAccounts, deployments}) => {
@@ -35,14 +35,13 @@ module.exports = async ({getNamedAccounts, deployments}) => {
   };
 ```
 
-2. Add a blank deployments folder in root directory. This is where the Json ABI and byte will be pasted automatically when we run a deploy command. 
+2. Add a blank deployment folder in root directory. The JSON ABI and byte will be pasted here automatically when a deploy command is executed. 
 
 ## Installations
 
 ### Package Checklist
 __ Make sure these packages are included in your package.json list before running a deploy command.__
 
-If some of the following packages are missing just run npm install <package_name>
 - @nomiclabs/hardhat-ethers
 - @nomiclabs/hardhat-waffle
 - chai
@@ -52,24 +51,25 @@ If some of the following packages are missing just run npm install <package_name
 - @openzeppelin/contracts
 - dotenv
 
+Run npm install <package_name> if any of the above packages are missing.
 
-**Hardhat Plugin**
+**Hardhat Plug-in**
 ```js title="desktop/Basic_hardhat_project"
 npm install -D hardhat-deploy
 ```
-Import the plugin in your hardhat.config.js file
+Import the plug-in in your hardhat.config.js file
 ```js title="/hardhat.config.js"
 require('hardhat-deploy');
 ```
-Since hardhat-deploy-ethers is a fork of @nomiclabs/hardhat-ethers and that other plugin might have an hardcoded dependency on @nomiclabs/hardhat-ethers the best way to install hardhat-deploy-ethers and ensure compatibility is the following:
+When taking into account that Hardhat-deploy-ethers is a fork of @nomiclabs/hardhat-ethers, and other plug-ins may have have an hardcoded dependency on @nomiclabs/hardhat-ethers, the best method to install hardhat-deploy-ethers and ensure compatibility is the following:
 ```js title="/Basic_hardhat_project"
 npm install --save-dev  @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
 ```
-Don't forget to add: ``` require("@nomiclabs/hardhat-ethers"); ``` at the top of your hardhat.config.js file`
+Remember to add: ``` require("@nomiclabs/hardhat-ethers"); ``` at the top of your hardhat.config.js file.
 
 
 ### Deploy
-Hardhat config file should look something like this:
+The following is what the Hardhat config file should like:
 ```js title="/hardhat.config.js"
 require("@nomiclabs/hardhat-waffle");
 require('dotenv').config({path: '.env'});
@@ -107,7 +107,7 @@ deploying "Greeter" (tx: 0xc800f2bfa3ef75768045d885210a8dfc4148ba2f9838f27113d40
 
 ### Verify
 
-Using the hardhat sourcify command you can easily verify smart contracts with the hardhat deploy sourcify command from the plugin.
+You can easily verify smart contracts with the hardhat deploy sourcify command from the plugin.
 
 
  ``` npx hardhat --network telos_testnet sourcify```
@@ -115,7 +115,7 @@ Using the hardhat sourcify command you can easily verify smart contracts with th
 
 Console output should result in contract printed and green verification text printed.
 
-Voila you should have successfully followed the steps to verify the contract. 
+Following these steps will enable you to successfully verify the contract. 
 
 
 ![verify](/img/verify.png)
