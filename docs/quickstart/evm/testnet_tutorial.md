@@ -5,16 +5,17 @@ sidebar_positon: 2
 
 # Telos Testnet Faucet
 
-**This tutorial demonstrates how to get Telos Testnet from the Testnet Faucet for development purposes**
+**This tutorial explains how to get Telos Testnet from the Testnet Faucet for development purposes**
 
 #### Step 1: Open Metamask wallet
-If you don't already have a development wallet, it is encouraged to set one up to set apart from personal degen wallet for safety purposes.
+It is recommended that you set up a new wallet specifically for development to keep it separate from any other wallets. 
 
 #### Step 2: Set up Testnet Network Configuration
 ![Metamask Network Config](/img/metamask_config.png)
-Click on top menu Ethereum Mainnet drop down then select Add Network. 
 
-Enter Network params below into the Add a network section
+Click the down arrow beside "Ethereum Mainnet" to open the drop-down menu, then select "Custom PRC." This will enable you to add a new network.
+
+Enter the network paramaters below into the the corresponding space on the Add a network window.
 
 #### **Telos Testnet Settings:**
 
@@ -28,13 +29,13 @@ Enter Network params below into the Add a network section
 
 #### Step 3: Go to Telos Testnet Faucet and request 50TLOS
 
-Go to [Testnet Faucet](https://app.telos.net/testnet/developers) and paste your Metamask address at the bottom above "SEND TESTNET EVM TLOS".
+Go to [Testnet Faucet](https://app.telos.net/testnet/developers) and paste your Metamask address into the space above "SEND TESTNET EVM TLOS".
 
 ![Testnet Faucet Example](/img/testnet_faucet.png)
 
 
 
-Voila you should now have some Testnet money to play around with in your Dapp development!
+Completing these steps will provide you with testnet funds to work with in your dApp development.
 
 
 
