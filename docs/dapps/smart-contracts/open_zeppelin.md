@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Open Zeppelin Contracts
 -----                                   --------
 A library for secure smart contract development. Build on a solid foundation of community-vetted code.

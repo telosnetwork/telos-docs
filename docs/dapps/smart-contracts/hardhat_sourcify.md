@@ -1,3 +1,8 @@
+---
+sidebar_position: 2
+---
+
+
 # How to Verify Smart Contracts with Hardhat Deploy plugin
 
 __ Refer to [this](https://github.com/nathanduft44/telos_hardhat_deploy) repository for project setup. __

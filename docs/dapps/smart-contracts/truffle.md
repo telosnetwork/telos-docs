@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Truffle Tutorial
 
 __Truffle makes web3 production and development easier to get up and running, it eases developer experience with compilation, deployment, and testing smart contracts on EVM based blockchains.__
