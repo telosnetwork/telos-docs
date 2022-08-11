@@ -5,11 +5,7 @@ id: "Nodeos"
 
 # Nodeos
 
-Telos makes use of EOSIO platform specific components and libraries (`nodeos`, `cleos`, `keosd`, `EOSIO.CDT`, and `EOSJS`) to operate blockchain nodes, collect blockchain data, interact with nodes, and to build smart contracts.
-
-All Telos nodes must implement the client service daemon protocol called **nodeos**. It is a child of EOSIO and is responsible for processing smart contracts, validating transactions, producing blocks, and confirming blocks on the Telos blockchain. 
-
-`nodeos` is distributed as part of the EOSIO software suite. Each node can be configured (with specific functional plugins) to function as a:
+`Nodeos` is distributed as part of the EOSIO software suite. Each node can be configured (with specific functional plugins) to function as a:
 1. Block Producing node; or as 
 2. Non-producing node.
 
