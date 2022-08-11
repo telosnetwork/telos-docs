@@ -7,10 +7,10 @@ __This tutorial explains how to configure a local test network, setup EOSIO syst
 
 # Installations
 Make sure you have EOSIO installed via ``` cleos version client``` 
-Otherwise head over to [EOSIO installation guide](../native/eosio_toolkit/getting_started_eosio)
+If not currently installed, follow this link before proceeding: [EOSIO installation guide](../native/eosio_toolkit/getting_started_eosio)
 
 ## Node Template
-We will be using the node template found [here](https://github.com/telosnetwork/node-template) to set up a local dev node. 
+This example will use the node template found [here](https://github.com/telosnetwork/node-template) to set up a local dev node. 
 
 __Clone the Node template to local project folder and open Code IDE.__
 
@@ -18,7 +18,7 @@ __Clone the Node template to local project folder and open Code IDE.__
 # Start here
 
 ## 1. Edit Config Files
-In the node_config file set LOCALIZE_LOG=true and set the nodeos and cleos binaries to be the name of the binary without a specific path:
+In the node_config file set LOCALIZE_LOG=true and set the nodeos and cleos binaries as the name of the binary without a specific path:
 
 ```
 BUILD_ROOT="/path/to/binaries/2.0.4"
@@ -47,7 +47,7 @@ Import the key into cleos, paste the private key when prompted:
 ```cleos wallet import -n dev```
 
 
-__Now that we have imported the private key to the new account we generated we can move onto configuring the files__
+__Now that the private keys have been imported to the newly generated account, the next step is to configure the files__
 
 ## 3. Configure local Node template files 
 
@@ -64,7 +64,7 @@ Edit the config.ini file to configure this node to produce blocks as ```eosio```
 
 ```vi config.ini```
 
-Also change these two, setting the key to be the one you generated above for eosio super account:
+Also change the following, setting the key to the you generated above for EOSIO super account:
 
 ```producer-name = eosio```
 
@@ -79,7 +79,7 @@ Uncomment the producer API Plugin in config.ini file:
 
 ```./start.sh --enable-stale-production --genesis-json genesis.json```
 
-2. View the blocks being confirmed in a new terminal run the command:
+2. View the blocks being confirmed in a new terminal and run the command:
 
 ```tail -f node-template.log```
 
@@ -87,15 +87,15 @@ Uncomment the producer API Plugin in config.ini file:
 
 ```./stop.sh```
 
-4. Start the node in dev mode, this is how you will start the node from now on:
+4. Start the node in dev mode (this is how you will start the node from now on):
 
 ```./start.sh --enable-stale-production```
 
 
 ## Create System Accounts
-Now make sure that you have your key pair that we initialized in the beginning of tutorial.
+Make sure to have your key pair that was initialized at the start of the tutorial.
 
-If you want to double check your using the right key in your wallet simply run the command:
+Run the following command to double check the correct wallet key is being used:
 
 ```cleos wallet private_keys -n <YourWalletName>```
 
@@ -122,9 +122,9 @@ Command for creating accounts (Usage: **cleos create account [OPTIONS] creator n
 
 ```cleos create account eosio eosio.stake <OwnerKey> <ActiveKey>```
 
-**NOTE:** Can only create accounts using this command before the system.contract is deployed, once it's deployed you must use ```cleos system newaccount ...```
+**NOTE:** Users can only create accounts with this command before the system.contract is deployed. Once deployed, you must use ```cleos system newaccount ...```
 
-Check accounts we made under the eosio account:
+Check created accounts under the EOSIO account:
 
 ```cleos get accounts <PublicKey>```
 
@@ -162,7 +162,7 @@ Issue Max Supply to EOSIO account
 
 
 ## Deploy the System Contract 
- We are going to deploy the standard system contract that comes with EOSIO software and initialize it using the Init action. 
+The next step is to deploy the standard system contract that comes with EOSIO software and initialize it using the Init action. 
 
 1. First run the curl command
 
