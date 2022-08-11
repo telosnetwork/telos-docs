@@ -15,5 +15,3 @@ OpenZeppelin brings about:
 
 Follow the link to get started using [OpenZeppelin](https://docs.openzeppelin.com/) code in your smart contacts.
 
-
-
