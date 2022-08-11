@@ -4,19 +4,24 @@
 
 ## Overview
 
-The purpose of this document is to help you with launching your existing dapp on Telos. It contains a series of resources designed to help you get the basics of Telos Platform and how it works, show how to connect to the network, how to use your existing tools and environments in developing and deploying on Telos, as well as some common pitfalls you need to consider when running your dapp on Telos.
+This document aims to help developers launch their existing dApps on Telos. In this section, you will find a series of resources that will detail:
+
+- The basics of the Telos platform.
+- How to connect to the network. 
+- How to use your existing tools and environments in developing and deploying on Telos. 
+- Common pitfalls you may encounter when running your dapp on Telos.
 
 ## Platform Basics
 
-Telos EVM is an implementation of the Ethereum EVM written as a Smart Contract in EOSIO(C++) that simply runs ontop of the native network. As far as your dapp is concerned, it will be running the same as on Ethereum, just quicker and cheaper. Let's find out how.
+Telos EVM is an implementation of the Ethereum EVM. It is written as a smart contract in EOSIO(C++) and runs on top of the native network. DApps built on the Telos EVM will run similarly to how they run on Ethereum, but with several key differences; namely, tEVM will execute transactions orders of magnitude faster and cheaper than on Ethereum. 
 
 ## Accessing Telos 
 
-There are multiple ways of working with the Telos. We are creating more ways to connect in the near future
+There are several ways developers can connect with Telos, as seen below:
 
 ### Through MetaMask
 
-You can access TelosEVM through MetaMask, by defining a custom network. Go to MetaMask, log in, click the network dropdown, and select 'Custom RPC'. Data for Telos is as follows.
+You can access TelosEVM through MetaMask by creating a custom network. Log into MetaMask and select the network dropdown. Then select 'Custom RPC' and enter the following data for Telos:
 
 #### **Telos Mainnet Settings:**
 
