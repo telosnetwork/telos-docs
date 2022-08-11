@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ----     -----
 
-__This page is intended to walkthrough the necessary steps for installing EOSIO software using pre-built binaries and download from source repository at bottom of page for experienced developers.__
+__This provides a walkthrough to install EOSIO software using pre-built binaries and a download from source repository located at the bottom of the page for experienced developers.__
 
 ## Prebuilt Binaries
 
