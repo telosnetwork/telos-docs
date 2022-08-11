@@ -8,6 +8,8 @@ id: faqs
 
 Answers to frequently asked questions about Telos.
 
+Feel free to visit [Telos Knowledge base](https://help.telos.net/) for additional help.
+
 ---
 
 ## Introduction and Overview
