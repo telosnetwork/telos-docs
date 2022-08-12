@@ -47,7 +47,13 @@ const config = {
         googleAnalytics: {
           trackingID: 'UA-154600181-4',
           anonymizeIP: true,
-        },      
+        },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.5,
+          ignorePatterns: ['/tags/**'],
+          filename: 'sitemap.xml',
+        },    
       }),
     ],
   ],
