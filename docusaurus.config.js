@@ -51,7 +51,7 @@ const config = {
         sitemap: {
           changefreq: 'weekly',
           priority: 0.5,
-          ignorePatterns: ['/tags/**'],
+          ignorePatterns: ['/tags/**','/index-off','/markdown-page','/my-react-page'],
           filename: 'sitemap.xml',
         },    
       }),
