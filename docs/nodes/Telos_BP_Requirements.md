@@ -5,15 +5,15 @@ id: "Telos_BP_Requirements"
 
 # Telos Block Producer Requirements
 
-The intent of this document is to clarify the minimum requirements for Block Producers to participate in the Telos Blockchain Network (herein referred to as the “TBN”). There are multiple phases of participation, with each level having more stringent requirements than the previous — this is intended to address the growing requirements of the network over time.
+The aim of this section is to clarify the minimum requirements for block producers to participate in the Telos Blockchain Network (herein referred to as the “TBN”). There are multiple levels of participation, with each level having more stringent requirements than the previous one— this is intended to address the growing requirements of the network over time.
 
-The specifications stated herein are subject to revision, as well as when the network will move from stage to stage — as determined by a vote of ⅔ + 1 of the current Block Producers at the time of the proposed revisions.
+The specifications stated herein are subject to revision, as well as when the network progresses from stage to stage — as determined by a vote of ⅔ + 1 of the current block producers at the time of the proposed revisions.
 
 Please visit https://www.telos.net/governance and navigate to Document: Block Producer Minimum Requirements for an up to date list of block producer hardware requirements per phase.
 
 ----                                          ------           
 
-Regardless of their level of participation, to participate in the TBN at any phase — Block Producers candidates are required to provide, and abide by the following:
+Regardless of their level of participation, to participate in the TBN at any phase, block producers candidates are required to provide, and abide by the following:
 
 ### A. Disclosures:
 

@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # CLEOS Wallet Overview
 -----       ------
-Telos native wallets are applications that let you interact with your Telos native accounts. CLEOS is a command line tool that interfaces with the REST API exposed nodeos. The wallet is like a container that is used to store key pairs/accounts for the blockchain. 
+Telos native wallets are applications that let you interact with your Telos native accounts. CLEOS is a command line tool that interfaces with the REST API exposed nodeos. The wallet acts a container that is used to store key pairs/accounts for the blockchain. 
 
 **Telos wallets are unique as you can store multiple accounts and keys unlike MetaMask.**
 
@@ -13,19 +13,19 @@ __Simply create a Development Wallet with Cleos commands__
 
 
 ## Step 1: Create a Wallet
-Using Cleos to create the wallet.
-We will be using the ```--to-console``` command for simplicity. If you are creating a wallet in production use ```--to-file``` so your wallet password is not in your bash history. 
+Using Cleos to create the wallet:
+This example will use the ```--to-console``` command for simplicity. If you are creating a wallet in production, use ```--to-file``` to ensure your wallet password is not recorded in your bash history. 
 
 ```cleos wallet create --to-console ```
 
-**Cleos will return a password, save this password somewhere as you will likely need it later in the tutorial.**
+**Cleos will return a password, save this password somewhere as you will likely need it later on in the tutorial.**
 
 
 ![CleosPassword](/img/cleos_password.png)
 
-**About Wallets** A common misconception in cryptocurrency regarding wallets is that they store tokens. However, in reality, a wallet is used to store private keys in an encrypted file to sign transactions. Wallets do not serve as a storage medium for tokens. Private keys are used for authentication(proof of ownership over a public address) and signing transactions/messages.
+**About Wallets** A common misconception in cryptocurrency regarding wallets is that they store tokens. However, a wallet is used to store private keys in an encrypted file to sign transactions. Wallets do not serve as a storage medium for tokens. Private keys are used for authentication (proof of ownership over a public address) and signing transactions/messages.
 
-A user builds a transaction object, usually through an interface, sends that object to the wallet to be signed, the wallet then returns that transaction object with a signature which is then broadcast to the network. When/if the network confirms that the transaction is valid, it is included into a block on the blockchain.
+A user builds a transaction object usually through an interface and sends that object to the wallet to be signed. The wallet then returns the transaction object with a signature which is then broadcast to the network. When/if the network confirms that the transaction is valid, it is included into a block on the blockchain.
 
 ----            -----
 
@@ -45,7 +45,7 @@ Enter wallet command and name of wallet
 ```
 cleos wallet unlock -n WalletName
 ```
-It will prompt you to enter wallet password
+It will then prompt you to enter wallet password
 
 ![unlockWallet](/img/unlockWallet.png)
 
@@ -57,7 +57,7 @@ cleos wallet keys
 ```
 **New Wallet Output**
 ```
-[] //Wallet is empty as we haven't imported private keys in yet. 
+[] //Wallet is empty orivate keys have yet to be imported. 
 ```
 
 
@@ -81,7 +81,7 @@ Import private key or keys into wallet.
 ```
 cleos wallet import 
 ```
-The command asks for the private key. Enter it:
+The command asks for the private key. Enter:
 ```
 5KDNWQvY2seBPVUz7MiiaEDGTwACfuXu78bwZu7w2UDM9A3u3Fs
 ```
