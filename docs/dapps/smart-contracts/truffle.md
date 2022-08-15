@@ -4,14 +4,14 @@ sidebar_position: 4
 
 # Truffle Tutorial
 
-__Truffle makes web3 production and development easier to get up and running, it eases developer experience with compilation, deployment, and testing smart contracts on EVM based blockchains.__
+__Truffle simplifies the process of operating Web3 production and development. It eases a developer's overall experience with compilation, deployment, and testing of smart contracts on EVM-based blockchains.__
 
 #### Truffle Features
-**Modular Solidity versions:** Allows developers to very easily switch between solidity versions by just changing a configuration. 
+**Modular Solidity versions:** Allows developers to switch between Solidity versions with a simple configuration change. 
 
-**Ganache:** Local blockchain implementation that is isolated from mainnet.
+**Ganache:** Local blockchain implementation isolated from mainnet.
 
-**Mocha:** Simply and flexible JavaScript test framework easing the testing process in smart contract development.
+**Mocha:** Simple and flexible, the JavaScript test framework eases the testing process in smart contract development.
 
 
 ## Getting Started
@@ -20,8 +20,8 @@ __Truffle makes web3 production and development easier to get up and running, it
 - NodeJS v12 or later
 - Windows, Linux or Mac OS X
 
-Truffle requires you to connect to a EVM client.
-- This tutorial we will be using the Telos testnet RPC endpoint.
+Truffle requires users to connect to an EVM client.
+- This tutorial will explain the process while utilizing the Telos testnet RPC endpoint.
 
 #### Installations
 
@@ -29,23 +29,23 @@ Truffle requires you to connect to a EVM client.
 
     ```npm install -g truffle ```
 
-    Check if Truffle is on your local machine
+    Check that Truffle is on your local machine
     ```truffle version```
 
 2. Setting up a Truffle project
-    - Create a local folder, you can name it Truffle tutorial  
-    - Go to the project directory and run ``` truffle init``` 
+    - Create a local folder and choose a name (i.e.,Truffle tutorial)
+    - Proceed to the project directory and run ``` truffle init``` 
 
     **File Structure**
-    - contracts: Hosts all the solidity smart contracts(.sol files)
-    - migrations: Write deployment scritps, tell truffle how to deploy smart contracts to the blockchain with NodeJS
+    - contracts: Hosts all solidity smart contracts (.sol files)
+    - migrations: Writes deployment scritps and tells truffle how to deploy smart contracts to the blockchain with NodeJS
     - test: Hosts the testing scripts either in Solidity, Mocha, or NodeJS
     - truffle-config.js: Hosts network infomration for deploying smart contracts. 
 3. Create Smart Contract
-    - Open up project in a code editor. 
-    - In the contracts folder create a new file named Simple_Storage.sol
+    - Open the project in a code editor. 
+    - In the contracts folder, create a new file named Simple_Storage.sol
 
-    We will be using this basic smart contract   
+    The following basic smart contract will be used as an example:  
 ```jsx title="/truffle_tutorial/contracts/Simple_Storage.sol"
 pragma solidity ^0.8.4;
 
@@ -61,26 +61,26 @@ contract SimpleStorage {
     }
 }
 ```
-**NOTE**: By default Truffle uses Solidity version 0.8.4. 
+**NOTE**: Truffle uses Solidity version 0.8.4. by default.
 
-If you want to change the solidity version simply go to truffle-config.js and change the solidity version in the compilers object
+To change the Solidity version, proceed to truffle-config.js and change the Solidity version in the compilers object.
 
 4. Compile Contracts
 
 ```truffle compile``` Run this command in the root directory of your project.
 
-__The compile produces artifact files which are saved within the ./build directory, along side the compiled deployed contract artifacts in ./build/contracts.__
+__The compile produces artifact files which are saved within the ./build directory, alongside the compiled deployed contract artifacts in ./build/contracts.__
 
-**Build Artifacts:** Inside the build folder we have json files with ABI information, contract bytecode(For EVM), deployment details, compiler version etc. The ABI can be used by the front end of DApp in order to interact with the Smart Contract. 
+**Build Artifacts:** JSON files with ABI information, contract bytecode(For EVM), deployment details, compiler version, and other data are located inside the build folder. The ABI can be used by the front end of the dApp to interact with the smart contract.
 
 #### Interacting With Your Contracts
-Writing data is called a transaction whereas reading data is called a call.
+Writing data is referred to as a transaction, whereas reading data refers to a call.
 
 Transactions change the state of the network, whereas calls just view the state of the network(specific data); they return a value immediately.
 
 
 #### Contract Abstractions
-Using either ethers.js or web3.js we can interact with a Telos node directly with a JavaScript library making it easy to read and write data to/from the blockchain. Truffle uses its own contract abstration via the @truffle/contract module, and it is this contract abrastraction that's described below. 
+Using either ethers.js or web3.js, a user can interact with a Telos node directly with a JavaScript library, making it easy to read and write data to/from the blockchain. Truffle uses its own contract abstraction via the @truffle/contract module, described below:
 
 5. Testing Contracts
     - Ganache 
@@ -99,11 +99,11 @@ contract('SimpleStorage', () => {
 });
 ```
 
-Test the Contract using the test script abstraction:
+Test the contract using the test script abstraction:
 
 ```truffle test```
 
-Truffle effecitively is creating a local test chain to test this contract.
+Truffle effecitively creates a local test chain to test this contract.
 
 
 ```jsx "Output:"
@@ -116,11 +116,10 @@ Contract: SimpleStorage
 ```
 
 
-6. Migrations for deploying Contracts.
-    We will need to make a few adjustments to truffle-config.js
+6. Migrations for deploying Contracts will require users to make several adjustments to truffle-config.js.
 
     - Open truffle.config.js
-    - We will be using a private key provider method to connect to a Telos RPC node. 
+    - A private key provider method will be used to connect to a Telos RPC node. 
     - NOTE: Use a Dev Wallet for safety purposes. 
 ```jsx title="/truffle_tutorial/truffle-config.js"
 // require('dotenv').config(); If you want to use a dotenv file use this plugin. 
@@ -163,15 +162,13 @@ module.exports = {
 };
 ```
 
-7. Deploy the contract on Telos Testnet
-
-Run the command 
+7. Deploy the contract on Telos Testnet, then run the following command:
 
 ```truffle migrate --network telos_testnet```
 
-After deployment the output will show all the block information such as transaction hash, block number etc. 
+After deployment, the output will display the block information such as transaction hash, block number etc. 
 
-Now that you know a tutorial with Truffle goahead and learn more [here](https://trufflesuite.com/docs/truffle/getting-started/creating-a-project/)
+This completes the Truffle tutorial. Click [here](https://trufflesuite.com/docs/truffle/getting-started/creating-a-project/) for further information on creating a project on Truffle. 
 
 
 

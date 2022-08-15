@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Smart Contract Development
 
-This tutorial introduces the concept of smart contracts on EOSIO native network. We will be building a smart contract, deploying it and using cleos to call the smart contract actions. 
+This tutorial introduces the concept of smart contracts on EOSIO native network. This includes how to build a smart contract, deploy it and use cleos to call the smart contract actions. 
 
 ### Build the Contract 
 
