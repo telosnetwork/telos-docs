@@ -82,7 +82,7 @@ Check out [Telos Decide Governance System](/native/eosio_toolkit/decide_engine.m
 ### How do I add Telos to MetaMask?
 Guide is over [here](/docs/dapps/launch-dapp-on-tEVM.md)
 ### What is REX and how does it work?
-REX is the resource exchange powered by the Telos native network. Users can stake REX for an API up to 14%. REX is responsible for all the actions on EOSIO that enable users and builders to buy, sell, stake resources in order to perform actions on-chain and acrue TLOS tokens. 
+REX is the resource exchange powered by the Telos native network. Users can stake REX for an API up to 14%. REX is responsible for all the actions on Antelope that enable users and builders to buy, sell, stake resources in order to perform actions on-chain and acrue TLOS tokens. 
 
 ---
 
@@ -90,7 +90,7 @@ REX is the resource exchange powered by the Telos native network. Users can stak
 
 ### How do I stake TELOS?
 - Stake Telos on the [Web Wallet](https://wallet.telos.net/balance)
-- Stake Telos on an [EOSIO block explorer](https://www.telos.net/ecosystem-apps-filter/block-explorer)
+- Stake Telos on an [Antelope block explorer](https://www.telos.net/ecosystem-apps-filter/block-explorer)
 - Coming soon stake TLOS on EVM on our WebWallet, Block Explorer or a DEX. 
 
 ---

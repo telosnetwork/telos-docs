@@ -17,7 +17,7 @@ Telos is a next-generation Delegated Proof of Stake (DPOS) Layer-1 blockchain ne
 
 #### Establishment
 
-The Telos Network is a real-world-ready blockchain. Through years of challenges, innovation, and web3 firsts, Telos has grown into a network capable of supporting the extreme demands of the decentralized world of tomorrow. Launched in 2018 without an ICO and through a fair token distribution, the lead development team initially took the open source eos.io software and debuted a specialized version with additional layers of governance, tooling, and node configuration requirements. Through the years, the development team has continued to innovate based on the needs of builders and, in late 2021, launched the first bespoke/ground-up Ethereum Virtual Machine (tEVM), which runs using a smart contract on the native chain's quick finality and node infrastructure. The launch of the tEVM has given builders and users two networks, native supporting C++-based applications and the tEVM allowing for complete compatibility from any traditional EVM/solidity-based applications. Telos continues to push beyond the boundaries of what web3.0 networks can achieve, and builders can look forward to additional performance and language capabilities as the Telos Network continues on its sharp growth trajectory.
+The Telos Network is a real-world-ready blockchain. Through years of challenges, innovation, and web3 firsts, Telos has grown into a network capable of supporting the extreme demands of the decentralized world of tomorrow. Launched in 2018 without an ICO and through a fair token distribution, the lead development team initially utilized the Antelope.io source code and debuted a specialized version with additional layers of governance, tooling, and node configuration requirements. Through the years, the development team has continued to innovate based on the needs of builders and, in late 2021, launched the first bespoke/ground-up Ethereum Virtual Machine (tEVM), which runs using a smart contract on the native chain's quick finality and node infrastructure. The launch of the tEVM has given builders and users two networks, native supporting C++-based applications and the tEVM allowing for complete compatibility from any traditional EVM/solidity-based applications. Telos continues to push beyond the boundaries of what web3.0 networks can achieve, and builders can look forward to additional performance and language capabilities as the Telos Network continues on its sharp growth trajectory.
 
 #### Distinctive Attributes Telos provides
 - **Uptime:** Operational integrity of the Telos network has maintained a 100% uptime since December 2018 without any breaks, forks, or outages.  
@@ -34,7 +34,7 @@ The Telos Network is a real-world-ready blockchain. Through years of challenges,
 
 #### Base Layer
 
-EOSIO is the open-source software platform that Telos is built upon. EOSIO is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has established itself as a high-powered open source EOSIO chain and was the first to build an EVM on top of the EOSIO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently, there are compilers for C, C++, RUST, and Typescript, catering to the needs of a diverse range of developers building smart contracts on the native layer of Telos.
+[Antelope](https://antelope.io/) is the open-source software platform that Telos is built upon. Antelope is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has established itself as a high-powered open source [Antelope](https://antelope.io/) chain and was the first to build an EVM on top of the EOSIO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently, there are compilers for C, C++, RUST, and Typescript, catering to the needs of a diverse range of developers building smart contracts on the native layer of Telos.
 
 #### TLOS Coin
 
@@ -55,7 +55,7 @@ The Telos blockchain is a highly inclusive network. It comprises contributors su
 
 Telos provides cutting-edge solutions to address the drawbacks developers and users face with other Layer 1 blockchains, such as lagging performance (high latency times & network congestion), limited scalability, and energy consumption. The Telos EVM also implements a fixed gas fee on all transactions, rendering it impossible for whales or any other user to front run their transaction in a mempool. 
 
-- **Architecture:** Telos EVM is a Smart Contract built on the native EOSIO layer. The EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods, so all EVM tools and wallets are compatible.
+- **Architecture:** Telos EVM is a Smart Contract built on the native Antelope.io layer. The EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods, so all EVM tools and wallets are compatible.
 - **Solidity & Viper:** Telos EVM processes the same code as Ethereum's and other EVMs. No modifications are needed. 
 - **RPC Specification:** Every Telos client implements a JSON-RPC specification identical to Ethereum's, making it easy to read blockchain data and send transactions to the network. 
 - **Convenience Libraries:** Telos supports the same libraries for JSON-RPC API, such as ethers.js & web3.js.
@@ -70,7 +70,7 @@ The Telos EVM accounts can be mapped to the native network accounts so users can
 
 1. TLOS, also known as the "gas token," is the native currency for executing transactions on the EVM platform.
 2. When an EVM transaction is executed, the RPC relays the raw transaction data to the native Telos smart contract, which runs the contract in the C++ WASM runtime. The RPC is responsible for translating the Ethereum JSON-RPC methods to the APIs of the Telos native network, as well as storing the historical transaction data to satisfy other JSON-RPC methods such as "`eth_getTransactionReceipt`".
-3. Account and code tables match the specification in the Ethereum Yellow Paper but are implemented in the EOSIO smart contract.
+3. Account and code tables match the specification in the Ethereum Yellow Paper but are implemented in the Antelope.io smart contract.
 
 ## Core layer Consensus Protocol aBFT
 

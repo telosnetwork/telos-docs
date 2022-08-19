@@ -1,24 +1,24 @@
 # Telos Native Platform
 
 
-_**The purpose of this document is to help you understand the components and utility of the Telos native EOSIO platform**_
+_**The purpose of this document is to help you understand the components and utility of the Telos native Antelope platform**_
 
 --------------------                           ------
 
 ## Overview
 
-Telos native leverages the EOSIO platform which applies in this section. 
+Telos native leverages the Antelope platform which applies in this section. 
 
 
 For the quickest start at deploying and testing smart contracts on Telos you can use our web browser IDE [Telos Studio](https://studio.telos.net/)
 
-The Telos native platform provides a number of components and libraries from EOSIO which are used to operate blockchain nodes, collect blockchain data, to interact with these nodes, and to build smart contracts. The main component is nodeos (node + EOSIO = nodeos). This is the core EOSIO node daemon that can be configured with plugins to run a node. Example uses are block production, dedicated API endpoints, and local development. Cleos (CLI + EOSIO = cleos) is a command line interface which interacts with nodeos, allowing you to send commands and actions to a blockchain. Cleos also interacts with keosd (key + EOSIO = keosd), a local component that securely stores EOSIO keys.
+The Telos native platform provides a number of components and libraries from Antelope which are used to operate blockchain nodes, collect blockchain data, to interact with these nodes, and to build smart contracts. The main component is nodeos (node + Antelope = nodeos). This is the core Antelope node daemon that can be configured with plugins to run a node. Example uses are block production, dedicated API endpoints, and local development. Cleos (CLI + Antelope = cleos) is a command line interface which interacts with nodeos, allowing you to send commands and actions to a blockchain. Cleos also interacts with keosd (key + Antelope = keosd), a local component that securely stores Antelope keys.
 
 --------------------------------                -------------
 
 # Toolkit
 
-![EOSIO](/img/eosio_development_lifecycle.png)
+![Antelope](/img/eosio_development_lifecycle.png)
 
 The Telos platform at protocol level is made out of the following components and toolchain:
 
@@ -37,7 +37,7 @@ The Telos platform at protocol level is made out of the following components and
 
 ## Next Steps 
 
-__Head over to the [overview](/native/eosio_toolkit/README.md) page and get started with installing EOSIO__
+__Head over to the [overview](/native/eosio_toolkit/README.md) page and get started with installing Antelope
 
 Walkthrough below before deploying smart contracts:
 

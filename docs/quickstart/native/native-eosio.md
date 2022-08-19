@@ -1,6 +1,6 @@
-# Native EOSIO
+# Native Antelope
 
-Developers utilize native EOSIO software build applications and work with nodes on the Telos native blockchain. This does not apply to EVM DApp developers unless they choose to run a node or build a native app. 
+Developers utilize native Antelope.io software build applications and work with nodes on the Telos native blockchain. This does not apply to EVM DApp developers unless they choose to run a node or build a native app. 
 
 ## Platform & Toolchain
 
@@ -11,6 +11,6 @@ The Telos platform is made up of the following components and toolchain:
 - Keosd: the component that securely stores Telos keys in wallets.
 - EOSIO.CDT: Toolchain for WebAssembly(Wasm) and a set of tools to facilitate smart contract writing for the Telos native blockchain. 
 
-![EOSIO](/img/eosio_development_lifecycle.png)
+![Antelope.io](/img/eosio_development_lifecycle.png)
 
 __If you are interested in learning more about the native Telos platform please refer to our native section__ [Telos Native Overview](/native/native_telos)

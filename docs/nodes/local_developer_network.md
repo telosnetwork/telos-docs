@@ -1,13 +1,13 @@
 ---
-id: "EOSIO-network-spinup"
+id: "Antelope.io-network-spinup"
 ---
 
 # Local Developer Network 
-__This tutorial explains how to configure a local test network, setup EOSIO system accounts, and create a native currency.__
+__This tutorial explains how to configure a local test network, setup Antelope system accounts, and create a native currency.__
 
 # Installations
 Make sure you have EOSIO installed via ``` cleos version client``` 
-If not currently installed, follow this link before proceeding: [EOSIO installation guide](../native/eosio_toolkit/getting_started_eosio)
+If not currently installed, follow this link before proceeding: [Antelope installation guide](../native/eosio_toolkit/getting_started_eosio)
 
 ## Node Template
 This example will use the node template found [here](https://github.com/telosnetwork/node-template) to set up a local dev node. 
