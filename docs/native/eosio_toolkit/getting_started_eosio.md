@@ -3,15 +3,15 @@ sidebar_position: 2
 ---
 
 
-# Installating EOSIO
+# Installating Antelope.io
 
 ----     -----
 
-__This page is intended to walkthrough the necessary steps for installing EOSIO software using pre-built binaries and download from source repository at bottom of page for experienced developers.__
+__This provides a walkthrough to install Antelope software using pre-built binaries and a download from source repository located at the bottom of the page for experienced developers.__
 
 ## Prebuilt Binaries
 
-Prebuilt EOSIO software packages are available for the operating systems below. Find and follow the instructions for your OS:
+Prebuilt Antelope software packages are available for the operating systems below. Find and follow the instructions for your OS:
 
 
 ## Supported Operating Systems
@@ -27,7 +27,7 @@ Prebuilt EOSIO software packages are available for the operating systems below. 
 - Ubuntu 20.04
 - Ubuntu 18.04
 
-## Install EOSIO Binaries
+## Install Antelop Binaries
 ----             -----
 ### Mac OS X:
 
@@ -36,7 +36,7 @@ Prebuilt EOSIO software packages are available for the operating systems below. 
 brew tap eosio/eosio
 brew install eosio
 ```
-Note: On MacOS 10.15 (Catalina), there is a chance to face the linking error below which prevents successful installation of EOSIO:
+Note: On MacOS 10.15 (Catalina), there is a chance to face the linking error below which prevents successful installation of Antelope:
 ```
 Reinstalling 1 broken dependent from source:
 eosio/eosio/eosio
@@ -97,7 +97,7 @@ To uninstall the EOSIO built/installed binaries and dependencies, run:
 ```
 
 
-## Check if EOSIO is installed
+## Check if Antelope is installed
 
 ```
 cleos version client
@@ -105,7 +105,7 @@ cleos version client
 
 output: ```- v2.1.0```
 
-__Now its time to build on Telos using the EOSIO platform head over to [get started with Telos Development Wallet creation!](/native/eosio_toolkit/cleos)__
+__Now its time to build on Telos using the Antelope platform head over to [get started with Telos Development Wallet creation!](/native/eosio_toolkit/cleos)__
 
 ------------                                            ------------
 
@@ -135,7 +135,7 @@ git pull --recurse-submodules
 ```
 
 
-### Build EOSIO Binaries
+### Build Antelope Binaries
 Using shell scripts from source code we downloaded above.
 
 The build script first installs all dependencies and then builds EOSIO. The script supports these Operating Systems. To run it, first change to the ~/eosio/eos folder, then launch the script:
@@ -147,7 +147,7 @@ cd ~/eosio/eos
 
 We now have a temporary build binary that is executable
 
-### Install EOSIO Binaries
+### Install Antelope Binaries
 
 Execute install script
 
@@ -158,7 +158,7 @@ cd ~/eosio/eos
 
 ALTERNATIVELY YOU CAN DO EOSIO MANUAL INSTALL 
 
-**EOSIO manual install** 
+**Antelope manual install** 
 
 ```
 cd ~/eosio/eos/build
@@ -166,7 +166,7 @@ make install
 ```
 
 
-**Test EOSIO Binaries** 
+**Test Antelope Binaries** 
 Validate the software has been installed successfully.
 
 Run test sweet via

@@ -1,17 +1,21 @@
+---
+sidebar_position: 3
+---
+
 # ERC721 NFT
 
-We are going to write an NFT minting smart contract that encapsulates all of the logic based on the NFTs you want to mint. Then we are going to be hosting all of our images and metadata on decentralized file storage. 
+This section will explain how to write an NFT minting smart contract that encapsulates all of the logic based on the NFTs you want to mint, followed by hosting images and metadata on decentralized file storage.
 
 
 ## Set up local Dev environment
 
-**Prerequsites** follow [here](https://hardhat.org/tutorial/setting-up-the-environment.html) if you don't already have NodeJS version 16 or Hardhat installed.
+**Prerequsites** follow this [link](https://hardhat.org/tutorial/setting-up-the-environment.html) NodeJS version 16 or Hardhat is not already installed on your device.
 
-**Note** you must be running NodeJS version 16 or less. 
+**Note** NodeJS version 16 or less is mandatory. 
 
-#### First we initalize a local project and install hardhat tools for testing, compiling, and deploying our Smart Contracts. 
+#### First, initialize a local project and install Hardhat tools for testing, compiling, and deploying smart contracts. 
 
-Open up a terminal and go to the directory where you want to create nft minter.
+Open a terminal and proceed to the directory you want to create an NFT minter.
 ```
 mkdir telos_nft_minter
 cd telos_nft_minter
@@ -23,7 +27,7 @@ npm install --save-dev hardhat
 ```
 npx hardhat
 ```
-Select create a sample project and hit return through all the questions asked in terminal. It will ask you to install ```hardhat-waffle``` and ```hardhat-ethers```. We will use these plugins to test and deploy smart contracts. 
+Select "create a sample project" and press "return" to bypass all the questions asked in the terminal. The system will then ask you to install ```hardhat-waffle``` and ```hardhat-ethers```. These are the plug-ins utilized to test and deploy smart contracts. 
 
 **If not installed then download here**
 ```
@@ -32,7 +36,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 ```
 #### Using the OpenZeppelin contracts Library API 
 
-Benefts: Reusable Solidity components to build custom contracts, contracts are audited, flexible role based permissioning scheme
+Benefits: Reusable Solidity components to build custom contracts, contracts are audited, flexible role based permissioning scheme
 
 ```
 npm install @openzeppelin/contracts
@@ -40,7 +44,7 @@ npm install @openzeppelin/contracts
 
 ## Solidity ERC721 Smart Contract Section 
 
-First we are going to write our Smart Contract is a .sol file under contracts folder
+The first step is to write a smart contract in a .sol file under the contracts folder. 
 
 
 ```js title="/contracts/TelosNFTMinter.sol"
@@ -84,7 +88,7 @@ contract TelosNFTMinter is ERC721URIStorage {
 
 ## Setting up a run.js file in Hardhat project 
 
-We set up a run.js file to use a local instance of the blockchain created by Hardhat. This lets us toy around with our projects to test if our contracts are compiling and to make sure everything is running correctly.
+A run.js file is set up to use a local instance of the blockchain created by Hardhat. This enables developers to test their contracts to ensure they are compiling and the overall dApp runs as intended.
 
 ```js title="scripts/run.js"
 const main = async () => {
@@ -119,7 +123,7 @@ const main = async () => {
 npx hardhat run scripts/run.js
 ```
 ## Deploy on telos_testnet
-To deploy on telos_testnet we have to provide the wallet credentials to sign the transaction.
+To deploy on telos_testnet, wallet credentials must be provided to sign the transaction.
 
 
 ## Set up Deploy.js File in /scripts folder
@@ -152,11 +156,11 @@ const main = async () => {
 ```
 
 Follow steps to deploy on telos_testnet
-1. ```npm install dotenv``` We will be using dotenv plug in to load environment variables from .env file. 
-**Note** .env file contains sensitive information and can be included in .gitignore to follow best practices
-2. Create a seperate .env file to hide your private keys and paste you private keys. 
+1. ```npm install dotenv``` Telos utilizes a dotenv plug-in to load environment variables from .env file.  
+**Note** .env file contains sensitive information and can be included in .gitignore to follow best practices.
+2. Create a seperate .env file to hide and paste all private keys. 
 ![dotenv](/img/dotenv.png)
-3. Open hardhat.config.js file add network configuration for telos_testnet
+3. Open hardhat.config.js file and add the network configuration for telos_testnet.
 Make sure to add ```require("dotenv").config({ path: ".env" });``` at the top of file.
 telos_tesnet rpc = "https://testnet.telos.net/evm"
 accounts: [process.env.TELOS]
@@ -177,9 +181,7 @@ module.exports = {
 ```
 run ```npx hardhat run scripts/deploy.js --network telos_testnet```
 
-Voila you have minted an NFT using hardhat on the Telos Testnet
+After completing these steps you will have minted an NFT using hardhat on the Telos Testnet.
 
-Now that you know how to mint on testnet you can play around more!
 
-Part 2 integrate more NFTS with IPFS and generative art...
 

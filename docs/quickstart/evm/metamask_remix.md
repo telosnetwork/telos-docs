@@ -3,7 +3,7 @@
 __Prerequisites: MetaMask Wallet__
 
 ### Set Up MetaMask
-1. If you dont already have MetaMask then download it [here](https://metamask.io/download/) 
+1. Download MetaMask [here](https://metamask.io/download/) if you don't already have it installed.
 
 **Note** Make a dev wallet for development purposes. This will reduce risk in short and long term. 
 
@@ -39,25 +39,25 @@ You can setup Telos Mainnet or Testnet at [Chainlist](https://chainlist.org) or 
 
 #### Using Test Network Faucet
 
-For funding on the test nework, you can use the Test Network Faucet. 
+You can use the Test Network Faucet to acquire funds for the test network 
 Go to [Testnet Faucet](https://app.telos.net/testnet/developers)
 
 ![Testnet Faucet](/img/testnet_faucet.png)
 
 
-Paste your address from Metamask in at the bottom above the SEND TESTNET EVM TLOS BUTTON
-Then Boom you should have Fake money to play with and write data to the blockchain. 
+Paste your address from Metamask in the space above the SEND TESTNET EVM TLOS button. 
+Once completed, you will receive testnet funds to work with and write data to the blockchain. 
 
 ### Step 3: Connect MetaMask and deploy a smart contract using Remix
 
 Open [Remix](http://remix.ethereum.org/)
 
 
-1. Load or create the smart contracts that we want to compile and deploy using Remix file explorer. Go under contracts tab and create a file named MyEpicToken.sol. 
+1. Load or create the smart contracts you want to compile and deploy using Remix file explorer. Click the contracts tab and create a file named MyEpicToken.sol. 
 
 2. For this example, we will deploy this ERC20 contract from [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc20)
 
-3. Copy and Paste the Smart Contract from Open Zeppelin under the contracts folder into MyEpicToken.sol file. 
+3. Copy and Paste the smart contract from Open Zeppelin under the contracts folder into MyEpicToken.sol file. 
 ![ERC20 Token Pic](/img/My_EPIC_ERC.png)
 
 4. **Change network to Web3Injected to integrate Telos Testnet Through MetaMask**
@@ -66,13 +66,13 @@ Click on Ethereum Deploy Logo on the side
 ![web3injected pic](/img/Injectedweb3.png)
 Then MetaMask will pop up, Click Next & allow the wallet to connect to Remix 
 
-5. Were going to **compile** the contract into byte code so the Telos EVM can read the state changes being made from our Solidity program. Note the compile version at the top. Always match it to atleast the compiler you program declares with Pragma. Then Compile!!
+5. The next step is to **compile** the contract into byte code so the Telos EVM can read the state changes being made from our Solidity program. Note the compile version at the top. Always match it to the compiler you program. It will declare with Pragma. Once complete, the byte code will be ready to compile.
 
 ![compile pic](/img/compile.png)
 
 5. Time for Deployment. 
-- Click on the Contract we created called GLD Token that inherits the ERC20 standards
-- Under Deploy insert initial supply we will be passing to the constructor
+- Click on the contract you have created called GLD Token that inherits the ERC20 standards
+- Under Deploy, insert initial supply that will be passed to the constructor
 - Transact
 
 ![transact](/img/deploy.png)
@@ -82,4 +82,4 @@ Then MetaMask will pop up, Click Next & allow the wallet to connect to Remix
 
 ![calldata](/img/call_data.png)
 
-### Now you can go on Open Zeppelin and other Open Source sites to copy and paste contracts and easily interact with them on the Telos blockchain Network. 
+### You can now go to Open Zeppelin and other Open Source sites to copy and paste contracts and easily interact with them on the Telos blockchain Network. 

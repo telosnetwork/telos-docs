@@ -13,6 +13,14 @@
 | [**Telos Decide Mobile App**](voting_guide/telos_mobile_app) | Learn about Telos Voting on Mobile App. |
 | [**Telos Web App Voting**](protocol_guide/Transactions) | Telos Decide Web App Guide. |
 
+# Telos Defi
+
+| Title | Description |
+| :--- | :--- |
+| [**sTLOS Integration**](defi_guide/sTLOS_integration) | A guide on using sTLOS interface. |
+
+
+
 # Telos Crosschain
 
 | Title | Description |
