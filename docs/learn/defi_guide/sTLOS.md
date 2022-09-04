@@ -16,3 +16,10 @@ This new tEVM staking mechanism is called sTLOS, or single-asset staked TLOS, on
 
 - For a more in-depth review on sTLOS, please read the full article [here](https://medium.com/telos-foundation/stlos-evm-single-asset-staking-implementation-governance-amendment-52d5129cf339). 
 - [Telos Tech Talk](https://www.telos.net/news/staking-with-benefits-stlos-erc4626-evm-single-asset-staking-governance) Staking with Benefits - sTLOS ERC4626 EVM Single Asset Staking & Governance
+
+### Latest update:
+All contracts were audited by Sentnl. Work on the ERC4626 contract requires some minor bug fixes since we identified an issue during testing; the same applies to the ESCROW unstaking contract and the Telos native REX contracts. 
+
+All smart contracts will be re-deployed on the testnet and await end-to-end testing and re-audit. The sTLOS user interfaces are close to final development. The governance amendment proposal passed successfully, and we are currently finalizing all steps for the go-live of sTLOS. 
+
+We are hand-selecting active community members soon to perform a final user acceptance test (UAT). We apologize for the launch delay, but we will always prioritize the security of your funds above all else.
