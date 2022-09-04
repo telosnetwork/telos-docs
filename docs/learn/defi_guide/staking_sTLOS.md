@@ -2,8 +2,7 @@
 
 As a single-asset staking token, sTLOS mimics the REX-style token staking on Telos native, which does not suffer impermanent loss (as seen in dual-asset staking pools) and therefore presents a far lower financial risk for investors.
 
-sTLOS can be staked on Teloscan. Staked sTLOS provides access to a steady income and our DeFi applications. 
-This functionality allows tEVM users to stake sTLOS for attractive rewards while boosting the TVL on Telos' industry-leading EVM. 
+Users can stake TLOS for sTLOS(receipt token)which can be done on [Teloscan](http://teloscan.io). Staked sTLOS provides access to a steady income and our DeFi applications. 
 
 Staking TLOS earns you interest, returns, and profits from a community reserve, which distributes to accounts that stake their TLOS and sTLOS. 
 
@@ -16,7 +15,7 @@ To stake sTLOS, all you will need is:
 
 - A Telos or EVM address, and 
 - navigate to [Teloscan](https://www.teloscan.io). 
-
+![staking_interface](/img/staking-interface.png)
 If you do not have a Telos or EVM address yet, follow these [simple steps](https://help.telos.net/evm/creating-a-tevm-address).
 
 ### In the future, to stake sTLOS, you need to:

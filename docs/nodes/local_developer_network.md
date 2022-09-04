@@ -6,7 +6,7 @@ id: "Antelope.io-network-spinup"
 __This tutorial explains how to configure a local test network, setup Antelope system accounts, and create a native currency.__
 
 # Installations
-Make sure you have EOSIO installed via ``` cleos version client``` 
+Make sure you Antelope installed via ``` cleos version client``` 
 If not currently installed, follow this link before proceeding: [Antelope installation guide](../native/eosio_toolkit/getting_started_eosio)
 
 ## Node Template
