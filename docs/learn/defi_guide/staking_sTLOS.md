@@ -13,19 +13,20 @@ In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://t
 - Staked sTLOS helps you put your staked TLOS to work in Defi and explore additional yield opportunities.
 - Helps lock TVL on EVM enabeling more attraction for investors and Dapps building on Telos. 
 
-> Disclaimer: Having sTLOS on the tEVM does not allow you to vote in governance processes (including block producers and worker proposals) - these are limited to the native network. Stake on Native to participate in Defi. Stake on EVM for receipt token and more yield opportunties. It's simple ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
+>   Disclaimer: Having sTLOS on the tEVM does not allow    you to vote in governance processes (including block producers and worker proposals) - these are limited to the native network. Stake on Native to participate in Defi. Stake on EVM for receipt token and more yield opportunties. It's simple ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
 
 ## Prerequisites
 
-__In order to stake TLOS on EVM following pre-requisites are required:__
+### In order to stake TLOS on EVM following pre-requisites are required:
 
-- **A Telos EVM address:**If you have not already generated a Telos EVM address, you will need to, follow this tutorial -> [Generate EVM account](https://help.telos.net/evm/creating-a-tevm-address).
+- **A Telos EVM address:**
+    - If you have not already generated a Telos EVM address, you will need to, follow this tutorial -> [Generate EVM account](https://help.telos.net/evm/creating-a-tevm-address).
 - **Metamask** If you don't have Metamask follow this link [Download_Metamask](https://metamask.io/download/)
 - **Add Telos EVM Testnet to MetaMask**
 
-__You may use [Chainlist](https://chainlist.org/) and select Chain ID 41 to connect Telos RPC to Metamask client.__
+__Note: You may use [Chainlist](https://chainlist.org/) and select Chain ID 41 to connect Telos RPC to Metamask client.__
 
-**For manual configuration please use the following parameters:**
+### For manual configuration please use the following parameters:
 
 - **Network:** Telos Testnet
 - **RPC:** https://testnet.telos.net/evm
@@ -44,9 +45,9 @@ Explorer: https://testnet.teloscan.io/
 
 2. **Navigate to staking page**
 
-Click on the menu (top right of page)
+- Click on the menu (top right of page)
 
-Select **Stake Telos**
+- Select **Stake Telos**
 
 ![StakeTelosbutton](/img/StakeTelosbutton.png)
 
@@ -59,32 +60,34 @@ Select **Stake Telos**
  ![staking](/img/stake-on-evm.png)
 
 5. **Approve Staking Confirmation Msg**
- - Approve staking confirmation message
- - Add sTLOS to Metamask
- - Click Stake Telos once your ready   
+    - Approve staking confirmation message
+    - Add sTLOS to Metamask
+    - Click Stake Telos once your ready   
 ![confirmation](/img/staking-confirmation.png)
 6. **Approve the transcaction on Metamask.**
 ![stake-tlos-metamask-tx](/img/stake-tlos-metamask-tx.png)
 -------        --                    ------ 
- > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval (TBA).**
+ > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval 30 minutes.**
  
-**Steps to unstake and claim your TLOS and rewards**
-First we unstake which will be a 10 minute waiting period until we can then claim our staked TLOS and rewards.
+
+
+**Testnet Unstake comment:**
+First we unstake which will be a 10 minute waiting period until we can then claim our staked TLOS and rewards. The unstake timer of the ESCROW conrtact on mainnet is set to 10 days, please note, that it will not be possible to access your funds within this time frame. 
 
 ### Unstake
 1. **Unstake**
 - Unstake your tokens, select amount then click unstake.
 ![Unstake](/img/Unstake-tlos.png)
-What is going on here is we are giving back our receipt (sTLOS tokens) to the smart contract. Then a waiting period is taken to provide the Telos rewards for the user to claim in the next step. 
+- What is going on here is we are giving back our receipt (sTLOS tokens) to the smart contract. Then a waiting period is taken to provide the Telos rewards for the user to claim in the next step. 
 2. **Unstake confirmation msg**
-There will be a confirmation message pop up that explains the unstaking process. Read and confirm it. 
+- There will be a confirmation message pop up that explains the unstaking process. Read and confirm it. 
 ![unstake-confirm](/img/unstaking-confirmation.png)
 3. **Unstake transation approval on Metamask** 
 ![unstake-metamask-tx](/img/unstake-meta.png)
 
 ### Claim
 
-Claim your sTLOS rewards. 
+**Claim your sTLOS rewards.**
 
 1. **Select desired amount to claim**
 
