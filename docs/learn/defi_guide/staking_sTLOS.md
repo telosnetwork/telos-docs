@@ -1,4 +1,4 @@
-# Liquid Staking on EVM (sTLOS)
+# Liquid Staking on EVM (sTLOS) - UAT Guide
 
 __A guide on how to stake TLOS on EVM for the sTLOS receipt token. We are in the UAT phase so this is not in effect on mainnet yet. Follow the guide and provide feedback.__
 
@@ -16,9 +16,23 @@ In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://t
 ## Steps to stake TLOS on EVM
 1. **Prerequisites**
 
-__In order to stake TLOS on EVM you will need the following materials:__
+__In order to stake TLOS on EVM following pre-requisites are required:__
+
 - **A Telos EVM address:**If you have not already generated a Telos EVM address, you will need to, follow this tutorial -> [Generate EVM account](https://help.telos.net/evm/creating-a-tevm-address).
 - **Metamask** If you don't have Metamask follow this link [Download_Metamask](https://metamask.io/download/)
+- **Add Telos EVM Testnet to MetaMask
+
+You may use [Chainlist](https://chainlist.org/) and select Chain ID 41
+
+For manual configuration please use the following parameters:
+
+Network: Telos Testnet
+RPC: https://testnet.telos.net/evm
+Chain ID: 41
+Currency Symbol: tlos
+Explorer: https://testnet.teloscan.io/
+
+- **Testnet $TLOS tokens, visit (https://app.telos.net/testnet/developers) to claim 50 $TLOS
 
 ------        ---           --------- 
 2. **Head over to [Teloscan](https://www.teloscan.io)**
