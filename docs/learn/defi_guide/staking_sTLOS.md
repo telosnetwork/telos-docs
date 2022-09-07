@@ -22,7 +22,7 @@ __In order to stake TLOS on EVM following pre-requisites are required:__
 - **Metamask** If you don't have Metamask follow this link [Download_Metamask](https://metamask.io/download/)
 - **Add Telos EVM Testnet to MetaMask
 
-You may use (https://chainlist.org/) and select Chain ID 41
+You may use [Chainlist](https://chainlist.org/) and select Chain ID 41
 
 For manual configuration please use the following parameters:
 
