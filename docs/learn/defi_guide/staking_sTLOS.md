@@ -101,7 +101,7 @@ Note: All matured positions will be claimed when executing when initialized.
 
 1. **Select desired amount to claim**
 
-![claim](/img/claim_TLOS.png)
+![claim](/img/Claim_TLOS.png)
 
 2. **Authorize transaction & gas fee via Metamask**
 ![metamask-claim](/img/claim-TLOS-metamask.png)
