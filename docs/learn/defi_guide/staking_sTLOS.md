@@ -21,7 +21,7 @@ In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://t
 
 - **A Telos EVM address:**
     - If you have not already generated a Telos EVM address, you will need to, follow this tutorial -> [Generate EVM account](https://help.telos.net/evm/creating-a-tevm-address).
-- **Metamask** If you don't have Metamask follow this link [Download_Metamask](https://metamask.io/download/)
+- **Metamask** If you don't have Metamask then follow this link [Download_Metamask](https://metamask.io/download/)
 - **Add Telos EVM Testnet to MetaMask**
 
 __Note: You may use [Chainlist](https://chainlist.org/) and select Chain ID 41 to connect Telos RPC to Metamask client.__
