@@ -2,7 +2,7 @@
 
 __A guide on how to stake TLOS on EVM for the sTLOS receipt token. We are in the UAT phase so this is not in effect on mainnet yet. Follow the guide and provide feedback.__
 
-For UAT testers please stake 3 seperate positions. Try to stake and unstake as many times as you are willing to (3 is preferred amount). Please critique UI and your overall experience when staking Telos on EVM. If there is anything that you think missing or would benefit our end-users let us know in the Telegram channel. This is very exciting for the future development of the Telos Defi ecosystem. Let's set this off here. 
+For UAT testers please stake 3 seperate positions. Try to stake and unstake as many times as you are willing to (3 is preferred amount). Please critique UI and provide your overall experience when staking Telos on EVM. If there is anything that you think missing or would benefit our end-users let us know in the Telegram channel. This is very exciting for the future development of the Telos Defi ecosystem. Let's set this off here. 
 
 -------   --                    ------
 
