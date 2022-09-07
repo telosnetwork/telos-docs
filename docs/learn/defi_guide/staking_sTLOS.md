@@ -37,19 +37,20 @@ Select **Stake Telos**
 
 
  5. **Stake TLOS**
-
+- Input a desired amount you want to lock up and stake. 
  ![staking](/img/stake-on-evm.png)
 
  6. **Approve the transcaction on Metamask.**
- 
+ - You will be notified by metamask to sign the transaction. 
 
 -------        --                    ------ 
- > After staking your sTLOS, it will be locked up and earning rewards on a fixed interval (TBA).
+ > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval (TBA).**
  
 **Steps to unstake and claim your TLOS and rewards**
 First we unstake which will be a 10 minute waiting period until we can then claim our staked TLOS and rewards.
 
 #### Unstake
+- Unstake your tokens, select amount then click unstake.
 ![Unstake](/img/unstake.png)
 What is going on here is we are giving back our receipt (sTLOS tokens) to the smart contract. Then a waiting period is taken to provide the Telos rewards for the user to claim in the next step. 
 
