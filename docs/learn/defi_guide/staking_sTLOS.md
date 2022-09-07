@@ -2,6 +2,8 @@
 
 __A guide on how to stake TLOS on EVM for the sTLOS receipt token. We are in the UAT phase so this is not in effect on mainnet yet. Follow the guide and provide feedback.__
 
+For UAT testers please stake 3 seperate positions. Try to stake and unstake as many times as you are willing to (3 is enough). Please critique UI and instructions. If there is anything that you think missing or would benefit our end-users let us know in the Telegram channel. 
+
 -------   --                    ------
 
 ## What we are doing here
@@ -21,6 +23,8 @@ __In order to stake TLOS on EVM you will need the following materials:__
 - **Metamask** If you don't have Metamask follow this link [Download_Metamask](https://metamask.io/download/)
 
 ------        ---           --------- 
+### Stake TLOS
+
 2. **Head over to [Teloscan](https://www.teloscan.io)**
  
 
@@ -36,28 +40,42 @@ Select **Stake Telos**
 ![metamaskSTLOS](/img/metamaskSTLOS.png)
 
 
- 5. **Stake TLOS**
+5. **Stake TLOS**
 - Input a desired amount you want to lock up and stake. 
  ![staking](/img/stake-on-evm.png)
 
- 6. **Approve the transcaction on Metamask.**
- - You will be notified by metamask to sign the transaction. 
-
+6. **Approve Staking Confirmation Msg**
+ - Approve staking confirmation message
+ - Add sTLOS to Metamask
+ - Click Stake Telos once your ready   
+![confirmation](/img/staking-confirmation.png)
+7. **Approve the transcaction on Metamask.**
+![stake-tlos-metamask-tx](/img/stake-tlos-metamask-tx.png)
 -------        --                    ------ 
  > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval (TBA).**
  
 **Steps to unstake and claim your TLOS and rewards**
 First we unstake which will be a 10 minute waiting period until we can then claim our staked TLOS and rewards.
 
-#### Unstake
+### Unstake
+1. **Unstake**
 - Unstake your tokens, select amount then click unstake.
-![Unstake](/img/unstake.png)
+![Unstake](/img/Unstake-tlos.png)
 What is going on here is we are giving back our receipt (sTLOS tokens) to the smart contract. Then a waiting period is taken to provide the Telos rewards for the user to claim in the next step. 
+2. **Unstake confirmation msg**
+There will be a confirmation message pop up that explains the unstaking process. Read and confirm it. 
+![unstake-confirm](/img/unstaking-confirmation.png)
+3. **Unstake transation approval on Metamask** 
+![unstake-metamask-tx](/img/unstake-meta.png)
 
-#### Claim
+### Claim
 
 Claim your sTLOS rewards. 
-![claim](/img/claim_tlos.png)
 
+1. **Select desired amount to claim**
 
+![claim](/img/claim_TLOS.png)
+
+2. **Authorize transaction & gas fee via Metamask**
+![metamask-claim](/img/claim-TLOS-metamask.png)
 **Thanks for participating in the UAT feedback**
