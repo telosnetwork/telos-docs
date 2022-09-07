@@ -6,10 +6,10 @@ For UAT testers please stake 3 seperate positions. Try to stake and unstake as m
 
 -------   --                    ------
 
-## What we are doing here
+## Purpose
 In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://teloscan.io). We are pushing for a few days of rigorous testing and feedback from our UAT particpants. 
 
-## Testing Scenarios
+### Testing Scenarios
 
 - Connect to website
 - Please stake several smaller positions and monitor behaviour
@@ -17,7 +17,7 @@ In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://t
 - wait some minutes and unstake further positions
 - Claim earlier positions when matured, all should be claimed excepted those that are not matured, yet
 
-## Why stake TLOS for sTLOS?
+### Why stake TLOS for sTLOS?
 - Staked sTLOS helps you put your staked TLOS to work in Defi and explore additional yield opportunities.
 - Helps lock TVL on EVM enabeling more attraction for investors and Dapps building on Telos. 
 
@@ -27,8 +27,10 @@ In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://t
 
 ### In order to stake TLOS on EVM following pre-requisites are required:
 
-- **A Telos EVM address:**
-    - If you have not already generated a Telos EVM address, you will need to, follow this tutorial -> [Generate EVM account](https://help.telos.net/evm/creating-a-tevm-address).
+We recommend for up to speed crypto users from other EVMs to bridge from Native to EVM and then send the TLOS from [TLOS_Webwallet](https://wallet.telos.net/) directly to Metamask account address. 
+
+
+- **An EVM account on Metamask:**
 - **Metamask** If you don't have Metamask then follow this link [Download_Metamask](https://metamask.io/download/)
 - **Add Telos EVM Testnet to MetaMask**
 
@@ -46,7 +48,7 @@ Explorer: https://testnet.teloscan.io/
 - **Acquiring Testnet TLOS guide** [here](https://docs.telos.net/quickstart/evm/testnet_tutorial)
 
 ------        ---           --------- 
-## Steps to stake TLOS on EVM
+## Stake TLOS on EVM
 
 1. **Head over to [Teloscan](https://www.teloscan.io)**
  
@@ -63,8 +65,8 @@ Explorer: https://testnet.teloscan.io/
 ![metamaskSTLOS](/img/metamaskSTLOS.png)
 
 
-4. **Stake TLOS**
-- Input a desired amount you want to lock up and stake. 
+## Stake TLOS 
+4. - Input a desired amount you want to lock up and stake. 
  ![staking](/img/stake-on-evm.png)
 
 5. **Approve Staking Confirmation Msg**
@@ -80,7 +82,7 @@ Explorer: https://testnet.teloscan.io/
 
 
 **Testnet Unstake comment:**
-First we unstake which will be a 10 minute waiting period until we can then claim our staked TLOS and rewards. The unstake timer of the ESCROW conrtact on mainnet is set to 10 days, please note, that it will not be possible to access your funds within this time frame. 
+Unstaking will swap your sTLOS receipt token for TLOS and transfer it to an ESCROW smart contract. All rewards will be included in the withdrawn balance. After the defined unstaking period your TLOS can be claimed.
 
 ### Unstake
 1. **Unstake**
@@ -97,7 +99,7 @@ First we unstake which will be a 10 minute waiting period until we can then clai
 
 **Claim your sTLOS rewards.**
 
-Note: All matured positions will be claimed when executing when initialized.
+Note: All matured positions will be claimed when executing after the claim has been clicked and confirmed.
 
 1. **Select desired amount to claim**
 
