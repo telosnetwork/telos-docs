@@ -9,6 +9,14 @@ For UAT testers please stake 3 seperate positions. Try to stake and unstake as m
 ## What we are doing here
 In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://teloscan.io). We are pushing for a few days of rigorous testing and feedback from our UAT particpants. 
 
+## Testing Scenarios
+
+- Connect to website
+- Please stake several smaller positions and monitor behaviour
+- Unstake several smaller positions
+- wait some minutes and unstake further positions
+- Claim earlier positions when matured, all should be claimed excepted those that are not matured, yet
+
 ## Why stake TLOS for sTLOS?
 - Staked sTLOS helps you put your staked TLOS to work in Defi and explore additional yield opportunities.
 - Helps lock TVL on EVM enabeling more attraction for investors and Dapps building on Telos. 
@@ -88,6 +96,8 @@ First we unstake which will be a 10 minute waiting period until we can then clai
 ### Claim
 
 **Claim your sTLOS rewards.**
+
+Note: All matured positions will be claimed when executing when initialized.
 
 1. **Select desired amount to claim**
 
