@@ -19,7 +19,7 @@ In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://t
 
 ### Why stake TLOS for sTLOS?
 - Staked sTLOS helps you put your staked TLOS to work in Defi and explore additional yield opportunities.
-- Helps lock TVL on EVM enabeling more attraction for investors and Dapps building on Telos. 
+- Helps lock TVL on EVM enabling more attraction for investors and Dapps building on Telos. 
 
 >   Disclaimer: Having sTLOS on the tEVM does not allow you to vote in governance processes (including block producers and worker proposals) - these are limited to the native network. Stake on Native to participate in Defi. Stake on EVM for receipt token and more yield opportunties. It's simple ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
 
@@ -81,11 +81,11 @@ You will need tokens on our testnet, here is how you can acquire some for the te
 - Click Stake Telos once your ready   
 ![confirmation](/img/staking-confirmation.png)
 
-6. **Approve the transcaction on Metamask.**
+6. **Approve the transaction on Metamask.**
 
 ![stake-tlos-metamask-tx](/img/stake-tlos-metamask-tx.png)
 -------        --                    ------ 
- > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval 30 minutes.**
+ > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval of 30 minutes.**
  
 ### Unstake
 1. **Unstake**
