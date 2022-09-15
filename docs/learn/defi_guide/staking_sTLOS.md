@@ -1,63 +1,113 @@
 # Liquid Staking on EVM (sTLOS)
 
-__A guide on how to stake TLOS on EVM for the sTLOS receipt token. We are in the UAT phase so this is not in effect on mainnet yet. Follow the guide and provide feedback.__
+__A guide on how to stake TLOS on EVM for the sTLOS receipt token.
+
+This is very exciting for the future development of the Telos Defi ecosystem. Let's set this off here. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
+
+Once liquidity pairs for sTLOS/TLOS are avaiable on our tEVM exchanges, these can be used to instantly sell sTLOS receipt tokens at market determined price.
+
+**Please be aware that a 10 day unstaking timer is applied when removing your funds from sTLOS liquid staking. Once unstaked and sent to the underlying ESCROW comntract, you will no longer be able to sell or transfer your tokens.
 
 -------   --                    ------
 
-## What we are doing here
-In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://teloscan.io).
+## Purpose
+In this guide we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://teloscan.io). 
 
-## Why stake TLOS for sTLOS?
+### Why stake TLOS for sTLOS?
 - Staked sTLOS helps you put your staked TLOS to work in Defi and explore additional yield opportunities.
-- Helps lock TVL on EVM enabeling more attraction for investors and Dapps building on Telos. 
+- Helps lock TVL on EVM enabling more attraction for investors and Dapps building on Telos. 
 
-> Disclaimer: Having sTLOS on the tEVM does not allow you to vote in governance processes (including block producers and worker proposals) - these are limited to the native network. Stake on Native to participate in Defi. Stake on EVM for receipt token and more yield opportunties. It's simple ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
+>   Disclaimer: Having sTLOS on the tEVM does not allow you to vote in governance processes (including block producers and worker proposals) - these are limited to the native network. Stake on Native to participate in Defi. Stake on EVM for receipt token and more yield opportunties. It's simple ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
 
-## Steps to stake TLOS on EVM
-1. **Prerequisites**
+## Prerequisites
 
-__In order to stake TLOS on EVM you will need the following materials:__
-- **A Telos EVM address:**If you have not already generated a Telos EVM address, you will need to, follow this tutorial -> [Generate EVM account](https://help.telos.net/evm/creating-a-tevm-address).
-- **Metamask** If you don't have Metamask follow this link [Download_Metamask](https://metamask.io/download/)
+You can easily create a new account on Metamask or utilize an existing tEVM account when staking to sTLOS. In case you have never used tEVM before with your Telos native account, following guide will assist you to get started using to create a tEVM account using the [TLOS_Webwallet](https://wallet.telos.net/). 
+
+In order to stake TLOS on EVM following pre-requisites are required:
+
+- **An EVM account on Metamask**
+- **Metamask** If you don't have Metamask then follow this link [Download_Metamask](https://metamask.io/download/)
+- **Add Telos EVM to MetaMask**
+
+__Note: You may use [Chainlist](https://chainlist.org/) and select Chain ID 40 TLOS to connect Telos RPC to Metamask client.__
+
+For manual configuration please use the following parameters:
+
+- **Network:** Telos EVM Mainnet
+- **RPC:** (https://mainnet.telos.net/evm)
+- **Chain ID:** 40
+- **Currency Symbol:** tlos
+- **Explorer:** (https://teloscan.io/)
+
 
 ------        ---           --------- 
-2. **Head over to [Teloscan](https://www.teloscan.io)**
+
+__Note: Some of the screenshots were taken based on our testnet, these do not include the real rewards APY and unstake timer.
+
+## Stake TLOS on EVM
+
+1. **Head over to [Teloscan](https://www.teloscan.io)**
  
 
-3. **Navigate to staking page**
+2. **Navigate to staking page**
 
-Click on the menu (top right of page)
+- Click on the "Burger-menu" (top right of page)
 
-Select **Stake Telos**
+- Select **Stake Telos**
 
 ![StakeTelosbutton](/img/StakeTelosbutton.png)
 
-4. **Connect Wallet** 
+3. **Connect Wallet**
+ 
 ![metamaskSTLOS](/img/metamaskSTLOS.png)
 
 
- 5. **Stake TLOS**
-- Input a desired amount you want to lock up and stake. 
+### Stake TLOS 
+
+4. - Input a desired amount you want to lock up and stake.
+ 
  ![staking](/img/stake-on-evm.png)
 
- 6. **Approve the transcaction on Metamask.**
- - You will be notified by metamask to sign the transaction. 
+5. **Approve Staking Confirmation Msg**
 
+- Approve staking confirmation message
+- Add sTLOS to Metamask
+- Click Stake Telos once your ready   
+![confirmation](/img/staking-confirmation.png)
+
+6. **Approve the transaction on Metamask.**
+
+![stake-tlos-metamask-tx](/img/stake-tlos-metamask-tx.png)
 -------        --                    ------ 
- > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval (TBA).**
+ > **Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval of 30 minutes.**
  
-**Steps to unstake and claim your TLOS and rewards**
-First we unstake which will be a 10 minute waiting period until we can then claim our staked TLOS and rewards.
-
-#### Unstake
+### Unstake
+1. **Unstake**
 - Unstake your tokens, select amount then click unstake.
-![Unstake](/img/unstake.png)
-What is going on here is we are giving back our receipt (sTLOS tokens) to the smart contract. Then a waiting period is taken to provide the Telos rewards for the user to claim in the next step. 
 
-#### Claim
+![Unstake](/img/Unstake-tlos.png)
+- Unstaking will swap your sTLOS receipt token for TLOS and transfer it to an ESCROW smart contract. All rewards will be included in the withdrawn balance. After the defined unstaking period your TLOS can be claimed. **It is not possible to remove unstaked TLOS from the ECSROW contract until the unstaking period ends.
 
-Claim your sTLOS rewards. 
-![claim](/img/claim_tlos.png)
+2. **Unstake confirmation msg**
+- There will be a confirmation message pop up that explains the unstaking process. Read and confirm it.
+ 
+![unstake-confirm](/img/unstaking-confirmation.png)
+3. **Unstake transation approval on Metamask**
 
+![unstake-metamask-tx](/img/unstake-meta.png)
 
-**Thanks for participating in the UAT feedback**
+### Claim
+
+**Claim your sTLOS rewards.**
+
+Note: All matured positions will be claimed in one transaction when claim has been clicked and confirmed.
+
+1. **Select desired amount to claim**
+
+![claim](/img/Claim-TLOS.png)
+
+2. **Authorize transaction & gas fee via Metamask**
+
+![metamask-claim](/img/claim-TLOS-metamask.png)
+
+**Thanks for using sTLOS liquid staking on worlds fastest EVM!**
