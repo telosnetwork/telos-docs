@@ -40,6 +40,8 @@
 
 - [DUNE](https://github.com/eosnetworkfoundation/DUNE)
 
+- [Antelope](https://antelope.io/)
+
 
 
 ## Infrastructure Tools (Oracles, Indexers, Bridge SDKs)

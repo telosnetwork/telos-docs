@@ -18,6 +18,7 @@
 | Title | Description |
 | :--- | :--- |
 | [**sTLOS Integration**](defi_guide/sTLOS_integration) | A guide on using sTLOS interface. |
+| [**sTLOS Staking**](defi_guide/staking_sTLOS) | How to stake sTLOS. |
 
 
 

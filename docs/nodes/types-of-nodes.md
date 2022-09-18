@@ -1,6 +1,6 @@
 # Types of Nodes
 
-The main component of the Telos blockchain network is `nodeos` (node + EOSIO). `nodeos` is the core node daemon that runs on every Telos node in the network and is distributed as part of the EOSIO software suite. Each node can be configured to function as a
+The main component of the Telos blockchain network is `nodeos` (node + Antelope). `nodeos` is the core node daemon that runs on every Telos node in the network and is distributed as part of the Antelope software suite. Each node can be configured to function as a
 
 1. Block Producing node, or
 2. Non-producing node (depending on the plugin's implemented).
@@ -28,7 +28,7 @@ For a full list of plug-ins, please visit [Nodeos Plugins](https://developers.eo
 ## Telos Nodes
 It's not uncommon to encounter a variety of different nodes such as: API node, Producer node, History node, and Seed node. All nodes update an internal database by applying the transactions as they arrive on incoming blocks. The difference between the node type lies in the amount of history they keep track of and the functionality they provide.
 
-After proper installation of released EOSIO core software, each node is implemented by the same executable, however, each node would need to set up different configurations to start. Although a block producing node can have full state history or run as an API endpoint, this would be a waste of resources. Block producing nodes should run with minimal plug-ins. Also, producing nodes should not have open network ports. We strongly recommend all node service providers to run and maintain their own nodes for reliability and security reasons.
+After proper installation of released Antelope.io core software, each node is implemented by the same executable, however, each node would need to set up different configurations to start. Although a block producing node can have full state history or run as an API endpoint, this would be a waste of resources. Block producing nodes should run with minimal plug-ins. Also, producing nodes should not have open network ports. We strongly recommend all node service providers to run and maintain their own nodes for reliability and security reasons.
 
 ### API Node
 ---------                                       --------

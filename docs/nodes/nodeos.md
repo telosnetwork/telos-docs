@@ -5,7 +5,7 @@ id: "Nodeos"
 
 # Nodeos
 
-`Nodeos` is distributed as part of the EOSIO software suite. Each node can be configured (with specific functional plugins) to function as a:
+`Nodeos` is distributed as part of the Antelope.io software suite. Each node can be configured (with specific functional plugins) to function as a:
 1. Block Producing node; or as 
 2. Non-producing node.
 
@@ -17,6 +17,6 @@ The behaviour of nodeos is determined mainly by which plug-ins are loaded and wh
 
 # Nodeos Getting Started
 
-To install `nodeos` visit [EOSIO Software Installation section](https://developers.eos.io/manuals/eos/latest/install/index), and follow the instructions provided. If you are new to EOSIO, it is recommended that you install the [EOSIO Prebuilt Binaries](https://developers.eos.io/manuals/eos/latest/install/install-prebuilt-binaries), then proceed to the Getting Started section of the EOSIO Developer Portal. 
+To install `nodeos` visit [Antelope.io Software Installation section](https://developers.eos.io/manuals/eos/latest/install/index), and follow the instructions provided. If you are new to Antelope, it is recommended that you install the [Antelope Prebuilt Binaries](https://developers.eos.io/manuals/eos/latest/install/install-prebuilt-binaries), then proceed to the Getting Started section of the Antelope Developer Portal. 
 
-If you are an advanced developer, a block producer, or no binaries are available for your platform, you may need to Build EOSIO from source instead.
+If you are an advanced developer, a block producer, or no binaries are available for your platform, you may need to Build Antelope from source instead.
