@@ -9,7 +9,7 @@ __The Telos Core Development is providing the [Open Block Exploerer](https://exp
 - Have a Telos Account setup
 - Anchor wallet. If you don't have an Anchor wallet, you can download one [here](https://greymass.com/en/anchor/)
 - Approximately 3 $TLOS in your account
-- Sufficient RAM purchased to perform transactions
+- Sufficient [RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md) purchased to perform transactions
 
 #### Instructions to add CPU and NET:
 
