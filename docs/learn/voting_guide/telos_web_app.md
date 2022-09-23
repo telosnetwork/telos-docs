@@ -23,7 +23,8 @@ Following Signers/Wallets are currently supported:
 While other options are available, we are focusing on Anchor for this tutorial.  
 
 - After you click the Anchor icon, it will prompt you to Launch Anchor.  
-- Once you launch Anchor, there will be an identity request sent. Sign the identity request in your wallet that pops up then you will be logged in. Please note that both the Anchor desktop and mobile wallets are supported. 
+- Once you launch Anchor, there will be an identity request sent. Sign the identity request in your wallet that pops up then you will be logged in. Please note that both the Anchor desktop and mobile wallets are supported.
+
 - __NOTE:__ In very rare cases, you may need to reset/reboot your Anchor wallet if there is no signing request.
 
 ![app-telos-net login screen](https://user-images.githubusercontent.com/39388424/191970340-33fa6f86-3801-47a1-8cc4-bdef12814c33.png)
@@ -48,7 +49,7 @@ This will request a signature of the Anchor Wallet, please confirm to add you to
 
 ![app-telos-net dao group view registered](https://user-images.githubusercontent.com/39388424/191972049-3bdc665a-343b-4301-91f8-fffe206e7e69.png)
 
-__Please note:__ If your account is “fresh” or you are missing required resources, this may result in an error message. Please refer to “Powering up your account” at the end of this article. This will resolve the issues in most instances.
+__Please note:__ If your account is “fresh” or you are missing required resources, this may result in an error message. Please refer to [How to manage RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
 
 #### Click on proposals in the top menue
 
@@ -79,5 +80,3 @@ Once the transaction executes a success green notification will pop up, and you 
 ![app-telos-net transaction history](https://user-images.githubusercontent.com/39388424/191972591-5ffaa28c-f38e-46ae-bc1f-0f0dae21080e.png)
 
 __Now that you can vote and participate in Telos Goverance. Take action and enjoy Digital Freedom!!__
-
-
