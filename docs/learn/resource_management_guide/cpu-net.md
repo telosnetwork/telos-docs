@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # How to manage CPU and NET
 
 __An extensive walkthrough of how to add CPU and NET to your account and enable low to no-fee transactions on the Telos native network.__
@@ -9,7 +13,7 @@ __The Telos Core Development is providing the [Open Block Exploerer](https://exp
 - Have a Telos Account setup
 - Anchor wallet. If you don't have an Anchor wallet, you can download one [here](https://greymass.com/en/anchor/)
 - Approximately 3 $TLOS in your account
-- Sufficient [RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md) purchased to perform transactions
+- Sufficient [RAM](docs/learn/resource_management_guide/ram.md) purchased to perform transactions
 
 #### Instructions to add CPU and NET:
 

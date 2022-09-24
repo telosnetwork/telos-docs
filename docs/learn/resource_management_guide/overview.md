@@ -1,3 +1,7 @@
+---
+sidebar_position: 1
+---
+
 # Telos Network Resources Overview
 
 __The Network Resources are an essential factor in using the feeless services provided on the TELOS blockhain. Below is a brief intro with links for learning how to obtain those resources.__
