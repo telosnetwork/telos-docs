@@ -49,7 +49,7 @@ This will request a signature of the Anchor Wallet, please confirm to add you to
 
 ![app-telos-net dao group view registered](https://user-images.githubusercontent.com/39388424/191972049-3bdc665a-343b-4301-91f8-fffe206e7e69.png)
 
-__Please note:__ If your account is “fresh” or you are missing required resources, this may result in an error message. Please refer to [How to manage RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
+__Please note:__ If your account is “fresh” or you are missing required resources, this may result in an error message. Please refer to [How to manage RAM](docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
 
 #### Click on proposals in the top menue
 
