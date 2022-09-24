@@ -25,7 +25,7 @@ Identity requests and log in.
 
 You will be returned to the Homepage with your account now visible. To use this account click on the account.
 
-![SelectAccount](img/select_account_v1
+![SelectAccount](/img/select_account_v1
 .png)
 
 
