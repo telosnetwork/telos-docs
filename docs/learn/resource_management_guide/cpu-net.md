@@ -6,7 +6,7 @@ sidebar_position: 3
 
 __An extensive walkthrough of how to add CPU and NET to your account and enable low to no-fee transactions on the Telos native network.__
 
-__The Telos Core Development is providing the [Open Block Exploerer](https://explorer.telos.net)and a [Web-Wallet](https://wallet.telos.net/) to add resources to your account. We will cover Open Block Explorer in this article.__
+__The Telos Core Development is providing the [Open Block Explorer](https://explorer.telos.net) and a [Web-Wallet](https://wallet.telos.net/) to add resources to your account. We will cover Open Block Explorer in this article.__
 
 ### PREREQUISITES
 
@@ -17,7 +17,7 @@ __The Telos Core Development is providing the [Open Block Exploerer](https://exp
 
 #### Instructions to add CPU and NET:
 
-Navigate to [Open Block Exploerer](https://explorer.telos.net) and log in.
+Navigate to [Open Block Explorer](https://explorer.telos.net) and log in.
 
 ![explorer telos net home](https://user-images.githubusercontent.com/39388424/192003471-9293e0f8-e178-4615-a683-305a8d3e794f.png)
 
