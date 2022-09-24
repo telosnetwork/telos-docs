@@ -52,7 +52,7 @@ Click "confirm" and approve the Anchor transaction.
 
 ![explorer telos net transaction confirmation](https://user-images.githubusercontent.com/39388424/192004975-7d0eb96e-fe67-47bf-9f6e-976d366a1149.png)
 
-__Please note:__ If your account is “fresh,” you may require additional RAM as a core resource, which may result in an error message when trying to add CPU or NET. Please refer to [Buy/Sell RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md). This will resolve the issues in most instances.
+__Please note:__ If your account is “fresh,” you may require additional RAM as a core resource, which may result in an error message when trying to add CPU or NET. Please refer to [Buy/Sell RAM](docs/learn/resource_management_guide/ram.md). This will resolve the issues in most instances.
 
 #### Remove CPU and NET from your account
 

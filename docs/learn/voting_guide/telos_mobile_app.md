@@ -89,4 +89,4 @@ Powering up your account (Optional)
 
 For those of you that have rarely interacted with the native Telos blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET or RAM to make it fully operational and gain access to the virtual feeless Telos network.
 
-Insufficient resources may result in an error messages. Please refer to [How to manage RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
+Insufficient resources may result in an error messages. Please refer to [How to manage RAM](docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
