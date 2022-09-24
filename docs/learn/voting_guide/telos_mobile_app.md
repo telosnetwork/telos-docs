@@ -89,16 +89,4 @@ Powering up your account (Optional)
 
 For those of you that have rarely interacted with the native Telos blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET or RAM to make it fully operational and gain access to the virtual feeless Telos network.
 
-This is how you can add resources to your account using Anchor Wallet on Desktop.
-
-We usually recommend approximately 0.25–0.5 TLOS RAM and a minimum staked amount of 0.25–0.50 TLOS for CPU and NET. If your account is “brand new”, please note that you will have to purchase RAM before you can stake CPU/NET due to our resource model.
-
-- RAM, NET, and CPU are needed to terminate the vote action
-- We will be only using 0.75–1.5 TLOS for the network resources
-- In Anchor Wallet, as seen in the image below, purchase 0.25 TLOS RAM and Stake 0.25 TLOS into CPU and NET. Then you will be ready to vote!
-- NOTE: You can also obtain RAM, CPU, and NET on one of the Telos block explorers
-
-![AnchorResources](/img/AnchorResources.png)
-
-![AnchorWalletStore](/img/AnchorStore.png)
-
+Insufficient resources may result in an error messages. Please refer to [How to manage RAM](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](https://github.com/telosnetwork/telos-docs/blob/master/docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
