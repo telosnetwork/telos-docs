@@ -25,7 +25,8 @@ Identity requests and log in.
 
 You will be returned to the Homepage with your account now visible. To use this account click on the account.
 
-![SelectAccount](img/select_account_v1.01.png)
+![SelectAccount](img/select_account_v1
+.png)
 
 
 As the overall logic of the Telos Decide System also applies to the Decide Voter app, you now need to join the “Telos Governance Token”. This option will only be visible if you did not join the group previously. If you have not joined, you may still explore Telos Governance but voting will fail.
@@ -66,7 +67,7 @@ Select the proposal you would like to vote on and click it to expand and see mor
 
 Scroll down the selected Amendment and view the details. Then decide your vote.
 
-![AmendProposal](/img/amend_proposal_v1.01.png)
+![AmendProposal](/img/amend_proposal_v1 .png)
 
 Cast Vote on a Ballot. Hit Continue on the telos decide cast action.
 
