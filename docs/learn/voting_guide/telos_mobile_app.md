@@ -15,7 +15,7 @@ Install the Decide Voter Mobile App [here](https://decidevoter.app/)
 
 Make sure you have Anchor Wallet installed on your Mobile phone and that the account(s) you are intending to use are imported.
 
-Open Decide Voter on mobile. Then click on the plus button to import the account by signing the transaction using Anchor mobile.
+Open Decide Voter on mobile. Then click on the plus button to import the account by signing the transaction using Anchor mobile. 
 
 ![DecideVoter](/img/decide_voter_v1.01.png)
 
@@ -89,4 +89,7 @@ Powering up your account (Optional)
 
 For those of you that have rarely interacted with the native Telos blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET or RAM to make it fully operational and gain access to the virtual feeless Telos network.
 
-Insufficient resources may result in an error messages. Please refer to [How to manage RAM](docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
+Insufficient resources may result in an error messages. 
+To resolve error messages visit the RAM & CPU & NET resource guides
+- [How to manage RAM](docs/learn/resource_management_guide/ram.md)
+- [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md).
