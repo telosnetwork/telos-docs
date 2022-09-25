@@ -17,7 +17,7 @@ Make sure you have Anchor Wallet installed on your Mobile phone and that the acc
 
 Open Decide Voter on mobile. Then click on the plus button to import the account by signing the transaction using Anchor mobile. 
 
-![DecideVoter](/img/decide_voter_v1.01.png)
+![DecideVoter](/img/decide_voter_v1.png)
 
 Identity requests and log in.
 
