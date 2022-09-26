@@ -1,12 +1,12 @@
 # Liquid Staking on EVM (sTLOS)
 
-__A guide on how to stake TLOS on EVM for the sTLOS receipt token.
+__A guide on how to stake TLOS on EVM for the sTLOS receipt token.__
 
 This is very exciting for the future development of the Telos Defi ecosystem. Let's set this off here. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
 
 Once liquidity pairs for sTLOS/TLOS are avaiable on our tEVM exchanges, these can be used to instantly sell sTLOS receipt tokens at market determined price.
 
-**Please be aware that a 10 day unstaking timer is applied when removing your funds from sTLOS liquid staking. Once unstaked and sent to the underlying ESCROW comntract, you will no longer be able to sell or transfer your tokens.
+**Please be aware that a 10 day unstaking timer is applied when removing your funds from sTLOS liquid staking. Once unstaked and sent to the underlying ESCROW comntract, you will no longer be able to sell or transfer your tokens.**
 
 -------   --                    ------
 
