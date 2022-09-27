@@ -4,16 +4,16 @@ ____                                            _______
 
 ### PREREQUISITES
 
-Each one of these things preqrequistes are vital to successful voting. 
+Each one of these things prerequisites is vital to successful voting. 
 
 1. Have a Telos Account setup
 2. Anchor wallet. If you don't have an Anchor wallet, you can download one [here](https://greymass.com/en/anchor/)
 3. Native TLOS currency
-4. System Resources: NET, RAM, CPU (See the guide at the below powering up your account.)
+4. System Resources: NET, RAM, CPU (See the guide below powering up your account.)
 
 Install the Decide Voter Mobile App [here](https://decidevoter.app/)
 
-Make sure you have Anchor Wallet installed on your Mobile phone and that the account(s) you are intending to use are imported.
+Make sure you have Anchor Wallet installed on your Mobile phone and that the account(s) you are intending to use is imported.
 
 Open Decide Voter on mobile. Then click on the plus button to import the account by signing the transaction using Anchor mobile. 
 
@@ -33,7 +33,7 @@ As the overall logic of the Telos Decide System also applies to the Decide Voter
 
 ![Join](/img/join_v1.01.png)
 
-From here you must sign the transaction using anchor.
+From here you must sign the transaction using Anchor wallet.
 
 ![JoinSign](/img/join_sign_v1.01.png)
 
@@ -41,7 +41,7 @@ From here you must sign the transaction using anchor.
 
 ![JoinSuccess](/img/join_success_v1.01.png)
 
-After joining you will be returned to the groups page. Click the blue arrow and enter the Telos Governance Group pages.  
+After joining you will be returned to the groups' page. Click the blue arrow and enter the Telos Governance Group pages.  
 
 ![Enter](/img/enter_v1.01.png)
 
@@ -69,7 +69,7 @@ Scroll down the selected Amendment and view the details. Then decide your vote.
 
 ![AmendProposal](/img/amend_proposal_v1.png)
 
-Cast Vote on a Ballot. Hit Continue on the telos decide cast action.
+Cast Vote on a Ballot. Hit Continue on the Telos Decide cast action.
 
 ![SignIdentityReq](/img/sign_identity.png)
 
@@ -87,9 +87,9 @@ Voila, you now know how to use the Decide Voter App by GoodBlock and are prepare
 
 Powering up your account (Optional) 
 
-For those of you that have rarely interacted with the native Telos blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET or RAM to make it fully operational and gain access to the virtual feeless Telos network.
+For those of you that have rarely interacted with the native Telos blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET, or RAM to make it fully operational and gain access to the virtual feeless Telos network.
 
-Insufficient resources may result in an error messages. 
+Insufficient resources may result in an error message. 
 To resolve error messages visit the RAM & CPU & NET resource guides
 - [How to manage RAM](docs/learn/resource_management_guide/ram.md)
 - [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md).
