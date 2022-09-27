@@ -17,7 +17,7 @@ Make sure you have Anchor Wallet installed on your Mobile phone and that the acc
 
 Open Decide Voter on mobile. Then click on the plus button to import the account by signing the transaction using Anchor mobile. 
 
-![DecideVoter](/img/decide_voter_v1.png)
+![DecideVoter](/img/decide_voter_v1.01.png)
 
 Identity requests and log in.
 
@@ -67,7 +67,7 @@ Select the proposal you would like to vote on and click it to expand and see mor
 
 Scroll down the selected Amendment and view the details. Then decide your vote.
 
-![AmendProposal](/img/amend_proposal_v1 .png)
+![AmendProposal](/img/amend_proposal_v1.png)
 
 Cast Vote on a Ballot. Hit Continue on the telos decide cast action.
 
