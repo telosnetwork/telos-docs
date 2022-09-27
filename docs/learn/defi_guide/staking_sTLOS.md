@@ -2,7 +2,7 @@
 
 __A guide on how to stake TLOS on EVM for the sTLOS receipt token.__
 
-This is very exciting for the future development of the Telos Defi ecosystem. Let's set this off here. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
+The sTLOS receipt token very exciting for the future development of the Telos Defi ecosystem. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
 
 Once liquidity pairs for sTLOS/TLOS are avaiable on our tEVM exchanges, these can be used to instantly sell sTLOS receipt tokens at market determined price.
 
@@ -42,7 +42,6 @@ For manual configuration please use the following parameters:
 
 ------        ---           --------- 
 
-__Note: Some of the screenshots were taken based on our testnet, these do not include the real rewards APY and unstake timer.
 
 ## Stake TLOS on EVM
 
@@ -64,16 +63,17 @@ __Note: Some of the screenshots were taken based on our testnet, these do not in
 
 ### Stake TLOS 
 
-4. - Input a desired amount you want to lock up and stake.
+4. **Add sTLOS token to your wallet**
+
+- Add sTLOS to Metamask
+
+- Click Stake Telos once your ready   
+![confirmation](/img/add_sTLOS_token.png)
+
+5. - Input a desired amount you want to lock up and stake.
  
  ![staking](/img/stake-on-evm.png)
 
-5. **Approve Staking Confirmation Msg**
-
-- Approve staking confirmation message
-- Add sTLOS to Metamask
-- Click Stake Telos once your ready   
-![confirmation](/img/staking-confirmation.png)
 
 6. **Approve the transaction on Metamask.**
 
@@ -106,8 +106,6 @@ Note: All matured positions will be claimed in one transaction when claim has be
 
 ![claim](/img/Claim-TLOS.png)
 
-2. **Authorize transaction & gas fee via Metamask**
-
-![metamask-claim](/img/claim-TLOS-metamask.png)
+- **Authorize transaction & gas fee via Metamask**
 
 **Thanks for using sTLOS liquid staking on worlds fastest EVM!**
