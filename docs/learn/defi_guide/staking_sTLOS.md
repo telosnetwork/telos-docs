@@ -2,11 +2,7 @@
 
 __A guide on how to stake TLOS on EVM for the sTLOS receipt token.__
 
-<<<<<<< HEAD
-The sTLOS receipt token very exciting for the future development of the Telos Defi ecosystem. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
-=======
-Liquid staking is very exciting for the future development of the Telos Defi ecosystem. Let's set this off here. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
->>>>>>> 591e31cfbab9509b92df00d6a779e7e162954dab
+The sTLOS receipt token is very exciting for the future development of the Telos Defi ecosystem. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.
 
 Once liquidity pairs for sTLOS/TLOS are available on our tEVM exchanges, these can be used to sell sTLOS receipt tokens at a market-determined price.
 
@@ -45,11 +41,6 @@ For manual configuration, please use the following parameters:
 
 
 ------        ---           --------- 
-
-<<<<<<< HEAD
-=======
-__Note: Some screenshots were taken based on our testnet. These do not include the real rewards APY and unstake timer.
->>>>>>> 591e31cfbab9509b92df00d6a779e7e162954dab
 
 ## Stake TLOS on EVM
 
@@ -93,7 +84,9 @@ __Note: Some screenshots were taken based on our testnet. These do not include t
 - To unstake your tokens, select the amount, then click unstake.
 
 ![Unstake](/img/Unstake-tlos.png)
-- Unstaking will swap your sTLOS receipt token for TLOS and transfer it to an ESCROW smart contract. The withdrawn balance will include all rewards. After the defined unstaking period, your TLOS can be claimed. **Removing unstaked TLOS from the ECSROW contract is impossible until the unstaking period ends.
+- Unstaking will swap your sTLOS receipt token for TLOS and transfer it to an ESCROW smart contract. The withdrawn balance will include all rewards. After the defined unstaking period, your TLOS can be claimed. 
+
+**NOTE: Removing unstaked TLOS from the ECSROW contract is impossible until the unstaking period ends.**
 
 2. **Unstake confirmation message**
 - There will be a confirmation message pop-up that explains the unstaking process. Please read and confirm it.
