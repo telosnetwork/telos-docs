@@ -4,6 +4,12 @@
 
 You can find the repository for the RNG Oracle Bridge [here](https://github.com/telosnetwork/rng-oracle-bridge)
 
+## DEPLOYMENTS
+
+**MAINNET:** TBD
+
+**TESTNET:** TBD
+
 ## HOW IT WORKS
 
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request randomness.
