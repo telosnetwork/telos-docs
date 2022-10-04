@@ -10,6 +10,12 @@ You can find the repository for the RNG Oracle Bridge [here](https://github.com/
 
 **TESTNET:** TBD
 
+## IMPORTANT CONSIDERATIONS
+
+There is a max request per consumer contract, if you reach it, wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made the request to delete one.
+
+Your implementation of the `receiveRandom()` callback function must not revert
+
 ## HOW IT WORKS
 
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request randomness.
