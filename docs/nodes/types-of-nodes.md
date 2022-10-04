@@ -23,7 +23,8 @@ Non-producing nodes exposes one or more services publicly or privately by enabli
 
 The behaviour of `nodeos` is determined mainly by which plug-ins are loaded and which plug-in options are selected. Some plug-ins are mandatory (`chain_plugin`, `net_plugin`, and `producer_plugin`) while others are optional. 
 
-For a full list of plug-ins, please visit [Nodeos Plugins](https://developers.eos.io/manuals/eos/latest/nodeos/plugins/index).
+## Leap
+Leap is the blockchain node software and supporting tools that impelments the Antelope protocol. Download the source [here](https://github.com/AntelopeIO/leap).
 
 ## Telos Nodes
 It's not uncommon to encounter a variety of different nodes such as: API node, Producer node, History node, and Seed node. All nodes update an internal database by applying the transactions as they arrive on incoming blocks. The difference between the node type lies in the amount of history they keep track of and the functionality they provide.
