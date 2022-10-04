@@ -71,7 +71,10 @@ contract MyContract {
     }
     
     function receiveRandom(callId, numbers){
+       require(msg.sender == address(bridge), "Only the bridge contract can call this function");
+        
        // Handle whatever logic you need with the random numbers received here
+    
     }
 }
 ```
