@@ -10,12 +10,6 @@ You can find the repository for the RNG Oracle Bridge [here](https://github.com/
 
 **TESTNET:** TBD
 
-## IMPORTANT CONSIDERATIONS
-
-There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
-
-Your implementation of the `receiveRandom()` callback function must not revert
-
 ## HOW IT WORKS
 
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request randomness.
@@ -86,3 +80,9 @@ contract MyContract {
 ```
 
 You can refer to the [`RNGOracleConsumer`](https://github.com/telosnetwork/rng-oracle-bridge/blob/main/evm/contracts/RNGOracleConsumer.sol) EVM contract for a complete example. 
+
+## IMPORTANT CONSIDERATIONS
+
+There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
+
+Your implementation of the `receiveRandom()` callback function must not revert
