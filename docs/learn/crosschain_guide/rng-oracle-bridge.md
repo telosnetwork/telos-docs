@@ -63,6 +63,10 @@ On the same contract, or in a new one, implement a `receiveRandom(uint callId, u
 
 
 ```
+interface IRNGOracleBridge {
+    function request(uint callId, uint64 seed, uint callback_gas, address callback_address, uint number_count) external payable;
+}
+
 contract MyContract {
     IRNGOracleBridge bridge;
 
