@@ -1,7 +1,7 @@
 # GAS ORACLE BRIDGE
 
 ## REPOSITORY
-You can find the repository for the Delphi Oracle Bridge here
+You can find the repository for the Gas Oracle Bridge [here](https://github.com/telosnetwork/gas-oracle-bridge)
 
 ## DEPLOYMENTS
 
