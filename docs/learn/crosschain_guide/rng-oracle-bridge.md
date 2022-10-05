@@ -43,6 +43,7 @@ Deploy a contract that calls the `RNGOracleBridge` contract's `request()` functi
 ```
 interface IRNGOracleBridge {
     function request(uint callId, uint64 seed, uint callback_gas, address callback_address, uint number_count) external payable;
+    function calculateRequestPrice(uint callback_gas) external view returns(uint);
 }
 
 contract MyContract {
@@ -54,7 +55,12 @@ contract MyContract {
     
     function makeRequest(uint64 seed, uint callback_gas, uint count) external  payable {
         ... YOUR LOGIC TO SETUP THE CALLID, ETC...
-        bridge.request{value: msg.value }(callId, seed, callback_gas, address(this), count);
+
+        uint price = bridge.calculateRequestPrice(callback_gas);
+        require(price > 0, "Could not calculate price");
+        require(address(this).balance >= price, "Contract balance is too low");
+
+        bridge.request{value: price }(callId, seed, callback_gas, address(this), count);
     }
 }
 ```
@@ -67,6 +73,7 @@ On the same contract, or in a new one, implement a `receiveRandom(uint callId, u
 ```
 interface IRNGOracleBridge {
     function request(uint callId, uint64 seed, uint callback_gas, address callback_address, uint number_count) external payable;
+    function calculateRequestPrice(uint callback_gas) external view returns(uint);
 }
 
 contract MyContract {
@@ -96,3 +103,5 @@ Your implementation of the `receiveRandom()` callback function must not revert
 There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
 
 There is a max number count per request, set at 25 for now.
+
+The maximum callback gas is: 
