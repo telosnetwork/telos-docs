@@ -12,7 +12,7 @@ You can find the repository for the Delphi Oracle Bridge [here](https://github.c
 
 ## HOW IT WORKS
 
-Your contract will need to make a call to the `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function of the DelphiOracleBridge and you will need to implement a `receiveDatapoints(uint callId, Datapoint[] calldata datapoints)` callback function in the same or another contract. Refer to the **Make a request** section below.
+Your contract will need to make a call to the `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function of the `DelphiOracleBridge` contract and you will need to implement a `receiveDatapoints(uint callId, Datapoint[] calldata datapoints)` callback function in the same or in another contract (see the **callback_address** argument). Refer to the **Make a request** section below.
 
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request datapoints.
 
