@@ -30,7 +30,7 @@ You can alternatively calculate that price by taking the gas price from the `Gas
 
 If the gas limit is underestimated, the callback fails and the consuming contract is still charged for the work done to generate the requested random values.
 If the gas limit is overestimated, the callback function will be executed but your contract is not refunded for the excess gas amount that you paid.
-Make sure that your consuming contracts are funded with enough TLOS tokens to cover the transaction costs. If the consuming contract doesn't have enough TLOS tokens, your request will revert. 
+Make sure that your consuming contracts are funded with enough TLOS tokens to cover the transaction costs. 
 
 ## REQUEST & RECEIVE DATAPOINTS
 
