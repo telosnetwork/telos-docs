@@ -26,7 +26,7 @@ You can query the TLOS value to pass in your `request(uint callId, string callda
 
 You can alternatively calculate that price by taking the gas price from the `GasOracleBridge` with `getPrice()`, multiply that price with your estimate gas units (ie: 50000) and add the fee from the `DelphiOracleBridge` that you can query with `fee()`:
 
-`Price = Gas Units * Gas Price + Bridge Fee`
+`Price = (Gas Units * Gas Price) + Bridge Fee`
 
 If the gas limit is underestimated, the callback fails and the consuming contract is still charged for the work done to generate the requested random values.
 If the gas limit is overestimated, the callback function will be executed but your contract is not refunded for the excess gas amount that you paid.
