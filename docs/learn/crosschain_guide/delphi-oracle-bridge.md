@@ -44,6 +44,7 @@ Deploy a contract that calls the `DelphiOracleBridge` contract's `request(uint c
 ```
 interface IDelphiOracleBridge {
     function request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address) external payable;
+    function calculateRequestPrice(uint callback_gas) external view returns(uint);
 }
 
 contract MyContract {
@@ -54,7 +55,13 @@ contract MyContract {
     }
     
     function makeRequest(string calldata pair, uint limit, uint callback_gas) external payable {
+    
         ... YOUR LOGIC TO SETUP THE CALLID, ETC...
+        
+        uint price = bridge.calculateRequestPrice(callback_gas);
+        require(price > 0, "Could not calculate price");
+        require(address(this).balance >= price, "Contract balance is too low");
+        
         bridge.request{value: msg.value }(callId, pair, limit, callback_gas, address(this));
     }
 }
@@ -68,6 +75,7 @@ On the same contract, or in a new one, implement a `receiveDatapoints(uint callI
 ```
 interface IDelphiOracleBridge {
     function request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address) external payable;
+    function calculateRequestPrice(uint callback_gas) external view returns(uint);
 }
 
 contract MyContract {
