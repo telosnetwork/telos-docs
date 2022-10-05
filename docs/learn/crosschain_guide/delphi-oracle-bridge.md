@@ -12,6 +12,8 @@ You can find the repository for the Delphi Oracle Bridge [here](https://github.c
 
 ## HOW IT WORKS
 
+Your contract will need to make a call to the `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function of the DelphiOracleBridge and you will need to implement a `receiveDatapoints()` callback function in the same or another contract. Refer to the **Make a request** section below.
+
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request datapoints.
 
 The `callback_gas` variable contains the maximum gas units you estimate will be needed to call your `receiveDatapoints()` callback function in your own smart contract (ie: 50000). This is the maximum amount of gas that will be spent by the bridge when calling your contract.
@@ -20,7 +22,7 @@ The `callback_gas` variable contains the maximum gas units you estimate will be 
 
 Because the consuming contract directly pays the TLOS for the request, the cost is calculated during the request and not during the callback when the request is fulfilled. Test your callback function to learn how to correctly estimate the callback gas limit.
 
-You can query the TLOS value to pass in your `request()` function call by calling the `calculateRequestPrice(uint callback_gas)` public function. 
+You can query the TLOS value to pass in your `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function call by calling the `calculateRequestPrice(uint callback_gas)` public function. 
 
 You can alternatively calculate that price by taking the gas price from the `GasOracleBridge` with `getPrice()`, multiply that price with your estimate gas units (ie: 50000) and add the fee from the `DelphiOracleBridge` that you can query with `fee()`:
 
@@ -37,7 +39,7 @@ Make sure that your consuming contracts are funded with enough TLOS tokens to co
 
 ## MAKE A REQUEST !
 
-Deploy a contract that calls the `DelphiOracleBridge` contract's `request()` function, passing a value to cover fee and callback gas cost (refer to the **Note on transaction costs** section above).
+Deploy a contract that calls the `DelphiOracleBridge` contract's `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function, passing a value to cover fee and callback gas cost (refer to the **Note on transaction costs** section above).
 
 ```
 interface IDelphiOracleBridge {
