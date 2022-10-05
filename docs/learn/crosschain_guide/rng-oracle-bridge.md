@@ -94,3 +94,5 @@ Your implementation of the `receiveRandom()` callback function must not revert
 ## LIMITS
 
 There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
+
+There is a max number count per request, set at 25 for now.
