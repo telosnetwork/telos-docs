@@ -96,7 +96,11 @@ You can refer to the [`DelphiOracleConsumer`](https://github.com/telosnetwork/de
 
 ## IMPORTANT CONSIDERATIONS
 
+Your implementation of the `receiveDatapoints()` callback function must not revert
+
+## LIMITS
+
 There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
 
-Your implementation of the `receiveDatapoints()` callback function must not revert
+The maximum limit of datapoints you can request is 10.
 
