@@ -104,7 +104,7 @@ Requesting a non existant pair, or a pair that has no data will return an empty 
 
 ## LIMITS
 
-There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
+There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from the smart contract that made that request to delete one.
 
 The maximum limit of datapoints you can request for a pair is 10. Note that there may be less datapoints received depending on the pair and the data available.
 
