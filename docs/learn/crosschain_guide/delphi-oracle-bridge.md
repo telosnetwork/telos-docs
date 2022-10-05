@@ -22,7 +22,7 @@ The `callback_gas` parameter contains the maximum gas units you estimate will be
 
 Because the consuming contract directly pays the TLOS for the request, the cost is calculated during the request and not during the callback when the request is fulfilled. Test your callback function to learn how to correctly estimate the callback gas limit.
 
-You can query the TLOS value to pass in your `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function call by calling the `calculateRequestPrice(uint callback_gas)` public function. 
+You can query the TLOS value to pass in your `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function call by calling the `calculateRequestPrice(uint callback_gas)` public function beforehand. 
 
 You can alternatively calculate that price by taking the gas price from the `GasOracleBridge` with `getPrice()`, multiply that price with your estimate gas units (ie: 50000) and add the fee from the `DelphiOracleBridge` that you can query with `fee()`:
 
