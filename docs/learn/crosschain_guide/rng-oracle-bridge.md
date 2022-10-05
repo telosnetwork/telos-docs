@@ -12,9 +12,11 @@ You can find the repository for the RNG Oracle Bridge [here](https://github.com/
 
 ## HOW IT WORKS
 
+Your contract will need to make a call to the `request(uint callId, uint64 seed, uint callback_gas, address callback_address, uint number_count)` function of the `RNGOracleBridge` contract and you will need to implement a `receiveRandom(uint callId, uint[] numbers)` callback function in the same or in another contract (see the **callback_address** parameter). Refer to the **Make a request** section below.
+
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request randomness.
 
-The `callback_gas` variable contains the gas units you estimate will be needed to call your `receiveRandom()` callback function in your own smart contract (ie: 50000). This is the maximum amount of gas that will be spent by the bridge when calling your contract.
+The `callback_gas` variable contains the gas units you estimate will be needed to call your `receiveRandom(uint callId, uint[] numbers)` callback function in your own smart contract (ie: 50000). This is the maximum amount of gas that will be spent by the bridge when calling your contract.
 
 ### Note on transaction costs.
 
