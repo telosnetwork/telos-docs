@@ -100,6 +100,8 @@ You can refer to the [`DelphiOracleConsumer`](https://github.com/telosnetwork/de
 
 Your implementation of the `receiveDatapoints()` callback function must not revert, we will not handle it.
 
+Requesting a non existant pair, or a pair that has no data will return an empty Datapoint array.
+
 ## LIMITS
 
 There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
