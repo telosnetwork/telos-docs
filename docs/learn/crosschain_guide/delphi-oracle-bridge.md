@@ -12,11 +12,11 @@ You can find the repository for the Delphi Oracle Bridge [here](https://github.c
 
 ## HOW IT WORKS
 
-Your contract will need to make a call to the `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function of the DelphiOracleBridge and you will need to implement a `receiveDatapoints()` callback function in the same or another contract. Refer to the **Make a request** section below.
+Your contract will need to make a call to the `request(uint callId, string calldata pair, uint limit, uint callback_gas, address callback_address)` function of the DelphiOracleBridge and you will need to implement a `receiveDatapoints(uint callId, Datapoint[] calldata datapoints)` callback function in the same or another contract. Refer to the **Make a request** section below.
 
 The method we use is similar to Chainlink's Direct funding method. You must directly fund consuming contracts with TLOS tokens before they request datapoints.
 
-The `callback_gas` variable contains the maximum gas units you estimate will be needed to call your `receiveDatapoints()` callback function in your own smart contract (ie: 50000). This is the maximum amount of gas that will be spent by the bridge when calling your contract.
+The `callback_gas` variable contains the maximum gas units you estimate will be needed to call your `receiveDatapoints(uint callId, Datapoint[] calldata datapoints)` callback function in your own smart contract (ie: 50000). This is the maximum amount of gas that will be spent by the bridge when calling your contract.
 
 ### Note on transaction costs.
 
