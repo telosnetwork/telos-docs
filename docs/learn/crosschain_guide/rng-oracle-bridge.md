@@ -32,7 +32,7 @@ Make sure that your consuming contracts are funded with enough TLOS tokens to co
 
 ## REQUEST & RECEIVE DATA
  
-![RNGOracleBridge](https://user-images.githubusercontent.com/5913758/193873078-b8e2e7ab-1f33-41d8-ac47-32ec81548c64.jpg)
+![RNGOracleBridge](https://user-images.githubusercontent.com/5913758/193971791-6e4ceda4-c55f-45d6-81ef-2122d80e5963.jpg)
 
 ## MAKE A REQUEST !
 
@@ -87,6 +87,8 @@ You can refer to the [`RNGOracleConsumer`](https://github.com/telosnetwork/rng-o
 
 ## IMPORTANT CONSIDERATIONS
 
-There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
-
 Your implementation of the `receiveRandom()` callback function must not revert
+
+## LIMITS
+
+There is a max request per consumer contract, set at 25 for now, if you reach it wait for an answer or use the `deleteRequestorRequest(address requestor, uint callId)` method from your the smart contract that made that request to delete one.
