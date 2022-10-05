@@ -32,7 +32,7 @@ If the gas limit is underestimated, the callback fails and the consuming contrac
 If the gas limit is overestimated, the callback function will be executed but your contract is not refunded for the excess gas amount that you paid.
 Make sure that your consuming contracts are funded with enough TLOS tokens to cover the transaction costs. 
 
-## REQUEST & RECEIVE DATAPOINTS
+## DIAGRAM
 
 ![DelphiOracleBridge](https://user-images.githubusercontent.com/5913758/193951928-58a946c3-622e-4b96-8873-d02b7bedea33.jpg)
 
