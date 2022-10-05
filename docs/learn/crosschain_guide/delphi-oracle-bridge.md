@@ -98,7 +98,7 @@ You can refer to the [`DelphiOracleConsumer`](https://github.com/telosnetwork/de
 
 ## IMPORTANT CONSIDERATIONS
 
-Your implementation of the `receiveDatapoints()` callback function must not revert
+Your implementation of the `receiveDatapoints()` callback function must not revert, we will not handle it.
 
 ## LIMITS
 
