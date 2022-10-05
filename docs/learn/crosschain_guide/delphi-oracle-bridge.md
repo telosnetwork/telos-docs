@@ -86,7 +86,7 @@ contract MyContract {
     function receiveDatapoints(uint callId, Datapoint[] calldata datapoints) external {
        require(msg.sender == address(bridge), "Only the bridge contract can call this function");
         
-       // Handle whatever logic you need with the random numbers received here
+       // Handle whatever logic you need with the datapoints received here
     
     }
 }
