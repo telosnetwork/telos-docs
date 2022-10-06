@@ -37,7 +37,7 @@ You can access TelosEVM through MetaMask by creating a custom network. Log into 
 * **New RPC URL**: [https://testnet.telos.net/evm](https://testnet.telos.net/evm)
 * **ChainID**: `41`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.teloscan.io/)
+* **Explorer**: [https://testnet.teloscan.io](https://testnet.teloscan.io/)
 
 #### **Telos Websockets:**
 
