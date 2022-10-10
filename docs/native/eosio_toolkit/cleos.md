@@ -76,7 +76,7 @@ cleos create key --file FILENAME // Save output in specified file
 
 ### Generate Keys and Account on [Telos Signup](https://www.telos.net/signup) 
 
-## Step:4 Import Keys
+## Step 4: Import Keys
 Import private key or keys into wallet. 
 ```
 cleos wallet import 
