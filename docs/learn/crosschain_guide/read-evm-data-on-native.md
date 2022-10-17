@@ -81,7 +81,7 @@ If you need to loop over all members and not just retreive the first member's pr
 
 You can use __eosio.evm__ utils to read EVM data from a Native Telos smart contract more easily. You will also need to integrate the intx library for the uint256 type.
 
-We will base this example on our [rng-oracle-bridge](https://github.com/telosnetwork/rng-oracle-bridge/tree/main/native) repository, the variable we want to read is an array of Request structs.
+We will base this example on our [rng-oracle-bridge](https://github.com/telosnetwork/rng-oracle-bridge/tree/main/antelope) repository, the variable we want to read is an array of Request structs.
 
 First we need the array length and array content slot key
 ```
@@ -117,4 +117,4 @@ for(uint256_t i = 0; i < array_length->value;i=i+1){
 }
 ```
 
-This loop makes use of functions inside our [utils class](https://github.com/telosnetwork/rng-oracle-bridge/blob/main/native/include/util.hpp) like `getArrayMemberSlot`
+This loop makes use of functions inside our [utils class](https://github.com/telosnetwork/rng-oracle-bridge/blob/main/antelope/include/util.hpp) like `getArrayMemberSlot`
