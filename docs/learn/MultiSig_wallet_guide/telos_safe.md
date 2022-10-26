@@ -1,11 +1,16 @@
-# Telos Safe
+# Telos Safe Quickstart
 
-__Telos Safe is the most trusted platform to manage digital assets on the Telos network. Multisigs are shaping the future of Web3 and expansion of crypto assets.__
+__[Telos Safe](https://safe.telos.net/) is the most trusted platform to manage digital assets on the Telos network.__
 
 ### Overview
 
-This guide will walk through how you can deploy your own multisignature wallet, using Telos Safe Wallet and having it act as a Light Wallet(contract account wallet). This wallet provides unique use cases in crypto today due to it's multi-signature arrangement of funds with chosen partners, you can think of it as a shared bank account or shared wallet. Telos Safe enables users to control Telos minted assets(ERC-20, ERC-721, ERC-1155) and TLOS on the EVM. 
+__This guide will walk through how you can create your own MultiSig wallet on the Telos EVM and utilize the Gnosis Safe Help center to understand all of the functionality this MultiSig interface provides.__
 
+
+### What is Telos Safe? 
+- Telos Safe is a fork of Gnosis Safe. The code is exactly the same as Gnosis Safe, the only few diferences are links you may notice in the [Gnosis Safe help center](https://help.gnosis-safe.io/en/articles/3876456-what-is-gnosis-safe).
+
+Telos Safe enables users to securely store Telos minted assets(ERC-20, ERC-721, ERC-1155) and TLOS on the EVM. The Safe is a Multisig account that is controlled by its signer keys. Please refer to [here](https://help.gnosis-safe.io/en/articles/3876456-what-is-gnosis-safe) to learn more about the Telos Safe Multisig application.
 
 #### Prerequisites
 
@@ -24,26 +29,26 @@ If you don't have MetaMask install it [here](https://metamask.io/download/)
 ### Create a Safe(multisig wallet)
 
 We are going to create a new Safe on the Telos EVM! Make sure you are on the Telos testnet for gaining a good understanding. 
-
+1. Click Create new Safe to get the process started. 
 ![create a safe](/img/create_safe.png)
 
 
-1. Connect wallet & select network. We will be using Telos testnet in this. 
+2. Connect a signer wallet & select network. We will be using Telos testnet in this. 
 
 ![telos_network_safe](/img/telos_network_safe.png)
 
-2. Go ahead and Name the wallet. 
+3. Once a wallet is selected, you can start the process of setting up your Safe by clicking on **"Create New Safe"**. First, you'll need to give a name to your new Safe. This name is only stored locally on your computer and never shared with any third party.
 
 ![Safe Name](/img/safe_name.png)
 
-3. Firstly, set your owner name. The wallet prefilled the Owner Address with your connected Metamask primary account. 
+3. **Select Signers**, set your owner name. The wallet prefilled the Owner Address with your connected Metamask primary account. 
 
 - **Note:If you want you can add permissions to additional accounts in you Metamask to test functionality.**
 
 ![Owners and Confirmations](/img/owners_and_confirmations.png)
 
-4. Review Safe Owners
-
+4. **Review Safe Owners.** You have the option to add additional owners to confirm transactions and determine how many owners it may take to confirm a transaction. Depending on your Multisig purpose you will need to add additional owners. For an individual looking to protect NFTs or ERC-20s on the Telos network. One can add an additional Owner 2 and set smart contract to require confirmation of 1 owner out of 2 to adhere to risk of losing private keys. The point is that this wallet is very flexible and it's worth understanding your multisigs usecase. 
+ **Approve new Safe transaction**
 ![review Safe details](/img/review_safe.png)
 
 4. Confirm Metamask transaction.
@@ -56,6 +61,27 @@ We are going to create a new Safe on the Telos EVM! Make sure you are on the Tel
 ![safe created](/img/safe_created.png)
 
 
-### Explore the multisig wallet more on Gnosis Safe docs.
+### FAQs for Telos Safe
 
-Head over to [Gnosis Docs](https://docs.gnosis-safe.io/) to learn more about the multisig usage and usecases. 
+**What do I do if I lost access to my Safe?** 
+
+- Paste the address you initially created the Safe with or have interacted with in the [Teloscan Block Explorer](teloscan.io) to locate the Safe. 
+**Note** The Contract function invoked for creating a Safe is **createProxyWithNonce** the contract that is interacted with to create a new Safe is called **GnosisSafeProxyFactory**
+
+
+
+### Features Guide
+**Telos Safe provides a lot of rich features. Check the links out below for best practices and utilizing all features**
+
+- [Managing Assets](https://help.gnosis-safe.io/en/collections/2767362-assets)
+- [Interact with Decentralized Finance DApps](https://help.gnosis-safe.io/en/collections/2331556-dapps-defi)
+- [Manage owners, policies and more](https://help.gnosis-safe.io/en/collections/2289657-settings)
+- [Security](https://help.gnosis-safe.io/en/collections/794057-security)
+
+
+
+### Learn more about Telos Safe and building apps with Gnosis Safe
+
+- Learn from the [Gnosis Safe Team](https://help.gnosis-safe.io/en/) with these extensive guides to get the most value out of the Telos Safe!
+
+- Head over to [Gnosis Docs for Developers](https://docs.gnosis-safe.io/) to learn more about building applications with Gnosis Safe contracts and SDKs.. 
