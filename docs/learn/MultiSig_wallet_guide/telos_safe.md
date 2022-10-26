@@ -60,12 +60,11 @@ We are going to create a new Safe on the Telos EVM! Make sure you are on the Tel
 
 ![safe created](/img/safe_created.png)
 
-
 ### FAQs for Telos Safe
 
 **What do I do if I lost access to my Safe?** 
 
-- Paste the address you initially created the Safe with or have interacted with in the [Teloscan Block Explorer](teloscan.io) to locate the Safe. 
+- Paste the address you initially created the Safe with or have interacted with in the [Teloscan Block Explorer](https://www.teloscan.io/) to locate the Safe. 
 **Note** The Contract function invoked for creating a Safe is **createProxyWithNonce** the contract that is interacted with to create a new Safe is called **GnosisSafeProxyFactory**
 
 
