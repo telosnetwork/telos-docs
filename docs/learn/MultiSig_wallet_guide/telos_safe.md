@@ -60,6 +60,37 @@ We are going to create a new Safe on the Telos EVM! Make sure you are on the Tel
 
 ![safe created](/img/safe_created.png)
 
+## Additional Security Guide
+
+__One of the best practices in creating a new Safe is understanding why you must set a threshold greater than 0 and adding additional owners you trust or maintain on your end.__
+
+5. Add Additional Owners to the Safe. On the left side of the browser page scroll down to settings, click the drop down arrow. Proceed to Owners. Click Add new owner 
+
+**Navigate to Settings**
+
+![Telos-Safe-Settings](/img/telos_safe_settings.png)
+
+**Look at Add Owner Menu**
+
+![Add-Owner-Menu](/img/add_owner_menu.png)
+
+**Add an Owner name and Owner address.** 
+
+![Add-Owner](/img/add_owner.png)
+
+6. Set the threshold for how many owners to confirm a transaction. Note adding an owner will require just .06 TLOS in this transaction. 
+
+
+__To add an owner to the Safe you must be using a signer account(be an owner)__
+
+
+
+![Set-Threshold](/img/set_threshold.png)
+
+Now that you have added a few owners and determined a threshold for you Safe. It is time to explore more features. Check out the Feature guide below for more resources. 
+
+Also the [Gnosis Safe help center](https://help.gnosis-safe.io/en/)
+
 ### FAQs for Telos Safe
 
 **What do I do if I lost access to my Safe?** 
