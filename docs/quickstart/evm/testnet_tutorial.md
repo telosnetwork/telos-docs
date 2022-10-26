@@ -23,7 +23,7 @@ Enter the network paramaters below into the the corresponding space on the Add a
 * **New RPC URL**: [https://testnet.telos.net/evm](https://testnet.telos.net/evm)
 * **ChainID**: `41`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
+* **Explorer**: [https://testnet.teloscan.io/](https://testnet.teloscan.io/)
 
 ![Testnetwork configs](/img/testnet_network_configs.png)
 

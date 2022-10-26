@@ -19,7 +19,7 @@ The Telos testnet tokens can be aquired in the [Testnet Faucet](https://app.telo
 * **New RPC URL**: [https://testnet.telos.net/evm](https://testnet.telos.net/evm)
 * **ChainID**: `41`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
+* **Explorer**: [https://testnet.teloscan.io/](https://testnet.teloscan.io/)
 
 ## Telos Mainnet 
 
