@@ -5,10 +5,12 @@ Welcome to the Telos Docs. The Telos documentation is aimed to provide a list of
 **Please reach out** [EVM](https://t.me/TelosEVMDevs) or [Dapps](https://t.me/dappstelos) development channels. 
 
 
-
 Our docs are built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 https://docs.telos.net will auto-update based on commits to the `master` branch, it is hosted in Cloudflare Pages.
+
+![Alt](https://repobeats.axiom.co/api/embed/261770e4a19da6061c5618a53bec3b3f7809db8e.svg "Repobeats analytics image")
+
 
 ### Installation
 
