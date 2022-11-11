@@ -66,6 +66,7 @@ Steps
 ![New Proposal](https://user-images.githubusercontent.com/39388424/201343588-960d447c-6106-48dd-bd1f-db5f6bada64e.png)
 
 5. Start giving your proposal a unique name, or use the automatically generated proposal name. It may consist of 2-13 characters, only including "a-z" or "1-5" or ".", while character 13 may only consist of "a-j" or "1-5". It is impossible to create a name that does not follow these rules.
+
 ![Proposal Naming Convention](https://user-images.githubusercontent.com/39388424/201345434-bd7557bc-c44d-496b-a66d-aae9b829f3c8.png)
 
 6. The proposer field is automatically updated with your account information.
