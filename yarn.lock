@@ -34,6 +34,7 @@
     flair-contracts-v1.9 "npm:@0xflair/evm-contracts@1.9.*"
 
 "@0xflair/evm-contracts@^1.19.9", "flair-contracts-v1.22@npm:@0xflair/evm-contracts@1.22.*":
+  name flair-contracts-v1.22
   version "1.22.0"
   resolved "https://registry.yarnpkg.com/@0xflair/evm-contracts/-/evm-contracts-1.22.0.tgz#3676d465bccbf39f447a53a984e1b4753ad2a8da"
   integrity sha512-R/j6dArSrgrtftIFLAze1POLGN8qHe0DjRXVUtjwCJCUyiYMPwyfPsc1PIi5efGNkwP8ZtubiGVoauS/hAhO2g==
@@ -7127,9 +7128,9 @@ json-stringify-safe@^5.0.1:
   integrity sha512-ZClg6AaYvamvYEE82d3Iyd3vSSIjQ+odgjaTzRuO3s7toCdFKczob2i0zCh7JE8kWn17yvAWhUVxvqGwUalsRA==
 
 json5@^2.1.2, json5@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.1.tgz#655d50ed1e6f95ad1a3caababd2b0efda10b395c"
-  integrity sha512-1hqLFMSrGHRHxav9q9gNjJ5EXznIxGVO09xQRrwplcS8qs28pZ8s8hupZAmqDwZUmVZ2Qb2jnyPOWcDH8m8dlA==
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.3.tgz#78cd6f1a19bdc12b73db5ad0c61efd66c1e29283"
+  integrity sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg==
 
 jsonfile@^4.0.0:
   version "4.0.0"
