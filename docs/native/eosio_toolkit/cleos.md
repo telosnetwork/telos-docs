@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # CLEOS Wallet Overview
 -----       ------
-Telos native wallets are applications that let you interact with your Telos native accounts. CLEOS is a command line tool that interfaces with the REST API exposed nodeos. The wallet acts a container that is used to store key pairs/accounts for the blockchain. 
+Telos native wallets are applications that let you interact with your Telos native accounts. CLEOS is a command line tool that interfaces with the REST API exposed by nodeos. You can use ```cleos``` to deploy and test Antelope smart contracts. The wallet acts a container that is used to store key pairs/accounts for the blockchain. 
 
 **Telos wallets are unique as you can store multiple accounts and keys unlike MetaMask.**
 
