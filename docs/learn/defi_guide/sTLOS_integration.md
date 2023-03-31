@@ -43,7 +43,7 @@ Preview methods are available to help with frontend integrations, such as:
 
 `previewRedeem(uint256 shares): uint256`
 
-#### Testnet address:
+#### Testnet address: [0xa9991E4daA44922D00a78B6D986cDf628d46C4DD](https://testnet.teloscan.io/address/0xa9991E4daA44922D00a78B6D986cDf628d46C4DD)
 #### Mainnet address: [0xB4B01216a5Bc8F1C8A33CD990A1239030E60C905](https://teloscan.io/address/0xB4B01216a5Bc8F1C8A33CD990A1239030E60C905)
 
 ### TelosEscrow Contract
@@ -82,5 +82,5 @@ Emitted on sucessfull call to withdraw()
 
 Emitted on sucessfull call to deposit(address depositor)
 
-#### Testnet address:
+#### Testnet address: [0x7E9cF9fBc881652B05BB8F26298fFAB538163b6f](https://testnet.teloscan.io/address/0x7E9cF9fBc881652B05BB8F26298fFAB538163b6f)
 #### Mainnet address: [0x95F5713A1422Aa3FBD3DCB8D553945C128ee3855](https://teloscan.io/address/0x95F5713A1422Aa3FBD3DCB8D553945C128ee3855)
