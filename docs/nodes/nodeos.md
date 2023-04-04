@@ -17,6 +17,6 @@ The behaviour of nodeos is determined mainly by which plug-ins are loaded and wh
 
 # Nodeos Getting Started
 
-To install `nodeos` visit [Antelope.io Software Installation section](https://developers.eos.io/manuals/eos/latest/install/index), and follow the instructions provided. If you are new to Antelope, it is recommended that you install the [Antelope Prebuilt Binaries](https://developers.eos.io/manuals/eos/latest/install/install-prebuilt-binaries), then proceed to the Getting Started section of the Antelope Developer Portal. 
+To install `nodeos` visit [Antelope.io Software Installation section](https://developers.eos.io/manuals/eos/latest/install/index), and follow the instructions provided. If you are new to Antelope, it is recommended that you install the [Antelope Prebuilt Binaries](https://github.com/AntelopeIO/leap), then proceed to the Getting Started section of the Antelope Developer Portal. 
 
 If you are an advanced developer, a block producer, or no binaries are available for your platform, you may need to Build Antelope from source instead.

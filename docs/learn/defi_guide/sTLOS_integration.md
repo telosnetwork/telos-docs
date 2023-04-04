@@ -4,7 +4,7 @@ __A look at our StakedTLOS and TelosEscrow contracts on Telos EVM__
 
 ## RUNDOWN
 
-The Telos EVM staking functionality revolves around 2 EVM smart contracts: the [__StakedTLOS contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol), a ERC20 token implementing [ERC4262](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626) that represents shares of deposited TLOS, and the [__TelosEscrow contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol), which locks up any TLOS deposited for a configurable amount of time.
+The Telos EVM staking functionality revolves around 2 EVM smart contracts: the [__StakedTLOS contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol), a ERC20 token implementing [ERC4626](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626) that represents shares of deposited TLOS, and the [__TelosEscrow contract__](https://github.com/telosnetwork/stlos/blob/dev/contracts/TelosEscrow.sol), which locks up any TLOS deposited for a configurable amount of time.
 
 When funds are withdrawn from the sTLOS contract, they are automatically sent over to the TelosEscrow contract and will only be withdrawable from there after a defined amount of time has passed.
 
@@ -12,7 +12,7 @@ When funds are withdrawn from the sTLOS contract, they are automatically sent ov
 
 ### StakedTLOS Contract
 
-The [StakedTLOS contract](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol) is based on the [ERC4262 tokenized vault standard](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626) which itself implements ERC20. 
+The [StakedTLOS contract](https://github.com/telosnetwork/stlos/blob/dev/contracts/StakedTLOS.sol) is based on the [ERC4626 tokenized vault standard](https://docs.openzeppelin.com/contracts/4.x/api/token/erc20#ERC4626) which itself implements ERC20. 
 
 - Users deposit their TLOS and get equivalent sTLOS tokens in return that represent their share of the total TLOS staked on the contract. 
 - Rewards are sent to the contract every 30 minutes by the native [exrsrv.tf contract](https://github.com/telosnetwork/telos-distribute/blob/stlos/src/eosio.tedp.cpp) which increase the TLOS price of sTLOS over time. 
@@ -43,8 +43,8 @@ Preview methods are available to help with frontend integrations, such as:
 
 `previewRedeem(uint256 shares): uint256`
 
-#### Testnet address:
-#### Mainnet address:
+#### Testnet address: [0xa9991E4daA44922D00a78B6D986cDf628d46C4DD](https://testnet.teloscan.io/address/0xa9991E4daA44922D00a78B6D986cDf628d46C4DD)
+#### Mainnet address: [0xB4B01216a5Bc8F1C8A33CD990A1239030E60C905](https://teloscan.io/address/0xB4B01216a5Bc8F1C8A33CD990A1239030E60C905)
 
 ### TelosEscrow Contract
 
@@ -82,5 +82,5 @@ Emitted on sucessfull call to withdraw()
 
 Emitted on sucessfull call to deposit(address depositor)
 
-#### Testnet address:
-#### Mainnet address:
+#### Testnet address: [0x7E9cF9fBc881652B05BB8F26298fFAB538163b6f](https://testnet.teloscan.io/address/0x7E9cF9fBc881652B05BB8F26298fFAB538163b6f)
+#### Mainnet address: [0x95F5713A1422Aa3FBD3DCB8D553945C128ee3855](https://teloscan.io/address/0x95F5713A1422Aa3FBD3DCB8D553945C128ee3855)

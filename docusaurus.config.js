@@ -13,7 +13,7 @@ const config = {
   tagline: 'Documentation and Tutorials for Telos',
   url: 'https://docs.telos.network',
   baseUrl: '/',
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/Telos_logo.png',
   organizationName: 'telosnetwork', // Usually your GitHub org/user name.

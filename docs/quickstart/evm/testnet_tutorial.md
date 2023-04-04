@@ -11,11 +11,12 @@ sidebar_positon: 2
 It is recommended that you set up a new wallet specifically for development to keep it separate from any other wallets. 
 
 #### Step 2: Set up Testnet Network Configuration
-![Metamask Network Config](/img/metamask_config.png)
 
-Click the down arrow beside "Ethereum Mainnet" to open the drop-down menu, then select "Custom PRC." This will enable you to add a new network.
+Head over to [Chainlist](https://chainlist.org/?search=Telos+&testnets=true) connect to the EVM Testnet. 
 
-Enter the network paramaters below into the the corresponding space on the Add a network window.
+**OR**
+
+Enter the Network specifications below in Metamask directly.
 
 #### **Telos Testnet Settings:**
 
@@ -23,7 +24,7 @@ Enter the network paramaters below into the the corresponding space on the Add a
 * **New RPC URL**: [https://testnet.telos.net/evm](https://testnet.telos.net/evm)
 * **ChainID**: `41`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
+* **Explorer**: [https://testnet.teloscan.io/](https://testnet.teloscan.io/)
 
 ![Testnetwork configs](/img/testnet_network_configs.png)
 

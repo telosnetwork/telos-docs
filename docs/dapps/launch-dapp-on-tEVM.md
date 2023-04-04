@@ -19,9 +19,20 @@ Telos EVM is an implementation of the Ethereum EVM. It is written as a smart con
 
 There are several ways developers can connect with Telos, as seen below:
 
-### Through MetaMask
+### Automatically on Teloscan
 
-You can access TelosEVM through MetaMask by creating a custom network. Log into MetaMask and select the network dropdown. Then select 'Custom RPC' and enter the following data for Telos:
+Head over to [Teloscan Explorer](teloscan.io)
+
+- Click Sign In. Using MetaMask
+
+![signin](/img/sign_in_teloscan.png)
+
+- Connect with MetaMask
+
+![ConnectMetaMask](/img/Connect_Metamask.png)
+
+### Connect via [Chainlist](https://chainlist.org/?search=Telos) 
+-------                             ---------
 
 #### **Telos Mainnet Settings:**
 
@@ -37,12 +48,11 @@ You can access TelosEVM through MetaMask by creating a custom network. Log into 
 * **New RPC URL**: [https://testnet.telos.net/evm](https://testnet.telos.net/evm)
 * **ChainID**: `41`
 * **Symbol**: `TLOS`
-* **Explorer**: [https://testnet.telos.net/v2/explore/](https://testnet.telos.net/v2/explore/)
+* **Explorer**: [https://testnet.teloscan.io](https://testnet.teloscan.io/)
 
 #### **Telos Websockets:**
 
 * **Testnet : wss://testnet.telos.net/evm**
 
 * **Mainnet: wss://mainnet.telos.net/evm**
-
 
