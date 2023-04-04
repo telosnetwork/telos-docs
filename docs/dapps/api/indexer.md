@@ -9,8 +9,10 @@ Mainnet:
 
 Two routes implement a filter by topics:
 
-- /contract/{ADDRESS}/logs
-- /event/{EVENT}/logs
+- `/contract/{ADDRESS}/logs`
+- `/event/{EVENT}/logs`
+
+Using the `topics` field of those route, this filter allows you to find rows by topics.
 
 #### Single topic
 `{"topics[1]": {"_eq": "0x077511a636ba1f10551cc7b89c13ff66a6ac9344e8a917527817a9690b15af7a"}}`
