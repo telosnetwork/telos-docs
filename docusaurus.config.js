@@ -85,7 +85,7 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'dapps',
+            sidebarId: 'evm',
             label: 'Telos EVM',
           },
           {
