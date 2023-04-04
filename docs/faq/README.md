@@ -80,7 +80,7 @@ Check out [Telos Decide Governance System](/native/eosio_toolkit/decide_engine.m
 
 
 ### How do I add Telos to MetaMask?
-Guide is over [here](/docs/dapps/launch-dapp-on-tEVM.md)
+Guide is over [here](/docs/evm/launch-dapp-on-tEVM.md)
 ### What is REX and how does it work?
 REX is the resource exchange powered by the Telos native network. Users can stake REX for an API up to 14%. REX is responsible for all the actions on Antelope that enable users and builders to buy, sell, stake resources in order to perform actions on-chain and acrue TLOS tokens. 
 

@@ -97,4 +97,4 @@ In this case we used 0.8.7 in compiler and declared a pragma ^0.8.0
 
 We just verified a ERC20 contract using the Remix IDE -  Sourcify plug in.
 
-Head over to [Hardhat Sourcify](docs/dapps/smart-contracts/hardhat_sourcify.md) for an automated method of verifying multiple smart contracts within a larger project dev environement, simutaneously with just one command!
+Head over to [Hardhat Sourcify](docs/evm/smart-contracts/hardhat_sourcify.md) for an automated method of verifying multiple smart contracts within a larger project dev environement, simutaneously with just one command!

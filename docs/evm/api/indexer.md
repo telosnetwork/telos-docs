@@ -1,11 +1,17 @@
-## Telos EVM Indexer API
+---
+sidebar_positon: 1
+---
 
-Our API mainly uses swagger for documentation, you can consult it using the following URLs:
+# EVM Indexer API
+
+The EVM Indexer indexes all EVM transactions, traces, accounts, blocks, logs for Telos EVM. It also indexes derived data such as token balances, nfts, approvals & transfers.
+
+Our API exposing the indexer's data mainly uses swagger for documentation, you can consult it using the following URLs:
 
 - Testnet: [api.testnet.teloscan.io](http://api.testnet.teloscan.io/swagger/)
 - Mainnet: [api.teloscan.io](http://api.teloscan.io/swagger/)
 
-We do however implement some advanced fields, like the `topics` filter field, for which you will find the documentation below
+However we also implement some advanced fields, like the `topics` filter field, for which you will find the documentation below:
 
 ## Topics filter
 

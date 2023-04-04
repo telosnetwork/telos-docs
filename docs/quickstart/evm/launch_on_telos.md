@@ -6,7 +6,7 @@ sidebar_positon: 1
 
 __Considerations and coverage for launching a DApp live on the Telos mainnet.__
 
-**Disclaimer**: This tutorial is for those already familiar with developing smart contracts on EVM-compatible chains and using tools like Solidity, Ethers.js, and Hardhat or Truffle. If you are not versed in these tools, please visit our [DApps tools section](/dapps/smart-contracts/README.md)
+**Disclaimer**: This tutorial is for those already familiar with developing smart contracts on EVM-compatible chains and using tools like Solidity, Ethers.js, and Hardhat or Truffle. If you are not versed in these tools, please visit our [EVM tools section](/evm/smart-contracts/README.md)
 
 ## Test Smart Contracts on Testnet
 The Telos testnet tokens can be aquired in the [Testnet Faucet](https://app.telos.net/testnet/developers).

@@ -21,7 +21,7 @@ There are several ways developers can connect with Telos, as seen below:
 
 ### Automatically on Teloscan
 
-Head over to [Teloscan Explorer](teloscan.io)
+Head over to [Teloscan Explorer](https://teloscan.io)
 
 - Click Sign In. Using MetaMask
 
