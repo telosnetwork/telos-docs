@@ -22,7 +22,3 @@ Two routes implement a filter by topics
 - _or
 - _ne
 - _eq
-- _gt
-- _gte
-- _lt
-- _lte
