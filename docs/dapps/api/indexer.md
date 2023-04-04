@@ -7,7 +7,10 @@ Mainnet:
 
 ## Topics filter
 
-Two routes implement a filter by topics
+Two routes implement a filter by topics:
+
+- /contract/{ADDRESS}/logs
+- /event/{EVENT}/logs
 
 #### Single topic
 `{"topics[1]": {"_eq": "0x077511a636ba1f10551cc7b89c13ff66a6ac9344e8a917527817a9690b15af7a"}}`
