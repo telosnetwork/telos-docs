@@ -2,8 +2,8 @@
 
 Our API mainly uses swagger for documentation, you can consult it using the following URLs:
 
-Testnet:
-Mainnet:
+- Testnet: [api.testnet.teloscan.io](http://api.testnet.teloscan.io/swagger/)
+- Mainnet: [api.teloscan.io](http://api.teloscan.io/swagger/)
 
 ## Topics filter
 
