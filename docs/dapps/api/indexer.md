@@ -5,6 +5,8 @@ Our API mainly uses swagger for documentation, you can consult it using the foll
 - Testnet: [api.testnet.teloscan.io](http://api.testnet.teloscan.io/swagger/)
 - Mainnet: [api.teloscan.io](http://api.teloscan.io/swagger/)
 
+We do however implement some advanced fields, like the `topics` filter field, for which you will find the documentation below
+
 ## Topics filter
 
 Two routes implement a filter by topics:
