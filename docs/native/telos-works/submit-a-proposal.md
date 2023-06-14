@@ -19,8 +19,6 @@ sidebar_position: 2
 
 To draft a new Telos Works Proposal, simply call the `draftprop()` action on the `works.decide` contract.
 
-### ACTION `draftprop`
-
 | Parameter Name        | Parameter Type | Description                                  | Example                       |
 | --------------------- | -------------- | -------------------------------------------- | ----------------------------- |
 | title                 | string         | Proposal title                               | "Example Proposal 1"          |
@@ -62,8 +60,6 @@ cleos push action works.decide editms '{ ... }' -p proposer
 
 When drafting has been completed by the proposer, the proposal can be officially launched. This will open voting to the public and prevent any further alteration by the proposer.
 
-### ACTION `launchprop`
-
 | Parameter Name | Parameter Type | Description      | Example    |
 | -------------- | -------------- | ---------------- | ---------- |
 | proposal\_name | name           | Name of proposal | worksprop1 |
@@ -92,8 +88,6 @@ __Note that in order to pass, a vote must achieve the pass threshold and the quo
 
 After the voting period has ended, it's time to close the milestone and allow Telos Works to render a decision based on the results. To do this, call the `closems` action:
 
-### ACTION `closems`
-
 | Parameter Name | Type | Description                | Example    |
 | -------------- | ---- | -------------------------- | ---------- |
 | proposal\_name | name | Name of the Works Proposal | worksprop1 |
@@ -105,8 +99,6 @@ cleos push action works.decide closems '{ ... }' -p proposer
 ## 6. Submit Milestone Report
 
 If the milestone passed, then the proposer must submit a milestone report before claiming funds. To submit a milestone report, call the `submitreport` action:
-
-### ACTION `submitreport`
 
 | Parameter Name | Type   | Description                      | Example        |
 | -------------- | ------ | -------------------------------- | -------------- |
@@ -121,8 +113,6 @@ cleos push action works.decide submitreport '{ ... }' -p proposer
 
 Finally, to claim funding from an approved milestone, call the `claimfunds` action:
 
-### ACTION `claimfunds`
-
 | Parameter Name | Type | Description                | Example    |
 | -------------- | ---- | -------------------------- | ---------- |
 | proposal\_name | name | Name of the Works Proposal | worksprop1 |
@@ -134,8 +124,6 @@ cleos push action works.decide claimfunds '{ ... }' -p proposer
 ## 8. Launch Next Milestone (If Applicable)
 
 If there are remaining milestones left on the proposal, the next one can be launched with the `nextms` action:
-
-### ACTION `nextms`
 
 | Parameter Name | Type | Description                                    | Example    |
 | -------------- | ---- | ---------------------------------------------- | ---------- |
