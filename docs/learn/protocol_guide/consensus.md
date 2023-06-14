@@ -31,8 +31,9 @@ The actual selection of the active producers (the producer schedule) is open for
 ## The Consensus Process
 The Antelope consensus process consists of two parts:
 
-Producer voting/scheduling - performed by the DPoS layer 2<br />
-Block production/validation - performed by the native consensus layer 1<br />
+- Producer voting/scheduling - performed by the DPoS layer 2
+- Block production/validation - performed by the native consensus layer 1
+
 These two processes are independent and can be executed in parallel, except for the very first schedule round after the boot sequence when the blockchain’s first genesis block is created.
 
 ## Producer Voting/Scheduling
