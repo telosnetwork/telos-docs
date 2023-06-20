@@ -1,5 +1,3 @@
-
-
 # Resources
 
 ## Community Channels
@@ -16,8 +14,9 @@
 
 - [Hyperion (API) Chat](https://t.me/EOSHyperion)
 
-
 ## EVM Tools
+
+- [thirdweb](https://thirdweb.com)
 
 - [Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
 
@@ -31,7 +30,6 @@
 
 - [Open Zeppelin](https://www.openzeppelin.com/)
 
-
 ## Native Tools
 
 - [eosjs](https://developers.eos.io/manuals/eosjs/latest/index)
@@ -41,8 +39,6 @@
 - [DUNE](https://github.com/eosnetworkfoundation/DUNE)
 
 - [Antelope](https://antelope.io/)
-
-
 
 ## Infrastructure Tools (Oracles, Indexers, Bridge SDKs)
 
@@ -54,8 +50,7 @@
 
 - [DIA Oracle (EVM)](https://www.diadata.org/)
 
-- **TELOS INDEXER API COMING SOON**   
-
+- **TELOS INDEXER API COMING SOON**
 
 ## Demos
 
