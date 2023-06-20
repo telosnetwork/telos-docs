@@ -8,7 +8,7 @@ An Antelope blockchain is a highly efficient, deterministic, distributed state m
 
 ## Block Producers  
 
-Block producers are responsible for maintaining the blockchain by running nodes which perform block production and block validation. Producers are elected by TLOS holders. Each producer runs an instance of an Antelope node through nodeos service.  For this reason, producers that are on the active schedule to produce blocks are also called "active" or "producing" nodes.
+Block producers are responsible for maintaining the blockchain by running nodes that perform block production and block validation. Producers are elected by TLOS holders. Each producer runs an instance of an Antelope node through nodeos service.  For this reason, producers that are on the active schedule to produce blocks are also called "active" or "producing" nodes.
 
 
 ### The Need for Consensus  
@@ -31,15 +31,16 @@ The actual selection of the active producers (the producer schedule) is open for
 ## The Consensus Process
 The Antelope consensus process consists of two parts:
 
-Producer voting/scheduling - performed by the the DPoS layer 2
-Block production/validation - performed by the native consensus layer 1
+- Producer voting/scheduling - performed by the DPoS layer 2
+- Block production/validation - performed by the native consensus layer 1
+
 These two processes are independent and can be executed in parallel, except for the very first schedule round after the boot sequence when the blockchain’s first genesis block is created.
 
 ## Producer Voting/Scheduling
 The voting of the active producers to be included in the next schedule is implemented by the DPoS layer. Strictly speaking, a token holder must first stake some tokens to become a stakeholder and thus be able to vote with a given staking power.
 
 #### Voting Process
-Each Antelope stakeholder can vote for up to 30 block producers in one voting action. The top 21 elected producers will then act as DPoS delegates to produce and sign blocks on behalf of the stakeholders. The remaining producers are placed in a standby list in the order of votes obtained. The voting process repeats every schedule round by adding up the number of votes obtained by each producer. Producers not voted on get to keep their old votes.
+Each Antelope stakeholder can vote for up to 30 block producers in one voting action. The top 21 elected producers will then act as DPoS delegates to produce and sign blocks on behalf of the stakeholders. The remaining producers are placed in a standby list in the order of votes obtained. The voting process repeats every schedule round by adding up the number of votes obtained by each producer. Producers that are not voted on get to keep their old votes.
 
 #### Producers schedule
 After the producers are voted on and selected for the next schedule, they are simply sorted alphabetically by producer name. This determines the production order. Each producer receives the proposed set of producers for the next schedule round within the very first block to be validated from the current schedule round that is about to start. When the first block that contains the proposed schedule is deemed irreversible by a supermajority of producers plus one, the proposed schedule becomes active for the next schedule round.
@@ -81,11 +82,11 @@ __block schema__
 
 
 #### Block Production
-During each schedule round of block production, the producer on schedule must create Bp=12 contiguous blocks containing as many validated transactions as possible. Each block is currently produced within a span of Tb=500 ms (0.5 s). To guarantee sufficient time to produce each block and transmit to other nodes for validation, the block production time is further divided into two configurable parameters:
+During each schedule round of block production, the producer on schedule must create Bp=12 contiguous blocks containing as many validated transactions as possible. Each block is currently produced within a span of Tb=500 ms (0.5 s). To guarantee sufficient time to produce each block and transmit it to other nodes for validation, the block production time is further divided into two configurable parameters:
 
 - maximum processing interval: time window to push transactions into the block (currently set at 200 ms).
 - minimum propagation time: time window to propagate blocks to other nodes (currently set at 300 ms).
-All loose transactions that have not expired yet, or dropped as a result of a previous failed validation, are kept in a local queue for both block inclusion and syncing with other nodes. During block production, the scheduled transactions are applied and validated by the producer on schedule, and if valid, pushed to the pending block within the processing interval. If the transaction falls outside this window, it is unapplied and rescheduled for inclusion in the next block. If there are no more block slots available for the current producer, the transaction is picked up eventually by another producing node (via the peer-to-peer protocol) and pushed to another block. The maximum processing interval is slightly less for the last block (from the producer round of Bp blocks) to compensate for network latencies during handoff to the next producer. By the end of the processing interval, no more transactions are allowed in the pending block, and the block goes through a finalization step before it gets broadcasted to other block producers for validation.
+All loose transactions that have not expired yet, or dropped as a result of a previously failed validation, are kept in a local queue for both block inclusion and syncing with other nodes. During block production, the scheduled transactions are applied and validated by the producer on schedule, and if valid, pushed to the pending block within the processing interval. If the transaction falls outside this window, it is unapplied and rescheduled for inclusion in the next block. If there are no more block slots available for the current producer, the transaction is picked up eventually by another producing node (via the peer-to-peer protocol) and pushed to another block. The maximum processing interval is slightly less for the last block (from the producer round of Bp blocks) to compensate for network latencies during handoff to the next producer. By the end of the processing interval, no more transactions are allowed in the pending block, and the block goes through a finalization step before it gets broadcasted to other block producers for validation.
 
 Blocks go through various stages during production: apply, finalize, sign, and commit.
 
@@ -116,8 +117,8 @@ When the block is received by the chain controller, the software must determine 
 
 3. If block must be added to a different branch, then:
 
-1. if that branch now becomes the preferred branch compared to the current main branch: rewind all blocks up to the nearest common ancestor (and rollback the database state in the process), re-apply all blocks in the different branch, add the new block and apply it. That branch now becomes the new main branch.
-2. otherwise: add the new block to that branch in the fork database but do nothing else.
+    - if that branch now becomes the preferred branch compared to the current main branch: rewind all blocks up to the nearest common ancestor (and rollback the database state in the process), re-apply all blocks in the different branch, add the new block and apply it. That branch now becomes the new main branch.
+    - otherwise: add the new block to that branch in the fork database but do nothing else.
 
 
 In order for the block to be added to fork database, some block validation must occur. Block header validation must always be done before adding a block to the fork database. And if the block must be applied, some validation of the transactions within the block must occur. The degree to which transactions are validated depends on the validation mode that nodeos is configured with. Two block validation modes are supported: full validation (the default mode), and light validation.

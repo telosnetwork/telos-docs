@@ -6,11 +6,11 @@ sidebar_positon: 2
 
 **Considerations and coverage for launching a DApp live on the Telos mainnet.**
 
-**Disclaimer**: This tutorial is for those already familiar with developing smart contracts on EVM-compatible chains and using tools like Solidity, Ethers.js, and Hardhat or Truffle. If you are not versed in these tools, please visit our [EVM tools section](/evm/smart-contracts/README.md)
+**Disclaimer**: This tutorial is for those already familiar with developing smart contracts on EVM-compatible chains and using tools like Solidity, Ethers.js, and Hardhat or Truffle. If you are not versed in these tools, please visit our [EVM tools section](/evm/smart-contracts/README.md).
 
 ## Test Smart Contracts on Testnet
 
-The Telos testnet tokens can be aquired in the [Testnet Faucet](https://app.telos.net/testnet/developers).
+The Telos testnet tokens can be acquired in the [Testnet Faucet](https://app.telos.net/testnet/developers).
 
 [Testnet Walkthrough](testnet_tutorial.md)
 
@@ -48,8 +48,8 @@ Optimize the contract to ensure its safety and efficiency.
 ## Estimate Cost of Deployment
 
 - Telos is an inexpensive chain to build on; transactions average $.01.
-- Gas price is currently fixed at ~500 GWEI.
-- To calculate the cost of deployment on mainnet, simply multiply gas consumed with the gas price using the Ethers library.
+- Gas price is currently fixed at ~500 GWEI. 
+- To calculate the cost of deployment on mainnet, simply multiply gas consumed by the gas price using the Ethers library. 
 
 ## Acquiring TLOS for mainnet
 
@@ -92,9 +92,9 @@ module.exports = {
 };
 ```
 
-** As is good practice, define deployment wallet's private key in a .env file that will not be committed to git repository.**
+** As is good practice, define the deployment wallet's private key in a .env file that will not be committed to the git repository.**
 
-Next, run your deploy script and once complete, you will have successfully launched onto Telos mainnet.
+Next, run your deploy script, and once complete, you will have successfully launched onto Telos mainnet. 
 
 Now run the code below.
 

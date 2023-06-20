@@ -1,6 +1,6 @@
 # ERC20 Mintable Token
 
-An ERC20 token contract keeps track of fungible tokens. Any single token is equal to any other token; no token have special rights or associated behaviors. This makes ERC20 tokens useful for things like a medium of exchange, currency, voting rights, staking, and more.
+An ERC20 token contract keeps track of fungible tokens. Any single token is equal to any other token; no token has special rights or associated behaviors. This makes ERC20 tokens useful for things like a medium of exchange, currency, voting rights, staking, and more.
 
 
 
@@ -24,7 +24,7 @@ Commands below work on recent Linux or Windows versions but have not been verifi
 ## Install
 
 - Clone the [repository](https://github.com/telosnetwork/erc20-mintable-example).
-- Add in the .env variables Account address, Token Name, Token Symbol.
+- Add in the .env variables Account address, Token Name, and Token Symbol.
 - Install or clone the repo locally on your machine. 
 - Go to the project's directory in your terminal and install the dependencies with yarn or npm.
 
