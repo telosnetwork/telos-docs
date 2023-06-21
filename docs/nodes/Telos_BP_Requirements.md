@@ -9,7 +9,7 @@ The aim of this section is to clarify the minimum requirements for block produce
 
 The specifications stated herein are subject to revision, as well as when the network progresses from stage to stage — as determined by a vote of ⅔ + 1 of the current block producers at the time of the proposed revisions.
 
-Please visit https://www.telos.net/governance and navigate to Document: Block Producer Minimum Requirements for an up to date list of block producer hardware requirements per phase.
+Please visit https://app.telos.net/governance and navigate to Document: Block Producer Minimum Requirements for an up to date list of block producer hardware requirements per phase.
 
 ----                                          ------           
 
