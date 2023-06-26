@@ -1,3 +1,7 @@
+---
+sidebar_positon: 2
+---
+
 # Remix Smart Contract Tutorial ERC20
 
 __Prerequisites: MetaMask Wallet__

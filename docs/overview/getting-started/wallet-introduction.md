@@ -1,5 +1,6 @@
 ---
 id: "wallet-introduction"
+sidebar_positon: 2
 ---
 
 # What is a Web Wallet?

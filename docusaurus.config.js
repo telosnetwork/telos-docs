@@ -91,14 +91,14 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'nodes',
-            label: 'Nodes',
+            sidebarId: 'native',
+            label: 'Telos Native',
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'native',
-            label: 'Telos Native',
+            sidebarId: 'nodes',
+            label: 'Nodes',
           },
           {
             type: 'docSidebar',

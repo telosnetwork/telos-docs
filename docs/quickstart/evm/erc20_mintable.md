@@ -1,3 +1,7 @@
+---
+sidebar_positon: 4
+---
+
 # ERC20 Mintable Token
 
 An ERC20 token contract keeps track of fungible tokens. Any single token is equal to any other token; no token has special rights or associated behaviors. This makes ERC20 tokens useful for things like a medium of exchange, currency, voting rights, staking, and more.

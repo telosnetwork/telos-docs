@@ -1,3 +1,7 @@
+---
+sidebar_positon: 5
+---
+
 # Resources
 
 ## Community Channels

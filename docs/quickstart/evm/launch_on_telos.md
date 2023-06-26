@@ -1,5 +1,5 @@
 ---
-sidebar_positon: 2
+sidebar_positon: 3
 ---
 
 # Deploy an Existing DApp on Telos EVM Mainnet
