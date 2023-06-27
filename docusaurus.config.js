@@ -91,8 +91,8 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'native',
-            label: 'Telos Native',
+            sidebarId: 'zero',
+            label: 'Telos Zero',
           },
           {
             type: 'docSidebar',
@@ -143,7 +143,7 @@ const config = {
             title: 'Block Explorers',
             items: [
               {
-                label: 'Native',
+                label: 'Telos Zero',
                 href: 'https://explorer.telos.net',
               },
               {

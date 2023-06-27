@@ -88,7 +88,7 @@ To determine how many cores you have, run `cat /proc/cpuinfo | grep processor` a
 CPU="0"
 ```
 
-### Optional: Configure to write logs locally to the node's directory if you prefer instead of the system-wide `/var/log/nodeos` path as mentioned above
+__Optional: Configure to write logs locally to the node's directory if you prefer instead of the system-wide `/var/log/nodeos` path as mentioned above__
 Set the `LOCALIZE_LOG` flag to true in the `node_config` file.
 ```
 LOCALIZE_LOG=true
@@ -97,8 +97,6 @@ LOCALIZE_LOG=true
 ## Setup config.ini
 ### Review
 Review the config.ini file to get familiar with it, adjust as needed.
-
-__Note: To switch from an API node to a block producing node, uncomment producer-name and signature-provider and set their values__
 
 ### Set the ports
 Make sure you set the ports to ones that are not already in use on this server by other nodes.

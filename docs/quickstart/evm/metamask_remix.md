@@ -1,5 +1,5 @@
 ---
-sidebar_positon: 2
+sidebar_positon: 1
 ---
 
 # Remix Smart Contract Tutorial ERC20
@@ -62,12 +62,12 @@ Open [Remix](http://remix.ethereum.org/)
 2. For this example, we will deploy this ERC20 contract from [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc20)
 
 3. Copy and Paste the smart contract from Open Zeppelin under the contracts folder into MyEpicToken.sol file. 
-![ERC20 Token Pic](/img/My_EPIC_ERC.png)
+![ERC20 Token Pic](../../../static/img/My_EPIC_ERC.png)
 
 4. **Change network to Web3Injected to integrate Telos Testnet Through MetaMask**
 Click on Ethereum Deploy Logo on the side
 
-![web3injected pic](/img/Injectedweb3.png)
+![web3injected pic](../../../static/img/Injectedweb3.png)
 Then MetaMask will pop up, Click Next & allow the wallet to connect to Remix 
 
 5. The next step is to **compile** the contract into byte code so the Telos EVM can read the state changes being made from our Solidity program. Note the compile version at the top. Always match it to the compiler you program. It will declare with Pragma. Once complete, the byte code will be ready to compile.

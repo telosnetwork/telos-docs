@@ -158,7 +158,7 @@ This will perform graceful `nodeos` stop and bring down all containers.
 
 ### FAQ
 
-#### Can I use this to process and index both native & EVM transactions?
+#### Can I use this to process and index both Zero & EVM transactions?
 
 > Yes, but will need to set correct producer keys on `nodeos` and un-whitelist `eosio.evm` on Hyperion config.
 

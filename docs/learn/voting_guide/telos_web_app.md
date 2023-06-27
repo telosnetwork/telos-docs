@@ -6,7 +6,7 @@ __An extensive walkthrough of votign on the Telos Decide web app__
 
 - Have a Telos Account setup
 - Anchor wallet. If you don't have an Anchor wallet, you can download one [here](https://greymass.com/en/anchor/)
-- Native TLOS currency
+- TLOS Zero currency
 - System Resources: NET, RAM, CPU (See the guide below for obtainting)
 
 #### Instructions to Place Your Vote: 

@@ -24,9 +24,9 @@ However, networks such as Ethereum have become near unusable for the average use
 
 The tEVM improves on the EVM by implementing it’s own version of the EVM. Telos has implemented the original EVM as a smart contract on the tEVM. All activities that would normally be run by the EVM on an Ethereum node are run by a smart contract on the Telos blockchain.&#x20;
 
-Telos smart contracts and dApps are written in C++ and compiled to WebAssembly (WASM) code. Any native C++ based smart contract is executed on Telos native network and no transaction fee is currently charged. It is totally free. Native Telos fees are set by block producers and voted by token holders.
+Telos smart contracts and dApps are written in C++ and compiled to WebAssembly (WASM) code. Any native C++ based smart contract is executed on Telos Zero network and no transaction fee is currently charged. It is totally free. Telos Zero fees are set by block producers and voted by token holders.
 
-An Ethereum compatibility JSON-RPC server provides the API Ethereum applications are expecting. It does this by translating the native Telos state from the EVM smart contract to Ethereum expected format. EVM transactions that go through the tEVM will have a fee model similar to the native Ethereum gas model. The Ethereum account needs to have TLOS tokens on their tEVM wallet account to pay for the transactions (or code execution). Telos EVM fees are fixed at < 0.1% of Ethereum gas fees for identical transactions. No front-running or miner extracted value (MEV) can occur on tEVM due to tEVM’s first-in-first-out mempool structure.
+An Ethereum compatibility JSON-RPC server provides the API Ethereum applications are expecting. It does this by translating the Telos Zero state from the EVM smart contract to Ethereum expected format. EVM transactions that go through the tEVM will have a fee model similar to the native Ethereum gas model. The Ethereum account needs to have TLOS tokens on their tEVM wallet account to pay for the transactions (or code execution). Telos EVM fees are fixed at < 0.1% of Ethereum gas fees for identical transactions. No front-running or miner extracted value (MEV) can occur on tEVM due to tEVM’s first-in-first-out mempool structure.
 
 To conclude, [Telos EVM (tEVM)](https://www.telos.net/evm) is an EVM running on a Telos blockchain as a smart contract. This allows for Ethereum based dApps to easily deploy on the Telos blockchain with all the benefits of Telos, such as
 
@@ -34,12 +34,12 @@ To conclude, [Telos EVM (tEVM)](https://www.telos.net/evm) is an EVM running on 
 * faster transaction speeds,&#x20;
 * and low transaction fees.&#x20;
 
-For an in-depth comparison between the Telos EVM and other EVM based chains see the [Benefits of Telos compared to EVM chains](../about-ethereum-virtual-machine/comparing-telos-to-other-evm-chains.md).
+For an in-depth comparison between the Telos EVM and other EVM based chains see the [Benefits of Telos compared to EVM chains](./why-telos.md).
 
-These documents will guide native Telos users, as well as users coming from Ethereum, to get started on the tEVM. For a more technical overview of the EVM, navigate to the [Overview and architecture](../about-ethereum-virtual-machine/overview-and-architecture.md) section.&#x20;
+These documents will guide Telos Zero users, as well as users coming from Ethereum, to get started on the tEVM. For a more technical overview of the EVM, navigate to the [Overview and architecture](./overview-and-architecture.md) section.&#x20;
 
-{% hint style="info" %}
+
 For more information and other questions related to getting started with tEVM, click [here](https://help.telos.net).
 
-Developers looking to start deploying on the tEVM, can find support in the [Developer Guides](../../for-developers/developer-guides-telos-evm/).
-{% endhint %}
+Developers looking to start deploying on the tEVM can find support in the [Developer Guides](launch-dapp-on-tEVM).
+

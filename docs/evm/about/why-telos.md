@@ -16,7 +16,7 @@ Telos has been continuously operating since 2018, illustrating the robustness of
 
 | Blockchain          | Continuously operating since | Blocks produced                                |
 | ------------------- | ---------------------------- | ---------------------------------------------- |
-| Telos               | 2018                         | >[145M](https://telos.bloks.io)                |
+| Telos               | 2018                         | >[145M](https://www.teloscan.io/)                |
 | Ethereum            | 2015                         | [12M](https://etherscan.io)                    |
 | Binance Smart Chain | 2020                         | [6M](https://bscscan.com)                      |
 | Polygon             | 2021                         | [12M](https://explorer-mainnet.maticvigil.com) |
@@ -25,7 +25,7 @@ Telos has been continuously operating since 2018, illustrating the robustness of
 
 ## Decentralization
 
-Telos is a fair-distribution chain. The original TLOS token distribution was made as wide as possible to ensure that Telos blockchain stays conflict-free and a community-led effort.[ More information about the fair distribution model can be found in the original Telos Whitepaper.](https://drive.google.com/file/d/1WpBUD9xWaaTk8X9t73uShgsCUfH\_-3cJ/view)
+Telos is a fair-distribution chain. The original TLOS token distribution was made as wide as possible to ensure that Telos blockchain stays conflict-free and a community-led effort.[ More information about the fair distribution model can be found in the original Telos Whitepaper.](https://telos.net/wp-content/uploads/2021/02/Telos-Whitepaper-master-20180717.pdf)
 
 ![How the Telos genesis block was formed from EOS genesis block by doing a haircut on whale investors](<../../../static/img/token_distribution.png>)
 
@@ -43,7 +43,7 @@ Ethereum token holders can be found on [EtherScan](https://etherscan.io/accounts
 
 
 
-Telos does not have minimum staking requirements for a block producer. The new block producers must accept the[ Regproducer Ricardian Contract](https://tbnoa.org/details.html?docid=4) and successfully run on a testnet for one week in addition to other minimum requirements (see the[ Telos Block Producer Minimum Requirements Document](https://tbnoa.org/details.html?docid=1)). These contracts also forbid collusion or using custodial TLOS tokens to participate in voting as well as dictating minimul levels of infrastructure that a block producer must operate. Block producers watch each other for misbehavior and can intervene based on the terms stipulated in the contracts.
+Telos does not have minimum staking requirements for a block producer. The new block producers must accept the [Regproducer Ricardian Contract](https://tbnoa.org/details.html?docid=4) and successfully run on a testnet for one week in addition to other minimum requirements (see the [Telos Block Producer Minimum Requirements Document](https://tbnoa.org/details.html?docid=1)). These contracts also forbid collusion or using custodial TLOS tokens to participate in voting as well as dictating minimul levels of infrastructure that a block producer must operate. Block producers watch each other for misbehavior and can intervene based on the terms stipulated in the contracts.
 
 Observers, hired through the Telos Works work proposal and payment system, can also identify violation of rules and propose remedies in the form of multi-signiture contracts for the block producers to execute.
 
@@ -97,7 +97,7 @@ Telos and other modern blockchains are not based on the classic proof of work (P
 | Binance Smart Chain | Proof of Authority (PoA) [Parlia](https://docs.binance.org/smart-chain/guides/concepts/consensus.html), inspired by Clique |
 | Polygon             | Proof of Authority (PoA) [Bor](https://docs.matic.network/docs/contribute/bor/consensus/), inspired by Clique              |
 
-For an in depth discussion on the protocol driving Telos consensus, click [here](../../developers/platform/protocol/consensus\_protocol.md#2.-consensus-models).
+For an in depth discussion on the protocol driving Telos consensus, click [here](../../overview/consensus.md).
 
 ## Block Time
 
@@ -110,19 +110,19 @@ Block time and consensus algorithm affects how fast a transaction is finalized, 
 | Binance Smart Chain | [3.0-5.0 seconds](https://www.bscscan.com/chart/blocktime)              |
 | Polygon             | [2.2 seconds](https://explorer-mainnet.maticvigil.com)                  |
 
-For more information on block time, click [here](../../developers/platform/protocol/consensus\_protocol.md#1.1.-block-producers).
+For more information on block time, click [here](../../overview/consensus.md).
 
 ## Fees
 
-Currently, native Telos transactions have no fees. Native Telos fees are set by block producers and voted by token holders.
+Currently, Telos Zero transactions have no fees. Telos Zero fees are set by block producers and voted by token holders.
 
-EVM transactions will have a fee model similar to [the native Ethereum gas model](https://ethereum.org/en/developers/docs/gas/). The Ethereum account needs to have TLOS token to pay for the transaction. [Telos EVM fees](../about-ethereum-virtual-machine/gas-fees.md) are expected to be < 0.1% of Ethereum gas fees for identical transactions.
+EVM transactions will have a fee model similar to [the native Ethereum gas model](https://ethereum.org/en/developers/docs/gas/). The Ethereum account needs to have TLOS token to pay for the transaction. [Telos EVM fees](./gas-fees.md) are expected to be < 0.1% of Ethereum gas fees for identical transactions.
 
 The table provides a summary of four mainstream blockchains with its respective pricing (fees) model.
 
 | **Blockchain**      | **Fee model**                                            |
 | ------------------- | -------------------------------------------------------- |
-| Telos               | Free on native & minimal on tEVM, settable by governance |
+| Telos               | Free on Zero & minimal on tEVM, settable by governance |
 | Ethereum            | Very high ($30 for a token transfer)                     |
 | Binance Smart Chain | Dictated by Binance                                      |
 | Polygon             | ?                                                        |
@@ -134,7 +134,7 @@ At the time of writing this document, the fee model for Polygon could not be est
 
 ## Introduction
 
-Dive into the inner workings of Telos' Network governance documentation. Governance is a huge strength to the Telos network. Powered by the [Telos Decide](https://docs.telos.net/developers/telos\_contracts/telos-decide) engine, Telos' governance structure puts network operations in the hands of token holders.
+Dive into the inner workings of Telos' Network governance documentation. Governance is a huge strength to the Telos network. Powered by the [Telos Decide](https://docs.telos.net/zero/governance/decide/) engine, Telos' governance structure puts network operations in the hands of token holders.
 
 For a full list of Telos on-chain governance documentation, please visit [telos.net/governance](https://www.telos.net/governance).&#x20;
 
@@ -154,7 +154,7 @@ Below is an example of active ballots being voted on. TLOS holder can review eac
 
 ![](<../../../static/img/image (9).png>)
 
-The most important proposals are setting the blockchain fees. Currently, there are no fees on TLOS native transactions. The table provides a summary of four mainstream blockchains with its respective governance model.
+The most important proposals are setting the blockchain fees. Currently, there are no fees on TLOS Zero transactions. The table provides a summary of four mainstream blockchains with its respective governance model.
 
 | Blockchain          | Governance model                                                                                                                                             |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -165,7 +165,7 @@ The most important proposals are setting the blockchain fees. Currently, there a
 
 ## Conflict of interests
 
-As mentioned in the [decentralization](comparing-telos-to-other-evm-chains-2.md#decentralization)
+As mentioned in the [decentralization](#decentralization)
 
 | Blockchain          | Conflict of interest issues                                          |
 | ------------------- | -------------------------------------------------------------------- |
@@ -178,7 +178,7 @@ As mentioned in the [decentralization](comparing-telos-to-other-evm-chains-2.md#
 
 Blockchains have an issue [with state bloat](https://blocking.net/1417/blockchain-state-explosion-dilemma-hard-core-series/). If there is no way to reduce the cumulative state of all past transactions, the blockchain state grows out of the capabilities of commodity hardware. This in turn will increase the capital cost of running a node and leads to more centralization.
 
-Below is a summary of different blockchains' approach towards state bloat at the moment. Native Telos transactions use a resource rent model where different resources (CPU, network, storage) are priced separately and can be exchanged or rented.\
+Below is a summary of different blockchains' approach towards state bloat at the moment. Telos Zero transactions use a resource rent model where different resources (CPU, network, storage) are priced separately and can be exchanged or rented.\
 \
 Storage on Telos (often described as RAM) has a cost, which is set via AMM type system (using Bancor algorithm). The total amount of data stored on chain gives the size of the state. If a smart contract removes data from state, the RAM asset is returned to it's original owner (the account which paid for the storage being recovered), the state size shrinks and that account can then sell the RAM back to the system if it wishes. Via this mechanism, responsible usage of storage is maintained.
 
@@ -197,7 +197,7 @@ Frontrunning is a situation where miners or bots do a high-frequency trade again
 
 The net effect is that value is drawn from the genuine buyer. Frontrunning is accomplished either by bots scouring the mempool for transactions and issuing competing trades with much higher gas fees, or more insidiously, with the participation of miners on the Ethereum mainnet who perform the frontrunning with or paid by the bot operators. This may cause millions of dollars of losses for dapp users.
 
-Telos has binding rules for block producers, as described earlier. Any block producer that is caught manipulating transaction order can be blacklisted through on-chain governance. The fast block speed makes it less likely anyone can frontrun transactions in a public mempool. Telos native, and more importantly Telos EVM, have [fixed transaction costs](../about-ethereum-virtual-machine/gas-fees.md). Unlike other systems there is no opportunity for one account to pay a higher fee/gas price to get their transaction processed sooner than another user's transaction. As a result, frontrunning is functionally eliminated from Telos and Telos EVM transactions.
+Telos has binding rules for block producers, as described earlier. Any block producer that is caught manipulating transaction order can be blacklisted through on-chain governance. The fast block speed makes it less likely anyone can frontrun transactions in a public mempool. Telos Zero, and more importantly Telos EVM, have [fixed transaction costs](./gas-fees.md). Unlike other systems there is no opportunity for one account to pay a higher fee/gas price to get their transaction processed sooner than another user's transaction. As a result, frontrunning is functionally eliminated from Telos and Telos EVM transactions.
 
 | Blockchain          | Frontrunning situation                                                                                                                   |
 | ------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |

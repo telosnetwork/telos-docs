@@ -39,18 +39,17 @@ Currently, some of the more commonly used wallets are the following (_**please**
 
 The desktop version enables users to store their wallet directly on their computer.
 
-### Telos Native
+### Telos EVM
+
+* [Metamask](https://metamask.io)&#x20;
+* [Wallet connect](https://walletconnect.com/)
+
+### Telos Zero
 
 * [SQRL](https://sqrlwallet.io): wallet with support for staking and voting
   * [Telos account creation with SQRL](https://trybe.one/how-to-create-and-open-a-telos-account-using-sqrl/)
 * [Anchor](https://greymass.com/en/anchor): Uses the innovative ESR protocol, created by Telos BP Greymass
 
-
-
-### tEVM
-
-* [Metamask](https://metamask.io)&#x20;
-* Wallet connect
 
 ## **Mobile Wallets**
 
@@ -58,10 +57,8 @@ The desktop version enables users to store their wallet directly on their comput
 
 ## Command-Line **Wallet**
 
-* [CLEOS](../developers/tutorials/cleos.md): developed by [Block.One](https://block.one)
+* [CLEOS](../../zero/developer-environment/cleos.md): developed by [Block.One](https://block.one)
 
 Creating a Telos account typically requires a small deposit of another cryptocurrency, and should be finalized shortly after payment. From this point forward your account name can be used as your receiving address, and will be used to identify you on the blockchain.
 
-{% hint style="info" %}
-For a more in-depth discussion on Accounts and account Permissions, click [here](../developers/platform/protocol/accounts\_and\_permissions.md).
-{% endhint %}
+For a more in-depth discussion on Accounts and account Permissions, click [here](../../zero/about/accounts.md).

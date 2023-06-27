@@ -6,9 +6,7 @@ sidebar_position: 7
 
 # Roadmap
 
-{% hint style="info" %}
 For our latest announcements regarding our roadmap for 2022 and beyond, visit our site [here](https://www.telos.net/news/telos-roadmap-2022-beyond).
-{% endhint %}
 
 ### Milestone 1: Testnet trials&#x20;
 
@@ -69,6 +67,6 @@ First DeFi applications running on Telos EVM on mainnet
 | Task                                            | Description                                                                                                                                                    | Status |
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ |
 | ERC-20 bridge                                   | Easily moving tokens between Telos EVM mainnet and other EVM based  blockchains                                                                                | 🛑     |
-| Telos native and EVM smart contract integration | SDK for integrating between native Telos smart contracts and EVM based contracts                                                                               | 🛑     |
+| Telos Zero and EVM smart contract integration | SDK for integrating between Telos Zero smart contracts and EVM based contracts                                                                               | 🛑     |
 | Block producer modifications                    | Any modifications needed for block producers or system contracts to make Telos EVM more attractive than other EVM based chains as a DApp execution environment | 🛑     |
 

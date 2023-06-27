@@ -17,11 +17,11 @@ In this guide, we will stake TLOS for sTLOS(receipt token) on [Teloscan](http://
 - Staked sTLOS helps you put your staked TLOS to work in Defi and explore additional yield opportunities.
 - Helps lock TVL on EVM, enabling more attraction for investors and Dapps building on Telos. 
 
->   Disclaimer: Having sTLOS on the tEVM does not allow you to vote in governance processes (including block producers and worker proposals) - these are limited to the native Network. Stake on Native to participate in Defi. Stake on EVM for receipt token and more yield opportunities. It's simple to ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
+>   Disclaimer: Having sTLOS on the tEVM does not allow you to vote in governance processes (including block producers and worker proposals) - these are limited to the Zero Network. Stake on Zero to participate in Defi. Stake on EVM for receipt token and more yield opportunities. It's simple to ask yourself this question: why am I staking? What is my defi play(have a plan), as there is a 3-5 day locking period.
 
 ## Prerequisites
 
-You can easily create a new account on Metamask or utilize an existing tEVM account when staking to sTLOS. If you have never used tEVM before with your Telos native account, the following guide will assist you in creating a tEVM account using the [TLOS_Webwallet](https://wallet.telos.net/). 
+You can easily create a new account on Metamask or utilize an existing tEVM account when staking to sTLOS. If you have never used tEVM before with your Telos Zero account, the following guide will assist you in creating a tEVM account using the [TLOS_Webwallet](https://wallet.telos.net/). 
 
 To stake TLOS on EVM following pre-requisites are required:
 

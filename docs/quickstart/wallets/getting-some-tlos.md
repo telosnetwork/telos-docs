@@ -17,13 +17,11 @@ To acquire TLOS you can earn them or buy. In [this article](https://help.telos.n
 
 For more information regarding how TLOS tokens are used and their function on Telos blockchain, click [here](https://help.telos.net/en\_US/getting-started/what-is-the-telos-tlos-cryptocurrency-used-for).
 
-Follow our [CEX, DEX, and Telos Native guides](https://help.telos.net/en\_US/evm) to send TLOS to your new Telos Native and EVM account.
+Follow our [CEX, DEX, and Telos Zero guides](https://help.telos.net/en\_US/evm) to send TLOS to your new Telos Zero and EVM account.
 
 ## TLOS for Mainnet
 
-*   **Exchanges**:\
-
-
+*   **Exchanges**
     * Centralized exchanges such as [Probit](https://www.probit.com), [CoinTiger](https://www.cointiger.com) and others
     * Swap from many exchanges via NewDex, [learn more here](https://www.telos.net/telos-news/tlos-now-available-to-purchase-using-major-exchanges-with-the-help-of-defi)
     * [Crypto Locally](https://cryptolocally.com/en/tlos/buy) - find someone in your country to purchase TLOS from.
@@ -62,5 +60,5 @@ This article describes the two primary methods used to bridge TLOS. You will nee
 {% hint style="info" %}
 For a guided tutorial on how to bridge TLOS between different chains, click [here](getting-some-tlos.md#undefined).
 
-Feel free to visit the "[Deposit, Withdraw and Send TLOS](../evm/getting-started/deposit-withdraw-and-send-tlos.md)" section for more details.
+Feel free to visit the "[Deposit, Withdraw and Send TLOS](./deposit-withdraw-and-send-tlos.md)" section for more details.
 {% endhint %}

@@ -81,7 +81,11 @@ In this case we used 0.8.7 in compiler and declared a pragma ^0.8.0
 
 ![Grab_contract_address](/img/grab_contract_address.png)
 
-### Step 6. Use the Sourcify Plug into Verify Contract
+### Step 6. Get the Sourcify Plugin
+
+![Get_sourcify](/img/getsourcify.jpg)
+
+### Step 7. Use the Sourcify Plugin to Verify the Contract
 
 **Note:**
 
