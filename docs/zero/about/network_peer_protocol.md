@@ -7,7 +7,7 @@ sidebar_position: 5
 
 ## 1. Overview
 
-Nodes on an active EOSIO blockchain must be able to communicate with each other for relaying transactions, pushing blocks, and syncing state between peers. The peer to peer (p2p) protocol, part of the `nodeos` service that runs on every node, serves this purpose. The ability to sync state is crucial for each block to eventually reach finality within the global state of the blockchain and allow each node to advance the last irreversible block (LIB). In this regard, the fundamental goal of the p2p protocol is to sync blocks and propagate transactions between nodes to reach consensus and advance the blockchain state.
+Nodes on an active Antelope blockchain must be able to communicate with each other for relaying transactions, pushing blocks, and syncing state between peers. The peer to peer (p2p) protocol, part of the `nodeos` service that runs on every node, serves this purpose. The ability to sync state is crucial for each block to eventually reach finality within the global state of the blockchain and allow each node to advance the last irreversible block (LIB). In this regard, the fundamental goal of the p2p protocol is to sync blocks and propagate transactions between nodes to reach consensus and advance the blockchain state.
 
 ### 1.1. Goals
 
@@ -18,7 +18,7 @@ In order to add multiple transactions into a block and fit them within the speci
 * Allow more efficient broadcasting and syncing of node states.
 * Minimize payload footprint with data compression and binary encoding.
 
-Most of these strategies are fully or partially implemented in the EOSIO software. Data compression, which is optional, is implemented at the transaction level. Binary encoding is implemented by the net serializer when sending object instances and protocol messages over the network.
+Most of these strategies are fully or partially implemented in the Antelope software. Data compression, which is optional, is implemented at the transaction level. Binary encoding is implemented by the net serializer when sending object instances and protocol messages over the network.
 
 ## 2. Architecture
 
@@ -55,7 +55,7 @@ All irreversible blocks constructed in a node are expected to match those from o
 
 ### 2.2. Chain Controller
 
-The Chain Controller manages the basic operations on blocks and transactions that change the local chain state, such as validating and executing transactions, pushing blocks, etc. The Chain Controller receives commands from the Net Plugin and dispatches the proper operation on a block or a transaction based on the network message received by the Net Plugin. The network messages are exchanged continuously between the EOSIO nodes as they communicate with each other to sync the state of blocks and transactions.
+The Chain Controller manages the basic operations on blocks and transactions that change the local chain state, such as validating and executing transactions, pushing blocks, etc. The Chain Controller receives commands from the Net Plugin and dispatches the proper operation on a block or a transaction based on the network message received by the Net Plugin. The network messages are exchanged continuously between the Antelope nodes as they communicate with each other to sync the state of blocks and transactions.
 
 #### 2.2.1. Fork Database
 
@@ -73,7 +73,7 @@ In the diagram above, the branch starting at block 52b gets pruned (blocks 52b, 
 
 ### 2.3. Net Plugin
 
-The Net Plugin defines the actual peer to peer communication messages between the EOSIO nodes. The main goal of the Net Plugin is to sync valid blocks upon request and to forward valid transactions invariably. To that end, the Net Plugin delegates functionality to the following components:
+The Net Plugin defines the actual peer to peer communication messages between the Antelope nodes. The main goal of the Net Plugin is to sync valid blocks upon request and to forward valid transactions invariably. To that end, the Net Plugin delegates functionality to the following components:
 
 * **Sync Manager**: maintains the block syncing state of the node with respect to its peers.
 * **Dispatch Manager**: maintains the list of blocks and transactions sent by the node.
@@ -119,7 +119,7 @@ The transaction state identifies a loose transaction and the peer it came from. 
 | Transaction State Fields | Description                                                                  |
 | ------------------------ | ---------------------------------------------------------------------------- |
 | `id`                     | 256-bit hash of the transaction instance, used as transaction identifier.    |
-| `expires`                | expiration time since EOSIO block timestamp epoch (January 1, 2000).         |
+| `expires`                | expiration time since Antelope block timestamp epoch (January 1, 2000).      |
 | `block_num`              | current head block number. Transaction drops when LIB catches up to it.      |
 | `connection_id`          | 32-bit integer that identifies the connected peer the transaction came from. |
 
@@ -178,7 +178,7 @@ The operation mode for each node is stored in a sync manager context within the 
 
 ### 3.1. Block ID
 
-The EOSIO software checks whether two blocks match or hold the same content by comparing their block IDs. A block ID is a function that depends on the contents of the block header and the block number. Checking whether two blocks are equal is crucial for syncing a node’s local chain with that of its peers. To generate the block ID from the block contents, the block header is serialized and a SHA-256 digest is created. The most significant 32 bits of the hash are retained while the least significant 32 bits are assigned the block number. Note that the block header includes the root hash of both the transaction merkle tree and the action merkle tree. Therefore, the block ID depends on all transactions included in the block as well as all actions included in each transaction.
+The Antelope software checks whether two blocks match or hold the same content by comparing their block IDs. A block ID is a function that depends on the contents of the block header and the block number. Checking whether two blocks are equal is crucial for syncing a node’s local chain with that of its peers. To generate the block ID from the block contents, the block header is serialized and a SHA-256 digest is created. The most significant 32 bits of the hash are retained while the least significant 32 bits are assigned the block number. Note that the block header includes the root hash of both the transaction merkle tree and the action merkle tree. Therefore, the block ID depends on all transactions included in the block as well as all actions included in each transaction.
 
 ### 3.2. In-Sync Mode
 
@@ -231,7 +231,7 @@ Eventually, both the node and its peer receive new fresh blocks from other peers
 * The node sends a catch up request message to the peer with its head block info.
 * The node sends a catch up notice message to inform the peer it needs to sync.
 
-In the first case, the node switches the mode from in-sync to head catchup mode. In the second case, the peer switches to head catchup mode after receiving the notice message from the node. In practice, in-sync mode is short-lived. In a busy EOSIO blockchain, nodes spend most of their time in catchup mode validating transactions and syncing their chains after catchup messages are received.
+In the first case, the node switches the mode from in-sync to head catchup mode. In the second case, the peer switches to head catchup mode after receiving the notice message from the node. In practice, in-sync mode is short-lived. In a busy Antelope blockchain, nodes spend most of their time in catchup mode validating transactions and syncing their chains after catchup messages are received.
 
 ## 4. Protocol Algorithm
 

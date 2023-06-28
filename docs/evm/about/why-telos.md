@@ -63,7 +63,7 @@ Data about Polygon block producers and auction prices to become a block producer
 
 # Block production and validation, Fees, and Consensus
 
-Since Telos is based on EOSIO's DPoS consensus mechanism, there are only 21 active block producers at a time. An additional 21 block producers serve as standby that are continually tested for readiness by regularly rotating one standby block producer into active production.
+Since Telos is based on Antelope's DPoS consensus mechanism, there are only 21 active block producers at a time. An additional 21 block producers serve as standby that are continually tested for readiness by regularly rotating one standby block producer into active production.
 
 Any Telos block producers that misses 15% of the blocks in any schedule is removed from its active role, and the 22nd ranked block producer is elevated from standby to active. Network resilience is maintained throughout this process. [There are more than 50 block producers](https://telos.bloks.io). The reserve block producers are [cycled as described in the Telos whitepaper](https://telos.net/wp-content/uploads/2021/02/Telos-Whitepaper-master-20180717.pdf). The block producers are ranked and accepted by TLOS holder voting.
 

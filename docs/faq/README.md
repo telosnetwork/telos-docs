@@ -21,7 +21,7 @@ Feel free to visit [Telos Knowledge base](https://help.telos.net/) for additiona
 
 **What is the TEVM ?**
 
-Telos EVM is a smart contract hosted on the Telos Zero network(written in EOSIO C++ with half second block times). Thus there is no mem pool or front running due to the speed of execution and fixed gas rates. The EVM on Telos is compatible with the existing frameworks on Ethereum such as Hardhat, Truffle, and Brownie. Telos RPC specification is identitcal to Ethereum's making it easy to port over existing DApps or build from scratch with a wide range of developer tools. 
+Telos EVM is a smart contract hosted on the Telos Zero network(written in Leap C++ with half second block times). Thus there is no mem pool or front running due to the speed of execution and fixed gas rates. The EVM on Telos is compatible with the existing frameworks on Ethereum such as Hardhat, Truffle, and Brownie. Telos RPC specification is identitcal to Ethereum's making it easy to port over existing DApps or build from scratch with a wide range of developer tools. 
 
 **ECOSYSTEM**
 The __Telos EVM__ launched in November 2021, since then it has 40+ Dapps.

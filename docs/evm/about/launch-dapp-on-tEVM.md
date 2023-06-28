@@ -18,7 +18,7 @@ This document aims to help developers launch their existing dApps on Telos. In t
 
 ## Platform Basics
 
-Telos EVM is an implementation of the Ethereum EVM. It is written as a smart contract in EOSIO(C++) and runs on top of the Telos Zero network. DApps built on the Telos EVM will run similarly to how they run on Ethereum, but with several key differences; namely, tEVM will execute transactions orders of magnitude faster and cheaper than on Ethereum. 
+Telos EVM is an implementation of the Ethereum EVM. It is written as a smart contract in Leap(C++) and runs on top of the Telos Zero network. DApps built on the Telos EVM will run similarly to how they run on Ethereum, but with several key differences; namely, tEVM will execute transactions orders of magnitude faster and cheaper than on Ethereum. 
 
 ## Accessing Telos 
 

@@ -116,7 +116,7 @@ class [[eosio::contract]] hello : public contract {
 The ABI Generator in eosio.cdt supports several different style of attributes, see the ABI usage guide [here](https://github.com/telosnetwork/docs/tree/6ab1055a149d12ea9ad55d46f0ca92a2ac1b5e98/developers/platform/getting-started/03\_smart-contract-development/03\_understanding-ABI-files.md) You can compile your code to web assembly (.wasm) as follows:
 
 ```
-eosio-cpp hello.cpp -o hello.wasm
+cdt-cpp hello.cpp -o hello.wasm
 ```
 
 When a contract is deployed, it is deployed to an account, and the account becomes the interface for the contract. As mentioned earlier these tutorials use the same public key for all of the accounts to keep things simple.
@@ -179,7 +179,7 @@ void hi( name user ) {
 Recompile the contract
 
 ```
-eosio-cpp -abigen -o hello.wasm hello.cpp
+cdt-cpp -abigen -o hello.wasm hello.cpp
 ```
 
 And then update it

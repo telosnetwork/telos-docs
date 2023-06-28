@@ -38,7 +38,7 @@ cleos create account eosio eosio.token EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHu
 ## Step 3: Compile the Contract
 
 ```
-eosio-cpp -I include -o eosio.token.wasm src/eosio.token.cpp --abigen
+cdt-cpp -I include -o eosio.token.wasm src/eosio.token.cpp --abigen
 ```
 
 ## Step 4: Deploy the Token Contract

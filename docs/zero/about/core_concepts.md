@@ -15,7 +15,7 @@ For more information on how to create an account, click [here](../../quickstart/
 
 **Wallets**
 
-Wallets are clients that store keys that may or may not be associated with the permissions of one or more accounts. Ideally, a wallet has a locked (encrypted) and unlocked (decrypted) state that is protected by a high entropy password. The EOSIO/eos repository comes bundled with a CLI client called `cleos` that interfaces with a lite-client called `keosd` and together, they demonstrate this pattern.
+Wallets are clients that store keys that may or may not be associated with the permissions of one or more accounts. Ideally, a wallet has a locked (encrypted) and unlocked (decrypted) state that is protected by a high entropy password. The Antelope/Leap repository comes bundled with a CLI client called `cleos` that interfaces with a lite-client called `keosd` and together, they demonstrate this pattern.
 
 For more information on how to link a wallet to your account, click [here](../../quickstart/wallets/wallets.md).
 
@@ -33,7 +33,7 @@ A smart contract is a piece of code that can execute on a blockchain and keep th
 
 ### Delegated Proof of Stake (DPOS)
 
-The Telos platform implements a proven decentralized consensus algorithm capable of meeting the performance requirements of applications on the blockchain called the _Delegated Proof of Stake_ (DPOS). Under this algorithm, if you hold tokens on a EOSIO-based blockchain, you can select block producers through a continuous approval voting system. Anyone can choose to participate in the block production and will be given an opportunity to produce blocks, provided they can persuade token holders to vote for them.
+The Telos platform implements a proven decentralized consensus algorithm capable of meeting the performance requirements of applications on the blockchain called the _Delegated Proof of Stake_ (DPOS). Under this algorithm, if you hold tokens on a Antelope-based blockchain, you can select block producers through a continuous approval voting system. Anyone can choose to participate in the block production and will be given an opportunity to produce blocks, provided they can persuade token holders to vote for them.
 
 For more information about DPOS BFT, see [Consensus](../../overview/consensus.md) Protocol.
 
@@ -53,6 +53,6 @@ More details about CPU as a system resource can be found [here](https://develope
 
 ### Network (NET)
 
-Besides CPU and RAM, NET is also a very important resource for the Telos blockchain network. NET is the network bandwidth, measured in bytes, of transactions and is referred to as `net bandwidth` on the cleos `get account` command. NET is a also a transient system resource and falls under the staking mechanism of EOSIO.
+Besides CPU and RAM, NET is also a very important resource for the Telos blockchain network. NET is the network bandwidth, measured in bytes, of transactions and is referred to as `net bandwidth` on the cleos `get account` command. NET is a also a transient system resource and falls under the staking mechanism of Antelope.
 
 More details about NET as a system resource can be found [here](https://developers.eos.io/manuals/eosio.contracts/latest/index/#net).

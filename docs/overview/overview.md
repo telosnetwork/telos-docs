@@ -35,7 +35,7 @@ The Telos Network is a real-world-ready blockchain. Through years of challenges,
 
 #### Base Layer
 
-[Antelope](https://antelope.io/) is the open-source software platform that Telos is built upon. Antelope is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has established itself as a high-powered open source [Antelope](https://antelope.io/) chain and was the first to build an EVM on top of the EOSIO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently, there are compilers for C, C++, RUST, and Typescript, catering to the needs of a diverse range of developers building smart contracts on the Telos Zero layers.
+[Antelope](https://antelope.io/) is the open-source software platform that Telos is built upon. Antelope is the backbone of Telos as it provides functionalities such as consensus, accounts, authentication, state storage, P2P communication, and the very powerful WASM runtime. Telos has established itself as a high-powered open source [Antelope](https://antelope.io/) chain and was the first to build an EVM on top of the Antelope IO base layer. WebAssembly provides a universal compile target that enables applications to be developed in any language. Currently, there are compilers for C, C++, RUST, and Typescript, catering to the needs of a diverse range of developers building smart contracts on the Telos Zero layers.
 
 #### TLOS Coin
 

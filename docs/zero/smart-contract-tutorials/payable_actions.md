@@ -302,7 +302,7 @@ First, create an account and deploy to it:
 
 ```
 cleos create account eosio hodl YOUR_PUBLIC_KEY
-eosio-cpp hodl.cpp -o hodl.wasm
+cdt-cpp hodl.cpp -o hodl.wasm
 cleos set contract hodl ./ -p hodl@active
 ```
 

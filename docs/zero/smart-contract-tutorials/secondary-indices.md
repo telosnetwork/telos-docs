@@ -96,7 +96,7 @@ void upsert(name user, std::string first_name, std::string last_name, uint64_t a
 Compile
 
 ```
-eosio-cpp --abigen addressbook.cpp -o addressbook.wasm
+cdt-cpp --abigen addressbook.cpp -o addressbook.wasm
 ```
 
 Deploy

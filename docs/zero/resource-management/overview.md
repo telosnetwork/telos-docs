@@ -12,7 +12,7 @@ __The Network Resources are an essential factor in using the feeless services pr
 
 **NET** aka Network is used for executing transaction and recoridng the information on TELOS blockhain. 
 ## RAM
-In TLEOS, **RAM** is different from the RAM used on your computer. RAM is a storage for data related to account information such as keys, balance, contract status etc.
+In Telos, **RAM** is different from the RAM used on your computer. RAM is a storage for data related to account information such as keys, balance, contract status etc.
 
 
 

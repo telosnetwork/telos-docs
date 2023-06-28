@@ -7,32 +7,32 @@ sidebar_position: 3
 
 ## Local development environment
 
-* [Getting Started](../developer-environment/prerequisites.md): Install the EOSIO platform in your local development environment.
+* [Getting Started](../developer-environment/prerequisites.md): Install the Antelope platform in your local development environment.
 
 ## Toolchain
 
 The Telos platform is made up of the following components and toolchain:
 
-1. `nodeos` (node + EOSIO = nodeos):  the core EOSIO node daemon that can be configured with plugins to run a node. Example uses are block production, dedicated API endpoints, and local development.
+1. `nodeos` (node + EOSIO = nodeos):  the core Antelope node daemon that can be configured with plugins to run a node. Example uses are block production, dedicated API endpoints, and local development.
 2. `cleos` (CLI + EOSIO = cleos): the command line interface to interact with the blockchain and to manage wallets.
-3. `keosd` (key + EOSIO = keosd): the component that securely stores EOSIO keys in wallets.
-4. `EOSIO.CDT`: toolchain for WebAssembly (Wasm) and a set of tools to facilitate smart contract writing for the EOSIO platform.
+3. `keosd` (key + EOSIO = keosd): the component that securely stores Antelope keys in wallets.
+4. `EOSIO.CDT`: toolchain for WebAssembly (Wasm) and a set of tools to facilitate smart contract writing for the Antelope platform.
 
 The basic relationship between these components is illustrated in the following diagram:
 
-![EOSIO Development Lifecycle](<../../../static/img/EOSIO-Overview-dev (1).svg>)
+![Antelope Development Lifecycle](<../../../static/img/EOSIO-Overview-dev (1).svg>)
 
-\[\[info | Note]] | EOSIO also provides a frontend library for javascript development called EOSJS along with Swift and Java SDKs for native mobile applications development.
+\[\[info | Note]] | Leap also provides a frontend library for javascript development called EOSJS along with Swift and Java SDKs for native mobile applications development.
 
 ## Nodeos
 
-Nodeos is the core EOSIO node daemon. Nodeos handles the blockchain data persistence layer, peer-to-peer networking, and contract code scheduling. For development environments, nodeos enables you to set up a single node blockchain network. Nodeos offers a wide range of features through plugins which can be enabled or disabled at start time via the command line parameters or configuration files.
+Nodeos is the core Antelope node daemon. Nodeos handles the blockchain data persistence layer, peer-to-peer networking, and contract code scheduling. For development environments, nodeos enables you to set up a single node blockchain network. Nodeos offers a wide range of features through plugins which can be enabled or disabled at start time via the command line parameters or configuration files.
 
 You can read detailed documentation about `nodeos` [here](https://developers.eos.io/manuals/eos/latest/nodeos/index).
 
 ## Cleos
 
-`cleos` is a command line tool that interfaces with the REST APIs exposed by `nodeos`. You can also use `cleos` to deploy and test EOSIO smart contracts.
+`cleos` is a command line tool that interfaces with the REST APIs exposed by `nodeos`. You can also use `cleos` to deploy and test Antelope smart contracts.
 
 You can read detailed documentation about `cleos` [here](https://developers.eos.io/manuals/eos/latest/cleos/index).
 
@@ -46,7 +46,7 @@ You can read detailed documentation about `keosd` [here](https://developers.eos.
 
 ## EOSIO.CDT
 
-EOSIO.CDT is a toolchain for WebAssembly (Wasm) and a set of tools to facilitate contract writing for the EOSIO platform. In addition to being a general-purpose WebAssembly toolchain, EOSIO-specific optimizations are available to support building EOSIO smart contracts. This new toolchain is built around Clang 7, which means that EOSIO.CDT has most of the current optimizations and analyses from LLVM.
+EOSIO.CDT is a toolchain for WebAssembly (Wasm) and a set of tools to facilitate contract writing for the Antelope platform. In addition to being a general-purpose WebAssembly toolchain, EOSIO-specific optimizations are available to support building Antelope smart contracts. This new toolchain is built around Clang 7, which means that EOSIO.CDT has most of the current optimizations and analyses from LLVM.
 
 ## EOSJS
 

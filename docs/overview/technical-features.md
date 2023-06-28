@@ -6,7 +6,7 @@ sidebar_positon: 4
 
 ## WebAssembly C++ Compilation
 
-Telos uses C++ as the smart contract programming language. If you are a C++ developer, you do not need to learn a new programming language to understand Smart Contract APIs and how Telos supports smart contract development through C++ classes and structures. With your existing C++ programming capabilities, you can onboard Telos development faster and be able to program Telos smart contracts using specific EOSIO canonical C++ code constructs and Smart Contract APIs in no time.
+Telos uses C++ as the smart contract programming language. If you are a C++ developer, you do not need to learn a new programming language to understand Smart Contract APIs and how Telos supports smart contract development through C++ classes and structures. With your existing C++ programming capabilities, you can onboard Telos development faster and be able to program Telos smart contracts using specific Leap canonical C++ code constructs and Smart Contract APIs in no time.
 
 On top of the Telos core layer, a WebAssembly (Wasm) virtual machine, `EOS VM`, executes smart contract code, and it is designed from the ground up for the high demands of blockchain applications which require far more from a WebAssembly engine than those designed for web browsers or standards development.&#x20;
 
@@ -18,7 +18,7 @@ Telos is designed with high transactions throughput in mind and each new version
 
 The consensus mechanism of Delegated Proof of Stake (DPoS) achieves high transaction throughputs because DPOS does not need to wait for all the nodes to complete a transaction to achieve finality. This behavior results in faster confirmations and lower latency.
 
-The `EOS-VM` mentioned earlier, and all its blockchain-dedicated features and improvements add significant contribution to the overall performance of the Telos blockchain network and any EOSIO-based blockchain.
+The `EOS-VM` mentioned earlier, and all its blockchain-dedicated features and improvements add significant contribution to the overall performance of the Telos blockchain network and any Antelope-based blockchain.
 
 ## Programmable Economics and Governance
 
@@ -32,7 +32,7 @@ RAM is a persistent system resource on Telos and does not fall in the scope of t
 
 When you stake tokens for CPU and NET, you gain access to system resources proportional to the total amount of tokens staked by all other users for the same resource at the same time. This means you can perform transactions at no cost but in the limitations of the staked tokens. The staked tokens guarantee the proportional amount of resources regardless of any variations in the free market.
 
-You can also allocate the system resources to Telos accounts in a programmatic manner by customizing the resource allocation model in the system smart contract. This flexibility is provided by the programmable economics of the EOSIO platform.
+You can also allocate the system resources to Telos accounts in a programmatic manner by customizing the resource allocation model in the system smart contract. This flexibility is provided by the programmable economics of the Antelope platform.
 
 ## Business Model Flexibility
 

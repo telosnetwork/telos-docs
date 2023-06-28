@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Data Persistence
 
-To learn about data persistence, write a simple smart contract that functions as an address book. While this use case isn't very practical as a production smart contract for various reasons, it's a good contract to start with to learn how data persistence works on EOSIO without being distracted by business logic that does not pertain to eosio's `multi_index` functionality.
+To learn about data persistence, write a simple smart contract that functions as an address book. While this use case isn't very practical as a production smart contract for various reasons, it's a good contract to start with to learn how data persistence works on Antelope without being distracted by business logic that does not pertain to Antelope's `multi_index` functionality.
 
 ## Step 1: Create a new directory
 
@@ -531,14 +531,14 @@ icon:
 Execute the following command from your terminal.
 
 ```
-eosio-cpp addressbook.cpp -o addressbook.wasm
+cdt-cpp addressbook.cpp -o addressbook.wasm
 ```
 
 If you created a Ricardian contract and Ricardian clauses, the definitions will appear in the .abi file. An example for the addressbook.cpp, built including the contract and clause definitions described above is shown below.
 
 ```javascript
 {
-    "____comment": "This file was generated with eosio-abigen. DO NOT EDIT ",
+    "____comment": "This file was generated with cdt-abigen. DO NOT EDIT ",
     "version": "eosio::abi/1.1",
     "types": [],
     "structs": [

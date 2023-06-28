@@ -93,7 +93,7 @@ cleos create account eosio abcounter YOUR_PUBLIC_KEY
 ## Step 3: Compile and Deploy
 
 ```
-eosio-cpp abcounter.cpp -o abcounter.wasm
+cdt-cpp abcounter.cpp -o abcounter.wasm
 ```
 
 Finally, deploy the `abcounter` contract.
@@ -252,7 +252,7 @@ private:
 Recompile the `addressbook.cpp` contract, we don't need to regenerate the ABI, because none of our changes have affected the ABI. Note here we include the abcounter contract folder with the -I option.
 
 ```
-eosio-cpp -o addressbook.wasm addressbook.cpp -I ../abcounter/
+cdt-cpp -o addressbook.wasm addressbook.cpp -I ../abcounter/
 ```
 
 Redeploy the contract

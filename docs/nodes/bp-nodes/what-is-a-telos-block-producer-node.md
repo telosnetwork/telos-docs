@@ -16,7 +16,7 @@ Before getting started as a block producer, you need to know a few things:
 
 1. A block producer needs to know it's role & fulfil the requirements.
 2. Having more block producers are healthier and better for the Telos ecosystem, especially block producers that are committed to transparency and being in a state of giving continuous contribution.
-3. Block producers are a core component of Telos network built on EOSIO protocol.
+3. Block producers are a core component of Telos network built on Antelope protocol.
 4. Below is the guide to get a node up and running as a block producer on Telos.
 
 ## What is the role of a Telos block producer
