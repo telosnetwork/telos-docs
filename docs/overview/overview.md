@@ -1,10 +1,10 @@
 ---
-id: Overview
 slug: /
 sidebar_positon: 1
 ---
 
 # Telos Blockchain Network
+
 
 
 ## Introduction

@@ -26,7 +26,7 @@ const sidebars = {
       collapsible: true,
       collapsed: false,
       items: [
-        'overview/Overview',
+        'overview/overview',
         'overview/wallet-introduction',
         'overview/consensus',
         'overview/technical-features',
