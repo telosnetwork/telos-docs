@@ -10,7 +10,7 @@ This tutorial will cover how to use the [Remix](https://remix-project.org/) Sour
 
 **Note: It is important to verify smart contracts for a wide number of reasons in an open network environement like Telos EVM, ultimately to build transparency, trust, and security within your developer and user community. It is advised to verify any smart contracts that are deployed onto the Telos network**
 
-If you run into issues don't hesitate to reach out in our [community channels](docs/overview/getting-started/resources.md) for help or questions.
+If you run into issues don't hesitate to reach out in our [community channels](docs/overview/resources.md) for help or questions.
 
 #### High level overview of steps we will cover
 

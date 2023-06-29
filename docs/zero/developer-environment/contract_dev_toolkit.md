@@ -182,4 +182,4 @@ sudo apt remove cdt
 
 ## License
 
-[MIT](./LICENSE)
+[MIT](https://github.com/AntelopeIO/cdt/blob/main/LICENSE)

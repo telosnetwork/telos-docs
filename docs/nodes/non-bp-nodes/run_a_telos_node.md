@@ -1,7 +1,6 @@
 ---
 title: 'Run a Non Block Producing Node'
 sidebar_position: 1
-id: "Run-A-Node"
 ---
 
 # Run a Node

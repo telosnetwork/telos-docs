@@ -102,4 +102,4 @@ REX is the resource exchange powered by the Telos Zero network. Users can stake 
 
 ### Where do I get started?
 
-Check out the [Quick Start](/quickstart) guide or come ask questions in our [Telegram channels](/overview/getting-started/resources#community-channels)
+Check out the [Quick Start](/quickstart) guide or come ask questions in our [Telegram channels](/overview/resources#community-channels)

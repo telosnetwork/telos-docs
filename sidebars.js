@@ -30,6 +30,11 @@ const sidebars = {
         'overview/wallet-introduction',
         'overview/consensus',
         'overview/technical-features',
+        {
+          type: 'link',
+          label: 'Roadmap',
+          href: 'https://hellotelos.medium.com/tcd-telos-2023-blockchain-roadmap-unveiled-7334d2661e9e',
+        },
         'overview/resources',
       ],
     },
@@ -294,8 +299,8 @@ const sidebars = {
     'faq/faqs',
     {
       type: 'link',
-      label: 'Other Questions', // The link label
-      href: 'https://help.telos.net/', // The external URL
+      label: 'Other Questions',
+      href: 'https://help.telos.net/',
     },
   ],
 

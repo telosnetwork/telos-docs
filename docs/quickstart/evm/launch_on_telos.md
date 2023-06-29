@@ -12,8 +12,6 @@ sidebar_positon: 3
 
 The Telos testnet tokens can be acquired in the [Testnet Faucet](https://app.telos.net/testnet/developers).
 
-[Testnet Walkthrough](testnet_tutorial.md)
-
 #### **Telos Testnet Settings:**
 
 - **Network Name**: Telos Testnet

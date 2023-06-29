@@ -106,7 +106,7 @@ cleos version client
 
 output: ```- v2.1.0```
 
-__Now its time to build on Telos using the Antelope platform head over to [get started with Telos Development Wallet creation!](/zero/eosio_toolkit/cleos)__
+__Now its time to build on Telos using the Antelope platform head over to [get started with Telos Development Wallet creation!](/zero/developer-environment/cleos)__
 
 ------------                                            ------------
 
