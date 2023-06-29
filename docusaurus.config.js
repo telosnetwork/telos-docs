@@ -1,8 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 
@@ -65,7 +63,7 @@ const config = {
         title: '',
         logo: {
           alt: 'Telos Logo',
-          src: 'img/acorn.png',
+          src: 'img/acorn-light.png',
           srcDark: 'img/acorn-dark.png',
         },
         items: [
@@ -167,12 +165,9 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Telos Foundation, Inc.`,
       },
-      prism: {
-        theme: darkCodeTheme,
-      },
       colorMode: {
         defaultMode: 'dark',
-        disableSwitch: true,
+        disableSwitch: false,
         respectPrefersColorScheme: false,
       },
       algolia: {

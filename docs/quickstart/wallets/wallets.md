@@ -17,7 +17,7 @@ The owner account has the exclusive function to change its own key, and always t
 
 More specific actions and permissions can be set-up, like multi-signature permissions attached to specific actions (as defined by the smart contract).
 
-For a guided tutorial on how to create a Telos account, click [here](../../zero/about/accounts.md) or visit our site for more information [here](https://www.telos.net/).
+For a guided tutorial on how to create a Telos account click [here](../../zero/about/accounts.md#creating-an-account) or visit our site for more information [here](https://www.telos.net/).
 
 For more information on how to change a Telos account's active and owner keys on Anchor, click [here](https://help.telos.net/en\_US/security/how-to-change-telos-keys-using-anchor).
 
@@ -55,7 +55,7 @@ The desktop version enables users to store their wallet directly on their comput
 
 * [Anchor](https://greymass.com/en/anchor): Uses the innovative ESR protocol, created by Telos BP Greymass
 
-## Command-Line **Wallet**
+## Command-Line Wallet
 
 * [CLEOS](../../zero/developer-environment/cleos.md): developed by [Block.One](https://block.one)
 

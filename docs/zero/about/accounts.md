@@ -32,15 +32,35 @@ By default, when Alice's account was generated it initialized 2 native permissio
 Designed for security and consensus amongst a group of stakeholders in a business or for an individual ramping up security. It is an account that has enabled permissions to multiple entities with keys within that account and requires most of the keys to sign the transaction to execute.
 
 ## Creating an Account 
-There are various ways to create an Antelope account. Some methods are relatively easy whereas other methods can be more secure and complicated. The 2 methods covered in this section are the automated Telos Account generator on the browser and the Cleos generate account command for local dev purposes. 
+There are various ways to create an Antelope account. Some methods are relatively easy whereas other methods can be more secure and complicated. The 3 methods covered in this section are the automated Telos Account generator on the browser, premium account name bidding, and the Cleos generate account command for local dev purposes.
 
 
 
-## Telos Account Generator
+### Telos Account Generator
 The easiest way to create an account via [Telos Account Generator](https://www.telos.net/signup)
 - Enter a preferred account name and the Telos super account will automatically generate an account with key pairs linked to the new account. 
 
-## CLEOS Account Command  
+### Premium Account Name Bidding
+Premium names will be available in the form of “suffixes”. This is essentially the same idea as the Top Level Domain (TLD) used for website addresses:
+
+- com
+- net
+- io
+- tlos
+- mydapp
+  
+The owner of these premium names would then be able to generate new accounts that can be shorter (but not longer) than the 12 character limit, and may include a “dot”. The owner of "mydapp" could create "user1.mydapp", "iam.mydapp", whatever they wish. These accounts are unable to be deleted and may be given away at the discretion (or for the correct price) of the owner of the premium name.
+
+Things to know about the bidding process:
+
+- You can bid any amount for a new name that’s not been bid on
+- New bids on the same name must be at least a 10% higher than the previous bid
+- To win a name bid, you must hold the highest bid of all names and hold it for an uncontested 24 hours. So only one account name per 24 hour period can be won
+- Anyone who is outbid will be refunded
+  
+Bid on premium account name [here](https://eosauthority.com/bidname?network=telos) via EOS Authority.
+
+### CLEOS Account Command  
 Generate a new account using the Antelope.io for creator account and provide a name for the account the Owner Key after all other parameters are met. 
 
 
