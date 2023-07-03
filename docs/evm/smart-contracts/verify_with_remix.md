@@ -1,20 +1,24 @@
 ---
-sidebar_position: 5
+sidebar_position: 2
 ---
 
-# Verify Smart Contracts Manually using Remix IDE
+# Deploy and Verify Smart Contracts Using Remix IDE
 
 Remix Online IDE is a powerful toolset for developing, deploying, debugging, and testing Ethereum and EVM-compatible smart contracts.
 
 This tutorial will cover how to use the [Remix](https://remix-project.org/) Sourcify plugin to verify deployed smart contracts on the [Telos Explorer](https://www.teloscan.io/) on mainnet.
 
-**Note: It is important to verify smart contracts for a wide number of reasons in an open network environement like Telos EVM, ultimately to build transparency, trust, and security within your developer and user community. It is advised to verify any smart contracts that are deployed onto the Telos network**
+:::info
+It is important to verify smart contracts for a wide number of reasons in an open network environement like Telos EVM, ultimately to build transparency, trust, and security within your developer and user community. It is advised to verify any smart contracts that are deployed onto the Telos network
+:::
 
 If you run into issues don't hesitate to reach out in our [community channels](docs/overview/resources.md) for help or questions.
 
-#### High level overview of steps we will cover
+## High Level Overview
 
-**With Remix verification method it is required to compile the contracts in order to use the sourcify plug in and meta data must be exact same as deployment time**
+:::caution
+With Remix verification, it is required to compile the contracts in order to use the sourcify plug in. The meta data must also be exact same as deployment time
+:::
 
 - Set up Smart Contraact file in the contracts folder
 - Compile the smart contract to byte code to be consumed by Telos EVM
@@ -22,13 +26,12 @@ If you run into issues don't hesitate to reach out in our [community channels](d
 - Deploy Smart Contract
 - Verify it using the sourcify plug in.
 
-**Simply isn't it, well lets go ahead and get to it!!**
+**Simple isn't it, well lets go ahead and get to it!!**
 
-### Step 1. Open up [Remix](http://remix.ethereum.org/)
+## Set up Smart Contract
 
-### Step 2. Set up Smart Contract
-
-For this example, we will compile, deploy, and verify this ERC20 contract from [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc20)
+For this example, we will compile, deploy, and verify this ERC20 contract from [Open Zeppelin](https://docs.openzeppelin.com/contracts/4.x/erc20).
+Open up [Remix](http://remix.ethereum.org/) and paste the code below into a new file in the contracts folder. Name it whatever you want. In this case we named it My_Epic_ERC.sol.
 
 ```
 // contracts/GLDToken.sol
@@ -44,11 +47,9 @@ contract GLDToken is ERC20 {
 }
 ```
 
-Name it whatever you want. In this case we named it My_Epic_ERC.sol
+## Connect Metamask and Compile the contract
 
-### Step 3. Connect Metamask and Compile the contract
-
-#### Connect Metamask
+### Connect Metamask
 
 **As an environment select `Injected Provider - Metamask`**
 Click on Ethereum Deploy Logo on the side
@@ -56,18 +57,18 @@ Click on Ethereum Deploy Logo on the side
 ![web3injected pic](/img/Injectedweb3.png)
 Then MetaMask will pop up, Click Next & allow the wallet to connect to Remix
 
-#### Compile
+### Compile
 
 Simply `command+s` works
 
-#### OR
+__OR__
 
 Run the compiler tab. Make sure to always make sure the compiler is >= pragma solidity declaration
 
 In this case we used 0.8.7 in compiler and declared a pragma ^0.8.0
 ![compile pic](/img/compile.png)
 
-### Step 4. Deploy Smart Contract
+## Deploy Smart Contract
 
 - Click on the contract you have created called GLD Token that inherits the ERC20 standards
 - Under Deploy, insert initial supply that will be passed to the constructor
@@ -75,22 +76,22 @@ In this case we used 0.8.7 in compiler and declared a pragma ^0.8.0
 
 ![transact](/img/deploy.png)
 
-### Step 5. Copy Contract Address
+## Copy Contract Address
 
-**Get the Contract Address we just deployed in the Deploy Tab**
+Get the Contract Address we just deployed in the Deploy Tab
 
 ![Grab_contract_address](/img/grab_contract_address.png)
 
-### Step 6. Get the Sourcify Plugin
+### Get the Sourcify Plugin
 
 ![Get_sourcify](/img/getsourcify.jpg)
 
-### Step 7. Use the Sourcify Plugin to Verify the Contract
+## Use the Sourcify Plugin to Verify the Contract
 
-**Note:**
-
-1. Compile contracts in Remix, before attempting verification
-2. The metadata must be exactly the same as at deployment time
+:::caution
+- Compile contracts in Remix, before attempting verification
+- The metadata must be exactly the same as at deployment time
+:::
 
 - Navigate to Sourcify Tab
 - Select Verifier

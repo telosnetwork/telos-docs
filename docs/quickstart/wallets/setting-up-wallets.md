@@ -3,7 +3,7 @@ description: Creating your first Telos Account.
 sidebar_positon: 2
 ---
 
-# Getting started with Telos Accounts
+# Getting started with Telos Wallets
 
 Creating a new Telos Account is very simple and can be done on multiple platforms. We will take you step-by-step through the two methods most preferred by our community.&#x20;
 

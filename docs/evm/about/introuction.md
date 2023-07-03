@@ -6,7 +6,7 @@ sidebar_position: 1
 
 # Introduction to Telos EVM
 
-SInce the introduction of the Ethereum Virtual Machine (EVM), instead of having just a distributed ledger (blockchain 1.0), we have a distributed state machine (blockchain 2.0 - 3.0) which hosts the functionality of the blockchain network. Decentralization is the key when it comes to Blockchain technology.&#x20;
+Since the introduction of the Ethereum Virtual Machine (EVM), instead of having just a distributed ledger (blockchain 1.0), we have a distributed state machine (blockchain 2.0 - 3.0) which hosts the functionality of the blockchain network. Decentralization is the key when it comes to Blockchain technology.&#x20;
 
 The Ethereum Virtual Machine (EVM) acts like a global prosessing unit or computer which is formed by the collective computing power of its network nodes, making the EVM accessable from anywhere in the world. These nodes lend their resources to developers to create smart contracts and decentralised apps (dApps) which relies on blockchain.
 
@@ -34,12 +34,12 @@ To conclude, [Telos EVM (tEVM)](https://www.telos.net/evm) is an EVM running on 
 * faster transaction speeds,&#x20;
 * and low transaction fees.&#x20;
 
-For an in-depth comparison between the Telos EVM and other EVM based chains see the [Benefits of Telos compared to EVM chains](./why-telos.md).
+For an in-depth comparison between the Telos EVM and other EVM based chains see the [Benefits of Telos compared to EVM chains](../../overview/why-telos.md).
 
 These documents will guide Telos Zero users, as well as users coming from Ethereum, to get started on the tEVM. For a more technical overview of the EVM, navigate to the [Overview and architecture](./overview-and-architecture.md) section.&#x20;
 
 
 For more information and other questions related to getting started with tEVM, click [here](https://help.telos.net).
 
-Developers looking to start deploying on the tEVM can find support in the [Developer Guides](launch-dapp-on-tEVM).
+Developers looking to start deploying on the tEVM can find support in the [Developer Guides](../smart-contracts/).
 

@@ -2,7 +2,7 @@
 sidebar_positon: 2
 ---
 
-# Create apps using thirdweb
+# Create Apps Using thirdweb
 
 ## Create Application
 

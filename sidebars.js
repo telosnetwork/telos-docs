@@ -27,6 +27,7 @@ const sidebars = {
       collapsed: false,
       items: [
         'overview/overview',
+        'overview/why-telos',
         'overview/wallet-introduction',
         'overview/consensus',
         'overview/technical-features',
@@ -47,10 +48,9 @@ const sidebars = {
       label: 'Wallets',
       collapsed: false,
       items: [
-        'quickstart/wallets/wallets',
         'quickstart/wallets/setting-up-wallets',
         'quickstart/wallets/getting-some-tlos',
-        'quickstart/wallets/deposit-withdraw-and-send-tlos',     
+        'quickstart/wallets/withdraw-transfer-and-send-tlos',     
       ],
   },
   {   //EVM Section
@@ -58,8 +58,8 @@ const sidebars = {
       label: 'EVM',
       collapsed: false,
       items: [
-        'quickstart/evm/create_apps_using_thirdweb',
         'quickstart/evm/metamask_remix',
+        'quickstart/evm/create_apps_using_thirdweb',
         'quickstart/evm/launch_on_telos',
         'quickstart/evm/erc20_mintable',
       ],

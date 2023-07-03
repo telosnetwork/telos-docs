@@ -11,13 +11,11 @@ sidebar_position: 2
 
 An account is a human-readable name that is stored on the blockchain. It can be owned through authorization by an individual or group of individuals depending on permissions configuration. An account is required to transfer or push any valid transaction to the blockchain.
 
-For more information on how to create an account, click [here](../../quickstart/wallets/wallets.md).
+For more information on how to create an account, click [here](./accounts.md#creating-an-account).
 
 **Wallets**
 
 Wallets are clients that store keys that may or may not be associated with the permissions of one or more accounts. Ideally, a wallet has a locked (encrypted) and unlocked (decrypted) state that is protected by a high entropy password. The Antelope/Leap repository comes bundled with a CLI client called `cleos` that interfaces with a lite-client called `keosd` and together, they demonstrate this pattern.
-
-For more information on how to link a wallet to your account, click [here](../../quickstart/wallets/wallets.md).
 
 **Authorization and Permissions**
 

@@ -48,7 +48,7 @@ The Telos platform has a comprehensive permission system for creating custom per
 
 Applications deployed on Telos are upgradeable. This means you can deploy code fix, add features, and change the application’s logic, as long as sufficient authority is provided. As a developer, you can iterate your application without the risk of being locked-in to a software bug permanently. It is also possible, however, to deploy smart contracts that cannot be modified on the Telos network. These decisions are at the discretion of developers rather than restricted by the protocol.
 
-## Efficient energy consumption
+## Efficient Energy Consumption
 
 With `DPOS` as the consensus mechanism, Telos consumes much less energy to validate transactions and secure a blockchain compared to other consensus algorithms.
 
