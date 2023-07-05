@@ -1,5 +1,5 @@
 ---
-sidebar_positon: 2
+sidebar_positon: 3
 ---
 
 # Create Apps Using thirdweb

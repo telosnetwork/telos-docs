@@ -1,5 +1,5 @@
 ---
-sidebar_positon: 4
+sidebar_positon: 5
 ---
 
 # ERC20 Mintable Token

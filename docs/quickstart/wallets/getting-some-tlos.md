@@ -9,9 +9,9 @@ In our previous section we included a link to a guided tutorial on how to create
 
 TLOS token is both the governance and resource token of the Telos network and is used for voting on network wide governance ballots, managing transaction quota and purchasing RAM. &#x20;
 
-If you are new to crypto, you may not know the important difference between an exchange and a wallet. KuCoin is an exchange – we trust it fully, but we do not leave our funds there indefinitely. The aim of the process described below is to withdraw your TLOS into your digital wallet where you have full control of your funds. (We recommend [Telos Wallet](https://wallet.telos.net), and use [Anchor ](https://greymass.com/anchor/)as your signer.)&#x20;
+If you are new to crypto, you may not know the important difference between an exchange and a wallet. With a wallet all the assets you store there are completely yours. You and you alone have ownership and control over them. This is what we call self custody or non custodial storage. Exchanges are useful for purchasing or trading funds but not ideal for storage. The exchange has complete control over your funds but you can request transfers or trades. Because you do not have the private key, you do not have complete ownership. This is known as custodial storage because you are trusting custody of your funds to someone else. The aim of the process described below is to withdraw your TLOS into your digital non custodial wallet where you have full control of your funds.
 
-To acquire TLOS you can earn them or buy. In [this article](https://help.telos.net/en\_US/getting-started/how-to-buy-tlos) we explain how to buy TLOS on the KuCoin exchange, but you can use any exchange listed on [CoinMarketCap](https://coinmarketcap.com/currencies/telos/markets/) or on [PublicDomain](https://coinmarketcap.com/currencies/telos/markets/)
+In [this article](https://help.telos.net/en\_US/getting-started/how-to-buy-tlos) we explain how to buy TLOS on the KuCoin exchange, but you can use any exchange listed on [CoinMarketCap](https://coinmarketcap.com/currencies/telos/markets/)
 
 \* You can view a video with screenshots and additional tips by Telos UK at [https://telosuk.io/how-to-buy-telos/](https://telosuk.io/how-to-buy-telos/)
 
@@ -21,27 +21,14 @@ Follow our [CEX, DEX, and Telos Zero guides](https://help.telos.net/en\_US/evm) 
 
 ## TLOS for Mainnet
 
-*   **Exchanges**
-    * Centralized exchanges such as [Probit](https://www.probit.com), [CoinTiger](https://www.cointiger.com) and others
-    * Swap from many exchanges via NewDex, [learn more here](https://www.telos.net/telos-news/tlos-now-available-to-purchase-using-major-exchanges-with-the-help-of-defi)
-    * [Crypto Locally](https://cryptolocally.com/en/tlos/buy) - find someone in your country to purchase TLOS from.
-    * [NewDex](https://newdex.io/trade/eosio.token-tlos-eos) - decentralized exchange with support for multiple wallets.
-    * Full list of Exchange Markets available on [CoinGecko](https://www.coingecko.com/en/coins/telos#markets).
-
-
-
-Telos can be traded or swapped using these platform:
-
-* [kuCoin](https://www.kucoin.com/trade/TLOS-USDT)
-* [gate.io](https://www.gate.io/fr/trade/TLOS\_USDT)
-* [Uniswap](https://app.uniswap.org/#/swap?use=V2?inputCurrency=ETH\&outputCurrency=0x7825e833d495f3d1c28872415a4aee339d26ac88)
-* [SushiSwap](https://app.sushi.com/en/swap)
-* [Cryptolocally](https://cryptolocally.com/en/crypto-offers/?type=buy\&crypto=TLOS\&location=any\&currency=any)
-
+- Centralized exchanges such as [Probit](https://www.probit.com), [CoinTiger](https://www.cointiger.com), [kuCoin](https://www.kucoin.com/trade/TLOS-USDT), [gate.io](https://www.gate.io/fr/trade/TLOS\_USDT), and others
+- [Crypto Locally](https://cryptolocally.com/en/tlos/buy) - find someone in your country to purchase TLOS from.
+- [NewDex](https://newdex.io/trade/eosio.token-tlos-eos), [SushiSwap](https://app.sushi.com/en/swap), and [Uniswap](https://app.uniswap.org/#/swap?use=V2?inputCurrency=ETH\&outputCurrency=0x7825e833d495f3d1c28872415a4aee339d26ac88) - decentralized exchange with support for multiple wallets.
+- __Full list of Exchange Markets available on [CoinGecko](https://www.coingecko.com/en/coins/telos#markets).__
 
 ## TLOS for Testnet
 
-* [Testnet Faucet](https://app.telos.net/testnet/developers): Simply go to the faucet, insert your testnet account name, and click the "Send Testnet Telos" button. Your testnet TLOS tokens should arrive within a few seconds!
+[Testnet Faucet](https://app.telos.net/testnet/developers): Simply go to the faucet, insert your testnet account name, and click the "Send Testnet Telos" button. Your testnet TLOS tokens should arrive within a few seconds!
 
 ![](<../../../static/img/faucet_50.png>)
 

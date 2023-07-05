@@ -58,6 +58,7 @@ const sidebars = {
       label: 'EVM',
       collapsed: false,
       items: [
+        'quickstart/evm/setup-a-wallet',
         'quickstart/evm/metamask_remix',
         'quickstart/evm/create_apps_using_thirdweb',
         'quickstart/evm/launch_on_telos',
