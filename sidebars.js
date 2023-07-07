@@ -43,37 +43,29 @@ const sidebars = {
   // Quick Start Layout A basic launch with Zero and EVM
   quickStart: [
     'quickstart/README',
-  {   //Wallets Section
-      type: 'category',
-      label: 'Wallets',
-      collapsed: false,
-      items: [
-        'quickstart/wallets/getting-some-tlos',   
+    {   //EVM Section
+        type: 'category',
+        label: 'EVM',
+        collapsed: false,
+        items: [
+          'quickstart/evm/setup-a-wallet',
+          'quickstart/evm/getting-tlos',
+          'quickstart/evm/metamask_remix',
+          'quickstart/evm/create_apps_using_thirdweb',
+        ],
+    },
+    {   //Zero Section
+        type: 'category',
+        label: 'Telos Zero',
+        collapsed: false,
+        items: [
+          'quickstart/zero/accounts',
+          'quickstart/zero/setup-a-wallet',
+          'quickstart/zero/getting-tlos',
+          'quickstart/zero/withdraw-transfer-and-send-tlos',
+          'quickstart/zero/native-eosio',
       ],
-  },
-  {   //EVM Section
-      type: 'category',
-      label: 'EVM',
-      collapsed: false,
-      items: [
-        'quickstart/evm/setup-a-wallet',
-        'quickstart/evm/getting-tlos',
-        'quickstart/evm/metamask_remix',
-        'quickstart/evm/create_apps_using_thirdweb',
-      ],
-  },
-  {   //Zero Section
-      type: 'category',
-      label: 'Telos Zero',
-      collapsed: false,
-      items: [
-        'quickstart/zero/accounts',
-        'quickstart/zero/setup-a-wallet',
-        'quickstart/zero/getting-tlos',
-        'quickstart/zero/withdraw-transfer-and-send-tlos',
-        'quickstart/zero/native-eosio',
-     ],
-   },
+    },
   ],
 
   // Telos EVM
