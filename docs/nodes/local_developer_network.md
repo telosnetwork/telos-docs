@@ -1,5 +1,6 @@
 ---
-id: "Antelope.io-network-spinup"
+title: "Local Developer Network"
+hide_table_of_contents: true
 ---
 
 # Local Developer Network 

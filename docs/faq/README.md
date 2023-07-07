@@ -2,6 +2,7 @@
 title: Telos FAQ
 description: Answers to frequently asked questions about Telos.
 id: faqs
+hide_table_of_contents: true
 ---
 
 # FAQ
@@ -21,7 +22,7 @@ Feel free to visit [Telos Knowledge base](https://help.telos.net/) for additiona
 
 **What is the TEVM ?**
 
-Telos EVM is a smart contract hosted on the native network(written in EOSIO C++ with half second block times). Thus there is no mem pool or front running due to the speed of execution and fixed gas rates. The EVM on Telos is compatible with the existing frameworks on Ethereum such as Hardhat, Truffle, and Brownie. Telos RPC specification is identitcal to Ethereum's making it easy to port over existing DApps or build from scratch with a wide range of developer tools. 
+Telos EVM is a smart contract hosted on the Telos Zero network(written in Leap C++ with half second block times). Thus there is no mem pool or front running due to the speed of execution and fixed gas rates. The EVM on Telos is compatible with the existing frameworks on Ethereum such as Hardhat, Truffle, and Brownie. Telos RPC specification is identitcal to Ethereum's making it easy to port over existing DApps or build from scratch with a wide range of developer tools. 
 
 **ECOSYSTEM**
 The __Telos EVM__ launched in November 2021, since then it has 40+ Dapps.
@@ -59,7 +60,7 @@ Kucoin, Huobi, Gate.io, Uniswap, SushiSwap, Cryptolocally, BitFinex, Bitget, Ape
 - [Multichain](https://app.multichain.org/#/router)
 
 ### How do I get Testnet Telos
-Checkout our guide [here](/quickstart/evm/testnet_tutorial.md)
+Checkout our guide [here](../quickstart/evm/getting-tlos.md#tlos-for-testnet)
 
 ---
 
@@ -76,13 +77,13 @@ Telos uses Delegated proof-of-stake +aBFT to maintain consensus. Holders of TLOS
 ### How does Telos handle Governance?
 Telos is a very decentralized network, owned by token holders who all contribute to decision making via on-chain voting.  Network operating rules are stored and amended on-chain as well.
 
-Check out [Telos Decide Governance System](/native/eosio_toolkit/decide_engine.md)
+Check out [Telos Decide Governance System](../zero/governance/decide/README.md)
 
 
 ### How do I add Telos to MetaMask?
-Guide is over [here](/docs/evm/launch-dapp-on-tEVM.md)
+Guide is over [here](../evm/about/setup-a-wallet.md)
 ### What is REX and how does it work?
-REX is the resource exchange powered by the Telos native network. Users can stake REX for an API up to 14%. REX is responsible for all the actions on Antelope that enable users and builders to buy, sell, stake resources in order to perform actions on-chain and acrue TLOS tokens. 
+REX is the resource exchange powered by the Telos Zero network. Users can stake REX for an API up to 14%. REX is responsible for all the actions on Antelope that enable users and builders to buy, sell, stake resources in order to perform actions on-chain and acrue TLOS tokens. 
 
 ---
 
@@ -102,4 +103,4 @@ REX is the resource exchange powered by the Telos native network. Users can stak
 
 ### Where do I get started?
 
-Check out the [Quick Start](/quickstart) guide or come ask questions in our [Telegram channels](/overview/getting-started/resources#community-channels)
+Check out the [Quick Start](/quickstart) guide or come ask questions in our [Telegram channels](/overview/resources#community-channels)

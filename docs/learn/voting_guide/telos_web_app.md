@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Telos Decide Web App Guide
 
 __An extensive walkthrough of votign on the Telos Decide web app__
@@ -6,7 +10,7 @@ __An extensive walkthrough of votign on the Telos Decide web app__
 
 - Have a Telos Account setup
 - Anchor wallet. If you don't have an Anchor wallet, you can download one [here](https://greymass.com/en/anchor/)
-- Native TLOS currency
+- TLOS Zero currency
 - System Resources: NET, RAM, CPU (See the guide below for obtainting)
 
 #### Instructions to Place Your Vote: 
@@ -31,7 +35,7 @@ While other options are available, we are focusing on Anchor for this tutorial.
 
 ![app-telos-net anchor login](https://user-images.githubusercontent.com/39388424/191970354-f5a41611-4343-4956-99be-6a5e937c2bd5.png)
 
-__Please note:__ If your account is “fresh” or you are missing required resources, this may result in an error message. Please refer to [How to manage RAM](docs/learn/resource_management_guide/ram.md) and [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md). This will resolve the issues in most instances.
+__Please note:__ If your account is “fresh” or you are missing required resources, this may result in an error message. Please refer to [How to manage RAM](../../zero/resource-management/ram.md) and [How to manage CPU and NET](../../zero/resource-management/cpu-net.md). This will resolve the issues in most instances.
 
 #### Click on proposals in the top menue
 

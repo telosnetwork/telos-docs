@@ -1,6 +1,7 @@
 ---
-sidebarId: 3
-id: "Nodeos"
+sidebar_position: 3
+title: "Nodeos"
+hide_table_of_contents: true
 ---
 
 # Nodeos

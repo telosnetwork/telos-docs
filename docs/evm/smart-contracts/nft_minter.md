@@ -1,18 +1,21 @@
 ---
 sidebar_position: 4
+hide_table_of_contents: true
 ---
 
 # ERC721 NFT
 
 This section will explain how to write an NFT minting smart contract that encapsulates all of the logic based on the NFTs you want to mint, followed by hosting images and metadata on decentralized file storage.
 
-## Set up local Dev environment
+## Setup Local Dev Environment
 
 **Prerequsites** follow this [link](https://hardhat.org/tutorial/setting-up-the-environment.html) NodeJS version 16 or Hardhat is not already installed on your device.
 
-**Note** NodeJS version 16 or less is mandatory.
+:::caution
+NodeJS version 16 or less is mandatory.
+:::
 
-#### First, initialize a local project and install Hardhat tools for testing, compiling, and deploying smart contracts.
+First, initialize a local project and install Hardhat tools for testing, compiling, and deploying smart contracts.
 
 Open a terminal and proceed to the directory you want to create an NFT minter.
 
@@ -38,7 +41,7 @@ npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs
 
 ```
 
-#### Using the OpenZeppelin contracts Library API
+### Using the OpenZeppelin contracts Library API
 
 Benefits: Reusable Solidity components to build custom contracts, contracts are audited, flexible role based permissioning scheme
 
@@ -46,7 +49,7 @@ Benefits: Reusable Solidity components to build custom contracts, contracts are 
 npm install @openzeppelin/contracts
 ```
 
-## Solidity ERC721 Smart Contract Section
+## Solidity ERC721 Smart Contract
 
 The first step is to write a smart contract in a .sol file under the contracts folder.
 
@@ -89,7 +92,7 @@ contract TelosNFTMinter is ERC721URIStorage {
 }
 ```
 
-## Setting up a run.js file in Hardhat project
+## Setting up a run.js File in Hardhat Project
 
 A run.js file is set up to use a local instance of the blockchain created by Hardhat. This enables developers to test their contracts to ensure they are compiling and the overall dApp runs as intended.
 
@@ -121,17 +124,17 @@ const runMain = async () => {
 runMain();
 ```
 
-## Deploy in local testnet
+### Deploy on Local Testnet
 
 ```
 npx hardhat run scripts/run.js
 ```
 
-## Deploy on telos_testnet
+### Deploy on Telos Testnet
 
 To deploy on telos_testnet, wallet credentials must be provided to sign the transaction.
 
-## Set up Deploy.js File in /scripts folder
+## Setup Deploy.js File in /scripts Folder
 
 ```js title="scripts/deploy.js"
 const main = async () => {

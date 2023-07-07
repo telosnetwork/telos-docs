@@ -1,8 +1,9 @@
 ---
-sidebar_positon: 1
+sidebar_positon: 4
+hide_table_of_contents: true
 ---
 
-# Create apps using thirdweb
+# Create Apps Using thirdweb
 
 ## Create Application
 

@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Decide Voter Mobile App Guide
 
 ____                                            _______
@@ -8,7 +12,7 @@ Each one of these things prerequisites is vital to successful voting.
 
 1. Have a Telos Account setup
 2. Anchor wallet. If you don't have an Anchor wallet, you can download one [here](https://greymass.com/en/anchor/)
-3. Native TLOS currency
+3. TLOS Zero currency
 4. System Resources: NET, RAM, CPU (See the guide below powering up your account.)
 
 Install the Decide Voter Mobile App [here](https://decidevoter.app/)
@@ -87,9 +91,9 @@ Voila, you now know how to use the Decide Voter App by GoodBlock and are prepare
 
 Powering up your account (Optional) 
 
-For those of you that have rarely interacted with the native Telos blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET, or RAM to make it fully operational and gain access to the virtual feeless Telos network.
+For those of you that have rarely interacted with the Telos Zero blockchain, either because you are jumping over from Telos EVM or just created a new account, you may have to add CPU, NET, or RAM to make it fully operational and gain access to the virtual feeless Telos network.
 
 Insufficient resources may result in an error message. 
 To resolve error messages visit the RAM & CPU & NET resource guides
-- [How to manage RAM](docs/learn/resource_management_guide/ram.md)
-- [How to manage CPU and NET](docs/learn/resource_management_guide/cpu-net.md).
+- [How to manage RAM](../../zero/resource-management/ram.md)
+- [How to manage CPU and NET](../../zero/resource-management/cpu-net.md).

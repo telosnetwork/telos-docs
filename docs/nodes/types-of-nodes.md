@@ -1,3 +1,9 @@
+---
+sidebar_position: 2
+title: "Types of Nodes"
+hide_table_of_contents: true
+---
+
 # Types of Nodes
 
 The main component of the Telos blockchain network is `nodeos` (node + Antelope). `nodeos` is the core node daemon that runs on every Telos node in the network and is distributed as part of the Antelope software suite. Each node can be configured to function as a

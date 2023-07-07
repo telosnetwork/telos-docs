@@ -1,9 +1,6 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
 /** @type {import('@docusaurus/types').Config} */
 const config = {
 
@@ -66,7 +63,7 @@ const config = {
         title: '',
         logo: {
           alt: 'Telos Logo',
-          src: 'img/acorn.png',
+          src: 'img/acorn-light.png',
           srcDark: 'img/acorn-dark.png',
         },
         items: [
@@ -91,14 +88,14 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'nodes',
-            label: 'Nodes',
+            sidebarId: 'zero',
+            label: 'Telos Zero',
           },
           {
             type: 'docSidebar',
             position: 'left',
-            sidebarId: 'native',
-            label: 'Telos Native',
+            sidebarId: 'nodes',
+            label: 'Nodes',
           },
           {
             type: 'docSidebar',
@@ -143,7 +140,7 @@ const config = {
             title: 'Block Explorers',
             items: [
               {
-                label: 'Native',
+                label: 'Telos Zero',
                 href: 'https://explorer.telos.net',
               },
               {
@@ -168,9 +165,10 @@ const config = {
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Telos Foundation, Inc.`,
       },
-      prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+      colorMode: {
+        defaultMode: 'dark',
+        disableSwitch: false,
+        respectPrefersColorScheme: false,
       },
       algolia: {
         appId: 'M49QB996FG',

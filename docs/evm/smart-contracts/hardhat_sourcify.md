@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+hide_table_of_contents: true
 ---
 
 # How to Verify Smart Contracts with Hardhat Deploy plugin
@@ -14,9 +15,7 @@ This tutorial will cover how to use the [hardhat-deploy plugin](https://github.c
 2. Deploy contracts using the plug-in
 3. Verify the contracts on sourcify
 
-### Verify contracts using hardhat-deploy plug-in
-
-**Setup**
+### Setup Local Environment
 
 The first step is to set up the local environment. If you are not familiar with how to set up a local hardhat project, refer to [this page](https://hardhat.org/tutorial/setting-up-the-environment.html).
 

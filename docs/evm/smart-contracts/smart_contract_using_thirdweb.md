@@ -1,8 +1,9 @@
 ---
 sidebar_position: 2
+hide_table_of_contents: true
 ---
 
-# Deploy a smart contract using thirdweb
+# Deploy a Smart Contract Using thirdweb
 
 ## Create Contract
 
