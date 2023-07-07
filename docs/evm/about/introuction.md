@@ -35,7 +35,7 @@ To conclude, [Telos EVM (tEVM)](https://www.telos.net/evm) is an EVM running on 
 * faster transaction speeds,&#x20;
 * and low transaction fees.&#x20;
 
-For an in-depth comparison between the Telos EVM and other EVM based chains see the [Benefits of Telos compared to EVM chains](../../overview/why-telos.md).
+For an in-depth comparison between the Telos EVM and other EVM based chains see the [Benefits of Telos compared to EVM chains](../../overview/why-telos/introduction.mdx).
 
 These documents will guide Telos Zero users, as well as users coming from Ethereum, to get started on the tEVM. For a more technical overview of the EVM, navigate to the [Overview and architecture](./overview-and-architecture.md) section.&#x20;
 

@@ -1,12 +1,11 @@
 ---
-sidebar_positon: 3
+sidebar_positon: 1
 hide_table_of_contents: true
 ---
 
-# Consensus 
+# Consensus
 
-
-# Overview
+## Overview
 
 An Antelope blockchain is a highly efficient, deterministic, distributed state machine that can operate in a decentralized fashion. The blockchain keeps track of transactions within a sequence of interchanged blocks. Each block cryptographically commits to the previous blocks along the same chain. It is therefore intractable to modify a transaction recorded on a given block without breaking the cryptographic checks of successive blocks. This simple fact makes blockchain transactions immutable and secure.
 

@@ -15,7 +15,7 @@ hide_table_of_contents: true
 
 The core protocols are:
 
-1. [Consensus Protocol](../../overview/consensus.md)
+1. [Consensus Protocol](../../overview/advanced/consensus.md)
 2. [Transactions Protocol](./transactions.md)
 3. [Network or Peer to Peer Protocol](./network_peer_protocol.md)
 4. [Accounts and Permissions](./accounts.md)
