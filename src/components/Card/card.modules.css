@@ -10,7 +10,7 @@
     border-style: solid;
     color: transparent;
 
-    max-width: 200px;
+    max-width: 300px;
 
 
     &:hover {
@@ -27,6 +27,8 @@
 
 .title {
     text-decoration: none;
+    text-align: center;
+    justify-content: center;
     font-size: 2rem;
 }
 

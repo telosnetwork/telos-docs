@@ -105,3 +105,14 @@ html[data-theme='dark'] .DocSearch {
 .theme-back-to-top-button {
   display: none;
 }
+
+.flex-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-card-item {
+  padding: 50px;
+}
