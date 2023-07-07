@@ -41,8 +41,13 @@ TLOS is the native coin of the Telos blockchain (like ETH is for Ethereum, BNB i
 
 This article describes the two primary methods used to bridge TLOS. You will need a TLOS account.
 
+:::danger
+Due to current circumstances we advise against using the Multichain bridge detailed in the article below. There are still other protocols available to bridge to/from Telos.
+:::
+
 :::info
 For a guided tutorial on how to bridge TLOS between different chains, click [here](https://help.telos.net/en_US/getting-started/how-to-bridge-tlos-between-different-blockchains).
-
-Feel free to visit the [Withdraw, Transfer, and Send TLOS](./withdraw-transfer-and-send-tlos.md) section for details on transferring TLOS between Zero and EVM.
+From what users report, the RocketX bridge has been performing the best.
 :::
+
+Aslo visit the [Withdraw, Transfer, and Send TLOS](./withdraw-transfer-and-send-tlos.md) section for details on transferring TLOS between Zero and EVM.

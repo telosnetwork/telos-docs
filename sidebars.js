@@ -61,7 +61,6 @@ const sidebars = {
   ],
   // Quick Start Layout A basic launch with Zero and EVM
   quickStart: [
-    'quickstart/README',
     {   //EVM Section
         type: 'category',
         label: 'EVM',
@@ -89,7 +88,6 @@ const sidebars = {
 
   // Telos EVM
   evm: [
-  'evm/README',
   {
     type: 'category',
     label: 'About',

@@ -24,7 +24,8 @@ You can use the [Testnet Faucet](https://app.telos.net/testnet/developers) to ac
 
 ### For Users in The USA
 
-- Simplex
+- [Simplex](https://www.telos.net/news/simplex-comes-to-telos)
+- Users can also bridge funds from Binance Smart Chain and Ethereum, see [below](#bridging-from-other-chains)
 
 ### Users Outside The USA
 
@@ -37,8 +38,13 @@ You can use the [Testnet Faucet](https://app.telos.net/testnet/developers) to ac
 
 TLOS is the native coin of the Telos blockchain (like ETH is for Ethereum, BNB is for Binance Smart Chain). TLOS now exists on three blockchains – Telos, Ethereum and BSC. While TLOS is fundamentally used on the Telos blockchain, it is also added on other blockchains for reasons such as liquidity and exposure. They’re pegged 1:1 which means that 1 TLOS on Telos is the same as 1 TLOS on Ethererum (erc20) and BSC (bep20). You can bridge/transfer TLOS between blockchains as per your convenience and needs.
 
-This article describes the two primary methods used to bridge TLOS. You will need a TLOS account.
+This article describes the two primary methods used to bridge TLOS.
+
+:::danger
+Due to current circumstances we advise against using the Multichain bridge detailed in the article below. There are still other protocols available to bridge to/from Telos.
+:::
 
 :::info
 For a guided tutorial on how to bridge TLOS between different chains, click [here](https://help.telos.net/en_US/getting-started/how-to-bridge-tlos-between-different-blockchains).
+From what users report, the RocketX bridge has been performing the best.
 :::
