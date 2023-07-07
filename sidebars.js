@@ -28,7 +28,6 @@ const sidebars = {
       items: [
         'overview/overview',
         'overview/why-telos',
-        'overview/wallet-introduction',
         'overview/consensus',
         'overview/technical-features',
         {

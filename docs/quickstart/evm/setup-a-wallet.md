@@ -11,6 +11,15 @@ A blockchain wallet (e-wallet, crypto wallet or signer) is a tool that you use t
 
 A wallet can either be a device or application that stores a collection of cryptographic keys and can be used to send, receive, and track ownership of cryptocurrencies. Wallets can take many forms. A wallet might be a directory or file in your computer's file system, a piece of paper, or a specialized device called a _hardware wallet_. There are also various smartphone apps and computer programs that provide a user-friendly way to create and manage wallets.
 
+### Types of Wallets
+
+Wallets can be categorized into two types: custodial and non-custodial wallets.
+
+- **Custodial Wallets**: These are managed by a third-party company. They are like a storage facility where you keep your valuables. They require less responsibility from your end, but are dependent on the third party. For instance, if the storage facility was compromised, your assets could be at risk.
+- **Non-Custodial Wallets**: These wallets are not managed by a third party. They are akin to a safe in your house where you store your valuables. They give you full control over your assets, but also demand extra care and responsibility from you.
+
+Non-custodial wallets further include software and hardware wallets. Software wallets live on your computer or internet browser, making them convenient for quick transactions. Hardware wallets, on the other hand, are physical devices that offer secure storage for long-term, albeit less convenient for frequent transactions.
+
 When interacting with the Telos blockchain, your choice of wallet software for safely storing and utilizing your tokens is one of the most critical decisions that you can make. Important factors include security, usability, and integrations for dApps and trading. Your wallet is your doorway into the Telos Blockchain network.
 
 ## Install a Wallet
