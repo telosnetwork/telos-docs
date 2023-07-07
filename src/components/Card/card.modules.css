@@ -10,7 +10,7 @@
     border-style: solid;
     color: transparent;
 
-    max-width: 300px;
+    width: 300px;
 
 
     &:hover {

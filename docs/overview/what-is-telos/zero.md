@@ -11,7 +11,7 @@ hide_table_of_contents: true
 
 ## TLOS Coin
 
-TLOS is the native currency of Telos. The native Telos coin is vital for network governance and allocation of system resources, such as staking for annual returns in Resource Exchange (REX). TLOS is utilized to unlock network bandwidth to execute and interact with contracts, send tokens, and stake for network resources. TLOS is also used as the voting currency in on-chain governance. The total supply of TLOS is 355.2 million coins.
+TLOS is the native currency of Telos. The native Telos coin is vital for network governance and allocation of system resources, such as staking for annual returns in Resource Exchange (REX). TLOS is utilized to unlock network bandwidth to execute and interact with contracts, send tokens, and stake for network resources. TLOS is also used as the voting currency in on-chain governance. The total supply of TLOS is 420 million coins.
 
 ## Resource Overview
 

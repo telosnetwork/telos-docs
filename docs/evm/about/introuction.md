@@ -42,5 +42,5 @@ These documents will guide Telos Zero users, as well as users coming from Ethere
 
 For more information and other questions related to getting started with tEVM, click [here](https://help.telos.net).
 
-Developers looking to start deploying on the tEVM can find support in the [Developer Guides](../smart-contracts/).
+Developers looking to start deploying on the tEVM can find support in the [Developer Guides](../smart-contracts/verify_with_remix.md).
 
