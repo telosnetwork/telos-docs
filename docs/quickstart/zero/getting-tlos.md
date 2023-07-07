@@ -25,7 +25,8 @@ You can use the [Testnet Faucet](https://app.telos.net/testnet/developers) to ac
 
 ### For Users in The USA
 
-- Simplex
+- [Simplex](https://www.telos.net/news/simplex-comes-to-telos)
+- Users can also bridge funds from Binance Smart Chain and Ethereum, see [below](#bridging-from-other-chains)
 
 ### Users Outside The USA
 
