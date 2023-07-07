@@ -1,6 +1,7 @@
 ---
 title: "Inline Actions to External Contracts"
 sidebar_position: 7
+hide_table_of_contents: true
 ---
 
 # Inline Actions to External Contracts

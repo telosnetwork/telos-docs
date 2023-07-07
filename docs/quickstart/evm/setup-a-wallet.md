@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 # Set Up a Wallet
@@ -14,13 +15,15 @@ When interacting with the Telos blockchain, your choice of wallet software for s
 
 ## Install a Wallet
 
-:::caution
+:::tip
 Make a dev wallet for development purposes. This will reduce risk in short and long term.
 :::
 
-**Telos support a range of wallets.** For the majority of users, we recommend using one of the app wallets or a browser-based web wallet, which will provide a more familiar user experience rather than needing to learn command line tools.
+Currently, some of the more commonly used wallets are the following
 
-Currently, some of the more commonly used wallets are the following (_**please**_ _**note that this is not an endorsement of any of the following wallets**_**)**
+:::caution
+Please note that this is not an endorsement of any of the following wallets
+:::
 
 * [Metamask](https://metamask.io)&#x20;
 * [Wallet connect](https://walletconnect.com/)

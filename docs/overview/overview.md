@@ -1,6 +1,7 @@
 ---
 slug: /
 sidebar_positon: 1
+hide_table_of_contents: true
 ---
 
 # Telos Blockchain Network

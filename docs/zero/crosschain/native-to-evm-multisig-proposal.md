@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Telos Zero Multisig Proposal Example
 
 The Telos EVM runs in one smart contract on the Telos Zero blockchain, the eosio.evm contract. Calling a function of a Telos EVM smart contract from Telos Zero requires the use of the eosio.evm contract's `raw(eosio::name &ram_payer,std::vector<int8_t> &tx, bool &estimate_gas,std::optional<eosio::checksum160> &sender)` action.

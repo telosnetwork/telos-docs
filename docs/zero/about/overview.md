@@ -4,6 +4,7 @@ description: >-
   applies to Telos.
 title: Protocol Overview
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 # Protocol

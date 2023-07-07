@@ -1,5 +1,6 @@
 ---
 sidebar_positon: 5
+hide_table_of_contents: true
 ---
 
 # Resources

@@ -4,6 +4,7 @@ description: >-
   blockchain
 title: "Overview and Architecture"
 sidebar_position: 4
+hide_table_of_contents: true
 ---
 
 # Overview and architecture
@@ -14,7 +15,7 @@ The tEVM improves on the EVM by implementing it’s own version of the EVM. Telo
 
 **Telos has implemented the original EVM as a smart contract on the tEVM.**
 
-EVM transactions, that go through the tEVM, will have a fee model similar to the native Ethereum gas model. The Ethereum account needs to have TLOS tokens on their [tEVM wallet account](../../quickstart/wallets/setting-up-wallets.md#telos-evm) to pay for the transactions (or code execution). Telos EVM fees are fixed at < 0.1% of Ethereum gas fees for identical transactions. No front-running or miner extracted value (MEV) can occur on tEVM due to tEVM’s first-in-first-out mempool structure.&#x20;
+EVM transactions, that go through the Telos EVM, will have a fee model similar to the native Ethereum gas model. The Ethereum account needs to have TLOS tokens on their [Telos EVM wallet account](./setup-a-wallet.md) to pay for the transactions (or code execution). Telos EVM fees are fixed at < 0.1% of Ethereum gas fees for identical transactions. No front-running or miner extracted value (MEV) can occur on tEVM due to tEVM’s first-in-first-out mempool structure.&#x20;
 
 The tEVM produces two new blocks every second, which leaves little time for bots to scan the mempool for valuable trades. Furthermore, a fixed-rate gas fee on tEVM transactions means that no one can jump ahead of another person by offering a higher gas fee. Most important of all, Telos is a blockchain that’s governed by its community, with clear rules of what its validators are allowed to do and the penalties for breaking these rules. On Telos, all block producers must process transactions on a first-in-first-out basis, as they receive them. Transactions cannot be reordered for profit.
 

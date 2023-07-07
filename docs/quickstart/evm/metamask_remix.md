@@ -1,21 +1,19 @@
 ---
-sidebar_positon: 2
+sidebar_positon: 3
+hide_table_of_contents: true
 ---
 
-# Remix Smart Contract Tutorial ERC20
+# Launch Your Own Token With Remix
 
 :::caution
 MetaMask is required for this tutorial. [Set up MetaMask](./setup-a-wallet.md) if you haven't already.
 :::
 
-## Deploy a Smart Contract Using Remix
+## Deploy an ERC20 Smart Contract Using Remix
 
 ### Getting TLOS for Testnet
 
-You can use the [Testnet Faucet](https://app.telos.net/testnet/developers) to acquire Testnet TLOS. Paste your address from MetaMask and press the SEND TESTNET EVM TLOS button. Once completed, you will receive testnet funds to work with and write data to the blockchain.
-
-![Testnet Faucet](/img/testnet_faucet.png)
-
+If you haven't already, visit the [Testnet Faucet](https://app.telos.net/testnet/developers) to acquire Testnet TLOS.
 
 ### Create Smart Contract
 

@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Telos Safe Quickstart
 
 __[Telos Safe](https://safe.telos.net/) is the most trusted platform to manage digital assets on the Telos network.__

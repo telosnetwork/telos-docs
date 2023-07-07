@@ -2,6 +2,7 @@
 title: "Getting Started"
 sidebar_position: 1
 description: A Worker Proposal System for the Telos Blockchain Network
+hide_table_of_contents: true
 ---
 
 # Getting Started

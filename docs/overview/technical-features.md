@@ -1,5 +1,6 @@
 ---
 sidebar_positon: 4
+hide_table_of_contents: true
 ---
 
 # Technical Features

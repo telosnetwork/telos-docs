@@ -2,6 +2,7 @@
 description: A Document Amendment Service for the Telos Blockchain Network
 title: Network Peer Protocol
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 # Telos Amend

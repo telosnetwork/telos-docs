@@ -1,3 +1,6 @@
+---
+hide_table_of_contents: true
+---
 # Read EVM data from Telos Zero
 
 The Telos EVM runs on one smart contract on Telos Zero: the __eosio.evm__ contract

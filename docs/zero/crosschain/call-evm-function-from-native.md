@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Call a EVM function from Telos Zero
 
 The __Telos EVM__ runs in one smart contract on the __Telos Zero__ blockchain, the __eosio.evm__ contract.

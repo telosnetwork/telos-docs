@@ -1,6 +1,7 @@
 ---
 sidebarId: 5
 id: "TEVM-local-guide"
+hide_table_of_contents: true
 ---
 # Telos EVM Controller (tevmc) Guide
 ### Coming soon.

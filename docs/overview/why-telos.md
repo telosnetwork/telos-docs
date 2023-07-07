@@ -2,6 +2,7 @@
 description: Why Telos is better than other Ethereum Virtual Machine (EVM) chains
 title: "Why Telos?"
 sidebar_position: 2
+hide_table_of_contents: true
 ---
 
 # Benefits of Telos

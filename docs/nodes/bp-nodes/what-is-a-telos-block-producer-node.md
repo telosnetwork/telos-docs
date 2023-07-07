@@ -4,6 +4,7 @@ description: >-
   This section will cover the details regarding what a Telos Block Producer is
   and its role in the Telos network.
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 # What is a Telos Block Producer Node

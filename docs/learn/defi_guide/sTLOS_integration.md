@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # StakedTLOS (sTLOS) integration
 
 __A look at our StakedTLOS and TelosEscrow contracts on Telos EVM__

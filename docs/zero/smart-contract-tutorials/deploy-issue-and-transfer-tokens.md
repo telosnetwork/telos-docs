@@ -1,6 +1,7 @@
 ---
 title: "Deploy, Issue & Transfer Tokens"
 sidebar_position: 2
+hide_table_of_contents: true
 ---
 
 # Deploy, Issue & Transfer Tokens

@@ -2,6 +2,7 @@
 description: How does gas billing work in the Telos EVM?
 title: "Gas Fees"
 sidebar_position: 3
+hide_table_of_contents: true
 ---
 
 # Gas Fees

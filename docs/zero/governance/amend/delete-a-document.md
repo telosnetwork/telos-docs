@@ -1,6 +1,7 @@
 ---
 title: Delete a Document
 sidebar_position: 3
+hide_table_of_contents: true
 ---
 
 # Delete a Document

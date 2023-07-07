@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 title: "Types of Nodes"
+hide_table_of_contents: true
 ---
 
 # Types of Nodes

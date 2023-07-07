@@ -2,6 +2,7 @@
 description: Follow along for an example contract built with Telos Decide™ Integration
 title: Contract Integration
 sidebar_position: 5
+hide_table_of_contents: true
 ---
 
 

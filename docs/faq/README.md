@@ -2,6 +2,7 @@
 title: Telos FAQ
 description: Answers to frequently asked questions about Telos.
 id: faqs
+hide_table_of_contents: true
 ---
 
 # FAQ

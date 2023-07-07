@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Telos Decide Web App Guide
 
 __An extensive walkthrough of votign on the Telos Decide web app__

@@ -2,6 +2,7 @@
 title: "Submit a Proposal"
 description: Follow the guide below to draft and run a Telos Works Proposal
 sidebar_position: 2
+hide_table_of_contents: true
 ---
 
 # Submit a Proposal

@@ -2,6 +2,7 @@
 description: The best thing since sliced bread
 title: "Introduction to Telos EVM"
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 # Introduction to Telos EVM

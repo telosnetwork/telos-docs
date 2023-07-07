@@ -1,5 +1,6 @@
 ---
 title: "Local Developer Network"
+hide_table_of_contents: true
 ---
 
 # Local Developer Network 

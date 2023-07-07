@@ -1,6 +1,7 @@
 ---
 title: Create a Document
 sidebar_position: 2
+hide_table_of_contents: true
 ---
 
 # Create a Document

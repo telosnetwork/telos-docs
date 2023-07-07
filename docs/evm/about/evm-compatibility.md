@@ -1,6 +1,7 @@
 ---
 sidebar_position: 5
 title: "EVM Compatibility"
+hide_table_of_contents: true
 ---
 
 # EVM Compatibility

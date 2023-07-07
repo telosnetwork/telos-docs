@@ -1,3 +1,9 @@
+---
+sidebar_positon: 5
+title: "Telos Zero"
+hide_table_of_contents: true
+---
+
 # Telos Zero
 
 Developers utilize native Antelope.io software to build applications and work with nodes on the Telos Zero blockchain. This does not apply to EVM DApp developers unless they choose to run a node or build a Telos Zero app. 

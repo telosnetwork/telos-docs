@@ -3,6 +3,7 @@ description: >-
   tevmc is a python 3.x library/command line tool to help bootstrap and
   managment of Telos EVM local, testnet and mainnet nodes.
 sidebar_position: 2
+hide_table_of_contents: true
 ---
 
 # Telos EVM Controller

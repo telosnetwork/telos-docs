@@ -1,6 +1,7 @@
 ---
 title: 'Run a Non Block Producing Node'
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 # Run a Node

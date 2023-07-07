@@ -1,6 +1,7 @@
 ---
 title: Contract Development Toolkit
 sidebar_position: 3
+hide_table_of_contents: true
 ---
 
 # CDT (Contract Development Toolkit)

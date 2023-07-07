@@ -1,6 +1,7 @@
 ---
 title: "Telos Block Producer Requirements"
 sidebarId: 2
+hide_table_of_contents: true
 ---
 
 # Telos Block Producer Requirements

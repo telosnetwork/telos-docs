@@ -1,9 +1,9 @@
 ---
-description: Using your Telos wallet.
 sidebar_positon: 3
+hide_table_of_contents: true
 ---
 
-# How to get TLOS
+# How To Get TLOS
 
 In our previous section we included a link to a guided tutorial on how to create a Telos account and link it to a wallet (signer). In this section we are going to discuss how to obtain TLOS tokens.
 
@@ -41,5 +41,5 @@ This article describes the two primary methods used to bridge TLOS. You will nee
 :::info
 For a guided tutorial on how to bridge TLOS between different chains, click [here](https://help.telos.net/en_US/getting-started/how-to-bridge-tlos-between-different-blockchains).
 
-Feel free to visit the "[Withdraw, Transfer, and Send TLOS](./withdraw-transfer-and-send-tlos.md)" section for details on transferring TLOS between Zero and EVM.
+Feel free to visit the Withdraw, Transfer, and Send TLOS section for details on transferring TLOS between Zero and EVM.
 :::

@@ -2,6 +2,7 @@
 title: 'Setting up a Telos Block Producer Node'
 description: This section describes all the steps needed to setup a Telos Block Producer
 sidebar_position: 3
+hide_table_of_contents: true
 ---
 
 # Setting up a Telos Block Producer Node

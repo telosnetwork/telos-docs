@@ -1,6 +1,7 @@
 ---
 id: 'Nodes and Clients'
 sidebar_position: 1
+hide_table_of_contents: true
 ---
 
 __ A guide to understanding, building, and maintaining nodes on the Telos Blockchain Network __

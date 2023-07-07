@@ -1,6 +1,7 @@
 ---
 title: Network Peer Protocol
 sidebar_position: 5
+hide_table_of_contents: true
 ---
 
 # Network Peer Protocol

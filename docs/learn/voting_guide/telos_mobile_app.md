@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Decide Voter Mobile App Guide
 
 ____                                            _______

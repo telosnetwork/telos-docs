@@ -1,6 +1,7 @@
 ---
 id: "wallet-introduction"
 sidebar_positon: 2
+hide_table_of_contents: true
 ---
 
 # What is a Web Wallet?

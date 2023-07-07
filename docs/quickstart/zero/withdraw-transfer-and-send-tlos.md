@@ -2,6 +2,7 @@
 description: How to deposit, withdraw and send TLOS on the Telos EVM.
 title: 'Withdraw, Transfer, and Send TLOS'
 sidebar_position: 4
+hide_table_of_contents: true
 ---
 
 # Withdraw, Transfer, and Send TLOS
@@ -28,7 +29,7 @@ If not using Telos Wallet, users may want to use https://chainlist.org to connec
 
 ## Transferring TLOS from Telos Zero to EVM
 
-After acquiring TLOS, you can send it to your EVM address using the [web-wallet](https://wallet.telos.net), which you can also use to send to other EVM addresses such as Metamask. Make sure you have [added the Telos EVM](./setting-up-wallets.md#telos-evm) network to your Metamask.
+After acquiring TLOS, you can send it to your EVM address using the [web-wallet](https://wallet.telos.net), which you can also use to send to other EVM addresses such as Metamask. Make sure you have [added the Telos EVM](../evm/setup-a-wallet.md) network to your Metamask.
 
 1. Once logged in to the [web-wallet](https://wallet.telos.net), click on the deposit to EVM button (as shown below).
 

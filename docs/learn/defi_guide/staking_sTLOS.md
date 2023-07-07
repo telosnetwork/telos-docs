@@ -1,3 +1,7 @@
+---
+hide_table_of_contents: true
+---
+
 # Liquid Staking on EVM (sTLOS)
 
 __A guide on how to stake TLOS on EVM for the sTLOS receipt token.__
