@@ -22,10 +22,21 @@ Make sure that the address and memo is:
 
 **Memo:** (Your EVM address)
 
-![](../../../static/img/EVM_ku.jpg)![](../../../static/img/EVM_gate.jpg)
+<img
+  src={require('/static/img/EVM_ku.jpg').default}
+  alt="Example 2"
+  width="35%"
+  height="automatic"
+/>
+
+<img
+  src={require('/static/img/EVM_gate.jpg').default}
+  alt="Example 2"
+  width="35%"
+  height="automatic"
+/>
 
 If not using Telos Wallet, users may want to use https://chainlist.org to connect TelosEVM using Metamask or an alternative web3 wallet/signer.
-
 
 ## Transferring TLOS from Telos Zero to EVM
 
@@ -33,11 +44,21 @@ After acquiring TLOS, you can send it to your EVM address using the [web-wallet]
 
 1. Once logged in to the [web-wallet](https://wallet.telos.net), click on the deposit to EVM button (as shown below).
 
-![](../../../static/img/mainaccount_zero_to_evm.PNG)
+<img
+  src={require('/static/img/mainaccount_zero_to_evm.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 2\. Enter the amount of TLOS you wish to deposit. Click "**Deposit**" and sign the transaction.&#x20;
 
-![](../../../static/img/zero_to_evm.PNG)
+<img
+  src={require('/static/img/zero_to_evm.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 3\. Viola! You should now see your new EVM balance.&#x20;
 
@@ -49,11 +70,21 @@ This can be done via the [web-wallet](https://wallet-dev.telos.net) by clicking 
 
 1. Once logged in to the web-wallet, click on the transfer to Zero button (as shown below).
 
-![](../../../static/img/mainaccount_evm_to_zero.PNG)
+<img
+  src={require('/static/img/mainaccount_evm_to_zero.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 2\. Enter the amount of TLOS you wish to transfer. Click "Deposit" and sign the transaction.
 
-![](../../../static/img/evm_to_zero.PNG)
+<img
+  src={require('/static/img/evm_to_zero.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 ## Sending TLOS to other EVM addresses with web wallet
 
@@ -61,20 +92,45 @@ Once you have TLOS on your EVM address, you can send it to any Metamask address 
 
 1. On the web-wallet, click on the Telos EVM token.
 
-![](../../../static/img/mainaccount_send.png)
+<img
+  src={require('/static/img/mainaccount_send.png').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 2\. Click on "**Send**"
 
-![](../../../static/img/send_evm.PNG)
+<img
+  src={require('/static/img/send_evm.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 3\. Enter the amount you wish to send.
 
-![](../../../static/img/send_evm2.PNG)
+<img
+  src={require('/static/img/send_evm2.PNG').default}
+  alt="Example 2"
+  width="30%"
+  height="automatic"
+/>
 
 4\. Enter the address you wish to send to   .
 
-![](../../../static/img/send_evm3.PNG)
+<img
+  src={require('/static/img/send_evm3.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
 
 5\. Confirm and sign the transaction.
 
-![](../../../static/img/send_evm4.PNG)
+<img
+  src={require('/static/img/send_evm4.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>

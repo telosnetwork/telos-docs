@@ -272,7 +272,6 @@ const sidebars = {
 
   // Learn
   learn: [
-    'learn/README',
     {
       type: 'category',
       label: 'Voting Guide',
