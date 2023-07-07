@@ -46,5 +46,6 @@ Due to current circumstances we advise against using the Multichain bridge detai
 
 :::info
 For a guided tutorial on how to bridge TLOS between different chains, click [here](https://help.telos.net/en_US/getting-started/how-to-bridge-tlos-between-different-blockchains).
-From what users report, the RocketX bridge has been performing the best.
+
+From what users report, the RocketX bridge has been performing the best and pTokens has been having issues.
 :::
