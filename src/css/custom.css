@@ -113,6 +113,13 @@ html[data-theme='dark'] .DocSearch {
   align-items: center;
 }
 
+@media (max-width: 800px) {
+  .flex-card-container {
+    flex-direction: column;
+  }
+}
+
 .flex-card-item {
   padding: 50px;
 }
+
