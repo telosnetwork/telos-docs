@@ -61,6 +61,14 @@ const sidebars = {
   ],
   // Quick Start Layout A basic launch with Zero and EVM
   quickStart: [
+    {
+        type: 'category',
+        label: 'Quickstart',
+        collapsed: false,
+        items: [
+            'quickstart/start-here',
+        ]
+    },
     {   //EVM Section
         type: 'category',
         label: 'EVM',
