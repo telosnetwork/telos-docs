@@ -5,3 +5,15 @@ hide_table_of_contents: true
 ---
 
 # Telos Zero Vs EVM
+
+## Telos Native
+
+Telos is a next-generation Delegated Proof of Stake (DPOS) Layer-1 blockchain network. It features unsurpassed compatibility for developers and provides an extensive suite of tools and onboarding support to develop and deploy smart contracts on the world's fastest, most scalable, and affordable Telos EVM. The network is backed by robust governance features and a vibrant community of passionate contributors and users excited about the future of Web3.
+
+## Telos EVM
+
+Telos EVM is a scalable solution for Solidity based applications, built with the intent of revolutionizing the DeFi landscape. Unlike other scalable EVMs, Telos EVM is not just a fork of the original Go Ethereum code. It’s an entirely new EVM redesigned from the ground up to take full advantage of the power that Telos technology has to offer.
+This new approach allows the Telos EVM to avoid the scaling issues that many major EVM alternatives run into. Despite its unique design, Telos EVM offers feature parity with Ethereum, this makes it a powerful solution for developers and users looking for an Ethereum Virtual Machine that can keep up with the demands of mass adoption.
+
+
+You can learn more about Telos by visiting our [website](https://www.telos.net).
