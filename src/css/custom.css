@@ -109,7 +109,7 @@ html[data-theme='dark'] .DocSearch {
 .cards-display {
     display: grid;
     gap: 16px;
-    grid-template-columns: repeat(auto-fill, 250px);
+    grid-template-columns: repeat(auto-fill, 250px)
 }
 
 .card {
@@ -141,6 +141,7 @@ html[data-theme='dark'] .DocSearch {
     transform: translateY(-100%);
     transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
 }
+
 
 .card__img {
     object-fit: cover;
