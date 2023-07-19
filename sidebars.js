@@ -95,6 +95,7 @@ const sidebars = {
   ],
 
   digitalAssets: [
+    'digital-assets/README',
     {   //Overview
         type: 'category',
         label: 'Overview',
