@@ -57,6 +57,7 @@ Things to know about the bidding process:
 - You can bid any amount for a new name that’s not been bid on
 - New bids on the same name must be at least a 10% higher than the previous bid
 - To win a name bid, you must hold the highest bid of all names and hold it for an uncontested 24 hours. So only one account name per 24 hour period can be won
+- If you win the bid, you receive the right to create an account with the given account name, you don't receive a created account.
 - Anyone who is outbid will be refunded
   
 Bid on premium account name [here](https://eosauthority.com/bidname?network=telos) via EOS Authority.
