@@ -15,7 +15,6 @@ To top-up an EVM testnet account, enter the address on the [Telos testnet faucet
 
 If you currently have TLOS on [Gate.io](https://www.gate.io) or [KuCoin](https://www.kucoin.com), you can withdraw it to your EVM address by doing the following:
 
-
 Make sure that the address and memo is:
 
 **Address:** deposit.evm
@@ -36,13 +35,22 @@ Make sure that the address and memo is:
   height="automatic"
 />
 
-If not using Telos Wallet, users may want to use https://chainlist.org to connect TelosEVM using Metamask or an alternative web3 wallet/signer.
+If not using Telos Web Wallet, users may want to reference [set up an evm wallet](../evm/setup-a-wallet.md) to connect TelosEVM using Metamask or an alternative web3 wallet/signer.
 
-## Transferring TLOS from Telos Zero to EVM
+## Transferring TLOS from Telos Zero to Telos EVM
 
 After acquiring TLOS, you can send it to your EVM address using the [web-wallet](https://wallet.telos.net), which you can also use to send to other EVM addresses such as Metamask. Make sure you have [added the Telos EVM](../evm/setup-a-wallet.md) network to your Metamask.
 
-1. Once logged in to the [web-wallet](https://wallet.telos.net), click on the deposit to EVM button (as shown below).
+1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](./accounts.md) and [setting up a wallet](./setup-a-wallet.md) to do so.
+
+<img
+  src={require('/static/img/native-wallet-login.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+2. Once logged in to web wallet, click on the deposit to EVM button (as shown below).
 
 <img
   src={require('/static/img/mainaccount_zero_to_evm.PNG').default}
@@ -51,7 +59,11 @@ After acquiring TLOS, you can send it to your EVM address using the [web-wallet]
   height="automatic"
 />
 
-2\. Enter the amount of TLOS you wish to deposit. Click "**Deposit**" and sign the transaction.&#x20;
+:::info
+If you do not already have an EVM address added in the native web wallet, you will have to generate one
+:::
+
+3\. Enter the amount of TLOS you wish to deposit. Click "**Deposit**" and sign the transaction.&#x20;
 
 <img
   src={require('/static/img/zero_to_evm.PNG').default}
@@ -60,15 +72,23 @@ After acquiring TLOS, you can send it to your EVM address using the [web-wallet]
   height="automatic"
 />
 
-3\. Viola! You should now see your new EVM balance.&#x20;
+4\. Viola! You should now see your new EVM balance.&#x20;
 
 ## Transferring TLOS from Telos EVM to Zero
 
 Funds can also be transferred from your associated EVM address to your Telos account.
+This can be done via the [web-wallet](https://wallet.telos.net).
 
-This can be done via the [web-wallet](https://wallet-dev.telos.net) by clicking on the EVM withdraw button to withdraw the desired amount.
+1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](./accounts.md) and [setting up a wallet](./setup-a-wallet.md) to do so.
 
-1. Once logged in to the web-wallet, click on the transfer to Zero button (as shown below).
+<img
+  src={require('/static/img/native-wallet-login.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+2. Once logged in to the web-wallet, click on the transfer to Zero button (as shown below).
 
 <img
   src={require('/static/img/mainaccount_evm_to_zero.PNG').default}
@@ -77,7 +97,11 @@ This can be done via the [web-wallet](https://wallet-dev.telos.net) by clicking 
   height="automatic"
 />
 
-2\. Enter the amount of TLOS you wish to transfer. Click "Deposit" and sign the transaction.
+:::info
+If you do not already have an EVM address added in the native web wallet, you will have to generate one
+:::
+
+3\. Enter the amount of TLOS you wish to transfer. Click "Deposit" and sign the transaction.
 
 <img
   src={require('/static/img/evm_to_zero.PNG').default}
