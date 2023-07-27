@@ -130,18 +130,17 @@ html[data-theme='dark'] .DocSearch {
 .card:hover {
     text-decoration: none;
     cursor: pointer;
-
-    .card__content--animation {
-        top: 0;
-        transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
-    }
-
-    .card__img--animation {
-        transform: translateY(-100%);
-        transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
-    }
 }
 
+.card:hover .card__content--animation {
+    top: 0;
+    transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
+}
+
+.card:hover .card__img--animation {
+    transform: translateY(-100%);
+    transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
+}
 
 .card__img {
     object-fit: cover;
