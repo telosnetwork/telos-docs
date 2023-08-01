@@ -82,6 +82,12 @@ const config = {
           {
             type: 'docSidebar',
             position: 'left',
+            sidebarId: 'digitalAssets',
+            label: 'Digital Assets',
+          },
+          {
+            type: 'docSidebar',
+            position: 'left',
             sidebarId: 'evm',
             label: 'Telos EVM',
           },

@@ -27,7 +27,7 @@
   --ifm-color-primary-lighter: #32d8b4;
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-} */ 
+} */
 
 /**
  * Any CSS included here will be global. The classic template
@@ -106,20 +106,86 @@ html[data-theme='dark'] .DocSearch {
   display: none;
 }
 
-.flex-card-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+.cards-display {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, 250px)
 }
 
-@media (max-width: 800px) {
-  .flex-card-container {
+.card {
+    display: flex;
     flex-direction: column;
-  }
+    align-items: center;
+
+    width: 250px;
+    height: 225px;
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 12px;
+    border-width: 1px;
+    border-style: solid;
 }
 
-.flex-card-item {
-  padding: 50px;
+.card:hover {
+    text-decoration: none;
+    cursor: pointer;
 }
 
+.card:hover .card__content--animation {
+    top: 0;
+    transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
+}
+
+.card:hover .card__img--animation {
+    transform: translateY(-100%);
+    transition: all 0.35s cubic-bezier(.1,.72,.4,.97);
+}
+
+
+.card__img {
+    object-fit: cover;
+    width: 100%;
+    height: 70%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    display: block;
+
+}
+
+.card__img--animation {
+    transform: translateY(0);
+    transition: all 0.35s 0.35s cubic-bezier(.1,.72,.4,.97);
+}
+
+.card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin: 20px;
+
+    position: absolute;
+    top: 70%;
+    left: 0;
+}
+
+.card__content--animation {
+        transform: translateY(0);
+        transition: all 0.35s 0.35s cubic-bezier(.1,.72,.4,.97);
+        will-change: bottom, background-color, transform, padding;
+        z-index: 1;
+}
+
+.card__title {
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.card__description {
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 400;
+}
