@@ -54,6 +54,14 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
+html[data-theme='dark'] main {
+    background: radial-gradient(circle at bottom, rgba(137,64,231,0.2) 0%, var(--ifm-background-color) 40%);
+}
+
+html[data-theme='light'] main {
+    background: radial-gradient(circle at bottom, rgba(137,64,231,0.2) 0%, var(--ifm-background-color) 40%);
+}
+
 html[data-theme='dark'] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
