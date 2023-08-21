@@ -58,7 +58,7 @@ tevmc down
 
 1. `git clone git@github.com:telosnetwork/telos-evm-docker.git`&#x20;
 2. `cd telos-evm-docker`
-3. `git checkout v1.0`
+3. `git checkout v1.5.0`
 4. `pip install -U -e .`&#x20;
 
 `tevmc` can be used as a command line utiliy to manually manage Telos EVM nodes, [but is usable as a library](../tevmc/intro).
