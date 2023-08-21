@@ -1,4 +1,5 @@
 ---
+title: "Quickstart"
 description: >-
   tevmc is a python 3.x library/command line tool to help bootstrap and
   managment of Telos EVM local, testnet and mainnet nodes.
@@ -7,8 +8,6 @@ hide_table_of_contents: true
 ---
 
 # Telos EVM Controller
-
-#### COMING SOON!
 
 ### Requirements
 
@@ -21,10 +20,10 @@ hide_table_of_contents: true
 Thanks to Teo from TelosKoreaBP for this quick rundown:
 
 ```
-## Need installed python version >= python 3.7
+## Need installed python version >= python 3.8
 ## Requires root at the moment.
 
-git clone https://github.com/telosnetwork/telos-evm-docker.git
+git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0
 cd telos-evm-docker
 
 apt-get update && apt-get install python3-venv
@@ -35,7 +34,7 @@ source .venv/bin/activate
 ## just run 'deactivate' when you want to deactivate virtual environment.
 
 pip install pip --upgrade
-pip install -U --no-cache-dir -e . -r requirements.txt
+pip install -U -e .
 
 tevmc init testnet
 cd testnet
@@ -43,13 +42,12 @@ cd testnet
 ## Modify tevmc.json
 ## For mainnet, signer_account, signer_permission, signer_key
 ## Containers use ports of host machine so you need to check the ports if used already.
-tevmc build --headless
-tevmc up
+tevmc build
 
-# Start process to backup logs
-tail -f tevmc.log > backup.tevmc.log &
+## Launch and store logs, also detach from session
+nohup tevmc up 2>&1 > tevmc.log &
 
-## Wait until nodeos synced and hyperion-api activated.
+## Wait until synced and evm-rpc activated.
 ## To stop:
 tevmc down
 ```
@@ -60,8 +58,10 @@ tevmc down
 
 1. `git clone git@github.com:telosnetwork/telos-evm-docker.git`&#x20;
 2. `cd telos-evm-docker`
-3. `git checkout python_toolchain`
+3. `git checkout v1.0`
 4. `pip install -U -e .`&#x20;
+
+`tevmc` can be used as a command line utiliy to manually manage Telos EVM nodes, [but is usable as a library](../tevmc/intro).
 
 Once the package installation finishes, you should be able to invoke:
 
@@ -91,7 +91,7 @@ Inside the directory created by the `init` command you'll see a `docker` directo
 
 From the newly created node directory run:
 
-> `tevmc build --headless`
+> `tevmc build`
 
 The first time you build the images `tevmc` will populate all the different config files in the `docker` directory based of the values in the unified config file. After that it will only re-create the files from templates if it detects changes on `tevmc.json`.
 
@@ -99,9 +99,9 @@ The first time you build the images `tevmc` will populate all the different conf
 
 With the docker images built we can launch the node:
 
-> `tevmc up  # launch daemon on the background`&#x20;
+> `tevmc up  # launch as foreground process Ctrl+C to exit`&#x20;
 >
-> `tevmc up && tevmc wait-init  # launch and stream output until ready` &#x20;
+> `nohup tevmc up 2>&1 > tevmc.log &  # launch as background process` &#x20;
 
 You should eventually see `control point reached!` in the logs, at that point the full node stack should be up and ready to serve requests.
 
@@ -123,10 +123,10 @@ node/
 ├── docker/
 │   ├── beats/
 │   ├── elasticsearch/
-│   ├── eosio/
-│   ├── hyperion/
+│   ├── leap/
+│   ├── telosevm-translator/
+│   ├── telos-evm-rpc/
 │   ├── kibana/
-│   ├── rabbitmq/
 │   └── redis/
 └── tevmc.json
 ```
@@ -141,13 +141,12 @@ Available sources:
 
 * `daemon`&#x20;
 * `redis`
-* `rabbitmq`
 * `beats`
 * `elasticsearch`
 * `kibana`
-* `eosio`
-* `hyperion-indexer`
-* `hyperion-api`
+* `nodeos`
+* `indexer`
+* `rpc`
 
 ### Landing
 
@@ -184,33 +183,33 @@ This will perform graceful `nodeos` stop and bring down all containers.
 #### While in the process of launching the `nodeos` service, it crashes with an error like this one:
 
 ```
-14:40:34:INFO:error 2022-02-09T14:40:34.566 nodeos    main.cpp:163                  main                 ] 3110006 plugin_config_exception: Incorrect plugin configuration
-14:40:34:INFO:Genesis state is necessary to initialize fresh blockchain 
-state but genesis state could not be found in the blocks log. Please either
-load from snapshot or find a blocks log that starts from genesis.
+warn  2023-08-20T19:22:30.845 nodeos    chain_plugin.cpp:1085         plugin_initialize    ] 13 N5boost10wrapexceptINSt3__112sy
+stem_errorEEE: Database dirty flag set
+rethrow Database dirty flag set:
+    {"what":"Database dirty flag set"}
+    nodeos  chain_plugin.cpp:1085 plugin_initialize
+
+error 2023-08-20T19:22:30.845 nodeos    main.cpp:157                  main                 ] database dirty flag set (likely du
+e to unclean shutdown): replay required
 ```
 
-> Usually means `nodeos` data is corrupted due to an ungraceful stop.
+> Usually means `nodeos` data is corrupted due to an ungraceful stop. Run `tevmc repair` from the node directory with the stack down to repair data.
 
 #### Can I start indexing from a custom snapshot?
 
-> Yes set the `snapshot` config on `nodeos` section and also `start_on` on Hyperion section.
+> Yes set the `snapshot` config on `nodeos` section and also `start_block` on `evm-rpc` section.
 
 #### Stack is correctly launched but when running transactions I get an error like this one on `hyperion-api` logs:
 
 ```
-2022-02-10T01:15:37: In raw, tx is: f86c80....                                                                                                                                                                                                    
+2022-02-10T01:15:37: In raw, tx is: f86c80....
 2022-02-10T01:15:37: transaction declares authority 
-'{"actor":"rpc.evm","permission":"rpc"}', but does not have signatures for it.                                                                                                            
+'{"actor":"rpc.evm","permission":"rpc"}', but does not have signatures for it.
 2022-02-10T01:15:37: RPCERROR: 2022-02-10T01:15:37.913Z -
 {"error":{"code":3,"message":"transaction declares authority...
 ```
 
-> Setup correct signing account on `telos-evm` section of Hyperion configuration.
-
-#### Elastichsearch `health` endpoint shows high active shard usage / filebeat's index health is yellow
-
-Change `"index.number_of_replicas"` value from `"1"` to `"0"`&#x20;
+> Setup correct signing account on `telos-evm` section of `evm-rpc` configuration.
 
 #### Is `kubernetes` supported?
 
