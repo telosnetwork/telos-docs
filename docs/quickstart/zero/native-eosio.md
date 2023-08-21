@@ -12,7 +12,7 @@ Developers utilize native Antelope.io software to build applications and work wi
 
 The Telos platform is made up of the following components and toolchain:
 
-- Nodeos: The core Telos node deamon that can be configured with plugins and dockers to run a node. This includes block production, dedicated API endpoints, and local development.
+- Nodeos: The core Telos node daemon that can be configured with plugins and dockers to run a node. This includes block production, dedicated API endpoints, and local development.
 - Cleos: CLI to interact with the blockchain and to manage wallets.
 - Keosd: the component that securely stores Telos keys in wallets.
 - EOSIO.CDT: Toolchain for WebAssembly(Wasm) and a set of tools to facilitate smart contract writing for the Telos Zero blockchain. 

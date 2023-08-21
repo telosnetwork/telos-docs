@@ -141,7 +141,7 @@ Once you have TLOS on your EVM address, you can send it to any Metamask address 
   height="automatic"
 />
 
-4\. Enter the address you wish to send to   .
+4\. Enter the address you wish to send to.
 
 <img
   src={require('/static/img/send_evm3.PNG').default}
