@@ -1,4 +1,8 @@
-<!-- markdownlint-disable -->
+---
+title: "Config"
+hide_table_of_contents: true
+sidebar_position: 9
+---
 
 
 # <kbd>module</kbd> `config`

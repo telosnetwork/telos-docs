@@ -1,3 +1,9 @@
+---
+title: "Management Tips"
+hide_table_of_contents: true
+sidebar_position: 3
+---
+
 # Management Tips
 
 ## Repair broken data

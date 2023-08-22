@@ -1,21 +1,22 @@
 ---
-title: "Quickstart"
+title: "Introduction"
+id: tevmc
 description: >-
   tevmc is a python 3.x library/command line tool to help bootstrap and
   managment of Telos EVM local, testnet and mainnet nodes.
-sidebar_position: 2
 hide_table_of_contents: true
+sidebar_position: 1
 ---
 
 # Telos EVM Controller
 
-### Requirements
+## Requirements
 
 * `git`
 * `docker`
 * `python3`
 
-### Quickstart
+## Quickstart
 
 Thanks to Teo from TelosKoreaBP for this quick rundown:
 
@@ -52,7 +53,7 @@ nohup tevmc up 2>&1 > tevmc.log &
 tevmc down
 ```
 
-### Installation
+## Installation
 
 `tevmc` is a [python installable package](https://docs.python.org/3/installing/index.html), and its currently [available on github](https://github.com/telosnetwork/telos-evm-docker).&#x20;
 
@@ -61,13 +62,13 @@ tevmc down
 3. `git checkout v1.5.0`
 4. `pip install -U -e .`&#x20;
 
-`tevmc` can be used as a command line utiliy to manually manage Telos EVM nodes, [but is usable as a library](../tevmc/intro).
+`tevmc` can be used as a command line utiliy to manually manage Telos EVM nodes, [but is usable as a library](../tevmc/references).
 
 Once the package installation finishes, you should be able to invoke:
 
 * `tevmc --help`
 
-### Initialization
+## Initialization
 
 `tevmc` uses a specific self-contained directory structure for each individual node, to create a new node directory from template use the `init` sub command.
 
@@ -85,7 +86,7 @@ If your node name contains any of this names the corresponding template will be 
 * `tevmc init us-testnet-04  # will use testnet template`
 * `tevmc init rpc.mainnet-07  # will use mainnet template`
 
-### Configuration
+## Configuration
 
 Inside the directory created by the `init` command you'll see a `docker` directory and the unified config file `tevmc.json`.&#x20;
 
@@ -95,7 +96,7 @@ From the newly created node directory run:
 
 The first time you build the images `tevmc` will populate all the different config files in the `docker` directory based of the values in the unified config file. After that it will only re-create the files from templates if it detects changes on `tevmc.json`.
 
-### Bootstrap
+## Bootstrap
 
 With the docker images built we can launch the node:
 
@@ -105,7 +106,7 @@ With the docker images built we can launch the node:
 
 You should eventually see `control point reached!` in the logs, at that point the full node stack should be up and ready to serve requests.
 
-### Where is the data?
+## Where is the data?
 
 The idea is to create self contained node directories, which can be easily moved with the stack down.
 
@@ -116,7 +117,7 @@ Each sub-directory inside main docker path generally contains a combination of t
 * `data` permanent storage kept between runs
 * `logs` log file location
 
-#### Full directory structure
+### Full directory structure
 
 ```
 node/
@@ -131,7 +132,7 @@ node/
 └── tevmc.json
 ```
 
-### Monitoring
+## Monitoring
 
 You can stream logs from any container using the `stream` sub command:
 
@@ -148,7 +149,7 @@ Available sources:
 * `indexer`
 * `rpc`
 
-### Landing
+## Landing
 
 To bring the stack down run:
 
@@ -156,13 +157,13 @@ To bring the stack down run:
 
 This will perform graceful `nodeos` stop and bring down all containers.
 
-### FAQ
+## FAQ
 
-#### Can I use this to process and index both Zero & EVM transactions?
+### Can I use this to process and index both Zero & EVM transactions?
 
 > Yes, but will need to set correct producer keys on `nodeos` and un-whitelist `eosio.evm` on Hyperion config.
 
-#### As  soon as I launch the stack it crashes with an error like this one:
+### As  soon as I launch the stack it crashes with an error like this one:
 
 ```
 07:00:32:WARNING:Starting daemon.
@@ -180,7 +181,7 @@ This will perform graceful `nodeos` stop and bring down all containers.
 
 > This error usually happens when trying to launch a stack without previously running `tevmc build` first.
 
-#### While in the process of launching the `nodeos` service, it crashes with an error like this one:
+### While in the process of launching the `nodeos` service, it crashes with an error like this one:
 
 ```
 warn  2023-08-20T19:22:30.845 nodeos    chain_plugin.cpp:1085         plugin_initialize    ] 13 N5boost10wrapexceptINSt3__112sy
@@ -195,11 +196,11 @@ e to unclean shutdown): replay required
 
 > Usually means `nodeos` data is corrupted due to an ungraceful stop. Run `tevmc repair` from the node directory with the stack down to repair data.
 
-#### Can I start indexing from a custom snapshot?
+### Can I start indexing from a custom snapshot?
 
 > Yes set the `snapshot` config on `nodeos` section and also `start_block` on `evm-rpc` section.
 
-#### Stack is correctly launched but when running transactions I get an error like this one on `hyperion-api` logs:
+### Stack is correctly launched but when running transactions I get an error like this one on `hyperion-api` logs:
 
 ```
 2022-02-10T01:15:37: In raw, tx is: f86c80....
@@ -211,6 +212,6 @@ e to unclean shutdown): replay required
 
 > Setup correct signing account on `telos-evm` section of `evm-rpc` configuration.
 
-#### Is `kubernetes` supported?
+### Is `kubernetes` supported?
 
 > No

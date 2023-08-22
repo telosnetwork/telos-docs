@@ -1,8 +1,10 @@
 ---
-title: "Introduction"
+title: "References"
+hide_table_of_contents: true
+sidebar_position: 2
 ---
 
-# Introduction
+# References
 
 As shown in this diagram, the Telos EVM node is composed of a minimun of five
 diferent services, `tevmc` is a python package that handles:
@@ -20,26 +22,26 @@ diferent services, `tevmc` is a python package that handles:
 ## Modules
 
 - [`config`](./config.md#module-config)
-- [`config.default.local`](./config.default.local.md#module-configdefaultlocal)
-- [`config.default.mainnet`](./config.default.mainnet.md#module-configdefaultmainnet)
-- [`config.default.testnet`](./config.default.testnet.md#module-configdefaulttestnet)
+- [`config.default.local`](./local-template.md#module-configdefaultlocal)
+- [`config.default.mainnet`](./mainnet-template.md#module-configdefaultmainnet)
+- [`config.default.testnet`](./testnet-template.md#module-configdefaulttestnet)
 - [`testing`](./testing.md#module-testing)
-- [`testing.database`](./testing.database.md#module-testingdatabase)
+- [`testing.database`](./testing-database.md#module-testingdatabase)
 - [`utils`](./utils.md#module-utils)
-- [`tevmc`](./tevmc.md#module-tevmc)
+- [`tevmc`](./tevm-controller.md#module-tevmc)
 
 ## Classes
 
-- [`database.ESDuplicatesFound`](./testing.database.md#class-esduplicatesfound)
-- [`database.ESGapFound`](./testing.database.md#class-esgapfound)
-- [`database.ElasticDataIntegrityError`](./testing.database.md#class-elasticdataintegrityerror)
-- [`database.ElasticDriver`](./testing.database.md#class-elasticdriver)
-- [`database.InternalEvmTransaction`](./testing.database.md#class-internalevmtransaction)
-- [`database.StorageEosioAction`](./testing.database.md#class-storageeosioaction)
-- [`database.StorageEosioDelta`](./testing.database.md#class-storageeosiodelta)
-- [`database.StorageEvmTransaction`](./testing.database.md#class-storageevmtransaction)
-- [`tevmc.TEVMCException`](./tevmc.md#class-tevmcexception)
-- [`tevmc.TEVMController`](./tevmc.md#class-tevmcontroller)
+- [`database.ESDuplicatesFound`](./testing-database.md#class-esduplicatesfound)
+- [`database.ESGapFound`](./testing-database.md#class-esgapfound)
+- [`database.ElasticDataIntegrityError`](./testing-database.md#class-elasticdataintegrityerror)
+- [`database.ElasticDriver`](./testing-database.md#class-elasticdriver)
+- [`database.InternalEvmTransaction`](./testing-database.md#class-internalevmtransaction)
+- [`database.StorageEosioAction`](./testing-database.md#class-storageeosioaction)
+- [`database.StorageEosioDelta`](./testing-database.md#class-storageeosiodelta)
+- [`database.StorageEvmTransaction`](./testing-database.md#class-storageevmtransaction)
+- [`tevmc.TEVMCException`](./tevm-controller.md#class-tevmcexception)
+- [`tevmc.TEVMController`](./tevm-controller.md#class-tevmcontroller)
 
 ## Functions
 
@@ -56,9 +58,9 @@ diferent services, `tevmc` is a python package that handles:
 - [`testing.open_web3`](./testing.md#function-open_web3)
 - [`testing.open_websocket_web3`](./testing.md#function-open_websocket_web3)
 - [`testing.tevm_node`](./testing.md#function-tevm_node)
-- [`database.format_block_numbers`](./testing.database.md#function-format_block_numbers)
-- [`database.get_suffix`](./testing.database.md#function-get_suffix)
-- [`database.index_to_suffix_num`](./testing.database.md#function-index_to_suffix_num)
+- [`database.format_block_numbers`](./testing-database.md#function-format_block_numbers)
+- [`database.get_suffix`](./testing-database.md#function-get_suffix)
+- [`database.index_to_suffix_num`](./testing-database.md#function-index_to_suffix_num)
 - [`utils.add_0x_prefix`](./utils.md#function-add_0x_prefix)
 - [`utils.decode_hex`](./utils.md#function-decode_hex)
 - [`utils.docker_stream_logs`](./utils.md#function-docker_stream_logs): Streams logs from a running Docker container.

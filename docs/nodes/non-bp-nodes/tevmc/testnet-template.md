@@ -1,8 +1,12 @@
 ---
 title: "Testnet Template"
+hide_table_of_contents: true
+sidebar_position: 6
 ---
 
-# <kbd>module</kbd> `config.default.testnet`
+# Testnet Template
+
+## <kbd>module</kbd> `config.default.testnet`
 
 ```json
 {

@@ -1,5 +1,8 @@
-<!-- markdownlint-disable -->
-
+---
+title: "Testing"
+hide_table_of_contents: true
+sidebar_position: 7
+---
 
 # <kbd>module</kbd> `testing`
 

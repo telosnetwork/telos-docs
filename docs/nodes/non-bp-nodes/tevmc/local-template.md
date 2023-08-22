@@ -1,8 +1,12 @@
 ---
 title: "Local Template"
+hide_table_of_contents: true
+sidebar_position: 4
 ---
 
-# <kbd>module</kbd> `config.default.local`
+# Local Template
+
+## <kbd>module</kbd> `config.default.local`
 
 ```json
 {

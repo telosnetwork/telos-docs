@@ -1,4 +1,8 @@
-<!-- markdownlint-disable -->
+---
+title: "tEVM Controller"
+hide_table_of_contents: true
+sidebar_position: 8
+---
 
 
 # <kbd>module</kbd> `tevmc`

@@ -1,4 +1,8 @@
-<!-- markdownlint-disable -->
+---
+title: "Utils"
+hide_table_of_contents: true
+sidebar_position: 10
+---
 
 
 # <kbd>module</kbd> `utils`

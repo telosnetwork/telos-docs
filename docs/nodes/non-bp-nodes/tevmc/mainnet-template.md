@@ -1,8 +1,12 @@
 ---
 title: "Mainnet Template"
+hide_table_of_contents: true
+sidebar_position: 5
 ---
 
-# <kbd>module</kbd> `config.default.mainnet`
+# Mainnet Template
+
+## <kbd>module</kbd> `config.default.mainnet`
 
 ```json
 {

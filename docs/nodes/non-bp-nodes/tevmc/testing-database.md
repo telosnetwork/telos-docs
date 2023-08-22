@@ -1,5 +1,8 @@
-<!-- markdownlint-disable -->
-
+---
+title: "Testing Database"
+hide_table_of_contents: true
+sidebar_position: 8
+---
 
 # <kbd>module</kbd> `testing.database`
 
