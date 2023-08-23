@@ -27,15 +27,17 @@ Thanks to Teo from TelosKoreaBP for this quick rundown:
 git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0
 cd telos-evm-docker
 
-apt-get update && apt-get install python3-venv
-python3 -m venv .venv
-source .venv/bin/activate
+# Two posibilities:
+# 1) Recommended: Install poetry python package manager dependecy to /usr/local (REQUIRES SUDO)
+sudo ./install.sh
+
+# 2) Install dependency to another $DIRECTORY that is already on $PATH
+./install.sh $DIRECTORY
+
+source ./activate.sh
 
 ## from now on we are working in the virtual environment.
 ## just run 'deactivate' when you want to deactivate virtual environment.
-
-pip install pip --upgrade
-pip install -U -e .
 
 tevmc init testnet
 cd testnet
@@ -43,7 +45,6 @@ cd testnet
 ## Modify tevmc.json
 ## For mainnet, signer_account, signer_permission, signer_key
 ## Containers use ports of host machine so you need to check the ports if used already.
-tevmc build
 
 ## Launch and store logs, also detach from session
 nohup tevmc up 2>&1 > tevmc.log &
@@ -60,7 +61,8 @@ tevmc down
 1. `git clone git@github.com:telosnetwork/telos-evm-docker.git`&#x20;
 2. `cd telos-evm-docker`
 3. `git checkout v1.5.0`
-4. `pip install -U -e .`&#x20;
+4. `sudo ./install.sh`&#x20;
+5. `source ./activate.sh`
 
 `tevmc` can be used as a command line utiliy to manually manage Telos EVM nodes, [but is usable as a library](../tevmc/references).
 
@@ -90,11 +92,8 @@ If your node name contains any of this names the corresponding template will be 
 
 Inside the directory created by the `init` command you'll see a `docker` directory and the unified config file `tevmc.json`.&#x20;
 
-From the newly created node directory run:
-
-> `tevmc build`
-
-The first time you build the images `tevmc` will populate all the different config files in the `docker` directory based of the values in the unified config file. After that it will only re-create the files from templates if it detects changes on `tevmc.json`.
+On startup `tevmc` will populate all the different config files in the `docker` directory based of the values in the unified config file.
+After that it will only re-create the files from templates if it detects changes on `tevmc.json`.
 
 ## Bootstrap
 
