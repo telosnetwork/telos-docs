@@ -22,7 +22,6 @@ Thanks to Teo from TelosKoreaBP for this quick rundown:
 
 ```
 ## Need installed python version >= python 3.8
-## Requires root at the moment.
 
 git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0
 cd telos-evm-docker
