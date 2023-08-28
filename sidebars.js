@@ -180,6 +180,7 @@ const sidebars = {
       },
     ],
   },
+  'evm/oreid',
   {
     type: 'category',
     label: 'Smart Contracts',
