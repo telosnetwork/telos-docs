@@ -1,10 +1,10 @@
 ---
 sidebar_positon: 2
 hide_table_of_contents: true
-title: Simple User Onboarding With ORE ID
+title: Simple User Onboarding With Telos Cloud Wallet
 ---
 
-# ORE ID 
+# Integrate Telos Cloud Wallet (powered by OreId) into your App
 
 ## Introduction
 

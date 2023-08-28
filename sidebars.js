@@ -180,7 +180,7 @@ const sidebars = {
       },
     ],
   },
-  'evm/oreid',
+  'evm/telos-cloud-wallet',
   {
     type: 'category',
     label: 'Smart Contracts',
