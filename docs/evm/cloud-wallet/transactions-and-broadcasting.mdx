@@ -1,53 +1,34 @@
 ---
-sidebar_positon: 3
+sidebar_positon: 4
 hide_table_of_contents: true
 title: Transactions, Signing, and Broadcasting
 ---
 
-# Integrate Telos Cloud Wallet (powered by OreId) Into your App
+# Calling contract functions
 
-## Introduction
+## Interacting
 
-ORE ID is the universal authentication & authorization platform for blockchain. It works seamlessly on web, mobile, and legacy applications. This documentation focuses on helping developers understand how to utilize the `oreid-js` library to facilitate transaction creation, signing, and broadcasting for users on their platform without the user having to manually manage blockchain complexities.
+In this chapter, we will not only learn how to send TLOS tokens using the Telos Cloud Wallet but also how to execute any function from any contract on the Telos EVM network.
+
+To explain this, we will break down the procedure into three parts. The last two parts are always the same, but the first one defines which contract and method you will be calling, along with the value of TLOS sent.
 
 :::info
 The following information is an extraction from the [OreIdAuth class](https://github.com/telosnetwork/telos-wallet/blob/develop/src/antelope/wallets/authenticators/OreIdAuth.ts) which implements all examples presented in this doc.
 :::
 
-## Installation
 
-First, be sure you have installed the `oreid-js` library. If not, you can do so via npm:
+## *STEP 1*: Creating Transaction Body
 
-```bash
-npm install oreid-js
-```
-
-## Importing Required Dependencies
-
-To start, you will need to import the necessary modules and types from the `oreid-js` package:
-
-```typescript
-import { AuthProvider, ChainNetwork, OreId, OreIdOptions, JSONObject, UserChainAccount } from 'oreid-js';
-```
-
-The type `addressString` is used to ensure a valid blockchain address format:
-
-```typescript
-type addressString = `0x${string}`;
-```
-
-## *STEP 1*: Creating Transaction Bodies
-
-Based on the action (transaction) you intend to execute, you first need to create its body. Here are configurations for several common transaction types:
+Based on the transaction type you intend to execute, you first need to create its body. Here are configurations for several common transaction types:
 
 ### 1. **System Token Transfer**
 
-This is a basic token transfer within the system:
+This is a basic token TLOS transfer within the system:
 
 ```typescript
-const systemTransferBody = {
-    from, // addressString: sender's address
-    to, // addressString: recipient's address
+const systemTransactionBody = {
+    from,   // sender's address
+    to,     // recipient's address
     value,  // amount to transfer, use ethers.BigNumber.toHexString() for conversion
 };
 ```
@@ -57,30 +38,30 @@ const systemTransferBody = {
 To transfer ERC20 tokens:
 
 ```typescript
-const erc20TransferBody = {
-    from, // addressString: sender's address
-    to: token.address, // the contract address of the ERC20 token
+const erc20TransactionBody = {
+    from,                        // sender's address
+    to: token_address,           // the contract address of the ERC20 token
     contract: {
-        abi, // ABI of the ERC20 token contract
-        parameters: [to, value], // parameters needed for the transfer method
-        method: 'transfer', // method name for the ERC20 transfer
+        abi,                     // ABI of the ERC20 token contract
+        parameters: [to, value], // parameters (destination, amount sent)
+        method: 'transfer',      // method name for the ERC20 transfer
     },
 } as unknown as JSONObject;
 ```
 
 ### 3. **Wrap System Token into ERC20 Token**
 
-If you want to wrap your system token into an ERC20 token:
+If you want to wrap your system token TLOS into an ERC20 token WTLOS:
 
 ```typescript
 const wrapTransactionBody = {
-    from, // addressString: sender's address
-    to: wrappedSystemTokenContractAddress, // contract address of the wrapped system token
-    value, // amount to wrap
+    from,                        // sender's address
+    to,                          // contract address of the wrapped system token
+    value,                       // amount to wrap
     contract: {
-        abi, // ABI of the contract
+        abi,                     // ABI of the contract
         parameters: [], 
-        method: 'deposit', // method name for depositing
+        method: 'deposit',       // method name for depositing
     },
 } as unknown as JSONObject;
 ```
@@ -91,12 +72,12 @@ To convert your wrapped ERC20 token back into a system token:
 
 ```typescript
 const unwrapTransactionBody = {
-    from, // addressString: sender's address
-    to: wrappedSystemTokenContractAddress, // contract address of the wrapped system token
+    from,                        // sender's address
+    to,                          // contract address of the wrapped system token
     contract: {
-        abi, // ABI of the contract
-        parameters: [value], // value to unwrap, use ethers.BigNumber.toHexString() for conversion
-        method: 'withdraw', // method name for withdrawing
+        abi,                     // ABI of the contract
+        parameters: [value],     // value to unwrap, use ethers.BigNumber.toHexString() for conversion
+        method: 'withdraw',      // method name for withdrawing
     },
 } as unknown as JSONObject;
 ```
@@ -107,12 +88,12 @@ With the transaction body configured, the next step is to construct the final tr
 
 ```typescript
 const transaction = await oreId.createTransaction({
-    transaction: transactionBody, // use one of the previously created transaction bodies
-    chainAccount: from, // sender's blockchain account address
-    chainNetwork: 'telos.evm', // specify the blockchain network
+    transaction: transactionBody,            // use one of the previously created transaction bodies
+    chainAccount: from,                      // sender's blockchain account address
+    chainNetwork: ChainNetwork.TelosEvmTest, // or ChainNetwork.TelosEvmMain
     signOptions: {
-        broadcast: true, // to effectively send the transaction
-        returnSignedTransaction: true, // to get a response after transaction execution
+        broadcast: true,                     // to effectively send the transaction
+        returnSignedTransaction: true,       // to get a response after transaction execution
     },
 });
 ```
