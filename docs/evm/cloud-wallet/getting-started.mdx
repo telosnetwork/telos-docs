@@ -1,5 +1,5 @@
 ---
-sidebar_positon: 3
+sidebar_positon: 2
 hide_table_of_contents: true
 title: Getting Started
 ---
@@ -24,7 +24,7 @@ If you sign up or create an app through different links you will not be a part o
 To create an app on **Telos EVM**: Click [here](https://oreid.io/developer/partner/new-app?app-group-id=7ec2bdfa-4f3a-47dd-86cd-760c8d905e98) to do so.  
 To create an app on **Telos Zero**: Click [here](https://oreid.io/developer/partner/new-app?app-group-id=native7d-aa42-4477-8f15-4e42ae14b937) to do so.  
 
-For a step by step guide of how to create an account, set up an app, and access your developer dashboard see ORE ID's [docs](https://docs.oreid.io/ore-id/blockchains/telos-cloud-wallet/quickstart).
+For a step by step guide on how to create an account, set up an app, and access your developer dashboard see ORE ID's [docs](https://docs.oreid.io/ore-id/blockchains/telos-cloud-wallet/quickstart).
 
 ### Installation
 
@@ -60,7 +60,7 @@ await oreId.init();
 // here the oreId is ready to use 
 ```
 
-In the appId property you need to specify the id from your app configuration which can be similar to `"t_a4d1e1d175197b379929233ec8c42244"` for test nets or `"p_9233ec919741d18c75a4d4e92b374221"` for main nets.
+In the appId property, you need to specify the id from your app configuration which can be similar to `"t_a4d1e1d175197b379929233ec8c42244"` for test nets or `"p_9233ec919741d18c75a4d4e92b374221"` for main nets.
 
 ### Authenticating the user
 
@@ -98,4 +98,4 @@ const { transactionId } = await oreId.popup.sign({ transaction });
 console.log('transaction hash:', transactionId);
 ```
 
-If you need to implement an interaction with some specific contract, then you may find very useful the next chapter in which we show how to implement most common actions like sending tokens, staking and wrapping.
+If you need to implement an interaction with some specific contract, then you may find very useful the next chapter in which we show how to implement the most common actions like sending tokens, staking, and wrapping.
