@@ -17,11 +17,11 @@ The following information is an extraction from the [OreIdAuth class](https://gi
 :::
 
 
-## *STEP 1*: Creating Transaction Body
+## STEP 1: Creating Transaction Body
 
 Based on the transaction type you intend to execute, you first need to create its body. Here are configurations for several common transaction types:
 
-### 1. **System Token Transfer**
+### System Token Transfer
 
 This is a basic token TLOS transfer within the system:
 
@@ -33,7 +33,7 @@ const systemTransactionBody = {
 };
 ```
 
-### 2. **ERC20 Token Transfer**
+### ERC20 Token Transfer
 
 To transfer ERC20 tokens:
 
@@ -49,7 +49,7 @@ const erc20TransactionBody = {
 } as unknown as JSONObject;
 ```
 
-### 3. **Wrap System Token into ERC20 Token**
+### Wrap System Token into ERC20 Token
 
 If you want to wrap your system token TLOS into an ERC20 token WTLOS:
 
@@ -66,7 +66,7 @@ const wrapTransactionBody = {
 } as unknown as JSONObject;
 ```
 
-### 4. **Unwrap ERC20 Back to System Token**
+### Unwrap ERC20 Back to System Token
 
 To convert your wrapped ERC20 token back into a system token:
 
@@ -82,7 +82,7 @@ const unwrapTransactionBody = {
 } as unknown as JSONObject;
 ```
 
-## *STEP 2*: Constructing the Transaction
+## STEP 2: Constructing the Transaction
 
 With the transaction body configured, the next step is to construct the final transaction structure:
 
@@ -98,7 +98,7 @@ const transaction = await oreId.createTransaction({
 });
 ```
 
-## *STEP 3*: Signing and Broadcasting the Transaction
+## STEP 3: Signing and Broadcasting the Transaction
 
 After constructing the transaction, prompt the user to sign it using a popup:
 
