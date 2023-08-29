@@ -24,12 +24,15 @@ If you sign up or create an app through different links you will not be a part o
 To create an app on **Telos EVM**: Click [here](https://oreid.io/developer/partner/new-app?app-group-id=7ec2bdfa-4f3a-47dd-86cd-760c8d905e98) to do so.  
 To create an app on **Telos Zero**: Click [here](https://oreid.io/developer/partner/new-app?app-group-id=native7d-aa42-4477-8f15-4e42ae14b937) to do so.  
 
-For a step by step gudie of how to create an account, set up an app, and access your developer dashboard see ORE ID's [docs](https://docs.oreid.io/ore-id/blockchains/telos-cloud-wallet/quickstart).
+For a step by step guide of how to create an account, set up an app, and access your developer dashboard see ORE ID's [docs](https://docs.oreid.io/ore-id/blockchains/telos-cloud-wallet/quickstart).
 
 ### Installation
 
-For this integration, you will need the `oreid-js` and `oreid-webpopup` packages, which you can install using Yarn:
+For this integration, you will need the `oreid-js` and `oreid-webpopup` packages, which you can install with yarn:
 
+```bash
+yarn add oreid-js oreid-webpopup
+```
 
 ### Importing Required Dependencies
 
@@ -40,7 +43,7 @@ import { AuthProvider, ChainNetwork, OreId, OreIdOptions, JSONObject, UserChainA
 import { WebPopup } from 'oreid-webpopup';
 ```
 
-### Initialice the library
+### Initialize the library
 
 First, we need to set the configuration to initialize the library. You can specify the app credentials like this:
 
