@@ -59,7 +59,7 @@ const config = {
     {
       src: 'https://cdn.usefathom.com/script.js',
       'data-site': "EKQJAMBV",
-      async: true,
+      defer: true,
     },
   ],
 
