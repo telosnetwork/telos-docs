@@ -55,6 +55,14 @@ const config = {
     ],
   ],
 
+  scripts: [
+    {
+      src: 'https://cdn.usefathom.com/script.js',
+      'data-site': "EKQJAMBV",
+      async: true,
+    },
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
