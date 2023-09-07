@@ -41,10 +41,6 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-        googleAnalytics: {
-          trackingID: 'UA-154600181-4',
-          anonymizeIP: true,
-        },
         sitemap: {
           changefreq: 'weekly',
           priority: 0.5,
@@ -53,6 +49,14 @@ const config = {
         },
       }),
     ],
+  ],
+
+  scripts: [
+    {
+      src: 'https://cdn.usefathom.com/script.js',
+      'data-site': "EKQJAMBV",
+      defer: true,
+    },
   ],
 
   themeConfig:

@@ -36,7 +36,7 @@ You can use the [Testnet Faucet](https://app.telos.net/testnet/developers) to ac
 
 ## Bridging From Other Chains
 
-TLOS is the native coin of the Telos blockchain (like ETH is for Ethereum, BNB is for Binance Smart Chain). TLOS now exists on three blockchains – Telos, Ethereum and BSC. While TLOS is fundamentally used on the Telos blockchain, it is also added on other blockchains for reasons such as liquidity and exposure. They’re pegged 1:1 which means that 1 TLOS on Telos is the same as 1 TLOS on Ethererum (erc20) and BSC (bep20). You can bridge/transfer TLOS between blockchains as per your convenience and needs.
+TLOS is the native coin of the Telos blockchain (like ETH is for Ethereum, BNB is for Binance Smart Chain). TLOS now exists on three blockchains – Telos, Ethereum and BSC. While TLOS is fundamentally used on the Telos blockchain, it is also added on other blockchains for reasons such as liquidity and exposure. They’re pegged 1:1 which means that 1 TLOS on Telos is the same as 1 TLOS on Ethereum (erc20) and BSC (bep20). You can bridge/transfer TLOS between blockchains as per your convenience and needs.
 
 This article describes the two primary methods used to bridge TLOS.
 

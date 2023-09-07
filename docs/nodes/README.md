@@ -30,5 +30,5 @@ If you are interested in running a Telos node or a Dapp developer, you should co
 | [**Requirements for running a Node**](./bp-nodes/Telos_BP_Requirements) | KYC node verification process guide. |
 | [**Nodeos Client Software**](Nodeos) | Learn about Telos client software Nodeos. |
 | [**Run a Telos Node**](./non-bp-nodes/run_a_telos_node) | Walkthrough setup Telos node. |
-| [**Telos EVM Docker**](TEVM-local-guide) | Guide for running a local tEVM implementation. |
+| [**Telos EVM Docker**](./non-bp-nodes/tevmc) | Guide for running a local tEVM implementation. |
 
