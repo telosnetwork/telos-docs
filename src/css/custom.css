@@ -218,6 +218,7 @@ html[data-theme='dark'] .DocSearch {
 .header__text {
     position: relative;
     top: 50%;
+    padding-left: 25px;
     z-index: 10;
     transform: translateY(-50%);
 }
