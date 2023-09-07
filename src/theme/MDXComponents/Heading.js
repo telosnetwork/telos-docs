@@ -19,10 +19,10 @@ export default function MDXHeading(props) {
                         light: HeaderBackgroundLight,
                         dark: HeaderBackgroundDark,
                     }}
-                />;
+                />
                 
             </div>
         )
     }
-    return <Heading {...props} />;
+    return <Heading {...props} />
 }
