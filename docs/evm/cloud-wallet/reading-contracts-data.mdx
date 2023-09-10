@@ -8,13 +8,13 @@ title: Reading Data From a Contract
 
 ## Interacting
 
-On EVM the ontracts may hold data in a private way, which means is not accesible to the public. However, the contracts may have public methods that allow to read the data. These methods are called `view` or `pure` methods. The `view` methods are the ones that read data from the blockchain, while the `pure` methods are the ones that do not read data from the blockchain. Both methods are free to use and do not require any signing.
+On EVM the contracts may hold data in a private way, which means it is not accessible to the public. However, the contracts may have public methods to read the data. These methods are called `view` or `pure` methods. The `view` methods are the ones that read data from the blockchain, while the `pure` methods are the ones that do not read data from the blockchain. Both methods are free to use and do not require any signing.
 
-In order execute a read function, you need to instantiate a contract object and call the method you want to execute. In this chapter we will show how to read the `balanceOf` method from the `ERC20` contract using JsonRpcProvider as the provider for remote access to the blockchain.
+To execute a read function, you need to instantiate a contract object and call the method you want to execute. In this chapter, we will show how to read the `balanceOf` method from the `ERC20` contract using JsonRpcProvider as the provider for remote access to the blockchain.
 
 ### Create the web3 provider
 
-First, we need to create a web3 provider. In this example we will use the `JsonRpcProvider` as the provider for remote access to the blockchain.
+First, we need to create a web3 provider. In this example, we will use the `JsonRpcProvider` as the provider for remote access to the blockchain.
 
 ```typescript
 async web3Provider(): Promise<ethers.providers.Web3Provider> {
@@ -33,7 +33,7 @@ async web3Provider(): Promise<ethers.providers.Web3Provider> {
 
 ### Create the contract object
 
-Then, we need to create a contract object. In this example we will use the `ERC20` contract.
+Then, we need to create a contract object. In this example, we will use the `ERC20` contract.
 
 ```typescript
 const provider = await this.web3Provider();
@@ -46,7 +46,7 @@ const erc20Contract = new ethers.Contract(token, erc20Abi, provider);
 
 ### Call the method
 
-Finally, we need to call the method. In this example we will call the `balanceOf` method.
+Finally, we need to call the method. In this example, we will call the `balanceOf` method.
 
 ```typescript
 const balance: ethers.BigNumber = await erc20Contract.balanceOf(address);
@@ -58,4 +58,4 @@ const balanceNumber: number = ethers.utils.formatUnits(balance, tokenDecimals);
 
 ## Conclusion
 
-In this chapter we have shown how to read data from a contract using the `view` methods, prforming a remote call to the blockchain endpoint through the `JsonRpcProvider` provider. You can execute any `view` or `pure` method from any contract using the same approach. All you need is a provider and the contract ABI.
+In this chapter we have shown how to read data from a contract using the `view` methods, performing a remote call to the blockchain endpoint through the `JsonRpcProvider` provider. You can execute any `view` or `pure` method from any contract using the same approach. All you need is a provider and the contract ABI.
