@@ -70,6 +70,7 @@ const sidebars = {
           'quickstart/evm/getting-tlos',
           'quickstart/evm/metamask_remix',
           'quickstart/evm/create_apps_using_thirdweb',
+          'quickstart/evm/custom_onchain_data_indexing',
         ],
     },
     {   //Zero Section
