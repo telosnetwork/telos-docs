@@ -21,6 +21,8 @@ hide_table_of_contents: true
 
 ## EVM Tools
 
+- [Flair](https://flair.dev/)
+
 - [thirdweb](https://thirdweb.com)
 
 - [Web3.js](https://web3js.readthedocs.io/en/v1.7.4/)
