@@ -27,7 +27,7 @@ The on-chain governance allows any holder of staked TLOS tokens (staked for CPU,
 
 ## Consensus Mechanism
 
-Telos and other modern blockchains are not based on the classic proof of work (PoW) consensus mechanism, which consumes a lot of energy (a wasteful way to run a blockchain). [Ethereum has the carbon footprint of Tanzania](https://digiconomist.net/ethereum-energy-consumption/). The table provides a summary of four mainstream blockchains with its respective consensus mechanism.
+Telos and other modern blockchains are not based on the classic proof of work (PoW) consensus mechanism, which consumes a lot of energy (a wasteful way to run a blockchain). The table provides a summary of four mainstream blockchains with its respective consensus mechanism.
 
 | Blockchain          | Consensus                                                                                                                  |
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
