@@ -192,6 +192,11 @@ const sidebars = {
     ],
   },
   {
+    type: 'link',
+    label: 'Telos EVM Controller',
+    href: '/nodes/non-bp-nodes/tevmc/',
+  },
+  {
     type: 'category',
     label: 'Smart Contracts',
     collapsed: true,
