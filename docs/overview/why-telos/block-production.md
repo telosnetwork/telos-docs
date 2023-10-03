@@ -1,6 +1,6 @@
 ---
 title: "Block Production"
-sidebar_position: 2
+sidebar_position: 5
 hide_table_of_contents: true
 ---
 
@@ -18,35 +18,14 @@ For any block producer motion to propagate, 15 of the 21 block producers in the 
 
 The on-chain governance allows any holder of staked TLOS tokens (staked for CPU, NET or REX) to vote for block producers with the rank determined by the stake-weighted voting of all voters.
 
-| Blockchain          | Active block producers                                                                                                      | Total block producers | Cost of becoming a block producer                                                    |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------| --------------------- | ------------------------------------------------------------------------------------ |
-| Telos               | 21 (+21 standby)                                                                                                            | ≥50                   | No minimum stake                                                                     |
-| Ethereum            | [Top 4 validators control <50% of staked ETH](https://www.coingecko.com/research/publications/ethereum-staking-statistics)  | -                     | [32 ETH](https://ethereum.org/en/staking/)                                           |
-| Binance Smart Chain | [50](https://docs.bnbchain.org/docs/BSC-FAQs-validator)                                                                     | 50                    | [\~250,000 BNB](https://bscscan.com/validators#)                                     |
-| Polygon             | 100                                                                                                                         | 100                   | [10,0000 MATIC](https://wiki.polygon.technology/docs/pos/design/validator/responsibilities/) |
-
 ## Consensus Mechanism
 
 Telos and other modern blockchains are not based on the classic proof of work (PoW) consensus mechanism, which consumes a lot of energy (a wasteful way to run a blockchain). The table provides a summary of four mainstream blockchains with its respective consensus mechanism.
-
-| Blockchain          | Consensus                                                                                                                  |
-| ------------------- | -------------------------------------------------------------------------------------------------------------------------- |
-| Telos               | Delegated Proof of Stake (DPoS)                                                                                            |
-| Ethereum            | Proof of Stake (PoS)                                                                                                       |
-| Binance Smart Chain | Proof of Authority (PoA) [Parlia](https://docs.bnbchain.org/docs/learn/consensus#parlia), inspired by Clique               |
-| Polygon             | Proof of Authority (PoA) [Bor](https://wiki.polygon.technology/docs/pos/design/bor/overview/), inspired by Clique          |
 
 For an in depth discussion on the protocol driving Telos consensus, click [here](../advanced/consensus.md).
 
 ## Block Time
 
 Block times significantly influence the speed of transaction finality and the level of interactivity achievable in dApps. The table provides a summary of four mainstream blockchains with its respective block time.
-
-| Blockchain          | Block time                                                              |
-| ------------------- | ----------------------------------------------------------------------- |
-| Telos               | [500 ms](https://en.wikipedia.org/wiki/EOS.IO) / 2 blocks per second    |
-| Ethereum            | [12-13 seconds](https://ycharts.com/indicators/ethereum_average_block_time)|
-| Binance Smart Chain | [3.0-5.0 seconds](https://www.bscscan.com/chart/blocktime)              |
-| Polygon             | [2.2 seconds](https://explorer-mainnet.maticvigil.com)                  |
 
 For more information on block time, click [here](../advanced/consensus.md).

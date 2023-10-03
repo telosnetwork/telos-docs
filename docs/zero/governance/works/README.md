@@ -11,7 +11,7 @@ hide_table_of_contents: true
 
 At its core Telos Works is a mechanism for funding community projects. The following is a high-level guide to making a simple proposal and how to navigate the platform along the way.
 
-__Telos Works receives 1,000,000 TLOS per month for funding proposals, as per the [TEDP amendment.](https://medium.com/@goodblock\_info/understanding-the-telos-economic-development-plan-bd42d4666374)&#x20;__
+__Telos Works receives ~35,000 TLOS per month for funding proposals&#x20;__
 
 ### 1. Draft a Proposal
 
