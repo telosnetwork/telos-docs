@@ -72,54 +72,65 @@ const config = {
         },
         items: [
           {
-            type: 'docSidebar',
+            type: 'dropdown',
+            label: 'Developer Docs',
             position: 'left',
-            sidebarId: 'overview',
-            label: 'Overview',
+            items: [
+              {
+                type: 'docSidebar',
+                label: 'Overview',
+                sidebarId: 'overview',
+              },
+              {
+                type: 'docSidebar',
+                label: 'Quick Start',
+                sidebarId: 'quickStart',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'digitalAssets',
+                label: 'Digital Assets',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'evm',
+                label: 'Telos EVM',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'zero',
+                label: 'Telos Zero',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'nodes',
+                label: 'Nodes',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'learn',
+                label: 'Learn',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'faq',
+                label: 'FAQ',
+              },
+            ],
+            
           },
           {
-            type: 'docSidebar',
+            type: 'dropdown',
+            label: 'User Guides',
             position: 'left',
-            sidebarId: 'quickStart',
-            label: 'Quick Start',
+            items: [
+              {
+                type: 'docSidebar',
+                sidebarId: 'gettingStarted',
+                label: 'Getting Started',
+              },
+            ],
           },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'digitalAssets',
-            label: 'Digital Assets',
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'evm',
-            label: 'Telos EVM',
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'zero',
-            label: 'Telos Zero',
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'nodes',
-            label: 'Nodes',
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'learn',
-            label: 'Learn',
-          },
-          {
-            type: 'docSidebar',
-            position: 'left',
-            sidebarId: 'faq',
-            label: 'FAQ',
-          },
-
         ],
       },
       footer: {
