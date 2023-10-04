@@ -112,6 +112,12 @@ html[data-theme='dark'] .DocSearch {
     grid-template-columns: repeat(auto-fill, 250px)
 }
 
+.cards-center {
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+}
+
 .card {
     display: flex;
     flex-direction: column;
