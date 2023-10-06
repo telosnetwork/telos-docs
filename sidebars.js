@@ -28,6 +28,7 @@ const sidebars = {
         'overview/what-is-telos/introduction',
         'overview/what-is-telos/evm',
         'overview/what-is-telos/zero',
+        'overview/what-is-telos/token',
         {
           type: 'link',
           label: 'Roadmap',
@@ -191,6 +192,11 @@ const sidebars = {
         dirName: 'evm/cloud-wallet',
       },
     ],
+  },
+  {
+    type: 'link',
+    label: 'Telos EVM Controller',
+    href: '/nodes/non-bp-nodes/tevmc/',
   },
   {
     type: 'category',
