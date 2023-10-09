@@ -1,28 +1,26 @@
 ---
 slug: /
-title: 'Telos'
+title: ' '
 sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-import Card from '@site/src/components/Card/Card'
+import TitleCard from '@site/src/components/TitleCard/TitleCard'
 
-# Welcome To Telos
+<div class="title-cards-center">
 
-<div class="cards-center">
-
-<Card
-    title='Developer Docs'
-    linkUrl='/overview/what-is-telos/introduction'
-    imageUrl={require('/static/img/background1.png').default}
+<TitleCard 
+    colorClass='docs-card'
+    title='Developer Documentation'
     descriptionText='All you need to know to build on Telos and harness its power!'
-/>
+    linkURL='/overview/what-is-telos/introduction'
+/>  
 
-<Card
+<TitleCard 
+    colorClass='users-card'
     title='User Guides'
-    linkUrl='/getting-started/'
-    imageUrl={require('/static/img/background2.png').default}
     descriptionText='Follow along to explore the Telos ecosystem and learn how to navigate through it!'
+    linkURL='/getting-started'
 />
 
 </div>
