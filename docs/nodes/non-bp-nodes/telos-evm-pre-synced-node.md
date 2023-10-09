@@ -4,7 +4,7 @@
 Starting the sync process for a Telos EVM node from the beginning can take several days and sometimes even weeks depending on the bandwidth and power of the system running the sync process. This pre-synced package should cut your sync time to 1 day or less by pre-syncing much of the chain data and offering it up as a download. 
 
 ## Versions in this release
-The following versions of the appropriate software are being run with associated github links
+The following list are the current versions of software running in this pre-packaged release.
 * Telos EVM RPC v1.5 - https://github.com/telosnetwork/telos-evm-rpc
 * Telos EVM Translator v1.5 - https://github.com/telosnetwork/telosevm-translator
 * Elastic Search v8.10.2 - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.10.2-linux-x86_64.tar.gz
