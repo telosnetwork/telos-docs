@@ -196,6 +196,10 @@ html[data-theme='dark'] .DocSearch {
     font-weight: 400;
 }
 
+.home-page-heading {
+  width: 300px;
+}
+
 .title-cards-center {
   display: flex;
   flex-wrap: wrap;
