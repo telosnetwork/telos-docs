@@ -195,7 +195,7 @@ const sidebars = {
   },
   {
     type: 'link',
-    label: 'Telos EVM Controller',
+    label: 'Telos EVM Docker',
     href: '/nodes/non-bp-nodes/tevmc/',
   },
   {
@@ -356,9 +356,10 @@ const sidebars = {
       collapsed: false,
       items: [
           'nodes/non-bp-nodes/run_a_telos_node',
+          'nodes/non-bp-nodes/telos-evm-pre-synced-node',
           {
             type: 'category',
-            label: 'Telos EVM Controller',
+            label: 'Telos EVM Docker',
             collapsed: true,
             items: [
               {
