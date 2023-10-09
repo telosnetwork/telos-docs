@@ -1,10 +1,21 @@
 # Telos EVM Pre-Synced Package
 
+## Intro
+Starting the sync process for a Telos EVM node from the beginning can take several days and sometimes even weeks depending on the bandwidth and power of the system running the sync process. This pre-synced package should cut your sync time to 1 day or less by pre-syncing much of the chain data and offering it up as a download. 
+
+## Versions in this release
+The following versions of the appropriate software are being run with associated github links
+* Telos EVM RPC v1.5 - https://github.com/telosnetwork/telos-evm-rpc
+* Telos EVM Translator v1.5 - https://github.com/telosnetwork/telosevm-translator
+* Elastic Search v8.10.2 - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.10.2-linux-x86_64.tar.gz
+* Nodeos v4.0.4-sub - https://github.com/telosnetwork/leap/releases/tag/v4.0.4-1.0.0-dev
+* Kibana v8.10.2 - https://artifacts.elastic.co/downloads/kibana/kibana-8.10.2-linux-x86_64.tar.gz
+
 ## Recommended Machine Specs: 
 * 1TB SSD (nvme preferred)
 * 32 GB RAM
 * Faster clock speeds preferred over core count
-* As of this writing (October 9, 2023), the uncompressed data is ~335GB.
+* As of this writing (October 8, 2023), the uncompressed data is ~335GB.
 
 ## Prerequisites: 
 * Install redis
