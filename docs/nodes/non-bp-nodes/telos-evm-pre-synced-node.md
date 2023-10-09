@@ -1,10 +1,10 @@
 # Telos EVM Pre-Synced Package
 
 ## Intro
-Starting the sync process for a Telos EVM node from the beginning can take several days and sometimes even weeks depending on the bandwidth and power of the system running the sync process. This pre-synced package should cut your sync time to 1 day or less by pre-syncing much of the chain data and offering it up as a download. 
+Starting the sync process for a Telos EVM node from the beginning can take several days and sometimes even weeks depending on the bandwidth and power of the system running the sync process. This pre-synced package should cut your sync time to 1 day or less by pre-syncing much of the chain data and offering it up as a download. This package assumes you are running Ubuntu Server 22.04. No other OS has been tested. 
 
 ## Versions in this release
-The following list are the current versions of software running in this pre-packaged release.
+The following list is the current versions of software running in this pre-packaged release.
 * Telos EVM RPC v1.5 - https://github.com/telosnetwork/telos-evm-rpc
 * Telos EVM Translator v1.5 - https://github.com/telosnetwork/telosevm-translator
 * Elastic Search v8.10.2 - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.10.2-linux-x86_64.tar.gz
@@ -18,6 +18,7 @@ The following list are the current versions of software running in this pre-pack
 * As of this writing (October 8, 2023), the uncompressed data is ~335GB.
 
 ## Prerequisites: 
+* This package assumes you are running Ubuntu Server 22.04. No other OS has been tested.
 * Install redis
   * `sudo apt install redis`
 * Install Node Version Manager and install Node version 18 along with pm2 and yarn
@@ -65,7 +66,7 @@ Important configuration files are as follows:
   * The Java Heap size has been changed from default here: `/telosevm/elastic/es1/config/jvm.options.d/heap.options` to 24GB. You may modify it as needed.
 * Nodeos
   * /telosevm/nodeos/config.ini
-    * Adjust `agnet-name` as needed.
+    * Adjust `agent-name` as needed.
 * telos-evm-rpc
   * /telosevm/telos-evm-rpc/config.json
 * telosevm-translator
