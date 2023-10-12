@@ -256,6 +256,7 @@ html[data-theme='dark'] .DocSearch {
   grid-template-columns: repeat(auto-fill, 350px)
 }
 
+
 .app-card-container {
   width: 350px;
   height: 450px;
@@ -290,6 +291,11 @@ html[data-theme='dark'] .DocSearch {
   transition: scale 0.6s, rotate 0.6s, filter 1s;
 }
 
+.app-card .app-content .description {
+   max-height: calc(100% - 70px);
+   overflow-y: auto; 
+}
+
 .app-card .app-img-content img {
   width: 50px;
   height: 50px;
@@ -302,7 +308,8 @@ html[data-theme='dark'] .DocSearch {
   top: 0;
   left: 0;
   width: 100%;
-  height: 80%;
+  height: calc(100% - 50px);
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -317,14 +324,16 @@ html[data-theme='dark'] .DocSearch {
   transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
 }
 
+
 .app-card .app-content .app-heading {
   font-size: 32px;
   font-weight: 700;
 }
 
 .app-card:hover .app-content {
-  opacity: 1;
-  transform: translateY(0);
+   opacity: 1;
+   transform: translateY(0);
+   pointer-events: auto;
 }
 
 .app-card:hover .app-img-content {
@@ -338,23 +347,42 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .card-icon {
-  width: 24px; /* Adjust the size as needed */
-  height: 24px; /* Adjust the size as needed */
-  margin: 0 5px; /* Adjust spacing as needed */
-  transition: transform 0.3s ease; /* Add a transition effect for icons */
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  filter: invert(1);
 }
 
 .app-icons {
-  width: 100%;
-  height: 70%;
+  position: absolute; 
+  bottom: 0; 
+  padding-left: 10px;
+  padding-bottom: 10px;
+  width: 100%; 
   display: flex;
-  align-items: center;
-  justify-content: center;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  position: relative;
+  justify-content: left; 
+  opacity: 0; 
+  transition: opacity 0.6s ease; 
 } 
 
-.app-card:hover .app-icon {
-  transform: scale(1.2); /* Increase the size on hover (adjust as needed) */
+.app-card:hover .app-icons {
+  opacity: 1;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
