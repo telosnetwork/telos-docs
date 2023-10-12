@@ -428,6 +428,17 @@ const sidebars = {
     },
   ],
 
+  defi: [
+    {
+      type: 'category',
+      label: 'DeFi',
+      collapsed: false,
+      items: [
+        'defi/defi-ecosystem',
+      ],
+    },
+  ],
+
 
 };
 

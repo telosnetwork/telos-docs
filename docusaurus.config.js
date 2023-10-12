@@ -129,6 +129,11 @@ const config = {
                 sidebarId: 'gettingStarted',
                 label: 'Getting Started',
               },
+              {
+                type: 'docSidebar',
+                sidebarId: 'defi',
+                label: 'DeFi',
+              },
             ],
           },
         ],
