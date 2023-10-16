@@ -405,3 +405,7 @@ html[data-theme='dark'] .DocSearch {
 .app-card ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+a[href=""] {
+  display: none;
+}
