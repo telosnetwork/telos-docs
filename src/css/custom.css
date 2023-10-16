@@ -256,54 +256,7 @@ html[data-theme='dark'] .DocSearch {
   grid-template-columns: repeat(auto-fill, 350px)
 }
 
-
-.app-card-container {
-  width: 350px;
-  height: 450px;
-  position: relative;
-  border-radius: 10px;
-}
-
-.app-card-container::before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(-45deg, #A9DC76 0%, #78DCE8 100% );
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-}
-
-.app-card {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  overflow: hidden;
-}
-
-.app-card .app-img-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(-45deg, #A9DC76 0%, #78DCE8 100% );
-  transition: scale 0.6s, rotate 0.6s, filter 1s;
-}
-
-.app-card .app-content .description {
-   max-height: calc(100% - 70px);
-   overflow-y: auto; 
-}
-
-.app-card .app-img-content img {
-  width: 50px;
-  height: 50px;
-  fill: #212121;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-}
-
-.app-card .app-content {
+.app-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -321,9 +274,75 @@ html[data-theme='dark'] .DocSearch {
   opacity: 0;
   pointer-events: none;
   transform: translateY(50px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.app-card-container {
+  width: 350px;
+  height: 450px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.app-card-container::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #a9dc76 0%, #78dce8 100%);
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+}
+
+.app-card {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+.app-card .app-img-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #a9dc76 0%, #78dce8 100%);
+  transition: scale 0.6s, rotate 0.6s, filter 1s;
+}
+
+.app-card .app-content .description {
+  max-height: calc(100% - 70px);
+  overflow-y: auto;
+}
+
+.app-card .app-img-content img {
+  width: 75px;
+  height: 75px;
+  fill: #212121;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-card .app-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 50px);
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  color: #e8e8e8;
+  padding: 20px 24px;
+  line-height: 1.5;
+
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(50px);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
 
 .app-card .app-content .app-heading {
   font-size: 32px;
@@ -331,15 +350,16 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .app-card:hover .app-content {
-   opacity: 1;
-   transform: translateY(0);
-   pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 .app-card:hover .app-img-content {
   scale: 2.5;
   rotate: 30deg;
-  filter: blur(7px);
+  filter: blur(35px);
+  background: linear-gradient(-45deg, #76bc30 0%, #24c0d3 100%);
 }
 
 .app-card:hover .app-img-content img {
@@ -347,42 +367,41 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .card-icon {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   margin: 0 5px;
-  filter: invert(1);
 }
 
 .app-icons {
-  position: absolute; 
-  bottom: 0; 
+  position: absolute;
+  bottom: 0;
   padding-left: 10px;
   padding-bottom: 10px;
-  width: 100%; 
+  width: 100%;
   display: flex;
-  justify-content: left; 
-  opacity: 0; 
-  transition: opacity 0.6s ease; 
-} 
+  justify-content: left;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
 
 .app-card:hover .app-icons {
   opacity: 1;
 }
 
-::-webkit-scrollbar {
+.app-card ::-webkit-scrollbar {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
+.app-card ::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb {
+.app-card ::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.app-card ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

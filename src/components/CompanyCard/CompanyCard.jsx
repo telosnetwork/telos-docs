@@ -1,6 +1,7 @@
 import React from 'react';
 
-const CompanyCard = ({ appName, logoURL, xURL, websiteURL, description }) => {
+
+const CompanyCard = ({ appName, logoURL, xURL, websiteURL, appURL, description }) => {
     
     return (
         <div className="app-card-container">
@@ -15,8 +16,9 @@ const CompanyCard = ({ appName, logoURL, xURL, websiteURL, description }) => {
                     </p>
                 </div>
             <div className="app-icons">
-                <a href={websiteURL}><img className="card-icon" src="https://cdn-icons-png.flaticon.com/128/1006/1006771.png" /></a>
-                <a href={xURL}><img className="card-icon" src="https://cdn-icons-png.flaticon.com/128/5968/5968958.png" /></a>
+                <a href={websiteURL}><img title="Website" className="card-icon" src={require('/static/img/website-icon-white.png').default} /></a>
+                <a href={appURL}><img title="Application"className="card-icon" src={require('/static/img/app-icon-white.png').default} /></a>
+                <a href={xURL}><img title="X (Twitter)" className="card-icon" src={require('/static/img/x-icon-white.png').default} /></a>
             </div>
         </div>
     </div>
