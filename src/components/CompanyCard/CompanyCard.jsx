@@ -1,13 +1,18 @@
 import React from 'react';
 
 
-const CompanyCard = ({ appName, logo, xURL, websiteURL, appURL, description }) => {
+const CompanyCard = ({ appName, logo, xURL, websiteURL, appURL, description, chain }) => {
     
     return (
-        <div className="app-card-container">
+        <div 
+            className={chain + "-app-card-container"}
+            >
             <div className="app-card">
-                <div className="app-img-content">
+                <div 
+                    className={chain +"-app-img-content"}
+                    >
                     <img src={logo}/>
+                    <img className="corner-image" src={require('/static/img/logos/telos-' + chain + '.png').default} />
                 </div>
                 <div className="app-content">
                     <p className="app-heading">{appName}</p>

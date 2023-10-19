@@ -277,19 +277,36 @@ html[data-theme='dark'] .DocSearch {
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-.app-card-container {
+.evm-app-card-container {
   width: 350px;
   height: 450px;
   position: relative;
   border-radius: 10px;
 }
 
-.app-card-container::before {
+.evm-app-card-container::before {
   content: "";
   z-index: -1;
   position: absolute;
   inset: 0;
-  background: linear-gradient(-45deg, #a9dc76 0%, #78dce8 100%);
+  background: linear-gradient(-45deg, #a9dc76 0%, #3193CD  100%);
+  transform: translate3d(0, 0, 0) scale(0.95);
+  filter: blur(20px);
+}
+
+.zero-app-card-container {
+  width: 350px;
+  height: 450px;
+  position: relative;
+  border-radius: 10px;
+}
+
+.zero-app-card-container::before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
   transform: translate3d(0, 0, 0) scale(0.95);
   filter: blur(20px);
 }
@@ -301,13 +318,23 @@ html[data-theme='dark'] .DocSearch {
   overflow: hidden;
 }
 
-.app-card .app-img-content {
+.app-card .evm-app-img-content {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(-45deg, #a9dc76 0%, #78dce8 100%);
+  background: linear-gradient(-45deg, #a9dc76 0%, #3193CD 100%);
+  transition: scale 0.6s, rotate 0.6s, filter 1s;
+}
+
+.app-card .zero-app-img-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
   transition: scale 0.6s, rotate 0.6s, filter 1s;
 }
 
@@ -316,7 +343,14 @@ html[data-theme='dark'] .DocSearch {
   overflow-y: auto;
 }
 
-.app-card .app-img-content img {
+.app-card .evm-app-img-content img {
+  width: 75px;
+  height: 75px;
+  fill: #212121;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-card .zero-app-img-content img {
   width: 75px;
   height: 75px;
   fill: #212121;
@@ -355,15 +389,52 @@ html[data-theme='dark'] .DocSearch {
   pointer-events: auto;
 }
 
-.app-card:hover .app-img-content {
+.app-card:hover .evm-app-img-content {
   scale: 2.5;
   rotate: 30deg;
   filter: blur(35px);
-  background: linear-gradient(-45deg, #76bc30 0%, #24c0d3 100%);
+  background: linear-gradient(-45deg, #76bc30 0%, #143b52  100%);
 }
 
-.app-card:hover .app-img-content img {
+.app-card:hover .evm-app-img-content img {
   fill: transparent;
+}
+
+.app-card .evm-app-img-content .corner-image {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  height: 30px;
+  width: auto;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-card:hover .evm-app-img-content .corner-image {
+  opacity: 0;
+}
+
+.app-card:hover .zero-app-img-content {
+  scale: 2.5;
+  rotate: 30deg;
+  filter: blur(35px);
+  background: linear-gradient(-45deg, #7b31a7 0%, #143b52 100%);
+}
+
+.app-card:hover .zero-app-img-content img {
+  fill: transparent;
+}
+
+.app-card .zero-app-img-content .corner-image {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  height: 30px;
+  width: auto;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.app-card:hover .zero-app-img-content .corner-image {
+  opacity: 0;
 }
 
 .card-icon {
