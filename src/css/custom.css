@@ -393,7 +393,7 @@ html[data-theme='dark'] .DocSearch {
   scale: 2.5;
   rotate: 30deg;
   filter: blur(35px);
-  background: linear-gradient(-45deg, #76bc30 0%, #143b52  100%);
+  background: linear-gradient(-45deg, #76bc30 0%, #143b52  70%);
 }
 
 .app-card:hover .evm-app-img-content img {
