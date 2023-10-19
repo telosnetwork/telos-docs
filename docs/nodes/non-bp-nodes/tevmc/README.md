@@ -8,7 +8,7 @@ hide_table_of_contents: true
 sidebar_position: 1
 ---
 
-# Telos EVM Controller
+# Telos EVM Docker
 
 ## Requirements
 
