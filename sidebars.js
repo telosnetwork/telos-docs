@@ -420,11 +420,13 @@ const sidebars = {
       items: [
         'getting-started/README',
         'getting-started/setup-wallet',
-        'getting-started/buy-tlos',
+        'getting-started/fund-your-wallet',
         'getting-started/bridging',
-        'getting-started/using-dapps',
-        'getting-started/staking',
-        //'digital-assets/zero-or-evm/evm-wallet',
+        {
+          type: 'link',
+          label: 'Exploring Telos DeFi',
+          href: '../defi/defi-ecosystem',
+        },
       ],
     },
   ],
