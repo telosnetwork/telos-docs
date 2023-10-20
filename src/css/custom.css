@@ -253,7 +253,7 @@ html[data-theme='dark'] .DocSearch {
 .app-cards-display {
   display: grid;
   gap: 25px;
-  grid-template-columns: repeat(auto-fill, 350px)
+  grid-template-columns: repeat(auto-fill, 250px)
 }
 
 .app-content {
@@ -278,8 +278,8 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .evm-app-card-container {
-  width: 350px;
-  height: 450px;
+  width: 250px;
+  height: 350px;
   position: relative;
   border-radius: 10px;
 }
