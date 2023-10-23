@@ -4,16 +4,41 @@ sidebar_position: 3
 hide_table_of_contents: true
 ---
 
+import LinkCard from '@site/src/components/LinkCard/LinkCard'
+
 # Fund Your Wallet
 
 After you’ve created your wallet and added the Telos EVM, it's time to get your hands on some TLOS. The easiest way to purchase TLOS is by using a Fiat onramp such as Topper or Simplex, these solutions allow you to purchase TLOS directly with your credit card. Another alternative is to purchase TLOS on popular exchanges such as KuCoin and Uphold.
 
 ## Centralized Exchanges (CEXs)
 
-- [Kucoin](https://www.kucoin.com/trade/TLOS-USDT)
-- [Gate.io](https://www.gate.io/trade/TLOS_USDT)
-- [Huobi](https://www.huobi.com/en-us/trade/tlos_usdt?type=spot)
-- [Uphold](https://uphold.com/prices/crypto/tlos)
+<div class="link-cards-display">
+
+<LinkCard
+    title="Kucoin"
+    linkURL="https://www.kucoin.com/trade/TLOS-USDT"
+    logo={require('/static/img/logos/kucoin.png').default}
+/>
+
+<LinkCard
+    title="Gate.io"
+    linkURL="https://www.gate.io/trade/TLOS_USDT"
+    logo={require('/static/img/logos/gateio.png').default}
+/>
+
+<LinkCard
+    title="Huobi"
+    linkURL="https://www.huobi.com/en-us/trade/tlos_usdt?type=spot"
+    logo={require('/static/img/logos/huobi.png').default}
+/>
+
+<LinkCard
+    title="Uphold"
+    linkURL="https://uphold.com/prices/crypto/tlos"
+    logo={require('/static/img/logos/uphold.png').default}
+/>
+
+</div>
 
 ### Tutorials:
 
@@ -21,10 +46,24 @@ After you’ve created your wallet and added the Telos EVM, it's time to get you
 
 <iframe width="750" height="422" src="https://www.youtube.com/embed/3DQNvUe22uc" title="Buying $TLOS with Uphold" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## WIDGETS
+## Buying $TLOS on telos.net
 
-- [Simplex](https://telos.net/#buy-tlos-simplex)
-- [Topper](https://telos.net/#buy-tlos-simplex)
+<div class="link-cards-display">
+
+<LinkCard
+    title="Simplex"
+    linkURL="https://telos.net/#buy-tlos-simplex"
+    logo={require('/static/img/logos/simplex.png').default}
+/>
+
+<LinkCard
+    title="Topper"
+    linkURL="https://telos.net/#buy-tlos-simplex"
+    logo={require('/static/img/logos/topper-uphold.png').default}
+/>
+
+</div>
+
 
 ### Tutorials:
 
@@ -38,11 +77,29 @@ After you’ve created your wallet and added the Telos EVM, it's time to get you
 
 ## Decentralized Exchanges (DEXs)
 
-- [Uniswap](https://app.uniswap.org/#/swap?use=V2?inputCurrency=ETH&outputCurrency=0x7825e833d495f3d1c28872415a4aee339d26ac88)
-- [Swapsicle](https://www.swapsicle.io/swap)
-- [Rocketx](https://app.rocketx.exchange/swap/TELOSEVM.telos/ETHEREUM.ethereum/2000?from=Telos&to=Ethereum)
+<div class="link-cards-display">
 
-## Link Your Native Account To An EVM Address
+<LinkCard
+    title="Uniswap"
+    linkURL="https://app.uniswap.org/#/swap?use=V2?inputCurrency=ETH&outputCurrency=0x7825e833d495f3d1c28872415a4aee339d26ac88"
+    logo={require('/static/img/logos/uniswap.png').default}
+/>
+
+<LinkCard
+    title="Swapsicle"
+    linkURL="https://app.swapsicle.io/swap"
+    logo={require('/static/img/logos/swapsicle.png').default}
+/>
+
+<LinkCard
+    title="Rocketx"
+    linkURL="https://app.rocketx.exchange/swap/TELOSEVM.telos/ETHEREUM.ethereum/2000?from=Telos&to=Ethereum"
+    logo={require('/static/img/logos/rocketx.png').default}
+/>
+
+</div>
+
+## **Optional:** Link Your Telos Zero Account To An EVM Address
 
 1. Head to [Telos Wallet](https://wallet.telos.net/)
 2. Click "Connect Wallet", and sign with Anchor.

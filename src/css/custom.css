@@ -177,23 +177,23 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .card__content--animation {
-        transform: translateY(0);
-        transition: all 0.35s 0.35s cubic-bezier(.1,.72,.4,.97);
-        will-change: bottom, background-color, transform, padding;
-        z-index: 1;
+  transform: translateY(0);
+  transition: all 0.35s 0.35s cubic-bezier(.1,.72,.4,.97);
+  will-change: bottom, background-color, transform, padding;
+  z-index: 1;
 }
 
 .card__title {
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 700;
-    text-align: center;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
 }
 
 .card__description {
-    text-decoration: none;
-    font-size: 1rem;
-    font-weight: 400;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .home-page-heading {
@@ -208,13 +208,17 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .title-card {
-  width: 300px;
-  height: 350px;
   padding: 5px;
   border-radius: 1rem;
   overflow: visible;
   position: relative;
   z-index: 1;
+}
+
+.link-cards-display {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fill, 150px);
 }
 
 .title-card-info {
@@ -253,7 +257,7 @@ html[data-theme='dark'] .DocSearch {
 .app-cards-display {
   display: grid;
   gap: 25px;
-  grid-template-columns: repeat(auto-fill, 250px)
+  grid-template-columns: repeat(auto-fill, 250px);
 }
 
 .app-content {
@@ -480,3 +484,61 @@ html[data-theme='dark'] .DocSearch {
 a[href=""] {
   display: none;
 }
+
+.link-card {
+  --background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
+  width: 150px;
+  height: 150px;
+  padding: 4px;
+  border-radius: 1rem;
+  overflow: visible;
+  background: #f7ba2b;
+  background: var(--background);
+  position: relative;
+  z-index: 1;
+ }
+ 
+ .link-card::after {
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  height: 100%;
+  width: 100%;
+  transform: scale(0.8);
+  filter: blur(25px);
+  background: var(--background);
+  transition: opacity .5s;
+ }
+ 
+ .link-card-info {
+  --color: #181818;
+  background: var(--color);
+  color: white;
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  border-radius: .7rem;
+ }
+ 
+ .link-card-info img {
+   width: 75px;
+   height: 75px;
+   margin: auto;
+ }
+ 
+ .link-card-info p{
+   margin: auto;
+ }
+ 
+ .link-card .link-card-title {
+  font-weight: bold;
+  letter-spacing: .1em;
+ }
+ 

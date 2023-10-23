@@ -3,13 +3,28 @@ import React from 'react';
 
 const CompanyCard = ({ appName, logo, xURL, websiteURL, appURL, description, chain }) => {
     
+    var cardContainer
+    var cardContent
+    if (chain == 'evm') {
+        cardContainer = "evm-app-card-container"
+        cardContent = "evm-app-img-content"
+    }
+    else if (chain == 'zero') {
+        cardContainer = "zero-app-card-container"
+        cardContent = "zero-app-img-content"
+    }
+    else {
+        cardContainer = "default-app-card-container"
+        cardContent = "default-app-img-content"
+    }
+
     return (
         <div 
-            className={chain + "-app-card-container"}
+            className={cardContainer}
             >
             <div className="app-card">
                 <div 
-                    className={chain +"-app-img-content"}
+                    className={cardContent}
                     >
                     <img src={logo}/>
                     <img className="corner-image" src={require('/static/img/logos/telos-' + chain + '.png').default} />
