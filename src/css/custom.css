@@ -542,3 +542,8 @@ a[href=""] {
   letter-spacing: .1em;
  }
  
+ .three-pics-display {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fill, 300px);
+}

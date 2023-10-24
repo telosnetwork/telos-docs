@@ -4,11 +4,98 @@ sidebar_position: 4
 hide_table_of_contents: true
 ---
 
-# How to bridge your TLOS ERC20 tokens to Telos EVM using pNetwork
+# Bridging to Telos EVM
+
+## How to bridge with LayerZero
+
+### Step 1
+
+Head to the [Telos Bridge](https://bridge.telos.net/) and press connect at the top right.
+
+<img
+    src={require('/static/img/layerzero/1.png').default}
+    alt="LayerZero Bridge"
+    width="70%"
+    height="automatic"
+/>
+
+### Step 2
+
+Select MetaMask from the list of wallets and connect your wallet.
+
+<img
+    src={require('/static/img/layerzero/2.png').default}
+    alt="LayerZero Bridge"
+    width="35%"
+    height="automatic"
+/>
+
+### Step 3
+
+Select the network you're bridging from and the asset you want to bridge. In this case, we are bridging USDT from Polygon.  Next, be sure to choose Telos EVM as the destination.
+
+<div class="three-pics-display">
+
+<img
+    src={require('/static/img/layerzero/3.png').default}
+    alt="LayerZero Bridge"
+    height="100%"
+    width="automatic"
+/>
+
+<img
+    src={require('/static/img/layerzero/4.png').default}
+    alt="LayerZero Bridge"
+    height="100%"
+    width="automatic"
+/>
+
+<img
+    src={require('/static/img/layerzero/5.png').default}
+    alt="LayerZero Bridge"
+    height="100%"
+    width="automatic"
+/>
+
+</div>
+
+### Step 4
+
+Next, add gas on the destination chain if needed.
+
+:::info
+If it is your first time bridging to Telos, be sure to select the 'Gas on destination' option, you will receive .05 tlos for free for gas fees.
+:::
+
+<img
+    src={require('/static/img/layerzero/6.png').default}
+    alt="LayerZero Bridge"
+    width="35%"
+    height="automatic"
+/>
+
+### Step 5
+
+From there, you can bridge your assets! You may be asked to switch networks in MetaMask to match the chain you are bridging from if you have not already switched.
+
+<img
+    src={require('/static/img/layerzero/7.png').default}
+    alt="LayerZero Bridge"
+    width="35%"
+    height="automatic"
+/>
+
+Congrats, your assets are being bridged and will show up in your Telos EVM wallet soon! 
+
+:::info
+Your assets will be transferred to the same EVM address that you bridged from. So if you have multiple accounts on MetaMask, just be aware of which one you want your assets to be on.
+:::
+
+## How to bridge your TLOS ERC20 tokens to Telos EVM using pNetwork
 
 As of now, some exchanges and fiat on-ramps only have withdraws via ETH chain, this means that users will need to bridge their TLOS from ERC20 to Telos EVM using the [pNetwork](https://dapp.ptokens.io/#/swap). Follow the step-by-step guide below to get started!
 
-## Step 1
+### Step 1
 
 Head to the [pTokens DApp](https://dapp.ptokens.io/#/swap) Swap Page and connect your wallet
 
@@ -21,7 +108,7 @@ Choose Ethereum, then connect your wallet with Metamask
     height="automatic"
 />
 
-# Step 2
+### Step 2
 
 In the “From” swap section, select TLOS on ETHEREUM.
 
@@ -32,7 +119,7 @@ In the “From” swap section, select TLOS on ETHEREUM.
     height="automatic"
 />
 
-# Step 3
+### Step 3
 
 In the “To” swap section, select TLOS on NATIVE.
 
@@ -43,9 +130,9 @@ In the “To” swap section, select TLOS on NATIVE.
     height="automatic"
 />
 
-# Step 4 
+### Step 4 
 
-Enter a Telos EVM destination address and make sure “Recieve on a tEVM (Telos EVM) compatible address” is enabled. Enter the amount you would like to swap, and complete the transaction.
+Enter a Telos EVM destination address and make sure “Recieve on a tEVM (Telos EVM) compatible address” is enabled. Enter the amount you would like to swap and complete the transaction.
 
 <img
     src={require('/static/img/ptokens4.png').default}
