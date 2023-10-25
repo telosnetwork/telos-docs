@@ -196,7 +196,7 @@ const sidebars = {
   {
     type: 'link',
     label: 'Telos EVM Docker',
-    href: '/nodes/non-bp-nodes/tevmc/',
+    href: 'nodes/non-bp-nodes/tevmc/',
   },
   {
     type: 'category',
@@ -407,6 +407,38 @@ const sidebars = {
       type: 'link',
       label: 'Other Questions',
       href: 'https://help.telos.net/',
+    },
+  ],
+
+  // ---- Community Docs ----
+
+  gettingStarted: [
+    {
+      type: 'category',
+      label: 'Getting Started',
+      collapsed: false,
+      items: [
+        'getting-started/README',
+        'getting-started/setup-wallet',
+        'getting-started/fund-your-wallet',
+        'getting-started/bridging',
+        {
+          type: 'link',
+          label: 'Exploring Telos DeFi',
+          href: '../defi/defi-ecosystem',
+        },
+      ],
+    },
+  ],
+
+  defi: [
+    {
+      type: 'category',
+      label: 'DeFi',
+      collapsed: false,
+      items: [
+        'defi/defi-ecosystem',
+      ],
     },
   ],
 
