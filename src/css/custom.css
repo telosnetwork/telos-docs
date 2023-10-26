@@ -138,15 +138,12 @@ html[data-theme='dark'] .DocSearch {
   justify-content: center;
 }
 
-<<<<<<< HEAD
 .cards-center {
   display: flex;
   gap: 50px;
   justify-content: center;
 }
 
-=======
->>>>>>> 41220c5b70108687e7fb0748a76e88e5ccaf0751
 .card {
     display: flex;
     flex-direction: column;
@@ -225,7 +222,6 @@ html[data-theme='dark'] .DocSearch {
   font-weight: 400;
 }
 
-<<<<<<< HEAD
 .header__container {
     position: relative;
     height: 15vh;
@@ -250,56 +246,6 @@ html[data-theme='dark'] .DocSearch {
     height: 100%;
 }
 
-.header__container {
-    position: relative;
-    height: 15vh;
-}
-
-.header__text {
-    position: relative;
-    top: 50%;
-    padding-left: 25px;
-    z-index: 10;
-    transform: translateY(-50%);
-}
-
-.header__image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 0;
-    object-fit: cover;
-
-    width: 100%;
-    height: 100%;
-}
-
-.header__container {
-    position: relative;
-    height: 15vh;
-}
-
-.header__text {
-    position: relative;
-    top: 50%;
-    padding-left: 25px;
-    z-index: 10;
-    transform: translateY(-50%);
-}
-
-.header__image {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 0;
-    object-fit: cover;
-
-    width: 100%;
-    height: 100%;
-}
-
-=======
->>>>>>> 41220c5b70108687e7fb0748a76e88e5ccaf0751
 .home-page-heading {
   width: 300px;
 }
@@ -348,7 +294,6 @@ html[data-theme='dark'] .DocSearch {
   color: white;
   font-weight: 900;
   letter-spacing: .1em;
-<<<<<<< HEAD
 }
 
 .users-card {
@@ -459,118 +404,6 @@ html[data-theme='dark'] .DocSearch {
   transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-=======
-}
-
-.users-card {
-  background: linear-gradient(to left, #A9DC76 0%, #FC9867 100%);
-}
-
-.docs-card {
-  background: linear-gradient(to left, #FC9867 0%, #FF6188 100%);
-}
-
-.app-cards-display {
-  display: grid;
-  gap: 25px;
-  grid-template-columns: repeat(auto-fill, 250px);
-}
-
-.app-content {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: calc(100% - 50px);
-  padding-bottom: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  color: #e8e8e8;
-  padding: 20px 24px;
-  line-height: 1.5;
-  border-radius: 5px;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(50px);
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
-.evm-app-card-container {
-  width: 250px;
-  height: 350px;
-  position: relative;
-  border-radius: 10px;
-}
-
-.evm-app-card-container::before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(-45deg, #a9dc76 0%, #3193CD  100%);
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-}
-
-.zero-app-card-container {
-  width: 350px;
-  height: 450px;
-  position: relative;
-  border-radius: 10px;
-}
-
-.zero-app-card-container::before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
-  transform: translate3d(0, 0, 0) scale(0.95);
-  filter: blur(20px);
-}
-
-.app-card {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
-  overflow: hidden;
-}
-
-.app-card .evm-app-img-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(-45deg, #a9dc76 0%, #3193CD 100%);
-  transition: scale 0.6s, rotate 0.6s, filter 1s;
-}
-
-.app-card .zero-app-img-content {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
-  transition: scale 0.6s, rotate 0.6s, filter 1s;
-}
-
-.app-card .app-content .description {
-  max-height: calc(100% - 70px);
-  overflow-y: auto;
-}
-
-.app-card .evm-app-img-content img {
-  width: 75px;
-  height: 75px;
-  fill: #212121;
-  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-}
-
->>>>>>> 41220c5b70108687e7fb0748a76e88e5ccaf0751
 .app-card .zero-app-img-content img {
   width: 75px;
   height: 75px;
