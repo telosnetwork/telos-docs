@@ -1,0 +1,38 @@
+---
+title: "Modern Features"
+sidebar_position: 2
+hide_table_of_contents: true
+---
+
+# Modern Features
+
+Telos is at the forefront of blockchain innovation, offering a suite of modern features that redefine the capabilities and possibilities of decentralized networks. From its remarkable speed and fee structure to robust frontrunning protection and an arbitration process, Telos is pushing the boundaries of what blockchain technology can achieve.
+
+## Speed
+
+Telos is an industry leader in network speed, capable of processing 15,200 transactions per second (TPS), as validated by Baylor University in an [independent study](https://hellotelos.medium.com/telos-breaking-evm-transaction-records-f7a2a2de098d). With half-second block times, Telos stands as the fastest proven blockchain network globally. This rapid block confirmation rate ensures quick transaction settlement, making Telos highly efficient for a wide range of applications and use cases. Telos' speed ensures fast and reliable transaction processing, eliminating concerns about network speed limitations for your dApp.
+
+## Fees
+
+Telos EVM transactions have a [fee model](../../evm/about/gas-fees.md) similar to the native Ethereum gas model. The EVM account needs to have TLOS tokens to pay for the transaction. Telos EVM fees are typically < 0.1% (1/1000th) of Ethereum gas fees for identical transactions.
+
+Currently, Telos Zero transactions have no fees. Telos Zero fees are set by block producers and voted by token holders.
+
+## Frontrunning Protection
+
+Frontrunning is a situation where miners or bots do a high-frequency trade against the transaction of a genuine buyer causing monetary loss to the buyer. In the crypto space, this is more commonly referred to as miner extracted value, or MEV.  Sandwich Trading is a common form of frontrunning on swap pools that consists of viewing a pending transaction in the mempool and issuing another transaction, buying a large amount of the same transaction to increase the price prior to the genuine buyer's transaction execution followed by a sale afterward.
+
+The net effect is that value is drawn from the genuine buyer. Frontrunning (or MEV) is accomplished either by bots scouring the mempool for transactions and issuing competing trades with much higher gas fees, or more insidiously, with the participation of miners on the Ethereum mainnet who perform the frontrunning with or paid by the bot operators. This may cause millions of dollars of losses for dApp users.
+
+Telos has binding rules for block producers, as described earlier. Any block producer that is caught manipulating transaction order can be blacklisted through on-chain governance. The fast block speed makes it less likely anyone can front-run transactions in a public mempool. Telos Zero, and more importantly Telos EVM, have fixed transaction costs. Unlike other systems, there is no opportunity for one account to pay a higher fee/gas price to get their transaction processed sooner than another user's transaction. As a result, frontrunning is functionally eliminated from Telos and Telos EVM transactions.
+
+
+## Arbitration
+
+Telos has an arbitration process through a body called Telos Arbitration Organization (TAO). There exists a board of arbitrators, elected members voted through TLOS governance. They act independently from block producers. The arbitrators can get involved in dispute cases between Telos users, block producers, and deployed smart contracts. More information about the arbitration process and arbitrators is in the [Telos whitepaper](https://telos.net/wp-content/uploads/2021/02/Telos-Whitepaper-master-20180717.pdf).
+
+The Telos arbitration process has not yet been invoked but is planned for implementation by the end of 2023 or in any case where it proves critical to the network operations. The most common expected case of the invocation would be a large-scale hack or a system failure. Eventually, Telos Arbitration will offer broad conflict resolution services on the Telos blockchain.
+
+To read more about Telos on-chain governance, click [here](https://www.telos.net/governance).
+
+

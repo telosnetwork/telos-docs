@@ -98,7 +98,11 @@ const { transactionId } = await oreId.popup.sign({ transaction });
 console.log('transaction hash:', transactionId);
 ```
 
-If you need to implement an interaction with some specific contract, then you may find very useful the next chapter in which we show how to implement the most common actions like sending tokens, staking, and wrapping.
+If you need to implement a **signed interaction** with some specific contract, then you may find very useful the [next chapter](https://ore-id.telos-docs.pages.dev/evm/cloud-wallet/transactions-and-broadcasting) in which we show how to implement the most common actions requiring user's signing like sending tokens, staking, and wrapping.
+
+However, if you need to read some information from a specific contract, you won't need to interact with the OreId library at all.
+That kind of non-signed interactions are made using a JsonRpcProvider class and we explain with some examples in [this chapter](https://ore-id.telos-docs.pages.dev/evm/cloud-wallet/reading-contracts-data).
+
 
 ## Integrating ORE ID with Web3 Modal
 

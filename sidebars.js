@@ -28,6 +28,7 @@ const sidebars = {
         'overview/what-is-telos/introduction',
         'overview/what-is-telos/evm',
         'overview/what-is-telos/zero',
+        'overview/what-is-telos/token',
         {
           type: 'link',
           label: 'Roadmap',
@@ -70,6 +71,7 @@ const sidebars = {
           'quickstart/evm/getting-tlos',
           'quickstart/evm/metamask_remix',
           'quickstart/evm/create_apps_using_thirdweb',
+          'quickstart/evm/custom_onchain_data_indexing',
         ],
     },
     {   //Zero Section
@@ -190,6 +192,11 @@ const sidebars = {
         dirName: 'evm/cloud-wallet',
       },
     ],
+  },
+  {
+    type: 'link',
+    label: 'Telos EVM Docker',
+    href: 'nodes/non-bp-nodes/tevmc/',
   },
   {
     type: 'category',
@@ -349,9 +356,10 @@ const sidebars = {
       collapsed: false,
       items: [
           'nodes/non-bp-nodes/run_a_telos_node',
+          'nodes/non-bp-nodes/telos-evm-pre-synced-node',
           {
             type: 'category',
-            label: 'Telos EVM Controller',
+            label: 'Telos EVM Docker',
             collapsed: true,
             items: [
               {
@@ -399,6 +407,38 @@ const sidebars = {
       type: 'link',
       label: 'Other Questions',
       href: 'https://help.telos.net/',
+    },
+  ],
+
+  // ---- Community Docs ----
+
+  gettingStarted: [
+    {
+      type: 'category',
+      label: 'Getting Started',
+      collapsed: false,
+      items: [
+        'getting-started/README',
+        'getting-started/setup-wallet',
+        'getting-started/fund-your-wallet',
+        'getting-started/bridging',
+        {
+          type: 'link',
+          label: 'Exploring Telos DeFi',
+          href: '../defi/defi-ecosystem',
+        },
+      ],
+    },
+  ],
+
+  defi: [
+    {
+      type: 'category',
+      label: 'DeFi',
+      collapsed: false,
+      items: [
+        'defi/defi-ecosystem',
+      ],
     },
   ],
 
