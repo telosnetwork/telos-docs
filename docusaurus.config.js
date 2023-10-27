@@ -15,7 +15,7 @@ const config = {
   favicon: 'img/Telos_logo.png',
   organizationName: 'telosnetwork', // Usually your GitHub org/user name.
   projectName:'telos-docs', // Usually your repo name.
-
+  plugins: ['docusaurus-plugin-sass'],
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -46,7 +46,7 @@ const config = {
           priority: 0.5,
           ignorePatterns: ['/tags/**','/index-off','/markdown-page','/my-react-page'],
           filename: 'sitemap.xml',
-        },    
+        },
       }),
     ],
   ],
@@ -200,7 +200,7 @@ const config = {
         appId: 'M49QB996FG',
         apiKey: '781dec423a50110abbe2e262dec95659',
         indexName: 'telos',
-        contextualSearch: true,     
+        contextualSearch: true,
      },
     }),
 };

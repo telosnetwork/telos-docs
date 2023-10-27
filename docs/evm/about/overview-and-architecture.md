@@ -2,12 +2,12 @@
 description: >-
   How EVM on Telos is structured and how it is related to the underlying Telos
   blockchain
-title: "Overview and Architecture"
+title: "Advanced Overview and Architecture"
 sidebar_position: 4
 hide_table_of_contents: true
 ---
 
-# Overview and architecture
+# Advanced Overview and Architecture
 
 ## Introduction
 
@@ -18,6 +18,10 @@ The tEVM improves on the EVM by implementing it’s own version of the EVM. Telo
 EVM transactions, that go through the Telos EVM, will have a fee model similar to the native Ethereum gas model. The Ethereum account needs to have TLOS tokens on their [Telos EVM wallet account](./setup-a-wallet.md) to pay for the transactions (or code execution). Telos EVM fees are fixed at < 0.1% of Ethereum gas fees for identical transactions. No front-running or miner extracted value (MEV) can occur on tEVM due to tEVM’s first-in-first-out mempool structure.&#x20;
 
 The tEVM produces two new blocks every second, which leaves little time for bots to scan the mempool for valuable trades. Furthermore, a fixed-rate gas fee on tEVM transactions means that no one can jump ahead of another person by offering a higher gas fee. Most important of all, Telos is a blockchain that’s governed by its community, with clear rules of what its validators are allowed to do and the penalties for breaking these rules. On Telos, all block producers must process transactions on a first-in-first-out basis, as they receive them. Transactions cannot be reordered for profit.
+
+## Sentnl Approved EVM
+
+The tEVM was meticulously audited and approved by Sentnl ([read more here](https://www.telos.net/news/telos-evm-approved-audit-certificate-received)). The audit conducted by Sentnl on the tEVM led to the discovery of a security vulnerability in the original Go Ethereum (Geth) code illustrating the quality control involved in developing the tEVM.
 
 ## Classical Ethereum Setup
 
@@ -53,7 +57,3 @@ Here are some of the main differences between the Telos EVM and other EVMs such 
 * Gas price is fixed, you can enter a higher price but will only be charged the current set price, you cannot enter a lower price or the transaction will be rejected (no gas charged). This means you cannot front run other transactions or speed yours up, but block times are .5 seconds so there is no need to speed them up.&#x20;
 * Since the EVM is just another smart contract on the Telos blockchain, multiple EVMs can exist on the same chain at the same time. They are differentiated by their Telos account name. They are differentiated by their Telos account name. There is currently only one EVM on Telos, under the “eosio.evm” account name for both mainnet and testnet. &#x20;
 * EVM smart contract uses TLOS token as gas instead of ETH. More can be read on gas fees [here](./gas-fees.md).
-
-## Sentnl Approved EVM
-
-The tEVM was meticulously audited and approved by Sentnl ([read more here](https://www.telos.net/news/telos-evm-approved-audit-certificate-received)). The audit conducted by Sentnl on the tEVM led to the discovery of a security vulnerability in the original Go Ethereum (Geth) code illustrating the quality control involved in developing the tEVM.
