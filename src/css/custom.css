@@ -563,7 +563,7 @@ a[href=""] {
   transition: opacity .5s;
  }
  
- .link-card-info {
+.link-card-info {
   --color: #181818;
   background: var(--color);
   color: white;
@@ -577,22 +577,28 @@ a[href=""] {
   border-radius: .7rem;
  }
  
- .link-card-info img {
+.link-card-info img {
    width: 75px;
    height: 75px;
    margin: auto;
  }
  
- .link-card-info p{
+.link-card-info p{
    margin: auto;
  }
  
- .link-card .link-card-title {
+.link-card .link-card-title {
   font-weight: bold;
   letter-spacing: .1em;
  }
  
- .three-pics-display {
+.three-pics-display {
+  display: grid;
+  gap: 25px;
+  grid-template-columns: repeat(auto-fill, 300px);
+}
+
+.two-pics-display {
   display: grid;
   gap: 25px;
   grid-template-columns: repeat(auto-fill, 300px);
