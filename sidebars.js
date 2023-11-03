@@ -442,6 +442,18 @@ const sidebars = {
     },
   ],
 
+  gaming: [
+    {
+      type: 'category',
+      label: 'Gaming',
+      collapsed: false,
+      items: [
+        'gaming/gaming-ecosystem',
+      ],
+    },
+  ],
+
+
 
 };
 

@@ -349,8 +349,8 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .zero-app-card-container {
-  width: 350px;
-  height: 450px;
+  width: 250px;
+  height: 350px;
   position: relative;
   border-radius: 10px;
 }

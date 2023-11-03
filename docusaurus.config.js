@@ -134,6 +134,11 @@ const config = {
                 sidebarId: 'defi',
                 label: 'DeFi',
               },
+              {
+                type: 'docSidebar',
+                sidebarId: 'gaming',
+                label: 'Gaming',
+              },
             ],
           },
         ],
