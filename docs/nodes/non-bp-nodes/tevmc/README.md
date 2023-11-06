@@ -20,7 +20,6 @@ sidebar_position: 1
 
 ```
 ## Need installed python version >= python 3.8
-## Requires root at the moment.
 
 git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0-rc2
 cd telos-evm-docker
@@ -61,7 +60,7 @@ tevmc down
 3. `git checkout v1.5.0-rc2`
 4. `sudo ./install.sh`&#x20;
 
-To load the virtual envoirment (and make `tevmc` command line available):
+To load the virtual environment (and make `tevmc` command line available):
 
     source ./activate.sh
 
