@@ -18,24 +18,22 @@ sidebar_position: 1
 
 ## Quickstart
 
-Thanks to Teo from TelosKoreaBP for this quick rundown:
-
 ```
 ## Need installed python version >= python 3.8
-## Requires root at the moment.
 
-git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0
+git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0-rc2
 cd telos-evm-docker
 
-apt-get update && apt-get install python3-venv
-python3 -m venv .venv
-source .venv/bin/activate
+# Two posibilities:
+# 1) Recommended: Install poetry python package manager dependecy to /usr/local (REQUIRES SUDO)
+sudo ./install.sh
 
+# 2) Install dependency to another $DIRECTORY that is already on $PATH
+./install.sh $DIRECTORY
+
+source ./activate.sh
 ## from now on we are working in the virtual environment.
 ## just run 'deactivate' when you want to deactivate virtual environment.
-
-pip install pip --upgrade
-pip install -U -e .
 
 tevmc init testnet
 cd testnet
@@ -59,8 +57,12 @@ tevmc down
 
 1. `git clone git@github.com:telosnetwork/telos-evm-docker.git`&#x20;
 2. `cd telos-evm-docker`
-3. `git checkout v1.5.0`
-4. `pip install -U -e .`&#x20;
+3. `git checkout v1.5.0-rc2`
+4. `sudo ./install.sh`&#x20;
+
+To load the virtual environment (and make `tevmc` command line available):
+
+    source ./activate.sh
 
 `tevmc` can be used as a command line utiliy to manually manage Telos EVM nodes, [but is usable as a library](../tevmc/references).
 
