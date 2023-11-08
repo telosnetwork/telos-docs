@@ -134,6 +134,11 @@ const config = {
                 sidebarId: 'defi',
                 label: 'DeFi',
               },
+              {
+                type: 'docSidebar',
+                sidebarId: 'knowledgeBase',
+                label: 'Knowledge Base',
+              },
             ],
           },
         ],
