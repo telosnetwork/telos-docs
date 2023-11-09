@@ -1,0 +1,158 @@
+---
+title: 'How To Change Telos Keys'
+sidebar_position: 7
+hide_table_of_contents: true
+---
+
+# How To Change Telos (or eosio) Keys Using Anchor
+
+:::info
+Save every version of your keys (from Genesis keys to every time you update your keys)  
+You may need to refer back to older versions of your keys for possible future chains
+:::
+
+:::warning
+Never show your Private Key to anyone.  
+Make sure you do not lose your Private Key. If you do not control the private keys, you will lose control of your account!
+:::
+
+## Updating Permissions
+
+You will want to change both the **Active** and **Owner** Permissions on your account. Change one at a time.
+
+1. Download [Anchor](https://greymass.com/en/anchor/download) for Desktop (updating permissions is not supported in the Anchor Mobile App)
+2. Click “Tools” in the Menu
+
+<img
+    src={require('/static/img/anchor/1.png').default}
+    alt="anchor"
+    width="25%"
+    height="automatic"
+/>
+
+3. Under the ‘Securities’ section, click “Manage Keys"
+
+<img
+    src={require('/static/img/anchor/2.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+4. Click “Generate Key Pairs”
+
+<img
+    src={require('/static/img/anchor/3.png').default}
+    alt="anchor"
+    width="35%"
+    height="automatic"
+/>
+
+5. Once you see your two sets of new keys, Click “Copy to clipboard”
+
+<img
+    src={require('/static/img/anchor/4.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+6. Save this key in a secure location. 
+- Write it down offline. Make sure you have the Private Key for the corresponding Public Key written down.
+- The public key always starts with EOS and then the Private Key is right below it.
+- Never show your Private Key to anyone
+- There are many ways you can save your keys, such as:
+  - “Save Keys to Wallet” will save the keys inside Anchor. This is recommended for everyone. Remember to backup your Anchor
+wallet if this is the only place you choose to save your keys.
+  - “Copy to clipboard” allows you to copy and paste the private keys elsewhere on your computer, for example in a text file.
+  - Click on the “eye” which displays your private keys on your screen (careful!) and allows you to write down your private key on a piece of paper. Make sure to double and triple check that your correctly transcribed your key and then store it in a safe location. Anyone who finds this private key controls the account and all the assets in it.
+
+:::info
+Always make sure to have 2 copies of your private keys.
+:::
+
+7. Close this window by clicking the "X" in the top right corner
+8. Click “Tools” in the Menu
+9. Under the ‘Securities’ section, click “Permissions” – on this page you will store your keys
+
+<img
+    src={require('/static/img/anchor/5.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+10. On this page you will see your current active permission (active key) and your current owner permission (owner key)
+
+<img
+    src={require('/static/img/anchor/6.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+:::info
+**Altering Account Permissions**  
+The permissions tool will allow you to specify new Public Keys and set them as the controlling authority of an account. When changing an accounts keys, ensure that you have the associated Private Key backed up someplace safe. Changing the Public Keys on an account to a keypair in which the Private Key is unknown will cause the account to become permanantly inaccessible.
+:::
+
+:::info
+**Access your account**  
+You have two options to access your account:  
+- Your account name @active – only able to change the active permission
+- Your account name @owner – can change both the owner and active permission
+:::
+
+11. Click “Modify” next to the permission you are altering first
+12. Copy and Paste your newly generated Public Key in the block where you see your current active Public Key
+13. Click “Update Permission”
+
+<img
+    src={require('/static/img/anchor/7.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+14. If the transaction is complete, your Public Key has been updated.
+15. Repeat steps 11-13 to modify the Owner Key
+
+:::tip
+You use only your Public Key (starting with EOS) when you change the Active or the Owner Key. You are not inputting your Private Key at this point. 
+:::
+
+After you update your keys, you will need to input your new Private Key to Anchor in order to control the account with the current key setup. 
+
+<img
+    src={require('/static/img/anchor/8.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+## Importing Your New Key
+
+1. Go to Home and click “Manage Wallets”
+
+<img
+    src={require('/static/img/anchor/9.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+2. Click “Import Accounts”
+
+<img
+    src={require('/static/img/anchor/10.png').default}
+    alt="anchor"
+    width="65%"
+    height="automatic"
+/>
+
+3. You can either manually import your account or allow the server to automatically detect it
+4. Use your newly generated Owner Key
+5. Paste your new Private Key
+6. Click “Import Account”
+
+**Congratulations! You have successfully generated a new key pair and can now control your Telos account through your Anchor wallet!**
