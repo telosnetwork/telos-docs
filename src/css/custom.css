@@ -594,7 +594,8 @@ a[href=""] {
   padding: 4px;
   border-radius: 1rem;
   overflow: visible;
-  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
+  /* background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%); */  
+  background: linear-gradient(-45deg, #3393cd 0%, #72c492 100%);
   position: relative;
   z-index: 1;
 }
@@ -607,7 +608,8 @@ a[href=""] {
   right: 0;
   bottom: -5px;
   z-index: -1;
-  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
+  /* background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%); */
+  background: linear-gradient(-45deg, #3393cd 0%, #72c492 100%);
   border-radius: 1rem;
   transform: scale(0.8);
   filter: blur(25px);
@@ -681,6 +683,10 @@ a[href=""] {
   justify-content: left;
 }
 
+.gaming-box-title .links a {
+  display: flex;
+  align-items: center;
+}
 
 .gaming-box-title .links img {
   width: 16px;

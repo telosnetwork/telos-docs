@@ -8,7 +8,7 @@ const GamingCard = ({ gameTitle, elixirLogo, chainLogo, descriptionHeading, desc
                     <h2>{gameTitle}</h2>
                     <div className='links'>
                         <a target="_blank" href={website}><img src={require('/static/img/logos/website-icon.png').default} alt="Website Icon" />Website</a>
-                        <a target="_blank" href={nftPage}><img src={require('/static/img/logos/altura.png').default} alt="NFT Page Icon" />NFT Mint Page</a>
+                        <a target="_blank" href={nftPage}><img src={require('/static/img/logos/altura.png').default} alt="NFT Page Icon" />NFT Collections</a>
                         <a target="_blank" href={elixirPage}><img src={elixirLogo} alt="Elixir Page Icon" />Elixir Page</a>
                     </div>
                     <div className='logos'>
