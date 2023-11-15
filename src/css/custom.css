@@ -589,12 +589,13 @@ a[href=""] {
 .gaming-main-card {
   display: flex;
   flex-direction: row;
+  margin-top: 50px;
+  margin-bottom: 25px;
   width: 90%;
   min-height: 250px;
   padding: 4px;
   border-radius: 1rem;
   overflow: visible;
-  /* background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%); */  
   background: linear-gradient(-45deg, #3393cd 0%, #72c492 100%);
   position: relative;
   z-index: 1;
@@ -608,7 +609,6 @@ a[href=""] {
   right: 0;
   bottom: -5px;
   z-index: -1;
-  /* background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%); */
   background: linear-gradient(-45deg, #3393cd 0%, #72c492 100%);
   border-radius: 1rem;
   transform: scale(0.8);
@@ -616,6 +616,14 @@ a[href=""] {
   height: 100%;
   width: 100%;
   transition: opacity .5s;
+}
+
+.gaming-main-card.zero {
+  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
+}
+
+.gaming-main-card.zero::after {
+  background: linear-gradient(-45deg, #913AC4 0%, #3193CD 100%);
 }
 
 @media (max-width: 600px) {
@@ -641,6 +649,9 @@ a[href=""] {
 .gaming-box-video {
   flex: 1;
   padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .gaming-box-description {
@@ -654,6 +665,13 @@ a[href=""] {
   border-radius: .7rem;
 }
 
+.gaming-box-video img {
+  max-width: 100%;
+  max-height: 235px;
+  object-fit: contain;
+  border-radius: .7rem;
+}
+
 .gaming-box-title {
   flex: 0.4;
   min-height: 225px;
@@ -664,7 +682,7 @@ a[href=""] {
 .gaming-box-title .logos {
   position: absolute;
   bottom: 15px;
-  left: 10px;
+  padding-left: 5px;
   width: 100%;
   display: flex;
   justify-content: left;
@@ -686,6 +704,10 @@ a[href=""] {
 .gaming-box-title .links a {
   display: flex;
   align-items: center;
+}
+
+.gaming-box-title .links a:not([href]) {
+  display: none;
 }
 
 .gaming-box-title .links img {
