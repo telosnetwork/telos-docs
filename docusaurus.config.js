@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/Telos_logo.png',
+  favicon: 'img/fav-icon.svg',
   organizationName: 'telosnetwork', // Usually your GitHub org/user name.
   projectName:'telos-docs', // Usually your repo name.
   plugins: ['docusaurus-plugin-sass'],
@@ -67,8 +67,8 @@ const config = {
         title: '',
         logo: {
           alt: 'Telos Logo',
-          src: 'img/acorn-light.png',
-          srcDark: 'img/acorn-dark.png',
+          src: 'img/logo-light.svg',
+          srcDark: 'img/logo-dark.svg',
         },
         items: [
           {
