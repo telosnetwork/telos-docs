@@ -110,6 +110,14 @@ html[data-theme='dark'] .DocSearch {
   );
 }
 
+html[data-theme='dark'] .navbar__logo {
+  content: url(/img/logo-dark.svg);
+}
+
+html[data-theme='light'] .navbar__logo {
+  content: url(/img/logo-light.svg);
+}
+
 .theme-back-to-top-button {
   display: none;
 }
