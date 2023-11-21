@@ -10,21 +10,18 @@ const TitleCard = ({title, colorClass, descriptionText, linkURL, cardWidth="300p
             href={linkURL}
             style={{width: cardWidth, height: cardHeight}}
             className={"title-card " + " " + colorClass}
-            //style={{zIndex:1, color: darkMode() ? '#ffffff3D' : '#0000003D'}}
         >
             <div 
                 className="title-card-info"
-                
+                style={{color: darkMode() ? 'white' : 'black', background: darkMode() ? '#181818' : 'white'}}
             >
                 <h2 
                     className="title"
-                    //style={{ color: darkMode() ? '#fff' : '#000'}}
                 >
                     {title}
                 </h2>
                 <p 
                     className="content"
-                    //style={{ color: darkMode() ? '#fff' : '#000'}}
                 >
                     {descriptionText}
                 </p>

@@ -409,10 +409,10 @@ const sidebars = {
       label: 'Getting Started',
       collapsed: false,
       items: [
-        'getting-started/README',
-        'getting-started/setup-wallet',
-        'getting-started/fund-your-wallet',
-        'getting-started/bridging',
+        'users/getting-started/README',
+        'users/getting-started/setup-wallet',
+        'users/getting-started/fund-your-wallet',
+        'users/getting-started/bridging',
         {
           type: 'link',
           label: 'Exploring Telos DeFi',
@@ -428,7 +428,7 @@ const sidebars = {
       label: 'DeFi',
       collapsed: false,
       items: [
-        'defi/defi-ecosystem',
+        'users/defi/defi-ecosystem',
       ],
     },
   ],

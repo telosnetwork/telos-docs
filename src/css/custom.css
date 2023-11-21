@@ -110,6 +110,14 @@ html[data-theme='dark'] .DocSearch {
   );
 }
 
+html[data-theme='dark'] .navbar__logo {
+  content: url(/img/logo-dark.svg);
+}
+
+html[data-theme='light'] .navbar__logo {
+  content: url(/img/logo-light.svg);
+}
+
 .theme-back-to-top-button {
   display: none;
 }
@@ -273,7 +281,7 @@ html[data-theme='dark'] .DocSearch {
 
 .title-card-info {
   background: #181818;
-  color: #181818;
+  color: white;
   display: grid;
   justify-content: center;
   align-items: center;
@@ -285,13 +293,11 @@ html[data-theme='dark'] .DocSearch {
 }
 
 .title-card .content {
-  color: white;
   font-weight: bold;
   letter-spacing: .1em;
 }
 
 .title-card .title {
-  color: white;
   font-weight: 900;
   letter-spacing: .1em;
 }

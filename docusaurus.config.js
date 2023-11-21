@@ -57,6 +57,10 @@ const config = {
       'data-site': "EKQJAMBV",
       defer: true,
     },
+    {
+      src: '/themeChanger.js',
+      async: true,
+    },
   ],
 
   themeConfig:
