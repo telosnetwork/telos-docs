@@ -1,12 +1,17 @@
 import React from 'react';
+import { useColorMode } from '@docusaurus/theme-common';
 
 const GamingCard = ({ gameTitle, chain, descriptionText, mediaUrl, mediaType, website, nftPage, elixirPage }) => {
-    
+    const { colorMode, setColorMode } = useColorMode();
+
+    const darkMode = () => colorMode === 'dark';
     const cardClass = chain === 'zero' ? 'gaming-main-card zero' : 'gaming-main-card';
     
     return (
         <div className={cardClass}>
-            <div className='smaller-box'> 
+            <div className='smaller-box'
+                style={{color: darkMode() ? 'white' : 'black', background: darkMode() ? '#181818' : 'white'}}
+            > 
                 <div className="gaming-box-title">
                     <h2>{gameTitle}</h2>
                     <div className='links'>

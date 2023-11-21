@@ -439,7 +439,7 @@ const sidebars = {
       label: 'Gaming',
       collapsed: false,
       items: [
-        'gaming/gaming-ecosystem',
+        'users/gaming/gaming-ecosystem',
       ],
     },
   ],
