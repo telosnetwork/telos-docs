@@ -1,0 +1,109 @@
+---
+sidebar_positon: 2
+hide_table_of_contents: true
+title: Getting Started
+---
+
+
+# Getting Started
+
+This is a quick guide to the steps you need to take to get your app connected to the Telos Cloud Wallet in less than five minutes.
+
+:::info
+The following information is extracted from the [OreIdAuth class](https://github.com/telosnetwork/telos-wallet/blob/develop/src/antelope/wallets/authenticators/OreIdAuth.ts), which implements all the examples presented in this document.
+:::
+
+## Prerequisites
+
+Before getting started you must set up an app with ORE ID through a specific login process to ensure your app will be created in the Telos ecosystem.  
+
+:::danger
+If you sign up or create an app through different links you will not be a part of the Telos ORE ID group and your users will not be able to access your app
+::: 
+
+To create an app on **Telos EVM**: Click [here](https://oreid.io/developer/partner/new-app?app-group-id=7ec2bdfa-4f3a-47dd-86cd-760c8d905e98) to do so.  
+To create an app on **Telos Zero**: Click [here](https://oreid.io/developer/partner/new-app?app-group-id=native7d-aa42-4477-8f15-4e42ae14b937) to do so.  
+
+For a step by step guide on how to create an account, set up an app, and access your developer dashboard see ORE ID's [docs](https://docs.oreid.io/ore-id/blockchains/telos-cloud-wallet/quickstart).
+
+### Installation
+
+For this integration, you will need the `oreid-js` and `oreid-webpopup` packages, which you can install with yarn:
+
+```bash
+yarn add oreid-js oreid-webpopup
+```
+
+### Importing Required Dependencies
+
+To start, you will need to import the necessary utilities and types from the `oreid-js` package:
+
+```typescript
+import { AuthProvider, ChainNetwork, OreId, OreIdOptions, JSONObject, UserChainAccount } from 'oreid-js';
+import { WebPopup } from 'oreid-webpopup';
+```
+
+### Initialize the library
+
+First, we need to set the configuration to initialize the library. You can specify the app credentials like this:
+
+```typescript
+const oreIdOptions: OreIdOptions = {
+    plugins: { popup: WebPopup() },
+    appName: process.env.APP_NAME as string,
+    appId: process.env.APP_OREID_APP_ID as string,
+};
+
+oreId = new OreId(oreIdOptions);
+await oreId.init();
+
+// here the oreId is ready to use 
+```
+
+In the appId property, you need to specify the id from your app configuration which can be similar to `"t_a4d1e1d175197b379929233ec8c42244"` for test nets or `"p_9233ec919741d18c75a4d4e92b374221"` for main nets.
+
+### Authenticating the user
+
+Once the OreId library is initialized successfully, you can open a popup window to authenticate the user using one of the many available providers for the cloud. In this example, we are using `"google"`, which is currently the only available provider.
+
+
+```typescript
+// popup a window to login the user
+await oreId.popup.auth({ provider: "google" as AuthProvider });
+
+// after success you will get the user data from this path
+const userData = await oreId.auth.user.getData();
+console.log('userData', userData);
+```
+
+### Sending Tokens
+
+Once your user is authenticated you can try to send some TLOS tokens as follows:
+
+```typescript
+const transaction = await oreId.createTransaction({
+    transaction: {
+        from,
+        to,
+        value,
+    },
+    chainAccount: from,
+    chainNetwork: ChainNetwork.TelosEvmTest, // or ChainNetwork.TelosEvmMain
+    signOptions: {
+        broadcast: true,                     // to effectively send the transaction
+        returnSignedTransaction: true,       // to get a response after transaction execution
+    },
+});
+const { transactionId } = await oreId.popup.sign({ transaction });
+console.log('transaction hash:', transactionId);
+```
+
+If you need to implement a **signed interaction** with some specific contract, then you may find very useful the [next chapter](https://ore-id.telos-docs.pages.dev/evm/cloud-wallet/transactions-and-broadcasting) in which we show how to implement the most common actions requiring user's signing like sending tokens, staking, and wrapping.
+
+However, if you need to read some information from a specific contract, you won't need to interact with the OreId library at all.
+That kind of non-signed interactions are made using a JsonRpcProvider class and we explain with some examples in [this chapter](https://ore-id.telos-docs.pages.dev/evm/cloud-wallet/reading-contracts-data).
+
+
+## Integrating ORE ID with Web3 Modal
+
+[This guide](https://docs.oreid.io/ore-id/build/features/web3-modal) provides step-by-step instructions for integrating ORE ID via the Web3 Modal into your Dapp.
