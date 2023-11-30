@@ -1,0 +1,51 @@
+---
+hide_table_of_contents: true
+title: "Limit Unlimited Token Allowances"
+sidebar_position: 10
+---
+
+# How to limit unlimited token allowances on tEVM dApps
+
+Combat exploits in allowance depositing. Scan the entire blockchain to find all the dApp allowances associated with your address.  
+One of the Telos Useful Tools is [revoke.telos.net](https://revoke.telos.net/) which grants users the power to revoke allowances when depositing ERC20 tokens through Telos EVM. This guide will explain ERC20 allowances, dangers and how to manage the security of your account.  
+Each transaction requires that a smart contract has access to your wallet to spend the tokens you are investing or swapping. The token allowance is the maximum amount the smart contract has permission to spend from your wallet.
+
+## Why are ERC20 allowances necessary?
+
+To use ERC20 tokens in DeFi protocols such as Uniswap, Aave or Yearn you have to grant the dApp permission to spend tokens on your behalf - and this is known as an ERC20 allowance. These allowances are integral to the functioning of DeFi platforms but can be dangerous if left unchecked.  
+The ERC20 standard allows smart contracts to transfer tokens on behalf of users with the transferFrom() function. To do so, the user needs to allow the smart contract to transfer those tokens on their behalf. This way, a user can deposit tokens into a smart contract, and at the same time, the smart contract can update its state to reflect the deposit.
+
+:::info
+Please note that Uniswap, Aave & Yearn are not developed or operated by Telos
+:::
+
+## Why are unlimited ERC20 allowances harmful?
+
+When depositing a specific amount into a contract, you can choose to set an allowance of an exact amount. But instead, many apps request an unlimited allowance from the user. This offers a superior user experience because the user does not need to approve a new allowance every time they want to deposit tokens. By setting up an unlimited allowance, the user just needs to approve it once, and not repeat the process for subsequent deposits.  
+However, this setup comes with significant drawbacks. 
+
+:::warning
+Bugs can exist and malicious exploiting opportunities arise in established projects. By giving these platforms an unlimited allowance, you do not only expose your deposited funds to these risks but also the tokens that you're holding "safely and protecting" in your wallet.
+:::
+
+## What can users do?
+
+To begin with, since ERC20 allowances are integral to the functioning of many smart contracts, it is not an option to stop approving allowances altogether. But where possible, try to avoid unlimited allowances. 
+
+:::note
+The Telos Core Developers (TCD) are working on a revoke tool that better supports Telos. This tool will enable you to revoke only those permissions that grant direct access to your assets.
+:::
+
+:::info
+Please note that Metamask is not developed or operated by Telos
+:::
+
+### Revoke permissions with MetaMask
+
+In the meantime, follow this method on Metamask:
+
+1. Click the kebab menu (three dots) next to your username.
+2. Select 'connected sites'.
+3. Click 'disconnect' for each app you wish to revoke permissions.
+
+Keep in mind that, unlike a revoke tool, this will revoke all permissions. 

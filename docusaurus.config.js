@@ -12,7 +12,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-  favicon: 'img/fav-icon.svg',
+  favicon: 'img/fav-icon.png',
   organizationName: 'telosnetwork', // Usually your GitHub org/user name.
   projectName:'telos-docs', // Usually your repo name.
   plugins: ['docusaurus-plugin-sass'],
@@ -137,6 +137,11 @@ const config = {
                 type: 'docSidebar',
                 sidebarId: 'defi',
                 label: 'DeFi',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'knowledgeBase',
+                label: 'Knowledge Base',
               },
             ],
           },
