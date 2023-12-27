@@ -57,6 +57,8 @@ hide_table_of_contents: true
 
 - [DIA Oracle (EVM)](https://www.diadata.org/)
 
+- [Supra Oracle](https://supraoracles.com/docs/overview/)
+
 - **TELOS INDEXER API COMING SOON**
 
 ## Demos
