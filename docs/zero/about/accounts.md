@@ -38,7 +38,7 @@ There are various ways to create an Antelope account. Some methods are relativel
 
 
 ### Telos Account Generator
-The easiest way to create an account via [Telos Account Generator](https://www.telos.net/signup)
+The easiest way to create an account via [Telos Account Generator](https://app.telos.net/accounts/add)
 - Enter a preferred account name and the Telos super account will automatically generate an account with key pairs linked to the new account. 
 
 ### Premium Account Name Bidding
