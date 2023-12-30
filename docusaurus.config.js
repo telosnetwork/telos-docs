@@ -155,7 +155,7 @@ const config = {
             items: [
               {
                 label: 'Discord',
-                href: 'https://discord.gg/4PBhQkE8NZ',
+                href: 'https://discord.gg/telos',
               },
               {
                 label: 'Twitter',
