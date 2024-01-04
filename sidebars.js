@@ -402,22 +402,7 @@ const sidebars = {
         'users/getting-started/setup-wallet',
         'users/getting-started/fund-your-wallet',
         'users/getting-started/bridging',
-        {
-          type: 'link',
-          label: 'Exploring Telos DeFi',
-          href: '../defi/defi-ecosystem',
-        },
-      ],
-    },
-  ],
-
-  defi: [
-    {
-      type: 'category',
-      label: 'DeFi',
-      collapsed: false,
-      items: [
-        'users/defi/defi-ecosystem',
+        'users/getting-started/defi-ecosystem'
       ],
     },
   ],
