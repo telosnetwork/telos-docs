@@ -1,0 +1,184 @@
+---
+hide_table_of_contents: true
+title: "Limit Unlimited Token Allowances"
+sidebar_position: 3
+---
+
+# Limit Unlimited Token Allowances on tEVM
+
+It's vital to check and revoke unnecessary allowances that some dApps set by default. Now with the [Telos Web Wallet](https://wallet.telos.net/evm/allowances), this is made incredibly easy to do! This guide will explain ERC20 allowances, their dangers, and how to manage the security of your account.
+
+## Why are ERC20 Allowances Necessary?
+
+To use ERC20 tokens in DeFi protocols you have to grant the dApp permission to spend tokens on your behalf - this is known as an ERC20 allowance. These allowances are integral to the functioning of DeFi platforms but can be dangerous if left unchecked.
+
+## Why are Unlimited ERC20 Allowances Harmful?
+
+When depositing a specific amount with a DeFi protocol, you can choose to set an allowance of an exact amount. But instead, many apps request an unlimited allowance from the user. This offers a superior user experience because the user does not need to approve a new allowance every time they want to deposit tokens. By setting up an unlimited allowance, the user just needs to approve it once, and not repeat the process for subsequent deposits.  
+However, this setup comes with significant drawbacks. 
+
+:::warning
+Bugs can exist and malicious exploiting opportunities can arise even in established projects. By giving these platforms an unlimited allowance, you do not only expose your deposited funds to these risks but also the tokens that you're holding "safely and protected" in your wallet.
+:::
+
+## What Can Users Do?
+
+Now you can easily reduce or revoke allowances through the [Approvals](https://wallet.telos.net/evm/allowances) tool built directly into the Telos Web Wallet.  
+Keep in mind that, since ERC20 allowances are integral to the functioning of many smart contracts within DeFi protocols, it is not an option to stop approving allowances altogether. But where possible, try to avoid unlimited allowances. 
+
+## Reduce Allowances
+
+**1. Go to [Telos Web Wallet](https://wallet.telos.net/evm) and connect your wallet.**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/1.png').default}
+    alt="Approvals"
+    width="30%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**2. Navigate to the Approvals tab on the left menu, or in the hamburger menu if you are on mobile.**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/2.png').default}
+    alt="Approvals"
+    width="80%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**3. Click on the pencil icon on the allowance you want to reduce, for this example, we will reduce the Robinos allowance.**
+
+<br/>
+
+<img
+    src={require('/static/img/approvals/3.png').default}
+    alt="Approvals"
+    width="60%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**4. Enter the amount to reduce the allowance to.**
+
+<br/>
+
+<img
+    src={require('/static/img/approvals/4.png').default}
+    alt="Approvals"
+    width="35%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**5. Approve the transactions.**
+
+<br/>
+
+<img
+    src={require('/static/img/approvals/5.png').default}
+    alt="Approvals"
+    width="30%"
+    height="automatic"
+    style={{marginRight: "15px"}}
+/>
+
+<img
+    src={require('/static/img/approvals/6.png').default}
+    alt="Approvals"
+    width="30%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**6. You're done! That allowance has been changed.**
+
+## Revoke Allowances
+
+**1. Go to [Telos Web Wallet](https://wallet.telos.net/evm) and connect your wallet.**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/1.png').default}
+    alt="Approvals"
+    width="30%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**2. Navigate to the Approvals tab on the left menu, or in the hamburger menu if you are on mobile.**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/2.png').default}
+    alt="Approvals"
+    width="80%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**3. Select the allowances you want to revoke and click "Revoke Selected".**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/rv-1.png').default}
+    alt="Approvals"
+    width="60%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**4. A pop-up will tell you how many more revokes you have to sign.**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/rv-2.png').default}
+    alt="Approvals"
+    width="35%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**5. Sign all the transactions that follow.**
+
+<br/>
+  
+<img
+    src={require('/static/img/approvals/rv-3.png').default}
+    alt="Approvals"
+    width="30%"
+    height="automatic"
+/>
+
+<br/>
+<br/>
+
+**6. You're done! All the selected allowances have been revoked!**
+
