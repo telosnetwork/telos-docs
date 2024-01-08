@@ -71,8 +71,8 @@ const config = {
         title: '',
         logo: {
           alt: 'Telos Logo',
-          src: 'img/logo-light.svg',
-          srcDark: 'img/logo-dark.svg',
+          src: 'img/logo-light.png',
+          srcDark: 'img/logo-dark.png',
         },
         items: [
           {
