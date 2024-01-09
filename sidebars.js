@@ -32,7 +32,7 @@ const sidebars = {
         {
           type: 'link',
           label: 'Roadmap',
-          href: 'https://hellotelos.medium.com/tcd-telos-2023-blockchain-roadmap-unveiled-7334d2661e9e',
+          href: 'https://www.telos.net/roadmap',
         },
       ],
     },
