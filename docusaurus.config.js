@@ -112,11 +112,6 @@ const config = {
               },
               {
                 type: 'docSidebar',
-                sidebarId: 'learn',
-                label: 'Learn',
-              },
-              {
-                type: 'docSidebar',
                 sidebarId: 'faq',
                 label: 'FAQ',
               },
