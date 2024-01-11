@@ -4,132 +4,229 @@ title: "How To Stake TLOS"
 sidebar_position: 2
 ---
 
-# How to stake TLOS: A simple guide with FAQs
+# How To Stake TLOS: A Simple Guide With FAQs
 
-TLOS is the native coin of the Telos Blockchain. You can stake your TLOS coins and earn interest/returns/profits automatically compounded every 30 minutes. The rewards come from a community reserve and are distributed to those who stake their TLOS to REX.
+You can stake your TLOS coins and earn interest/returns/profits automatically compounded every 30 minutes. The rewards come from a community reserve and are distributed to those who stake their TLOS.
 
-The process to stake TLOS to REX is simple. You need to have TLOS on the Telos Blockchain to start.
+The process to stake TLOS is simple. You need to have TLOS on the Telos Blockchain to start.
 
-If you don’t have a Telos account, follow these simple steps. 
+In this guide, we will go over how to stake both on the Telos EVM, as well as on Telos Zero.
 
-There are multiple interfaces to stake TLOS, of which the Open Block Explorer is the primary method. This article shows the process of staking using preferred methods.
+## How To Stake TLOS On The Telos EVM - Liquid Staking
 
-<iframe width="750" height="422" src="https://www.youtube.com/embed/ReNPkA5K0xA" title="How to stake TLOS (~13% APR)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+When you stake your TLOS, you receive sTLOS which is a receipt token. sTLOS liquid staking allows you to remain flexible with your investments while enjoying staking rewards.  
+If you don't have a wallet on Telos EVM, follow our guide [here](/users/getting-started/setup-wallet/)
 
-## Method 1: Staking Using Telos Explorer
-
-The process to stake TLOS to REX is as follows:
-
-### Stake CPU & NET
-
-:::info
-This is not the staking done to earn rewards. Stake only the recommended amount. Staking resources will enable you to perform most of the actions on Telos. You do not need to do this again when you stake to REX in the future.
+:::tip
+Please be aware that a 10-day unstaking timer is applied when removing your funds from sTLOS liquid staking. Once unstaked and sent to the underlying ESCROW contract, you will no longer be able to sell or transfer your tokens.
 :::
 
-1. Go to [explorer.telos.net](https://explorer.telos.net/)
-2. Click the "connect" button in the top right corner
+We will be going over two different ways to stake your TLOS, using the Telos Web Wallet, and using Teloscan.  
+
+Let's start with the recommended way, using Telos Web Wallet.
+
+### Staking Using Telos Web Wallet
+
+1. **Head over to [Telos Web Wallet](https://wallet.telos.net/) and login with your wallet**
 
 <img
-    src={require('/static/img/staking/explorer-1.jpg').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/web-wallet-stake/1.png').default}
+    alt="Web Wallet"
+    width="65%"
     height="automatic"
 />
 
-3. Select the wallet you are using 
-
-- Recommended wallet/signer: Anchor
-
-4. Once your account has been connected, select "Wallet" from the menu
+2. **Navigate to the Staking page**
 
 <img
-    src={require('/static/img/staking/explorer-2.png').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/web-wallet-stake/2.png').default}
+    alt="Web Wallet"
+    width="65%"
     height="automatic"
 />
 
-5. Select "Resources", which will open the 'Manage Resources' page
+<br />
 
 <img
-    src={require('/static/img/staking/explorer-3.png').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/web-wallet-stake/3.png').default}
+    alt="Web Wallet"
+    width="65%"
+    height="automatic"
+/>  
+
+2. **Stake TLOS**
+
+- Enter the amount of $TLOS you want to stake
+- Click "Stake"
+- Sign the transaction
+
+<img
+    src={require('/static/img/web-wallet-stake/4.png').default}
+    alt="Web Wallet"
+    width="65%"
+    height="automatic"
+/>  
+
+**Congrats! Your TLOS is staked and you have received the corresponding amount of sTLOS tokens!**
+
+### Unstaking
+
+1. **Click the "Unstake" tab**
+
+- Enter the amount to unstake
+- Click "Unstake"
+- Sign the transaction
+
+:::info
+Unstaking TLOS will take 10 days
+:::
+
+
+<img
+    src={require('/static/img/web-wallet-stake/5.png').default}
+    alt="Web Wallet"
+    width="65%"
     height="automatic"
 />
 
-6. Enter the amount of TLOS (0.1-0.5 TLOS each recommended) to stake to each CPU and NET
+### Withdrawing
+
+1. **Once your TLOS has been unlocked, you can withdraw your TLOS**
+
+- Click the "Withdraw" tab
+- Enter the amount of TLOS to withdraw
+- Sign the transaction
+- Complete! Your TLOS will now be in your wallet!
+
+**Thanks for using sTLOS liquid staking on the world's fastest EVM!**
+
+### Staking Using Teloscan
+
+1. **Head over to [Teloscan](https://www.teloscan.io)**
+
+2. **Navigate to the staking page**
+
+- Click on the "Burger menu" (top right of the page)
+- Select **Stake Telos**
 
 <img
-    src={require('/static/img/staking/explorer-4.png').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/StakeTelosbutton.png').default}
+    alt="Teloscan"
+    width="65%"
     height="automatic"
 />
 
-7. Click ‘Confirm’ and approve the transaction from your wallet/signer.
-
-### Stake to REX 
-
-1. Return to the 'Wallet' tab on [explorer.telos.net](https://explorer.telos.net/)
-2. Select 'Rex' from the menu, which will open the Rex page
+3. **Connect Wallet**
 
 <img
-    src={require('/static/img/staking/explorer-5.png').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/metamaskSTLOS.png').default}
+    alt="Teloscan"
+    width="65%"
     height="automatic"
 />
 
-3. Enter the amount of Liquid TLOS to Lend and click 'Stake TLOS'
+4. **Input a desired amount you want to lock up and stake.**
 
 <img
-    src={require('/static/img/staking/explorer-6.jpg').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/stake-on-evm.png').default}
+    alt="Teloscan"
+    width="65%"
     height="automatic"
 />
 
-4. Approve the transaction from your wallet/signer.
+5. **Add sTLOS token to your wallet**
 
-Staking complete.
-
-### How do you unstake?
-
-You can unstake any time after a minimum of 4 days.
-
-### Unstaking CPU & NET
-
-1. Select 'Unstake' from the Manage Staking menu
-
+- Add sTLOS to Metamask
+- Click Stake Telos once you're ready
+  
 <img
-    src={require('/static/img/staking/explorer-7.png').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/add_sTLOS_token.png').default}
+    alt="Teloscan"
+    width="65%"
     height="automatic"
 />
 
-2. Enter the amount and click 'Confirm'
-
-### Unstaking Rex
-
-1. Return to the 'Wallet' tab on [explorer.telos.net](https://explorer.telos.net/)
-2. Select 'Rex' from the menu, which will open the Rex page
-3. Enter the amount to Liquid TLOS to Withdraw
-4. Click 'Withdraw'
+6. **Confirm the transaction on Metamask.**
 
 <img
-    src={require('/static/img/staking/explorer-8.jpg').default}
-    alt="explorer"
-    width="35%"
+    src={require('/static/img/stake-tlos-metamask-tx.png').default}
+    alt="Teloscan"
+    width="65%"
     height="automatic"
 />
 
-## Method 2: Staking Using Telos Wallet
+:::info
+**Note: After staking your sTLOS, it will be locked up and earning rewards on a fixed interval of 30 minutes.**
+:::
 
-There is a button for direct staking on Telos Web Wallet.
+### Unstaking
 
-### The process to stake TLOS to REX is as follows:
+1. **Select Unstake Tab**
+
+- To unstake your tokens, enter the amount, then click unstake.
+
+<img
+    src={require('/static/img/Unstake-tlos.png').default}
+    alt="Teloscan"
+    width="65%"
+    height="automatic"
+/>
+
+- Unstaking will swap your sTLOS receipt token for TLOS and transfer it to an ESCROW smart contract. The withdrawn balance will include all rewards. After the defined unstaking period, your TLOS can be claimed.
+
+:::info
+Removing unstaked TLOS from the ECSROW contract is impossible until the unstaking period ends.**
+:::
+
+2. **Unstake confirmation message**
+
+- There will be a confirmation message pop-up that explains the unstaking process. Please read and confirm it.
+
+<img
+    src={require('/static/img/unstaking-confirmation.png').default}
+    alt="Teloscan"
+    width="65%"
+    height="automatic"
+/>
+
+3. **Unstake transaction approval on Metamask**
+
+<img
+    src={require('/static/img/unstake-meta.png').default}
+    alt="Teloscan"
+    width="65%"
+    height="automatic"
+/>
+
+### Withdrawing
+
+:::info
+All matured positions will be claimed in one transaction when the claim button has been clicked and the transaction is confirmed.
+:::
+
+**Select the desired amount to claim**
+
+<img
+    src={require('/static/img/Claim-TLOS.png').default}
+    alt="Teloscan"
+    width="65%"
+    height="automatic"
+/>
+
+- **Authorize the transaction via MetaMask**
+
+**Thanks for using sTLOS liquid staking on the world's fastest EVM!**
+
+
+## How To Stake TLOS On Telos Zero
+
+If you don’t have a Telos account, follow this [video](/users/getting-started/setup-wallet#setting-up-a-telos-wallet-account-telos-zero) to create one. 
+Staking to earn interest on Telos Zero is known as staking to [REX](#what-is-rex-and-what-does-it-mean-to-stake-tlos-to-rex), which is important to note as on Telos Zero there is also staking to CPU, NET, and RAM which are different and covered more in detail [here](/users/knowledge-base/how-to-stake-resources), and in simplified form [here](/users/knowledge-base/web-wallet-resources).
+There are multiple interfaces to stake TLOS. We will be going over two different methods, using the Open Block Explorer, and using the Telos Web Wallet.
+
+### Staking Using Telos Web Wallet
+
+The process to stake TLOS to REX is as follows:
 
 1. Go to your Telos Web Wallet
 2. Select the signer you are using 
@@ -148,53 +245,60 @@ There is a button for direct staking on Telos Web Wallet.
 
 Staking complete.
 
-### How do you unstake?
+### Unstaking
 
+:::info
 You can unstake any time after a minimum of 4 days.
+:::
+
 Click ‘Return Funds’ to unstake.
 
-## Method 3: Staking Using EOS Authority
+### Staking Using Telos Explorer
 
-### The process to stake TLOS to REX is as follows:
+1. **Return to the 'Wallet' tab on [explorer.telos.net](https://explorer.telos.net/)**
 
-1. Go to [https://telos.eosauthority.com](https://telos.eosauthority.com)
-2. Select 'REX'
+- Select 'Rex' from the menu, which will open the Rex page
 
 <img
-    src={require('/static/img/staking/eosauthority-1.png').default}
-    alt="eosauthority"
+    src={require('/static/img/staking/explorer-5.png').default}
+    alt="explorer"
     width="35%"
     height="automatic"
 />
 
-3. Click on '+ Add account' (If you use a wallet/signer, you will need to log into your wallet/signer)
+2. **Enter the amount of Liquid TLOS to Lend and click 'Stake TLOS'**
 
 <img
-    src={require('/static/img/staking/eosauthority-2.png').default}
-    alt="eosauthority"
-    width="20%"
-    height="automatic"
-/>
-
-4. Enter the amount of TLOS to lend to REX
-5. Click 'Lend to REX' (If you used a wallet/signer, you will need to approve the transaction with your wallet/signer)
-
-<img
-    src={require('/static/img/staking/eosauthority-3.png').default}
-    alt="eosauthority"
+    src={require('/static/img/staking/explorer-6.jpg').default}
+    alt="explorer"
     width="35%"
     height="automatic"
 />
 
-### How do you unstake?
+3. **Approve the transaction from your wallet/signer.**
+
+Staking complete.
+
+### Unstaking
 
 You can unstake any time after a minimum of 4 days.
-Click ‘Return Funds’ to unstake.
+
+1. Return to the 'Wallet' tab on [explorer.telos.net](https://explorer.telos.net/)
+2. Select 'Rex' from the menu, which will open the Rex page
+3. Enter the amount to Liquid TLOS to Withdraw
+4. Click 'Withdraw'
+
+<img
+    src={require('/static/img/staking/explorer-8.jpg').default}
+    alt="explorer"
+    width="35%"
+    height="automatic"
+/>
 
 
 ## Frequently Asked Questions:
 
-### How do I create a free Telos account?
+### How do I create a free Telos Zero account?
 
 If you don’t have a Telos account, follow this [guide](/users/getting-started/setup-wallet#setting-up-a-telos-wallet-account-telos-zero).
 
@@ -206,7 +310,7 @@ REX stands for Resource Exchange. It meant lending and borrowing resources such 
 
 A community reserve pays for various purposes which include REX staking.
 
-### Is staking to REX 100% risk-free?
+### Is staking 100% risk-free?
 Yes, you are guaranteed 100% of your initial staking amount in TLOS.
 
 ### Is the rate of interest/APY fixed?
@@ -218,7 +322,7 @@ No, an allocation is set to the REX rewards pool from the community reserve. The
 Yes. TLOS starts to compound after a once-off stake.
 
 ### Can I unstake anytime?
-Yes, a minimum of 4 days after staking.
+Yes, a minimum of 4 days after staking for Telos Zero, and 10 days after staking for Telos EVM.
 
 ### I have my TLOS on Trustwallet/Metamask on Ethereum/BSC. How can I stake?
 
