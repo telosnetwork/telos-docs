@@ -82,13 +82,13 @@ const config = {
             items: [
               {
                 type: 'docSidebar',
-                label: 'Overview',
                 sidebarId: 'overview',
+                label: 'Overview',
               },
               {
                 type: 'docSidebar',
-                label: 'Quick Start',
                 sidebarId: 'quickStart',
+                label: 'Quick Start',
               },
               {
                 type: 'docSidebar',
@@ -104,6 +104,11 @@ const config = {
                 type: 'docSidebar',
                 sidebarId: 'zero',
                 label: 'Telos Zero',
+              },
+              {
+                type: 'docSidebar',
+                sidebarId: 'cloudLogin',
+                label: 'Telos Cloud Login',
               },
               {
                 type: 'docSidebar',

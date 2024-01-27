@@ -1,0 +1,186 @@
+---
+title: Telos Zero
+sidebar_position: 3
+hide_table_of_contents: true
+---
+
+# Telos Cloud for Zero
+
+Unfortunately, for Telos Zero, we do not have a straightforward solution from Metakeep as we do for EVM. Therefore, we need to implement the authentication and transaction processes ourselves.
+
+## Metakeep Instance
+
+The first step is to create a Metakeep instance and then request credentials for the user, from which we will obtain the public key for EOS-type (Antelope) blockchains.
+
+```typescript
+// you should get this user's data from google
+const email = 'user.address@email.com';
+const jwt = 'eyJhbGciOi...eXAiOiJKV1QifQ.eyJpc...kzMTkifQ.p6AJD-s_ZxJbcx-6fY....bJ_ETidA';
+
+// metakeep instance
+const appId = 'fbad055e-802a-18b6-4ae1-626557b9a245';
+metakeep = new MetaKeep({
+    // App id to configure UI
+    appId,
+    // Signed in user's email address
+    user: {
+        email,
+    },
+});
+
+const credentials = await metakeep.getWallet();
+const publicKey = credentials.wallet.eosAddress;
+```
+
+## Account Name Retrieval
+
+Authenticating requires more than just the public key from Metakeep; at least one account on the blockchain must be associated with that public key. You need to find them out.
+
+```typescript
+// we need the account name for the user
+let accountName = '';
+const rpc_endpoint = 'https://api.telos.net';
+
+// first, we fetch all the accounts for the email
+const response = await axios.post(`${rpc_endpoint}/v1/history/get_key_accounts`, {
+    public_key: publicKey,
+});
+const accountExists = response?.data?.account_names.length>0;
+
+if (accountExists) {
+    // for simplicity we take the first one
+    accountName = response.data.account_names[0];
+} else {
+    // we get somehow the desired name from the user
+    const suggestedName = await askTheUserForAnAccountName();
+    // we need to create one account (using the jwt)
+    accountName = await createAccount(publicKey, suggestedName, jwt);
+}
+```
+
+## New Account Creation
+
+We provide an endpoint in the Telos API for creating an account per user with a simple POST request.
+
+```typescript
+async function createAccount(publicKey, suggestedName, jwt) {
+    return axios.post(this.accountCreateAPI, {
+        ownerKey: publicKey,
+        activeKey: publicKey,
+        jwt,
+        suggestedName: suggestedName,
+    }).then(response => response.data.accountName);
+}
+```
+
+## Sending a Token
+Sending a token involves three steps: constructing the transaction, signing it with Metakeep, and broadcasting it to the blockchain. To do so, we will relay heavily on the great `'@greymass/eosio'` library.
+
+### Create the Transaction
+We create a specific object structure containing the raw transaction to be signed, formatted for the Metakeep service.
+
+
+```typescript
+import { APIClient, NameType, PackedTransaction, Serializer, Transaction } from '@greymass/eosio';
+const eosioCore = new APIClient({ url: rpc.endpoint });
+
+// expire time in seconds
+const expireSeconds = 120;
+
+// Retrieve transaction headers
+const info = await eosioCore.v1.chain.get_info();
+const header = info.getTransactionHeader(expireSeconds);
+
+// collect all contract abis
+const abi_promises = originalTransaction.actions.map((a: { account: NameType; }) =>
+    eosioCore.v1.chain.get_abi(a.account),
+);
+const responses = await Promise.all(abi_promises);
+const abis = responses.map(x => x.abi);
+const abis_and_names = originalTransaction.actions.map((x: { account: any; }, i: number) => ({
+    contract: x.account,
+    abi: abis[i],
+}));
+
+// create complete well formed transaction
+const transaction = Transaction.from(
+    {
+        ...header,
+        actions: originalTransaction.actions,
+    },
+    abis_and_names,
+);
+
+const expiration = transaction.expiration.toString();
+const ref_block_num = transaction.ref_block_num.toNumber();
+const ref_block_prefix = transaction.ref_block_prefix.toNumber();
+
+// convert actions to JSON
+const actions = transaction.actions.map(a => ({
+    account: a.account.toJSON(),
+    name: a.name.toJSON(),
+    authorization: a.authorization.map((x: { actor: any; permission: any; }) => ({
+        actor: x.actor.toJSON(),
+        permission: x.permission.toJSON(),
+    })),
+    data: a.data.toJSON(),
+}));
+
+// compose the complete transaction
+const chainId = '4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11'; // Telos mainnet
+const complete_transaction = {
+    rawTransaction: {
+        expiration: expiration,
+        ref_block_num: ref_block_num,
+        ref_block_prefix: ref_block_prefix,
+        max_net_usage_words: 0,
+        max_cpu_usage_ms: 0,
+        delay_sec: 0,
+        context_free_actions: [],
+        actions: actions,
+        transaction_extensions: [],
+    },
+    extraSigningData: {
+        chainId,
+    },
+};
+```
+
+### Sign the Transaction
+
+Once we have the transaction object, we invoke Metakeep's service to sign it on behalf of the user, which will prompt the user to confirm or reject the signing through an interactive popup.
+
+
+```typescript
+// sign the transaction with metakeep
+const reason = 'sign this transaction';
+const response = await metakeep.signTransaction(complete_transaction, reason);
+const signature = response.signature;
+```
+
+### Broadcasting the Transaction
+
+Even after signing, the transaction has not yet been sent and processed by the blockchain, so we must implement this ourselves.
+
+
+```typescript
+// Pack the transaction for transport
+const packedTransaction = PackedTransaction.from({
+    signatures: [signature],
+    packed_context_free_data: '',
+    packed_trx: Serializer.encode({ object: transaction }),
+});
+
+// Broadcast the signed transaction to the blockchain
+const pushResponse = await eosioCore.v1.chain.push_transaction(
+    packedTransaction,
+);
+
+// we compose the final response
+const finalResponse/*: SignTransactionResponse*/ = {
+    wasBroadcast: true,
+    transactionId: pushResponse.transaction_id,
+    status: pushResponse.processed.receipt.status,
+    transaction: packedTransaction,
+};
+```

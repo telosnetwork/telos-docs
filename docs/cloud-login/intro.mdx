@@ -1,0 +1,23 @@
+---
+title: "Introduction"
+sidebar_position: 1
+hide_table_of_contents: true
+---
+
+# Telos Cloud Login
+
+## Overview
+
+**Telos Cloud Login** offers a seamless access for non-crypto users to enter the web3 space. By utilizing Google for authentication, users can interact with web3 applications by signing transactions on a blockchain without the need to handle private keys or create accounts themselves.
+
+## How Does It Work?
+
+At its core, the functionality relies on a third-party service from the Metakeep group, which is responsible for securely managing user keys while also signing transactions on their behalf. Each web3 application will authenticate the user using Google to obtain their email along with their JWT token. These credentials are then used to delegate the transaction signing to Metakeep.
+
+## EVM vs Zero
+
+Integrating **Telos Cloud Login** for EVM is significantly more straightforward for two primary reasons:
+  1. Account creation is not necessary. The public key provided by Metakeep already serves as the immutable account identifier.
+  2. Metakeep offers a web3Provider similar to those injected by MetaMask and other compatible wallets, making the integration process almost identical.
+
+On the other hand, interaction with Telos Zero presents more complexity due to the Antelope architecture's unique aspects. For starters, it is necessary to associate a public key provided by Metakeep with an account since in Antelope, a public key can be linked to multiple accounts or none at all. Additionally, there isn't a ready-to-use solution from Metakeep for Telos Zero as there is for EVM, thus requiring developers to handle transaction construction, signature requests, and broadcasting.
