@@ -6,24 +6,26 @@ hide_table_of_contents: true
 
 # Creating A Wallet
 
-To get started in the Telos ecosystem you’ll need a cryptocurrency wallet. A wallet allows you to securely store your assets and interact with dApps (Decentralized Applications) within the Telos ecosystem.
+To get started in the Telos ecosystem you’ll need a cryptocurrency wallet. A wallet allows you to securely store your assets and interact with dApps (Decentralized Applications) within the Telos ecosystem. The two primary wallets/signers we suggest using are Metamask and Anchor. Below you will find step-by-step guides to creating these wallets and connecting with Telos. 
 
 ## Wallet Options
 
-We will be going over two different options for wallets on Telos. Each wallet is recommended based on your experience and comfort level with crypto.
 
-### MetaMask (Telos EVM)
+<div class="wallet-container">
+  <a href="/users/getting-started/setup-wallet#metamask-a-wallet-for-telos-evm" class="clickable-a">
+    <img src={require('/static/img/metamask-button.png').default} alt="Metamask button"/>
+    <div>MetaMask: A Wallet For Telos EVM</div>
+  </a>
+  
+  <a href="/users/getting-started/setup-wallet#anchor-a-signer-for-telos-zero" class="clickable-a">
+    <img src={require('/static/img/anchor-button.png').default} alt="Anchor Button"/>
+    <div>Anchor: A Signer For Telos Zero</div>
+  </a>
+</div>
 
-[MetaMask](/users/getting-started/setup-wallet#metamask) is an industry-standard and is used across all EVMs. **If you have experience in crypto or already use MetaMask**, then this is a great option for you.
+## MetaMask: A Wallet For Telos EVM
 
-### Anchor (Telos Zero)
-
-[Anchor](/users/getting-started/setup-wallet#setting-up-a-telos-wallet-account-telos-zero) is the most popular wallet signer for Telos Zero. If you are more **advanced in your crypto knowledge or want to take full advantage of the power that Telos has**, this is a great option for you.
-
-
-## MetaMask
-
-Telos EVM fully supports MetaMask, a leading wallet for Ethereum based blockchains.
+Telos EVM fully supports MetaMask, a leading wallet for Ethereum-based blockchains.
 
 ### Step I - Install MetaMask
 
@@ -72,6 +74,78 @@ If your private key/ seed phrase is lost or stolen you lose control over your ac
 With the network added you can now enjoy what the tEVM ecosystem has to offer! We are sure you'll love the instant speeds, cheap transactions and the lack of front running. 
 
 
-## Setting up a Telos Wallet Account (Telos Zero)
+## Anchor: A Signer For Telos Zero
 
-<iframe width="750" height="422" src="https://www.youtube.com/embed/i-2Ari0QPJ0" title="How To: Set up a Telos Zero account &amp; wallet" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+Since Anchor is a signer and not a wallet, we will be using it in tandem with the Telos Web Wallet.
+
+### Step I - Create a New Account
+
+1. Go to [Telos Wallet](https://wallet.telos.net/)
+2. Click the "TELOS ZERO" tab
+3. Click "Create a New Account".
+4. Choose an account name. 
+5. Save & store your public and private key somewhere safe. 
+6. Press continue to create the account!
+
+<img
+    src={require('/static/img/zero-setup-1.png').default}
+    alt="Example 2"
+    width="70%"
+    height="automatic"
+/>
+
+:::info
+Telos account names must be 12 characters long and can only contain letters a-z, and numbers 1-5.
+:::
+
+:::danger
+If your private key is lost or stolen you lose control over your account and wallet. Please keep your key/s safe!
+:::
+
+### Step II - Get Anchor To Sign For Your Transactions
+
+1. Download Anchor [here](https://www.greymass.com/anchor#download)
+2. Open Anchor and click "Add account".
+3. Click "Import private key".
+
+<img
+    src={require('/static/img/zero-setup-2.png').default}
+    alt="Example 2"
+    width="70%"
+    height="automatic"
+/>
+
+4. Paste in the private key we saved from earlier.
+5. Select the account to import.
+6. Confirm the account, choose your security settings and click "Import account".
+
+<img
+    src={require('/static/img/zero-setup-3.png').default}
+    alt="Example 2"
+    width="70%"
+    height="automatic"
+/>
+
+
+:::info
+Anchor isn't a wallet. It is used to authenticate all transactions and interactions you may make with dApps on the native Telos ecosystem.
+In the example, we are using the mobile app version. Desktop versions are similar.
+:::
+
+### Step III - Log Into The Telos Web Wallet
+
+1. Head back to [Telos Wallet](https://wallet.telos.net/)
+2. Click the "TELOS ZERO" tab
+3. Click "Anchor".
+4. Now use Anchor to authenticate and log in to your Telos wallet.
+
+<img
+    src={require('/static/img/zero-setup-4.png').default}
+    alt="Example 2"
+    width="70%"
+    height="automatic"
+ />
+
+:::info
+With the Telos Web Wallet, you can send, receive, stake and more! 
+:::
