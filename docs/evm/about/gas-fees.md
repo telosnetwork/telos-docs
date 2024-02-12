@@ -24,7 +24,7 @@ Transactions will contain two gas related values:
 
 ## Fee Beneficiary
 
-The fees collected as part of EVM gas billing are sent to a fees account as part of every transaction. These fees will be added back to the network reserve, which currently is where validator pay, REX rewards and other funding is sourced from.  This helps Telos to be a more sustainable tokenomic model.
+The fees collected as part of EVM gas billing are sent to a fees account as part of every transaction. As of [TIP3](https://app.telos.net/trails/ballot/tip.35.gov/1707780214676), these fees will be burned on a monthly schedule. This helps Telos achieve a sustainable tokenomics model.
 
 ## Example of Standard Transfer
 
