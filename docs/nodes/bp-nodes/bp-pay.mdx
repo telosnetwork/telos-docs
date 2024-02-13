@@ -1,0 +1,36 @@
+---
+title: "Block Producer Pay"
+sidebar_position: 4
+hide_table_of_contents: true
+---
+
+# Telos Block Producer Pay Structure
+
+## Introduction
+
+The current pay structure for Block Producers and Validators within the Telos network has been established through a community-approved proposal, aiming to ensure a balanced and sustainable compensation model. This model dynamically adjusts payments in line with the TLOS token's market value, promoting network growth and stability. For detailed insights into the proposal that shaped this pay model, visit [the proposal documentation](https://kquainta.medium.com/telos-network-validator-sustainable-pay-proposal-9ea7f2db7f76).
+
+## Pay Model
+
+The foundation of the Telos pay structure is its adaptability to the TLOS token's fluctuating price, using the median price data from the on-chain "delphioracle" contract. This approach guarantees that payments to validators are fair, reflecting the current economic conditions of the network.
+
+### Core Elements of the Pay Model:
+
+- **Dynamic Adjustment:** The compensation for validators is calculated through a logarithmic formula, making the USD equivalent of the TLOS payment responsive to the token's price movements. This ensures that the pay reflects the token's current value, aligning incentives with the network's success.
+- **Payment Calculation:** The formula applied for payment adjustments operates on a 30-minute cycle: TLOS paid = (pay interval amount) x (TLOS price^-0.516). It is designed to modulate the payment in USD terms, increasing as the TLOS price rises and decreasing when it falls, with a target pay of $12,000 at a TLOS price of $1 USD.
+- **Token Issue Cap:** A cap is in place to limit the number of tokens issued, particularly when the TLOS price is below the target, preventing unsustainable inflation.
+
+## Validator Compensation
+
+Validators are crucial for the network's operation, ensuring transactions are processed accurately and securely. Their compensation reflects the technical responsibility and operational costs associated with these roles.
+
+### Compensation Details:
+
+- **Active Validators:** Receive full payment for their service, based on the current TLOS price, recalculated and distributed every 30 minutes. Active status is determined by community votes, with the top 21 validators receiving full compensation for their active participation.
+- **Standby Validators:** Those in standby status, rotated into active duty periodically, receive half the payment amount of active validators.
+
+### Specific Payment Formulas:
+
+- **Active Validators:** TLOS paid = 8.34 x (TLOS price^-0.516)
+- **Standby Validators:** TLOS paid = (8.34 x (TLOS price^-0.516))/2
+- **Maximum Token Allocation:** To ensure the network's economic stability, there's a maximum issuance cap of 28,000 TLOS tokens, preventing excessive inflation.
