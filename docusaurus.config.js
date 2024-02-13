@@ -71,8 +71,8 @@ const config = {
         title: '',
         logo: {
           alt: 'Telos Logo',
-          src: 'img/logo-light.svg',
-          srcDark: 'img/logo-dark.svg',
+          src: 'img/telos-light.png',
+          srcDark: 'img/telos-dark.png',
         },
         items: [
           {
@@ -112,11 +112,6 @@ const config = {
               },
               {
                 type: 'docSidebar',
-                sidebarId: 'learn',
-                label: 'Learn',
-              },
-              {
-                type: 'docSidebar',
                 sidebarId: 'faq',
                 label: 'FAQ',
               },
@@ -135,11 +130,6 @@ const config = {
               },
               {
                 type: 'docSidebar',
-                sidebarId: 'defi',
-                label: 'DeFi',
-              },
-              {
-                type: 'docSidebar',
                 sidebarId: 'knowledgeBase',
                 label: 'Knowledge Base',
               },
@@ -155,7 +145,7 @@ const config = {
             items: [
               {
                 label: 'Discord',
-                href: 'https://discord.gg/4PBhQkE8NZ',
+                href: 'https://discord.gg/telos',
               },
               {
                 label: 'Twitter',

@@ -1,0 +1,58 @@
+---
+hide_table_of_contents: true
+title: "How to connect your wallet to Ledger & Trezor"
+sidebar_position: 12
+---
+
+# How to connect your wallet to Ledger & Trezor
+
+Security is always a concern for anything on the internet, and so is the case for cryptocurrencies. With the increasing user base, the number of crypto hacks and thefts is also on the rise. 
+
+**Hot wallet**: A wallet that is connected to the internet to enable certain functionalities on the web. Eg. MetaMask or Anchor. Hot Wallets improve ease of use when accessing blockchain applications but still pose certain security risks.  
+**Cold Wallet/Hardware Wallet**: A hardware device that plugs into your computer and stores your private keys offline. Eg. Trezor and Ledger. Cold Wallets guarantee that no one on the internet can tamper with them.  
+A combination of a Cold Wallet and a Hot Wallet is considered to be the safest and smoothest choice.
+
+:::info
+Please note that these applications are not developed or operated by Telos
+:::
+
+## Method 1: Use MetaMask with your Hardware Wallet:
+
+You will need:
+
+- A Metamask account
+- A Hardware Wallet. E.g. [Ledger hardware wallet](https://shop.ledger.com/pages/hardware-wallets-comparison) to safeguard your private keys. Ledger devices come with software called Ledger Live (available on mobile & desktop)
+- View more detailed steps on [Ledger's guide](https://www.ledger.com/academy/security/the-safest-way-to-use-metamask)
+
+### How to connect Ledger to Metamask:
+
+1. Connect your Ledger Nano to your computer device using a USB cable. Also, open your MetaMask wallet in full screen on your browser.
+2. Click on the top-right menu of the MetaMask wallet and then find and click on “Connect Hardware Wallet” in the drop-down menu.
+3. When you click “Continue,” MetaMask will look for a Ledger device connected to the computer. So, to make sure it discovers your wallet, unlock your Ledger device. 
+4. Once it discovers your wallet, it will prompt you to choose a Ledger account that you would want to connect to MetaMask. Choose the one you prefer and finish (or create one from Ledger Live if you have none).
+5. Some last steps to make sure everything runs smoothly
+    - Click on the “Ethereum application” on your hardware wallet display then click on “settings” and turn on “blind signing” (please make sure you’re aware of the risks associated with blind signing). Or else it won’t work properly. 
+    - Open the MetaMask window, click on the account logo in the top right corner, scroll down to “settings” and click. Then click “advanced settings”, scroll down and turn on “WebHID”. 
+6. Complete. You can now view your Ledger wallet balance on your MetaMask extension. You will also be able to transact across all blockchain applications that support MetaMask.
+
+## Method 2: Use Anchor with your Hardware Wallet:
+
+You will need:
+
+- A Telos account
+- A Hardware Wallet. Eg. Ledger - to safeguard your private keys. Ledger devices come with a software called Ledger Live.
+
+### How to connect Ledger to Anchor
+
+The steps in converting an account to use a Ledger (or any hardware wallet) are as follows:
+
+1. Find the PUBLIC key of your Ledger device.
+2. Load the PRIVATE key of your account into Anchor.
+3. Change the PERMISSIONS of your account to use the PUBLIC key of the Ledger.
+4. Remove and re-import your account in Anchor.
+
+View more detailed steps on [EOS Community](https://forums.eoscommunity.org/t/using-anchor-to-change-permissions-of-an-existing-eosio-account-to-use-a-ledger/3284)
+
+:::info
+Just as a word of warning for those going through this process… be very careful when changing the keys of your account. If you change the keys to a private key you don’t have control of, you may not be able to recover the account or any tokens held by that account.
+:::

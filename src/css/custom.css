@@ -609,3 +609,38 @@ a[href=""] {
   gap: 25px;
   grid-template-columns: repeat(auto-fill, 300px);
 }
+
+.wallet-container {
+  display: flex;
+  justify-content: center;
+  gap: 75px; /* Adjust the space between the two divs */
+}
+
+.clickable-a {
+  text-align: center; /* Center the text under the image */
+  cursor: pointer;
+}
+
+.clickable-a div {
+  font-size: 24px; /* Adjust this value as needed to match your design */
+  font-weight: bold; /* Bold text */
+  font-family: 'Arial', sans-serif; /* Common sans-serif font */
+  margin-top: 10px; /* Space between the image and the text */
+}
+
+.clickable-a img {
+  width: 350px; /* Adjust the width of the images */
+  height: auto;
+}
+
+/* Ensure links do not have the default underline and color */
+.clickable-a a {
+  text-decoration: none;
+  color: inherit; /* This makes the text color inherit from the parent element */
+}
+
+@media (max-width: 600px) {
+  .clickable-div div {
+    font-size: 18px; /* Smaller font size for mobile */
+  }
+}
