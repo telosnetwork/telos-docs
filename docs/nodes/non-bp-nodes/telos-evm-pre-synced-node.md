@@ -15,7 +15,7 @@ The following list is the current versions of software running in this pre-packa
 * 1TB SSD (nvme preferred)
 * 32 GB RAM
 * Faster clock speeds preferred over core count
-* As of this writing (October 8, 2023), the uncompressed data is ~335GB.
+* As of this writing (October 8, 2023), the uncompressed data is ~476GB.
 
 ## Prerequisites: 
 * This package assumes you are running Ubuntu Server 22.04. No other OS has been tested.
@@ -46,10 +46,10 @@ untar/gzip the telosevm.tgz file: `tar -zxvf /path/to/file/telosevm.tgz -C /dest
 
 1. cd to the **telos-evm-rpc** directory
 1. run `git pull`
-1. run `yarn`
+1. run `npm run build`
 1. cd to the **telosevm-translator** directory
 1. run `git pull`
-1. run `yarn`
+1. run `npm run build`
 
 ## A note about permissions
 It is recommended to run all the following services under a common account and directory permissions structure. Create something like a `telos` user where admins can `sudo su - telos` and perform administrative functions.
@@ -115,6 +115,7 @@ This package is meant to serve as an all-in-one RPC node. If services are going 
 * 7000 - Telos EVM RPC
 * 7400 - Telos EVM RPC Websocket
 * 7300 - Telos EVM Translator Websocket
+* 6379 - Redis
 
 
 
