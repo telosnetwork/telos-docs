@@ -71,8 +71,6 @@ const sidebars = {
           'quickstart/evm/getting-tlos',
           'quickstart/evm/metamask_remix',
           'quickstart/evm/create_apps_using_thirdweb',
-          'quickstart/evm/goldsky',
-          'quickstart/evm/custom_onchain_data_indexing',
         ],
     },
     {   //Zero Section
@@ -190,7 +188,7 @@ const sidebars = {
   },
   {
     type: 'category',
-    label: 'Smart Contracts',
+    label: 'Smart Contract Tutorials',
     collapsed: true,
     items: [
       {
@@ -199,7 +197,6 @@ const sidebars = {
       },
     ],
   },
-  'evm/telos-safe',
   {
     type: 'category',
     label: 'Indexers',
@@ -211,6 +208,7 @@ const sidebars = {
       },
     ],
   },
+  'evm/telos-safe',
   'evm/stlos-integration',
   ],
 
