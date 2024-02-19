@@ -639,8 +639,20 @@ a[href=""] {
   color: inherit; /* This makes the text color inherit from the parent element */
 }
 
-@media (max-width: 600px) {
+@media (max-width: 750px) {
   .clickable-div div {
     font-size: 18px; /* Smaller font size for mobile */
+  }
+
+  .mobile-scalable {
+    width: 95%;
+  }
+
+  iframe {
+    width: 95%;
+  }
+
+  img {
+    width: 95%;
   }
 }
