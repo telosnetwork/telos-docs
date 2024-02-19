@@ -644,15 +644,11 @@ a[href=""] {
     font-size: 18px; /* Smaller font size for mobile */
   }
 
-  .mobile-scalable {
-    width: 95%;
-  }
-
   iframe {
-    width: 95%;
+    width: 100%;
   }
 
   img {
-    width: 95%;
+    width: 100%;
   }
 }
