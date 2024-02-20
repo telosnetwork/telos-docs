@@ -110,11 +110,6 @@ const config = {
                 sidebarId: 'nodes',
                 label: 'Nodes',
               },
-              {
-                type: 'docSidebar',
-                sidebarId: 'faq',
-                label: 'FAQ',
-              },
             ],
             
           },

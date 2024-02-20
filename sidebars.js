@@ -363,17 +363,6 @@ const sidebars = {
     'nodes/local_developer_network',
   ],
 
-
-  // FAQ PAGE
-  faq: [
-    'faq/faqs',
-    {
-      type: 'link',
-      label: 'Other Questions',
-      href: 'https://help.telos.net/',
-    },
-  ],
-
   // ---- Community Docs ----
 
   gettingStarted: [

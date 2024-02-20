@@ -7,7 +7,7 @@ hide_table_of_contents: true
 
 # Withdraw, Transfer, and Send TLOS
 
-The tEVM uses TLOS Zero to pay for [gas](../../evm/about/gas-fees.md), which requires that you have TLOS on your EVM account to do transactions. To deposit TLOS to your EVM address, you need to transfer it from a Telos Zero account. TLOS can be purchased on the [web-wallet](https://wallet.telos.net) or through one of the official portals listed on [telos.net](https://telos.net).
+The tEVM uses TLOS Zero to pay for [gas](../../evm/about/gas-fees), which requires that you have TLOS on your EVM account to do transactions. To deposit TLOS to your EVM address, you need to transfer it from a Telos Zero account. TLOS can be purchased on the [web-wallet](https://wallet.telos.net) or through one of the official portals listed on [telos.net](https://telos.net).
 
 To top-up an EVM testnet account, enter the address on the [Telos testnet faucet](https://app.telos.net/testnet/developers) and press the "Send Testnet EVM TLOS" button. 100 TLOS will be sent to that address.
 
@@ -35,13 +35,13 @@ Make sure that the address and memo is:
   height="automatic"
 />
 
-If not using Telos Web Wallet, users may want to reference [set up an evm wallet](../evm/setup-a-wallet.md) to connect TelosEVM using Metamask or an alternative web3 wallet/signer.
+If not using Telos Web Wallet, users may want to reference [set up an evm wallet](../evm/setup-a-wallet) to connect TelosEVM using Metamask or an alternative web3 wallet/signer.
 
 ## Transferring TLOS from Telos Zero to Telos EVM
 
-After acquiring TLOS, you can send it to your EVM address using the [web-wallet](https://wallet.telos.net), which you can also use to send to other EVM addresses such as Metamask. Make sure you have [added the Telos EVM](../evm/setup-a-wallet.md) network to your Metamask.
+After acquiring TLOS, you can send it to your EVM address using the [web-wallet](https://wallet.telos.net), which you can also use to send to other EVM addresses such as Metamask. Make sure you have [added the Telos EVM](../evm/setup-a-wallet) network to your Metamask.
 
-1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](./accounts.md) and [setting up a wallet](./setup-a-wallet.md) to do so.
+1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](./accounts) and [setting up a wallet](./setup-a-wallet) to do so.
 
 <img
   src={require('/static/img/native-wallet-login.PNG').default}
@@ -79,7 +79,7 @@ If you do not already have an EVM address added in the native web wallet, you wi
 Funds can also be transferred from your associated EVM address to your Telos account.
 This can be done via the [web-wallet](https://wallet.telos.net).
 
-1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](./accounts.md) and [setting up a wallet](./setup-a-wallet.md) to do so.
+1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](./accounts) and [setting up a wallet](./setup-a-wallet) to do so.
 
 <img
   src={require('/static/img/native-wallet-login.PNG').default}

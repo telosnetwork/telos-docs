@@ -7,7 +7,7 @@ hide_table_of_contents: true
 
 __An extensive walkthrough of how to buy or sell RAM for your account and enable low to no-fee transactions on the Telos Zero network.__
 
-__The Telos Core Development is providing the [Open Block Exploerer](https://explorer.telos.net)and a [Web-Wallet](https://wallet.telos.net/) to add resources to your account. We will cover Open Block Explorer in this article.__
+__The Telos Core Developers provide the [Open Block Explorer](https://explorer.telos.net) and [Telos Web Wallet](https://wallet.telos.net/) to add resources to your account. We will cover Open Block Explorer in this article.__
 
 ### PREREQUISITES
 
@@ -56,7 +56,7 @@ Click "confirm" and approve the Anchor transaction.
 
 ![explorer telos net transaction confirmation](https://user-images.githubusercontent.com/39388424/192004975-7d0eb96e-fe67-47bf-9f6e-976d366a1149.png)
 
-__Please note:__ If your account is “fresh,” you may require additional CPU and NET as a core resource. Please refer to [How to manage CPU and NET](cpu-net.md). This will resolve the issues in most instances.
+__Please note:__ If your account is “fresh,” you may require additional CPU and NET as a core resource. Please refer to [How to manage CPU and NET](./cpu-net). This will resolve the issues in most instances.
 
 #### Sell RAM from your account
 
