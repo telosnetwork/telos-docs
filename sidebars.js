@@ -82,6 +82,7 @@ const sidebars = {
           'quickstart/zero/accounts',
           'quickstart/zero/setup-a-wallet',
           'quickstart/zero/getting-tlos',
+          'quickstart/zero/bridging',
           'quickstart/zero/withdraw-transfer-and-send-tlos',
           'quickstart/zero/native-eosio',
       ],
