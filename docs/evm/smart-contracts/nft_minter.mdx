@@ -171,10 +171,10 @@ Follow steps to deploy on telos_testnet
    **Note** .env file contains sensitive information and can be included in .gitignore to follow best practices.
 2. Create a seperate .env file to hide and paste all private keys.
    ![dotenv](/img/dotenv.png)
-3. Open hardhat.config.js file and add the network configuration for telos_testnet.
-   Make sure to add `require("dotenv").config({ path: ".env" });` at the top of file.
-   telos_tesnet rpc = "https://testnet.telos.net/evm"
-   accounts: [process.env.TELOS]
+3. Open hardhat.config.js file and add the network configuration for telos_testnet.  
+   Make sure to add `require("dotenv").config({ path: ".env" });` at the top of file.  
+   `telos_tesnet rpc = "https://testnet.telos.net/evm"`  
+   `accounts: [process.env.TELOS]`  
 
 ```js title="Telos_NFT_MINTER/hardhat.config.js"
 require("@nomiclabs/hardhat-waffle");
