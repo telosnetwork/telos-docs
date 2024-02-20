@@ -341,4 +341,4 @@ cleos get actions alice
 
 ## What's Next?
 
-* [Inline Actions to External Contracts](inline-action-to-external-contract.md): Learn how to construct actions and send those actions to an external contract.
+* [Inline Actions to External Contracts](./inline-action-to-external-contract): Learn how to construct actions and send those actions to an external contract.

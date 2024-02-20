@@ -217,4 +217,4 @@ executed transaction: 235bd766c2097f4a698cfb948eb2e709532df8d18458b92c9c6aae74ed
 
 ## What's Next?
 
-* [Deploy, Issue and Transfer Tokens](deploy-issue-and-transfer-tokens.md): Learn how to deploy, issue and transfer tokens.
+* [Deploy, Issue and Transfer Tokens](./deploy-issue-and-transfer-tokens): Learn how to deploy, issue and transfer tokens.

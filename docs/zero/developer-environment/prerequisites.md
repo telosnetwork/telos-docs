@@ -69,4 +69,4 @@ _Only a sample of what you'll learn_
 - Deploy contracts
 
 ## What's Next?
-- [Installing Antelope.io](./installing-antelope.md): Steps to download and install binaries on your system.
+- [Installing Antelope.io](./installing-antelope): Steps to download and install binaries on your system.
