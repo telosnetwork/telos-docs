@@ -256,4 +256,4 @@ private:
 
 ## What's Next?
 
-* [Adding Inline Actions](adding-inline-actions.md): Learn how to construct actions and send those actions from within a contract.
+* [Adding Inline Actions](./adding-inline-actions): Learn how to construct actions and send those actions from within a contract.

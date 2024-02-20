@@ -69,6 +69,7 @@ const sidebars = {
         items: [
           'quickstart/evm/setup-a-wallet',
           'quickstart/evm/getting-tlos',
+          'quickstart/evm/bridging',
           'quickstart/evm/metamask_remix',
           'quickstart/evm/create_apps_using_thirdweb',
         ],
@@ -361,17 +362,6 @@ const sidebars = {
       ],
     },
     'nodes/local_developer_network',
-  ],
-
-
-  // FAQ PAGE
-  faq: [
-    'faq/faqs',
-    {
-      type: 'link',
-      label: 'Other Questions',
-      href: 'https://help.telos.net/',
-    },
   ],
 
   // ---- Community Docs ----

@@ -8,7 +8,7 @@ const config = {
 
   title: 'Telos Docs',
   tagline: 'Documentation and Tutorials for Telos',
-  url: 'https://docs.telos.network',
+  url: 'https://docs.telos.net',
   baseUrl: '/',
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
@@ -109,11 +109,6 @@ const config = {
                 type: 'docSidebar',
                 sidebarId: 'nodes',
                 label: 'Nodes',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'faq',
-                label: 'FAQ',
               },
             ],
             

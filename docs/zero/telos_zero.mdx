@@ -38,7 +38,7 @@ The Telos platform at protocol level is made out of the following components and
 
 ## Next Steps 
 
-Head over to the [overview](/zero/about/overview.md) page and get started with installing Antelope
+Head over to the [overview](/zero/about/overview) page and get started with installing Antelope
 
 Walkthrough below before deploying smart contracts:
 

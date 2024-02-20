@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 ## Local development environment
 
-* [Getting Started](../developer-environment/prerequisites.md): Install the Antelope platform in your local development environment.
+* [Getting Started](../developer-environment/prerequisites): Install the Antelope platform in your local development environment.
 
 ## Toolchain
 

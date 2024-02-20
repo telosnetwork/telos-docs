@@ -72,12 +72,12 @@ Further information about each service can be found in the relevant documentatio
 
 ### Services Documentation
 
-- [Treasuries](treasuries.md)
-- [Ballots](ballots.md)
-- [Voting](voting.md)
-- [Contract Integration](contract-integration.md)
-- [Payrolls](payrolls.md)
-- [Workers](workers.md)
+- [Treasuries](./treasuries)
+- [Ballots](./ballots)
+- [Voting](./voting)
+- [Contract Integration](./contract-integration)
+- [Payrolls](./payrolls)
+- [Workers](./workers)
 
 ### Roadmap
 
