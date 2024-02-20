@@ -69,6 +69,7 @@ const sidebars = {
         items: [
           'quickstart/evm/setup-a-wallet',
           'quickstart/evm/getting-tlos',
+          'quickstart/evm/bridging',
           'quickstart/evm/metamask_remix',
           'quickstart/evm/create_apps_using_thirdweb',
         ],
