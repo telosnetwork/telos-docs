@@ -184,9 +184,9 @@ const sidebars = {
     ],
   },
   {
-    type: 'link',
+    type: 'doc',
+    id: 'nodes/non-bp-nodes/tevmc/tevmc',
     label: 'Telos EVM Docker',
-    href: '../../nodes/non-bp-nodes/tevmc/',
   },
   {
     type: 'category',
