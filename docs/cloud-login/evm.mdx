@@ -1,0 +1,83 @@
+---
+title: Telos EVM
+sidebar_position: 2
+hide_table_of_contents: true
+---
+
+# Telos Cloud for EVM
+
+Incorporating **Telos Cloud Login** into a Telos EVM-based application involves creating an instance of Metakeep and then requesting the ethereum provider to create a `ethers.providers.Web3Provider` for interacting with the blockchain. We'll divide the code into two parts.
+
+## Metakeep Instance
+
+To create an instance of Metakeep with the proper configuration, execute the following TypeScript code:
+
+```typescript
+import { MetaKeep } from 'metakeep';
+import { ethers } from 'ethers';
+
+const email = 'user.address@email.com'; // you take this from google
+const appId = 'ad05fb5e-802a-4ae1-18b6-57b9a2626545';
+const chainId = 40;
+const url = 'https://mainnet.telos.net';
+const rpcNodeUrls = {
+    [chainId]: url,
+} as unknown as Map<number, string>;
+metakeep = new MetaKeep({
+    // App id to configure UI
+    appId,
+    // Default chain to use
+    chainId,
+    // RPC node urls map
+    rpcNodeUrls,
+    // Signed in user's email address
+    user: {
+        email,
+    },
+});
+```
+
+## Obtaining the web3Provider
+
+For Telos EVM, we have a solution provided by Metakeep to construct an instance of `ethers.providers.Web3Provider` from an ethereum provider obtained from the newly created instance of Metakeep. 
+
+```typescript
+// we create the web3Provider
+const provider = await metakeep.ethereum;
+await provider.enable();
+web3Provider = new ethers.providers.Web3Provider(provider);
+// finally we get the user account address
+this.accountAddress = await provider.getSigner().getAddress();
+```
+
+## Sending a Token
+
+Once the instance of web3Provider is ready, the code to send a TLOS token is straightforward:
+
+
+```typescript
+const to = '0x...';
+const value = BigNumber.from(1);
+const signer = await provider.getSigner();
+signer.sendTransaction({ to, value })
+```
+
+## Interacting with a Contract
+
+If you need to interact with a contract and you have the ABI and its address, the code is as follows:
+
+
+```typescript
+// prepare parameters
+const to = '0x...';
+const value = BigNumber.from(1);
+const parameters = [ to, value ];
+// prepare contract and method info
+const method = 'myMethod';
+const abi = [{name: method, inputs: [...], ... }];
+const contract = '0x...';
+// create a contract instance and interact with it
+const signer = await provider.getSigner();
+const contractInstance = new ethers.Contract(contract, abi, signer);
+const transaction = await contractInstance[method](...parameters);
+```
