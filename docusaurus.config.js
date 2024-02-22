@@ -13,12 +13,10 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/fav-icon.png',
-  organizationName: 'telosnetwork', // Usually your GitHub org/user name.
-  projectName:'telos-docs', // Usually your repo name.
+  //trailingSlash: true, generates links differently an breaks almost all internal links. But when resolved will help with SEO
+  organizationName: 'telosnetwork',
+  projectName:'telos-docs',
   plugins: ['docusaurus-plugin-sass'],
-  // Even if you don't use internalization, you can use this field to set useful
-  // metadata like html lang. For example, if your site is Chinese, you may want
-  // to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
