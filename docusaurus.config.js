@@ -13,7 +13,7 @@ const config = {
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/fav-icon.png',
-  //trailingSlash: true, generates links differently an breaks almost all internal links. But when resolved will help with SEO
+ trailingSlash: true, // generates links differently an breaks almost all internal links. But when resolved will help with SEO
   organizationName: 'telosnetwork',
   projectName:'telos-docs',
   plugins: ['docusaurus-plugin-sass'],
