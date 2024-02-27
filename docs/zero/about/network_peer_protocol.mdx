@@ -8,7 +8,7 @@ hide_table_of_contents: true
 
 ## 1. Overview
 
-Nodes on an active Antelope blockchain must be able to communicate with each other for relaying transactions, pushing blocks, and syncing state between peers. The peer to peer (p2p) protocol, part of the `nodeos` service that runs on every node, serves this purpose. The ability to sync state is crucial for each block to eventually reach finality within the global state of the blockchain and allow each node to advance the last irreversible block (LIB). In this regard, the fundamental goal of the p2p protocol is to sync blocks and propagate transactions between nodes to reach consensus and advance the blockchain state.
+Nodes on an active Antelope blockchain must be able to communicate with each other for relaying transactions, pushing blocks, and syncing state between peers. The peer-to-peer (p2p) protocol, part of the `nodeos` service that runs on every node, serves this purpose. The ability to sync state is crucial for each block to eventually reach finality within the global state of the blockchain and allow each node to advance the last irreversible block (LIB). In this regard, the fundamental goal of the p2p protocol is to sync blocks and propagate transactions between nodes to reach consensus and advance the blockchain state.
 
 ### 1.1. Goals
 
@@ -32,11 +32,16 @@ The main goal of the p2p protocol is to synchronize nodes securely and efficient
 
 The interaction between the above components is depicted in the diagram below:
 
-![](<../../../static/img/graphviz (5).svg>)
+<img
+    src={require('/static/img/graphviz (5).png').default}
+    alt="graph 1"
+    width="70%"
+    height="automatic"
+/>
 
 At the highest level sits the Net Plugin, which exchanges messages between the node and its peers to sync blocks and transactions. A typical message flow goes as follows:
 
-1. Node A sends a message to Node B through the Net Plugin (refer to diagram above).
+1. Node A sends a message to Node B through the Net Plugin (refer to the diagram above).
    1. Node A’s Net Serializer packs the message and sends it to Node B.
    2. Node B’s Net Serializer unpacks the message and relays it to its Net Plugin.
 2. The message is processed by Node B’s Net Plugin, dispatching the proper actions.
@@ -46,13 +51,18 @@ At the highest level sits the Net Plugin, which exchanges messages between the n
 
 The local chain is the node’s local copy of the blockchain. It consists of both the irreversible and reversible blocks received by the node, each block being cryptographically linked to the previous one. The list of irreversible blocks contains the actual copy of the immutable blockchain. The list of reversible blocks is typically shorter in length and it is managed by the Fork Database as the Chain Controller pushes blocks to it. The local chain is depicted below.
 
-![](<../../../static/img/graphviz (6).svg>)
+<img
+    src={require('/static/img/graphviz (6).png').default}
+    alt="graph 2"
+    width="70%"
+    height="automatic"
+/>
 
-Each node constructs its own local copy of the blockchain as it receives blocks and transactions and syncs their state with other peers. The reversible blocks are those new blocks received that have not yet reached finality. As such, they are likely to form branches that stem from a main common ancestor, which is the LIB (last irreversible block). Other common ancestors different from the LIB are also possible for reversible blocks. In fact, any two sibling branches always have a nearest common ancestor. For instance, in the diagram above, block 52b is the nearest common ancestor for the branches starting at block 53a and 53b that is different from the LIB. Every active branch in the local chain has the potential to become part of the blockchain.
+Each node constructs its own local copy of the blockchain as it receives blocks and transactions and syncs its state with other peers. The reversible blocks are those new blocks received that have not yet reached finality. As such, they are likely to form branches that stem from a main common ancestor, which is the LIB (last irreversible block). Other common ancestors different from the LIB are also possible for reversible blocks. In fact, any two sibling branches always have a nearest common ancestor. For instance, in the diagram above, block 52b is the nearest common ancestor for the branches starting at block 53a and 53b which is different from the LIB. Every active branch in the local chain has the potential to become part of the blockchain.
 
 #### 2.1.1. LIB Block
 
-All irreversible blocks constructed in a node are expected to match those from other nodes up to the last irreversible block (LIB) of each node. This is the distributed nature of the blockchain. Eventually, as the blocks that follow the LIB block reach finality, the LIB block moves up the chain through one of the branches as it catches up with the head block (HB). When the LIB block advances, the immutable blockchain effectively grows. In this process, the head block might switch branches multiple times depending on the potential head block numbers received and their timestamps, which is ultimately used as tiebreaker.
+All irreversible blocks constructed in a node are expected to match those from other nodes up to the last irreversible block (LIB) of each node. This is the distributed nature of the blockchain. Eventually, as the blocks that follow the LIB block reach finality, the LIB block moves up the chain through one of the branches as it catches up with the head block (HB). When the LIB block advances, the immutable blockchain effectively grows. In this process, the head block might switch branches multiple times depending on the potential head block numbers received and their timestamps, which are ultimately used as tiebreakers.
 
 ### 2.2. Chain Controller
 
@@ -66,20 +76,25 @@ The Fork Database (Fork DB) provides an internal interface for the Chain Control
 * Advance the head block, the root block, and the LIB block.
 * Trim off invalid branches and purge orphaned blocks.
 
-In essence, the Fork DB contains all the candidate block branches within a node that may become the actual branch that continues to grow the blockchain. The root block always marks the beginning of the reversible block tree, and will match the LIB block, except when the LIB advances, in which case the root block must catch up. The calculation of the LIB block as it advances through the new blocks within the Fork DB will ultimately decide which branch gets selected. As the LIB block advances, the root block catches up with the new LIB, and any candidate branch whose ancestor node is behind the LIB gets pruned. This is depicted below.
+In essence, the Fork DB contains all the candidate block branches within a node that may become the actual branch that continues to grow the blockchain. The root block always marks the beginning of the reversible block tree and will match the LIB block, except when the LIB advances, in which case the root block must catch up. The calculation of the LIB block as it advances through the new blocks within the Fork DB will ultimately decide which branch gets selected. As the LIB block advances, the root block catches up with the new LIB, and any candidate branch whose ancestor node is behind the LIB gets pruned. This is depicted below.
 
-![](<../../../static/img/graphviz (7).svg>)
+<img
+    src={require('/static/img/graphviz (7).png').default}
+    alt="graph 3"
+    width="70%"
+    height="automatic"
+/>
 
-In the diagram above, the branch starting at block 52b gets pruned (blocks 52b, 53a, 53b are invalid) after the LIB advances from node 51 to block 52c then 53c. As the LIB moves through the reversible blocks, they are moved from the Fork DB to the local chain as they now become part of the immutable blockchain. Finally, block 54d is kept in the Fork DB since new blocks might still be built off from it.
+In the diagram above, the branch starting at block 52b gets pruned (blocks 52b, 53a, and 53b are invalid) after the LIB advances from node 51 to block 52c then 53c. As the LIB moves through the reversible blocks, they are moved from the Fork DB to the local chain as they now become part of the immutable blockchain. Finally, block 54d is kept in the Fork DB since new blocks might still be built off of it.
 
 ### 2.3. Net Plugin
 
-The Net Plugin defines the actual peer to peer communication messages between the Antelope nodes. The main goal of the Net Plugin is to sync valid blocks upon request and to forward valid transactions invariably. To that end, the Net Plugin delegates functionality to the following components:
+The Net Plugin defines the actual peer-to-peer communication messages between the Antelope nodes. The main goal of the Net Plugin is to sync valid blocks upon request and to forward valid transactions invariably. To that end, the Net Plugin delegates functionality to the following components:
 
 * **Sync Manager**: maintains the block syncing state of the node with respect to its peers.
 * **Dispatch Manager**: maintains the list of blocks and transactions sent by the node.
 * **Connection List**: list of active peers the node is currently connected to.&#x20;
-* **Message Handler**: dispatches protocol messages to the corresponding handler. (see [4.2. Protocol Messages](network_peer_protocol#42-protocol-messages)).
+* **Message Handler**: dispatches protocol messages to the corresponding handler. (see [4.2. Protocol Messages](#42-protocol-messages)).
 
 #### 2.3.1. Sync Manager
 
@@ -89,7 +104,7 @@ The Sync Manager implements the functionality for syncing block state between th
 * **Head Catch-Up**: node is about to sync with another peer's HEAD block.
 * **In-Sync**: both LIB and HEAD blocks are in sync with the other peers.
 
-If the node’s LIB or head block is behind, the node will generate sync request messages to retrieve the missing blocks from the connected peer. Similarly, if a connected peer’s LIB or head block is behind, the node will send notice messages to notify the node about which blocks it needs to sync with. For more information about sync modes see [3. Operation Modes](network_peer_protocol#3-operation-modes).
+If the node’s LIB or head block is behind, the node will generate sync request messages to retrieve the missing blocks from the connected peer. Similarly, if a connected peer’s LIB or head block is behind, the node will send notice messages to notify the node about which blocks it needs to sync with. For more information about sync modes see [3. Operation Modes](#3-operation-modes).
 
 #### 2.3.2. Dispatch Manager
 
@@ -130,7 +145,7 @@ The list of transaction states is indexed by transaction ID, expiration time, bl
 
 **2.3.2.3. State Recycling**
 
-As the LIB block advances (see [3.3.1. LIB Catch-Up Mode](network_peer_protocol#331-lib-catch-up-mode)), all blocks prior to the new LIB block are considered finalized, so their state is removed from the local list of block states, including the list of block states owned by each peer in the list of connections maintained by the node. Likewise, transaction states are removed from the list of transactions based on expiration time. Therefore, after a transaction expires, its state is removed from all lists of transaction states.
+As the LIB block advances (see [3.3.1. LIB Catch-Up Mode](#331-lib-catch-up-mode)), all blocks prior to the new LIB block are considered finalized, so their state is removed from the local list of block states, including the list of block states owned by each peer in the list of connections maintained by the node. Likewise, transaction states are removed from the list of transactions based on expiration time. Therefore, after a transaction expires, its state is removed from all lists of transaction states.
 
 The lists of block states and transaction states have a light footprint and feature high rotation, so they are maintained in memory for faster access. The actual contents of the blocks and transactions received by a node are stored temporarily in the fork database and the various incoming queues for applied and unapplied transactions, respectively.
 
@@ -179,11 +194,11 @@ The operation mode for each node is stored in a sync manager context within the 
 
 ### 3.1. Block ID
 
-The Antelope software checks whether two blocks match or hold the same content by comparing their block IDs. A block ID is a function that depends on the contents of the block header and the block number. Checking whether two blocks are equal is crucial for syncing a node’s local chain with that of its peers. To generate the block ID from the block contents, the block header is serialized and a SHA-256 digest is created. The most significant 32 bits of the hash are retained while the least significant 32 bits are assigned the block number. Note that the block header includes the root hash of both the transaction merkle tree and the action merkle tree. Therefore, the block ID depends on all transactions included in the block as well as all actions included in each transaction.
+The Antelope software checks whether two blocks match or hold the same content by comparing their block IDs. A block ID is a function that depends on the contents of the block header and the block number. Checking whether two blocks are equal is crucial for syncing a node’s local chain with that of its peers. To generate the block ID from the block contents, the block header is serialized and a SHA-256 digest is created. The most significant 32 bits of the hash are retained while the least significant 32 bits are assigned the block number. Note that the block header includes the root hash of both the transaction Merkle tree and the action Merkle tree. Therefore, the block ID depends on all transactions included in the block as well as all actions included in each transaction.
 
 ### 3.2. In-Sync Mode
 
-During in-sync mode, the node's head block is caught up with the peer's head block, which means the node is in sync block-wise. When the node is in-sync mode, it does not request further blocks from peers, but continues to perform the other functions:
+During in-sync mode, the node's head block is caught up with the peer's head block, which means the node is in sync block-wise. When the node is in sync mode, it does not request further blocks from peers, but continues to perform the other functions:
 
 * **Validate transactions**, drop them if invalid; forward them to other peers if valid.
 * **Validate blocks**, drop them if invalid; forward them to other peers upon request if valid.
@@ -205,17 +220,27 @@ Therefore, the node’s LIB block is updated first, followed by the node’s hea
 
 Case 1 above, where the node’s LIB block needs to catch up with the peer’s LIB block, is depicted in the below diagram, before and after the sync (Note: inapplicable branches have been removed for clarity):
 
-![](<../../../static/img/graphviz (8).svg>)
+<img
+    src={require('/static/img/graphviz (8).png').default}
+    alt="graph 4"
+    width="70%"
+    height="automatic"
+/>
 
-In the above diagram, the node’s local chain syncs up with the peer’s local chain by appending finalized blocks 91 and 92 (the peer’s LIB) to the node’s LIB (block 90). Note that this discards the temporary fork consisting of blocks 91n, 92n, 93n. Also note that these nodes have an “n” suffix (short for node) to indicate that they are not finalized, and therefore, might be different from the peer’s. The same applies to unfinalized blocks on the peer; they end in “p” (short for peer). After syncing, note that both the LIB (lib) and the head block (hb) have the same block number on the node.
+In the above diagram, the node’s local chain syncs up with the peer’s local chain by appending finalized blocks 91 and 92 (the peer’s LIB) to the node’s LIB (block 90). Note that this discards the temporary fork consisting of blocks 91n, 92n, and 93n. Also note that these nodes have an “n” suffix (short for node) to indicate that they are not finalized, and therefore, might be different from the peer’s. The same applies to unfinalized blocks on the peer; they end in “p” (short for peer). After syncing, note that both the LIB (lib) and the head block (hb) have the same block number on the node.
 
 #### 3.3.2. Head Catch-Up Mode
 
 After the node’s LIB block is synced with the peer’s, there will be new blocks pushed to either chain. Case 2 above covers the case where the peer’s chain is longer than the node’s chain. This is depicted in the following diagram, which shows the node and the peer’s local chains before and after the sync:
 
-![](<../../../static/img/graphviz (9).svg>)
+<img
+    src={require('/static/img/graphviz (9).png').default}
+    alt="graph 5"
+    width="70%"
+    height="automatic"
+/>
 
-In either case 1 or 2 above, the syncing process in the node involves locating the first common ancestor block starting from the node’s head block, traversing the chains back, and ending in the LIB blocks, which are now in sync (see [3.3.1. LIB Catch-Up Mode](network_peer_protocol#331-lib-catch-up-mode)). In the worst case scenario, the synced LIBs are the nearest common ancestor. In the above diagram, the node’s chain is traversed from head block 94n, 93n, etc. trying to match blocks 94p, 93p, etc. in the peer’s chain. The first block that matches is the nearest common ancestor (block 93n and 93p in the diagram). Therefore, the following blocks 94p and 95p are retrieved and appended to the node’s chain right after the nearest common ancestor, now re-labeled 93n,p (see [3.3.3. Block Retrieval](network_peer_protocol#333-block-retrieval) process). Finally, block 95p becomes the node’s head block and, since the node is fully synced with the peer, the node switches to in-sync mode.
+In either case 1 or 2 above, the syncing process in the node involves locating the first common ancestor block starting from the node’s head block, traversing the chains back, and ending in the LIB blocks, which are now in sync (see [3.3.1. LIB Catch-Up Mode](#331-lib-catch-up-mode)). In the worst-case scenario, the synced LIBs are the nearest common ancestor. In the above diagram, the node’s chain is traversed from head block 94n, 93n, etc. trying to match blocks 94p, 93p, etc. in the peer’s chain. The first block that matches is the nearest common ancestor (block 93n and 93p in the diagram). Therefore, the following blocks 94p and 95p are retrieved and appended to the node’s chain right after the nearest common ancestor, now re-labeled 93n,p (see [3.3.3. Block Retrieval](#333-block-retrieval) process). Finally, block 95p becomes the node’s head block and, since the node is fully synced with the peer, the node switches to in-sync mode.
 
 #### 3.3.3. Block Retrieval
 
@@ -227,10 +252,10 @@ When both LIB and head blocks are caught up with respect to the peer, the operat
 
 ### 3.4. Mode Switching
 
-Eventually, both the node and its peer receive new fresh blocks from other peers, which in turn push the blocks to their respective local chains. This causes the head blocks on each chain to advance. Depending on which chain grows first, one of the following actions occur:
+Eventually, both the node and its peer receive new fresh blocks from other peers, which in turn push the blocks to their respective local chains. This causes the head blocks on each chain to advance. Depending on which chain grows first, one of the following actions occurs:
 
-* The node sends a catch up request message to the peer with its head block info.
-* The node sends a catch up notice message to inform the peer it needs to sync.
+* The node sends a catch-up request message to the peer with its head block info.
+* The node sends a catch-up notice message to inform the peer it needs to sync.
 
 In the first case, the node switches the mode from in-sync to head catchup mode. In the second case, the peer switches to head catchup mode after receiving the notice message from the node. In practice, in-sync mode is short-lived. In a busy Antelope blockchain, nodes spend most of their time in catchup mode validating transactions and syncing their chains after catchup messages are received.
 
@@ -241,7 +266,7 @@ The p2p protocol algorithm runs on every node, forwarding validated transactions
 1. A node requests data or sends a control message to a peer.
 2. If the request can be fulfilled, the peer executes the request; repeat 1.&#x20;
 
-The data messages contain the block contents or the transaction contents. The control messages make possible the syncing of blocks and transactions between the node and its peers (see [Protocol Messages](network_peer_protocol#42-protocol-messages)). In order to allow such synchronization, each node must be able to retrieve information about its own state of blocks and transactions as well as that of its peers.
+The data messages contain the block contents or the transaction contents. The control messages make possible the syncing of blocks and transactions between the node and its peers (see [Protocol Messages](#42-protocol-messages)). In order to allow such synchronization, each node must be able to retrieve information about its own state of blocks and transactions as well as that of its peers.
 
 ### 4.1. Node/Peers Status
 
