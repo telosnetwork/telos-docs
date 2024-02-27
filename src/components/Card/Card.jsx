@@ -10,7 +10,7 @@ const Card = ({ title, imageUrl, linkUrl, descriptionText, animateContent = true
             className="card"
             style={{ borderColor: darkMode() ? '#ffffff3D' : '#0000003D'}}
         >
-            <img src={imageUrl} className={`card__img ${animateContent ? 'card__img--animation' : ''}`} />
+            <img alt="card image" src={imageUrl} className={`card__img ${animateContent ? 'card__img--animation' : ''}`} />
             <div className={`card__content ${animateContent ? 'card__content--animation' : ''}`}>
                 <div
                     className="card__title"
