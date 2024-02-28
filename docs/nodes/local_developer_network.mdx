@@ -4,16 +4,16 @@ hide_table_of_contents: true
 ---
 
 # Local Developer Network 
-__This tutorial explains how to configure a local test network, setup Antelope system accounts, and create a native currency.__
+__This tutorial explains how to configure a local test network, set up Antelope system accounts, and create a native currency.__
 
 # Installations
-Make sure you have Antelope installed via ``` cleos version client``` 
+Make sure you have Antelope installed via ```cleos version client``` 
 If not currently installed, follow this link before proceeding: [Antelope source code](https://github.com/AntelopeIO/leap)
 
 ## Node Template
 This example will use the node template found [here](https://github.com/telosnetwork/node-template) to set up a local dev node. 
 
-__Clone the Node template to local project folder and open Code IDE.__
+__Clone the Node template to the local project folder and open Code IDE.__
 
 
 # Start here
@@ -39,7 +39,7 @@ First, generate a key to use for this local network's ```eosio``` super-user acc
 
 ```cleos create key --to-console ```
 
-Create a dev wallet, save this password: 
+Create a dev wallet, and save this password: 
 
 ```cleos wallet create -n dev --to-console```
 
@@ -52,7 +52,7 @@ __Now that the private keys have been imported to the newly generated account, t
 
 ## 3. Configure local Node template files 
 
-Generate a genesis block```genesis.json``` file (This is the standard for EOSIO launches):
+Generate a genesis block ```genesis.json``` file (This is the standard for EOSIO launches):
 
 ``` nodeos --extract-genesis-json genesis.json ```
 
@@ -65,7 +65,7 @@ Edit the config.ini file to configure this node to produce blocks as ```eosio```
 
 ```vi config.ini```
 
-Also change the following, setting the key to the you generated above for EOSIO super account:
+Also change the following, setting the key to the one you generated above for EOSIO super account:
 
 ```producer-name = eosio```
 
