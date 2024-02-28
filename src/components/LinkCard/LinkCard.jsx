@@ -8,7 +8,7 @@ const Card = ({ logo, title, url }) => {
         >
             <div className="link-card">
                 <div className="link-card-info">
-                    <img src={logo}/>
+                    <img alt="logo" src={logo}/>
                     <p className="link-card-title">{title}</p>
                 </div>
             </div>

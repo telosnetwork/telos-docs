@@ -1,8 +1,12 @@
 ---
+title: Call an EVM function from Telos Zero
+description: >-
+    Learn how to call an EVM 
+    function from Telos Zero
 hide_table_of_contents: true
 ---
 
-# Call a EVM function from Telos Zero
+# Call an EVM function from Telos Zero
 
 The __Telos EVM__ runs in one smart contract on the __Telos Zero__ blockchain, the __eosio.evm__ contract.
 Calling a function of a Telos EVM smart contract from Telos Zero requires the use of the __eosio.evm__ contract's `raw(eosio::name &ram_payer,std::vector<int8_t> &tx, bool &estimate_gas,std::optional<eosio::checksum160> &sender)` action.
