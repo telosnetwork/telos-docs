@@ -1,5 +1,9 @@
 ---
 sidebar_positon: 2
+description: >-
+    Learn more about the Telos
+    EVM and the incredible features
+    it has!
 hide_table_of_contents: true
 ---
 
@@ -7,7 +11,7 @@ hide_table_of_contents: true
 
 ## Overview
 
-Telos provides cutting-edge solutions to address the drawbacks developers and users face with other Layer 1 blockchains, such as lagging performance (high latency times & network congestion), limited scalability, and energy consumption. The Telos EVM also implements a fixed gas fee on all transactions, rendering it impossible for whales or any other user to front run their transaction in a mempool.
+Telos provides cutting-edge solutions to address the drawbacks developers and users face with other Layer 1 blockchains, such as lagging performance (high latency times & network congestion), limited scalability, and energy consumption. The Telos EVM also implements a fixed gas fee on all transactions, rendering it impossible for whales or any other user to front-run their transaction in a mempool.
 
 - **Architecture:** Telos EVM is a Smart Contract built on the native Antelope.io layer. The EVM RPC plays a critical role by translating the native APIs to the standard EVM RPC methods, so all EVM tools and wallets are compatible.
 - **Solidity & Vyper:** Telos EVM processes the same code as Ethereum's and other EVMs. No modifications are needed.
@@ -21,4 +25,4 @@ The Telos EVM accounts can be mapped to the Telos Zero network accounts so users
 
 1. TLOS, also known as the "gas token," is the native currency for executing transactions on the EVM platform.
 2. When an EVM transaction is executed, the RPC relays the raw transaction data to the Telos Zero smart contract, which runs the contract in the C++ WASM runtime. The RPC is responsible for translating the Ethereum JSON-RPC methods to the APIs of the Telos Zero network, as well as storing the historical transaction data to satisfy other JSON-RPC methods such as "`eth_getTransactionReceipt`".
-3. Account and code tables match the specification in the Ethereum Yellow Paper but are implemented in the Antelope.io smart contract.
+3. Account and code tables match the specifications in the Ethereum Yellow Paper but are implemented in the Antelope.io smart contract.
