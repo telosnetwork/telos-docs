@@ -65,9 +65,10 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       metadata: [
-        {name: 'og:image', content: 'https://docs.telos.net/img/docs-social-share.png'},
-        {name: 'og:type', content: 'website'},
-        {name: 'twitter:image', content: 'hhttps://docs.telos.net/img/docs-social-share.png'},
+        {property: 'og:image', content: 'https://docs.telos.net/img/docs-social-share.png'},
+        {property: 'og:locale', content: 'en_US'},
+        {property: 'og:type', content: 'website'},
+        {property: 'twitter:image', content: 'https://docs.telos.net/img/docs-social-share.png'},
       ],
       navbar: {
         title: '',
