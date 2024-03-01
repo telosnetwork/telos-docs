@@ -64,7 +64,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-
+      metadata: [
+        {name: 'og:image', content: 'https://docs.telos.net/img/docs-social-share.png'},
+        {name: 'og:type', content: 'website'},
+        {name: 'twitter:image', content: 'hhttps://docs.telos.net/img/docs-social-share.png'},
+      ],
       navbar: {
         title: '',
         logo: {
