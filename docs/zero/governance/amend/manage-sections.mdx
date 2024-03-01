@@ -14,8 +14,8 @@ Every section has a unique id number that indicates its order in the document. D
 
 | Parameter Name | Type | Example | Description |
 | :--- | :--- | :--- | :--- |
-| document\_name | name | doc1 | Name of the document to reorder. |
-| new\_order | map&lt;name, uint64\_t&gt; | { sectiona: 3, sectionb: 2, sectionc: 1 } | The new section order |
+| document_name | name | doc1 | Name of the document to reorder. |
+| new_order | map&lt;name, uint64_t&gt; | `{ sectiona: 3, sectionb: 2, sectionc: 1 }` | The new section order |
 
 ```text
 cleos push action amend.decide reorder '{ ... }' -p author

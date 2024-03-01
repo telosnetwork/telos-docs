@@ -14,7 +14,7 @@ Documents are broken down into named sections which hold the contents of the doc
 
 Document Subtitle
 
-| section\_name | content |
+| section_name | content |
 | :--- | :--- |
 | sectiona | Text here |
 | sectionb | More text here |
@@ -30,9 +30,10 @@ To begin, the document author must call the `newdocument` action on the `amend.d
 | :--- | :--- | :--- | :--- |
 | title | string | "Doc1" | The title of the document |
 | subtitle | string | "A small example document" | The subtitle of the document |
-| document\_name | name | doc1 | The name identifier for the document |
+| document_name | name | doc1 | The name identifier for the document |
 | author | name | testaccount1 | The telos account of the author |
-| initial\_sections | map&lt;name, string&gt; | { sectiona : "Text here", sectionb: "More text here", sectionc: "A little more text" } ... | The document broken down into a mapping of section names to section content.  |
+| initial_sections | map&lt;name, string&gt; | `{sectiona: "Text here", sectionb: "More text here", sectionc: "A little more text"}` ... | The document is broken down into a mapping of section names to section content. |
+
 
 ```text
 cleos push action amend.decide newdocument '{ ... }' -p author
