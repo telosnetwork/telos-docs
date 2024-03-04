@@ -69,6 +69,7 @@ const config = {
         {property: 'og:locale', content: 'en_US'},
         {property: 'og:type', content: 'website'},
         {property: 'twitter:image', content: 'https://docs.telos.net/img/docs-social-share.png'},
+        {name: 'google-site-verification', content: 'HgXA9uRlyondYS68-b8ZBHo2KMpEv1h4LcUOSnJB1PE'},
       ],
       navbar: {
         title: '',
