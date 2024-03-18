@@ -129,20 +129,24 @@ Check created accounts under the EOSIO account:
 
 ```cleos get accounts <PublicKey>```
 
-**Output**: {
-  "account_names": [
-    "eosio.bpay",
-    "eosio.msig",
-    "eosio.names",
-    "eosio.ram",
-    "eosio.ramfee",
-    "eosio.rex",
-    "eosio.saving",
-    "eosio.stake",
-    "eosio.token",
-    "eosio.vpay",
+**Output**: 
+```json
+{  
+  "account_names": [  
+    "eosio.bpay",  
+    "eosio.msig",  
+    "eosio.names",  
+    "eosio.ram",  
+    "eosio.ramfee",  
+    "eosio.rex",  
+    "eosio.saving",  
+    "eosio.stake",  
+    "eosio.token",  
+    "eosio.vpay",  
     ]
 }
+```
+
 ## EOSIO Token Contract
 __Defines the structures and actions allowing users to create, issue, and manage tokens on EOSIO-based blockchains.__
 1. Create the eosio.token contract account

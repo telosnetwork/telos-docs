@@ -8,7 +8,7 @@ Welcome to the Telos Docs. The Telos documentation is aimed to provide a list of
 
 **Please reach out** in [EVM](https://t.me/TelosEVMDevs) or [Dapps](https://t.me/dappstelos) development Telegram channels. 
 
-Our docs are built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+Our docs are built using [Docusaurus 3](https://docusaurus.io/), a modern static website generator.
 
 Site will auto-update based on commits to the `master` branch, it is hosted in Cloudflare Pages.
 
