@@ -1,60 +1,11 @@
 ---
 title: 'Setting up a Telos Block Producer Node'
 description: This section describes all the steps needed to set up a Telos Block Producer
-sidebar_position: 2
+sidebar_position: 3
 hide_table_of_contents: true
 ---
 
 # Setting up a Telos Block Producer Node
-
-## Installation Methods
-
-* EOSIO currently supports the following operating systems:
-  * Amazon Linux 2
-  * CentOS 7
-  * Ubuntu 16.04
-  * Ubuntu 18.04
-  * MacOS 10.14 (Mojave)
-
-> NOTE: If you are new to EOSIO, it is recommended that you install the EOSIO Prebuilt Binaries. If you are an advanced developer, a block producer, or no binaries are available for your platform, you may need to Build EOSIO from source depending on your OS.
-
-### Ubuntu package method
-
-```
-$ wget https://github.com/eosio/eos/releases/download/v2.0.11/eosio_2.0.11-1-ubuntu-18.04_amd64.deb
-$ sudo apt install ./eosio_2.0.11-1-ubuntu-18.04_amd64.deb
-```
-
-### Compile source code method
-
-1.  Clone the `EOSIO/EOS` repository from Github like this:
-
-    ```
-    $ git clone https://github.com/EOSIO/eos.git --recursive` [NOT NEEDED, if already cloned]
-    ```
-
-> NOTE: The step-1 is not needed, if the repository is already cloned. Directly, start from step-2.
-
-1.  Go to the `eos` folder&#x20;
-
-    ```
-    $ cd eos
-    ```
-2.  pull the repository with required released version&#x20;
-
-    ```
-    $ git pull https://github.com/EOSIO/eos.git v2.0.11`
-    ```
-3.  update the submodules
-
-    ```
-    $ git submodule update --init --recursive`
-    ```
-4.  Go to required version
-
-    ```
-    $ git checkout tags/v2.0.11`
-    ```
 
 ## Run Nodeos
 
@@ -68,12 +19,12 @@ $ sudo apt install ./eosio_2.0.11-1-ubuntu-18.04_amd64.deb
 
 #### Goal
 
-This section describes how to set up a producing node within the EOSIO network. A producing node, as its name implies, is a node that is configured to produce blocks in an EOSIO based blockchain. This functionality if provided through the producer\_plugin as well as other Nodeos Plugins.
+This section describes how to set up a producing node within the Telos network. A producing node, as its name implies, is a node that is configured to produce blocks on the Telos blockchain. This functionality is provided through the producer\_plugin as well as other Nodeos Plugins.
 
 **nodeos plugins**
 
-* Plugins extend the core functionality implemented in `nodeos`. Some plugins are mandatory, such as `chain_plugin`, `net_plugin`, and `producer_plugin`, which reflect the modular design of `nodeos`. The other plugins are optional as they provide nice to have features, but non-essential for the nodes operation.
-* The list of specific plugins are as follows:
+* Plugins extend the core functionality implemented in `nodeos`. Some plugins are mandatory, such as `chain_plugin`, `net_plugin`, and `producer_plugin`, which reflect the modular design of `nodeos`. The other plugins are optional as they provide nice-to-have features, but are non-essential for the node's operation.
+* The list of specific plugins is as follows:
   * `blockvault_client_plugin`
   * `chain_api_plugin`
   * `chain_plugin`
@@ -94,8 +45,8 @@ This section describes how to set up a producing node within the EOSIO network. 
 
 #### Pre-requisites
 
-* Install the [EOSIO software](https://github.com/EOSIO/eos) before starting this section.
-* It is assumed that `nodeos`, `cleos`, and `keosd` are accessible through the path. If you built EOSIO using shell scripts, make sure to run the Install Script.
+* Install the [Leap software](/nodes/bp-nodes/installing-node-software) before starting this section.
+* It is assumed that `nodeos`, `cleos`, and `keosd` are accessible through the path. If you built Leap using shell scripts, make sure to run the Install Script.
 * Know how to pass Nodeos options to enable or disable functionality.
 
 #### Steps
@@ -107,7 +58,7 @@ Please follow the steps below to set up a producing node:
 3. Register your account as a producing validator
 4. Set Producer Name
 5. Set the Producer's signature-provider
-6. Define a peers list
+6. Define a peer list
 7. Load the Required Plugins
 
 **1. Local Wallet**
@@ -150,7 +101,7 @@ For instance, [http://yourwebsite.com/bp.json](http://yourwebsite.com/bp.json) W
 For instance, for Aloha, the `bp.json` is located at [https://www.alohaeos.com/bp.json](https://www.alohaeos.com/bp.json), the URL to locate this will be [https://www.alohaeos.com](https://www.alohaeos.com).
 
 * [Template for the standard bp\_info.json format for the EOS Mainnet.](https://github.com/eosrio/bp-info-standard)
-* You can find most Validator's bp.json at their websites.
+* You can find most Validator's bp.json on their websites.
 * Please conform to the [JSON format standard](https://www.w3schools.com/js/js\_json\_syntax.asp).
 * Here is an excellent [JSON validator](https://jsonformatter.org).
 
@@ -167,10 +118,10 @@ cleos -u http://api.main.alohaeos.com system regproducer alohaeosprod EOS87wJkSD
 >
 > If you currently have your active key listed in your `config.ini` for signing blocks — you need to stop it and replace it with a separate Signature key
 
-Just follow this in order to replace the existing active (or insecure key) with separate signature key
+Just follow this in order to replace the existing active (or insecure key) with a separate signature key
 
-* Create new key pair using `cleos create key --to-console`
-* Replace signature provider record in your `config.ini` with the new key: `signature-provider = EOS-SIGNATURE-PUBLIC-KEY=KEY:SIGNATURE-PRIVATE-KEY`
+* Create a new key pair using `cleos create key --to-console`
+* Replace the signature provider record in your `config.ini` with the new key: `signature-provider = EOS-SIGNATURE-PUBLIC-KEY=KEY:SIGNATURE-PRIVATE-KEY`
 * Call regproducer command with the new signature key: `cleos system regproducer [PRODUCER-NAME] [EOS-SIGNATURE-PUBLIC-KEY] {PRODUCER_URL] [COUNTRY_CODE]`
 
 **4. Set Producer Name**
@@ -251,12 +202,12 @@ plugin = eosio::producer_plugin
 
 #### Goal
 
-This section describes how to set up a non-producing validator node within the Telos network. A non-producing validator node is a node that is not configured to produce blocks, instead it is connected and synchronized with other peers from an EOSIO based blockchain, exposing one or more services publicly or privately by enabling one or more Nodeos Plugins, except the producer\_plugin.
+This section describes how to set up a non-producing validator node within the Telos network. A non-producing validator node is a node that is not configured to produce blocks, instead, it is connected and synchronized with other peers from the Telos blockchain, exposing one or more services publicly or privately by enabling one or more Nodeos Plugins, except the producer\_plugin.
 
 #### Pre-requisites
 
 * Install the [EOSIO software](https://github.com/EOSIO/eos) before starting this section.
-* It is assumed that `nodeos`, `cleos`, and `keosd` are accessible through the path. If you built EOSIO using shell scripts, make sure to run the Install Script.
+* It is assumed that `nodeos`, `cleos`, and `keosd` are accessible through the path. If you built Leap using shell scripts, make sure to run the Install Script.
 * Know how to pass Nodeos options to enable or disable functionality.
 
 #### Steps
