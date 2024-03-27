@@ -15,7 +15,11 @@ The tEVM is generally compatible with any smart contract written in Solidity. Ca
 
 ## Solidity Versions
 
-Due to the nature of the Telos EVM's implementation, certain versions of Solidity may not always be supported. Currently, all versions before 0.8.25 should be supported, but version > 0.7.0 is recommended.
+Due to the nature of the Telos EVM's implementation, certain versions of Solidity may not always be supported. Currently, version 0.8.23 is fully supported and all versions before 0.8.23 should be supported, but version > 0.7.0 is recommended.
+
+:::warning
+Version 0.8.24 is partially supported. 0.8.24 can be used if the following functions are not called within the code: `tstore()`, `tload()`, `blobhash()`, `basefee()`, `blobbasefee()` and `mcopy()`
+:::
 
 ## Supported EIPs
 
@@ -49,7 +53,7 @@ eth_sendRawTransaction
 eth_sendTransaction
 eth_getTransactionReceipt
 eth_getTransactionByHash
-aeth_getTransactionByBlockHashAndIndex
+eth_getTransactionByBlockHashAndIndex
 eth_getBlockByNumber
 eth_getBlockByHash
 eth_getBlockTransactionCountByHash
