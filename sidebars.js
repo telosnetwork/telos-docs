@@ -210,6 +210,7 @@ const sidebars = {
       },
     ],
   },
+  'evm/dia-oracles',
   'evm/telos-safe',
   'evm/stlos-integration',
   ],
