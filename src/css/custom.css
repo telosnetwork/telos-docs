@@ -110,12 +110,16 @@ html[data-theme='dark'] .DocSearch {
   );
 }
 
-html[data-theme='dark'] .navbar__logo {
+/* html[data-theme='dark'] .navbar__logo {
   content: url(/img/logo-dark.svg);
 }
 
 html[data-theme='light'] .navbar__logo {
   content: url(/img/logo-light.svg);
+} */
+
+.theme-doc-sidebar-menu {
+  margin-bottom: 15px; /* Adjust the value as needed */
 }
 
 .theme-back-to-top-button {
