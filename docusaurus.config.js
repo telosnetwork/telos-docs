@@ -75,64 +75,21 @@ const config = {
         title: '',
         logo: {
           alt: 'Telos Logo',
-          src: 'img/telos-light.png',
-          srcDark: 'img/telos-dark.png',
+          src: 'img/logos/telos-logo-light.png',
+          srcDark: 'img/logos/telos-logo-dark.png',
         },
         items: [
           {
-            type: 'dropdown',
+            type: 'doc',
             label: 'Developer Docs',
+            docId: 'overview/what-is-telos/introduction',
             position: 'left',
-            items: [
-              {
-                type: 'docSidebar',
-                label: 'Overview',
-                sidebarId: 'overview',
-              },
-              {
-                type: 'docSidebar',
-                label: 'Quick Start',
-                sidebarId: 'quickStart',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'digitalAssets',
-                label: 'Digital Assets',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'evm',
-                label: 'Telos EVM',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'zero',
-                label: 'Telos Zero',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'nodes',
-                label: 'Nodes',
-              },
-            ],
-            
           },
           {
-            type: 'dropdown',
+            type: 'doc',
             label: 'User Guides',
+            docId: 'users/getting-started/README',
             position: 'left',
-            items: [
-              {
-                type: 'docSidebar',
-                sidebarId: 'gettingStarted',
-                label: 'Getting Started',
-              },
-              {
-                type: 'docSidebar',
-                sidebarId: 'knowledgeBase',
-                label: 'Knowledge Base',
-              },
-            ],
           },
         ],
       },
