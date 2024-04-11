@@ -55,9 +55,9 @@ Oracle specifications:
 The final price point for each asset is calculated by computing the assets' trade information across multiple DEXs and CEXs. This is done using a Volume Weighted Average Price with Interquartile Range (VWAPIR) methodology. [Learn more about VWAPIR](https://docs.diadata.org/products/token-price-feeds/exchangeprices/vwapir-volume-weighted-average-price-with-interquartile-range-filter).
 
 
-#### Update frequency: 2-minute heartbeat + 0.2% deviation threshold
+#### Update frequency: 0.2% deviation threshold, and 24 hour heartbeat.
 
-A consistent heartbeat refreshes all asset prices every 2 minutes. Moreover, if the oracle detects a price fluctuation exceeding 0.2% from the last published rate, it promptly sends an update on-chain.
+The oracle operates a trade collection window of 2 minutes, distinct from the heartbeat mechanism. This period is used to aggregate trades for calculating the price point. Specifically, it gathers trade data within 120-second intervals and then evaluates if a 0.2% price deviation has occurred, triggering an update if such deviation is detected.
 
 
 ### How to access DIA oracles?
