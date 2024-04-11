@@ -56,7 +56,13 @@ contract GLDToken is ERC20 {
 **As an environment select `Injected Provider - Metamask`**
 Click on Ethereum Deploy Logo on the side
 
-![web3injected pic](/img/Injectedweb3.png)
+<img
+    src={require('/static/img/Injectedweb3.png').default}
+    alt="remix"
+    width="70%"
+    height="automatic"
+/>
+
 Then MetaMask will pop up, Click Next & allow the wallet to connect to Remix
 
 ### Compile
@@ -68,7 +74,13 @@ __OR__
 Run the compiler tab. Make sure to always make sure the compiler is >= pragma solidity declaration
 
 In this case we used 0.8.7 in compiler and declared a pragma ^0.8.0
-![compile pic](/img/compile.png)
+
+<img
+    src={require('/static/img/compile.png').default}
+    alt="remix"
+    width="70%"
+    height="automatic"
+/>
 
 ## Deploy Smart Contract
 
@@ -76,17 +88,32 @@ In this case we used 0.8.7 in compiler and declared a pragma ^0.8.0
 - Under Deploy, insert initial supply that will be passed to the constructor
 - Transact by confirming in Metamask pop up.
 
-![transact](/img/deploy.png)
+<img
+    src={require('/static/img/deploy.png').default}
+    alt="remix"
+    width="70%"
+    height="automatic"
+/>
 
 ## Copy Contract Address
 
 Get the Contract Address we just deployed in the Deploy Tab
 
-![Grab_contract_address](/img/grab_contract_address.png)
+<img
+    src={require('/static/img/grab_contract_address.png').default}
+    alt="remix"
+    width="70%"
+    height="automatic"
+/>
 
 ### Get the Sourcify Plugin
 
-![Get_sourcify](/img/getsourcify.jpg)
+<img
+    src={require('/static/img/getsourcify.jpg').default}
+    alt="remix"
+    width="70%"
+    height="automatic"
+/>
 
 ## Use the Sourcify Plugin to Verify the Contract
 
@@ -99,11 +126,21 @@ Get the Contract Address we just deployed in the Deploy Tab
 - Select Verifier
 - Since we just deployed using remix it already has contract metadata and sources.
 
-![Remix_sourcify](/img/remix_sourcify.png)
+<img
+    src={require('/static/img/remix_sourcify.png').default}
+    alt="remix"
+    width="70%"
+    height="automatic"
+/>
 
 **Select Verify**
 
-![Verify_success](/img/verify_success.png)
+<img
+    src={require('/static/img/verify_success.png').default}
+    alt="remix"
+    width="20%"
+    height="automatic"
+/>
 
 We just verified a ERC20 contract using the Remix IDE - Sourcify plug in.
 
