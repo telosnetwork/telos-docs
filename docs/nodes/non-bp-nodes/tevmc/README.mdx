@@ -3,7 +3,7 @@ title: "tEVM Docker Introduction"
 displayed_sidebar: devBar
 id: tevmc
 description: >-
-  tevmc is a python 3.x library/command line tool to help bootstrap and
+  tevmc is a python 3 library/command line tool to help bootstrap and
   managment of Telos EVM local, testnet and mainnet nodes.
 hide_table_of_contents: true
 sidebar_position: 1
@@ -20,9 +20,9 @@ sidebar_position: 1
 ## Quickstart
 
 ```
-## Need installed python version >= python 3.8
+## Need installed python version >= python 3.9
 
-git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0-rc2
+git clone https://github.com/telosnetwork/telos-evm-docker.git -b v1.5.0-rc8
 cd telos-evm-docker
 
 # Two posibilities:
@@ -58,7 +58,7 @@ tevmc down
 
 1. `git clone git@github.com:telosnetwork/telos-evm-docker.git`&#x20;
 2. `cd telos-evm-docker`
-3. `git checkout v1.5.0-rc2`
+3. `git checkout v1.5.0-rc8`
 4. `sudo ./install.sh`&#x20;
 
 To load the virtual environment (and make `tevmc` command line available):
@@ -125,32 +125,15 @@ Each sub-directory inside main docker path generally contains a combination of t
 ```
 node/
 ├── docker/
-│   ├── beats/
 │   ├── elasticsearch/
 │   ├── leap/
 │   ├── telosevm-translator/
 │   ├── telos-evm-rpc/
 │   ├── kibana/
 │   └── redis/
+├── logs/
 └── tevmc.json
 ```
-
-## Monitoring
-
-You can stream logs from any container using the `stream` sub command:
-
-> `tevmc stream {source}`
-
-Available sources:
-
-* `daemon`&#x20;
-* `redis`
-* `beats`
-* `elasticsearch`
-* `kibana`
-* `nodeos`
-* `indexer`
-* `rpc`
 
 ## Landing
 
@@ -161,28 +144,6 @@ To bring the stack down run:
 This will perform graceful `nodeos` stop and bring down all containers.
 
 ## FAQ
-
-### Can I use this to process and index both Zero & EVM transactions?
-
-> Yes, but will need to set correct producer keys on `nodeos` and un-whitelist `eosio.evm` on Hyperion config.
-
-### As  soon as I launch the stack it crashes with an error like this one:
-
-```
-07:00:32:WARNING:Starting daemon.
-07:00:32:INFO:opening redis-2122399...
-07:00:33:INFO:running
-07:00:33:INFO:
-07:00:33:INFO:*** FATAL CONFIG FILE ERROR (Redis 6.2.6) ***
-07:00:33:INFO:Reading the configuration file, at line 92
-07:00:33:INFO:>>> 'port $redis_port'
-07:00:33:INFO:argument couldn't be parsed into an integer
-07:00:33:CRITICAL:container status: removing, log dump:
-07:00:33:CRITICAL:couldn't access logs.
-07:00:33:WARNING:Stopping daemon.
-```
-
-> This error usually happens when trying to launch a stack without previously running `tevmc build` first.
 
 ### While in the process of launching the `nodeos` service, it crashes with an error like this one:
 
@@ -213,7 +174,7 @@ e to unclean shutdown): replay required
 {"error":{"code":3,"message":"transaction declares authority...
 ```
 
-> Setup correct signing account on `telos-evm` section of `evm-rpc` configuration.
+> Setup correct signing account credentials on rpc service configuration.
 
 ### Is `kubernetes` supported?
 
