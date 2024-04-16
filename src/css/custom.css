@@ -146,6 +146,17 @@ html[data-theme='light'] .navbar__logo {
   display: none;
 }
 
+.theme-doc-sidebar-item-link a[href="/build-on-telos/"] {
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: underline;
+}
+
+.theme-doc-sidebar-item-link a[href="/overview/what-is-telos/introduction/"] {
+  font-weight: bold;
+  font-size: 16px;
+}
+
 .attributes__container {
     display: grid;
     justify-content: center;
