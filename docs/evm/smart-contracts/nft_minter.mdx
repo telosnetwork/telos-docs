@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 6
 displayed_sidebar: devBar
 hide_table_of_contents: true
 ---
@@ -171,7 +171,14 @@ Follow steps to deploy on telos_testnet
 1. `npm install dotenv` Telos utilizes a dotenv plug-in to load environment variables from .env file.  
    **Note** .env file contains sensitive information and can be included in .gitignore to follow best practices.
 2. Create a seperate .env file to hide and paste all private keys.
-   ![dotenv](/img/dotenv.png)
+
+<img
+    src={require('/static/img/dotenv.png').default}
+    alt="nft minter"
+    width="70%"
+    height="automatic"
+/>
+
 3. Open hardhat.config.js file and add the network configuration for telos_testnet.  
    Make sure to add `require("dotenv").config({ path: ".env" });` at the top of file.  
    `telos_tesnet rpc = "https://testnet.telos.net/evm"`  

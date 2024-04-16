@@ -122,8 +122,24 @@ html[data-theme='light'] .navbar__logo {
   width: auto;
 }
 
+/* Bold the main section titles */
+.theme-doc-sidebar-menu > .theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link--sublist {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Increase font weight over individual pages */
+.theme-doc-sidebar-menu .theme-doc-sidebar-item-category .theme-doc-sidebar-item-category .menu__link--sublist {
+  font-weight: 500;
+}
+
+/* Set thin font weight of individual pages */
+.theme-doc-sidebar-menu .theme-doc-sidebar-item-link > a {
+  font-weight: 400;
+}
+
 .theme-doc-sidebar-menu {
-  margin-bottom: 15px; /* Adjust the value as needed */
+  margin-bottom: 15px;
 }
 
 .theme-back-to-top-button {

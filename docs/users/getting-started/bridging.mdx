@@ -8,11 +8,13 @@ sidebar_position: 3
 hide_table_of_contents: true
 ---
 
-# Bridging to Telos EVM
+# Bridging TLOS
 
-## How To Move Assets With The Telos Bridge, Powered By LayerZero
+## Bridging to Telos EVM
 
-### Step 1
+### How To Move Assets With The Telos Bridge, Powered By LayerZero
+
+#### Step 1
 
 Head to the [Telos Bridge](https://bridge.telos.net/) and press connect at the top right.
 
@@ -23,7 +25,7 @@ Head to the [Telos Bridge](https://bridge.telos.net/) and press connect at the t
     height="automatic"
 />
 
-### Step 2
+#### Step 2
 
 Select MetaMask from the list of wallets and connect your wallet.
 
@@ -34,7 +36,7 @@ Select MetaMask from the list of wallets and connect your wallet.
     height="automatic"
 />
 
-### Step 3
+#### Step 3
 
 Select the network you're bridging from and the asset you want to bridge. In this case, we are bridging USDT from Polygon.  Next, be sure to choose Telos EVM as the destination.
 
@@ -63,7 +65,7 @@ Select the network you're bridging from and the asset you want to bridge. In thi
 
 </div>
 
-### Step 4
+#### Step 4
 
 Next, add gas on the destination chain if needed.
 
@@ -78,7 +80,7 @@ If it is your first time bridging to Telos, be sure to select the 'Gas on destin
     height="automatic"
 />
 
-### Step 5
+#### Step 5
 
 From there, you can bridge your assets! You may be asked to switch networks in MetaMask to match the chain you are bridging from if you have not already switched.
 
@@ -95,12 +97,12 @@ Congrats, your assets are being bridged and will show up in your Telos EVM walle
 Your assets will be transferred to the same EVM address that you bridged from. So if you have multiple accounts on MetaMask, just be aware of which one you want your assets to be on.
 :::
 
-## How to bridge your TLOS ERC20/BEP20 tokens to Telos EVM using pNetwork
+### How to bridge your TLOS ERC20/BEP20 tokens to Telos EVM using pNetwork
 
 Follow the step-by-step guide below to bridge from Ethereum or Binance Smart Chain to Telos using [pNetwork](https://dapp.ptokens.io/#/swap)!  
 The instructions are specifically for ERC20 TLOS on Ethereum, but the steps for Binance are nearly identical, just choose the BSC options instead of the ETH ones.
 
-### Step 1
+#### Step 1
 
 Head to the [pTokens DApp](https://dapp.ptokens.io/#/swap) Swap Page and connect your wallet
 
@@ -113,7 +115,7 @@ Choose Ethereum, then connect your wallet with Metamask
     height="automatic"
 />
 
-### Step 2
+#### Step 2
 
 In the “From” swap section, select TLOS on ETHEREUM.
 
@@ -124,7 +126,7 @@ In the “From” swap section, select TLOS on ETHEREUM.
     height="automatic"
 />
 
-### Step 3
+#### Step 3
 
 In the “To” swap section, select TLOS on NATIVE.
 
@@ -135,7 +137,7 @@ In the “To” swap section, select TLOS on NATIVE.
     height="automatic"
 />
 
-### Step 4 
+#### Step 4 
 
 Enter a Telos EVM destination address and make sure “Recieve on a tEVM (Telos EVM) compatible address” is enabled. Enter the amount you would like to swap and complete the transaction.
 
@@ -148,4 +150,179 @@ If you want to bridge to Telos Zero insead of Telos EVM, toggle off thr "Receive
     alt="Select TLOS destination"
     width="35%"
     height="automatic"
+/>
+
+## Bridging to Telos Zero
+
+### How to bridge your TLOS ERC20/BEP20 tokens to Telos Zero using pNetwork
+
+Follow the step-by-step guide below to bridge from Ethereum or Binance Smart Chain to Telos using [pNetwork](https://dapp.ptokens.io/#/swap)!  
+The instructions are specifically for ERC20 TLOS on Ethereum, but the steps for Binance are nearly identical, just choose the BSC options instead of the ETH ones.
+
+#### Step 1
+
+Head to the [pTokens DApp](https://dapp.ptokens.io/#/swap) Swap Page and connect your wallet
+
+Choose Ethereum, then connect your wallet with Metamask
+
+<img
+    src={require('/static/img/ptokens1.png').default}
+    alt="Select Ethereum Network"
+    width="35%"
+    height="automatic"
+/>
+
+#### Step 2
+
+In the “From” swap section, select TLOS on ETHEREUM.
+
+<img
+    src={require('/static/img/ptokens2.png').default}
+    alt="Select TLOS on Ethereum"
+    width="35%"
+    height="automatic"
+/>
+
+#### Step 3
+
+In the “To” swap section, select TLOS on NATIVE.
+
+<img
+    src={require('/static/img/ptokens3.png').default}
+    alt="Select TLOS on NATIVE"
+    width="35%"
+    height="automatic"
+/>
+
+#### Step 4 
+
+Enter a Telos Zreo destination address and make sure “Recieve on a tEVM (Telos EVM) compatible address” is disabled. Enter the amount you would like to swap and complete the transaction.
+
+<img
+    src={require('/static/img/ptokens-native.png').default}
+    alt="Select TLOS destination"
+    width="35%"
+    height="automatic"
+/>
+
+## Transferring TLOS from Telos Zero to Telos EVM
+
+After acquiring TLOS, you can send it to your EVM address using the [web-wallet](https://wallet.telos.net), which you can also use to send to other EVM addresses such as Metamask. Make sure you have [added the Telos EVM](/quickstart/evm/setup-a-wallet) network to your Metamask.
+
+1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](/quickstart/zero/accounts) and [setting up a wallet](/quickstart/zero/setup-a-wallet) to do so.
+
+<img
+  src={require('/static/img/native-wallet-login.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+2. Once logged in to web wallet, click on the deposit to EVM button (as shown below).
+
+<img
+  src={require('/static/img/mainaccount_zero_to_evm.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+:::info
+If you do not already have an EVM address added in the native web wallet, you will have to generate one
+:::
+
+3\. Enter the amount of TLOS you wish to deposit. Click "**Deposit**" and sign the transaction.&#x20;
+
+<img
+  src={require('/static/img/zero_to_evm.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+4\. Viola! You should now see your new EVM balance.&#x20;
+
+## Transferring TLOS from Telos EVM to Zero
+
+Funds can also be transferred from your associated EVM address to your Telos account.
+This can be done via the [web-wallet](https://wallet.telos.net).
+
+1. Login to the native side of the [web-wallet](https://wallet.telos.net). If you haven't created a native wallet please reference [accounts](/quickstart/zero/accounts) and [setting up a wallet](/quickstart/zero/setup-a-wallet) to do so.
+
+<img
+  src={require('/static/img/native-wallet-login.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+2. Once logged in to the web-wallet, click on the transfer to Zero button (as shown below).
+
+<img
+  src={require('/static/img/mainaccount_evm_to_zero.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+:::info
+If you do not already have an EVM address added in the native web wallet, you will have to generate one
+:::
+
+3\. Enter the amount of TLOS you wish to transfer. Click "Deposit" and sign the transaction.
+
+<img
+  src={require('/static/img/evm_to_zero.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+## Sending TLOS to other EVM addresses with web wallet
+
+Once you have TLOS on your EVM address, you can send it to any Metamask address using the web-wallet. This allows users to use dapps on the tEVM with their own wallet of choice.
+
+1. On the web-wallet, click on the Telos EVM token.
+
+<img
+  src={require('/static/img/mainaccount_send.png').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+2\. Click on "**Send**"
+
+<img
+  src={require('/static/img/send_evm.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+3\. Enter the amount you wish to send.
+
+<img
+  src={require('/static/img/send_evm2.PNG').default}
+  alt="Example 2"
+  width="30%"
+  height="automatic"
+/>
+
+4\. Enter the address you wish to send to.
+
+<img
+  src={require('/static/img/send_evm3.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
+/>
+
+5\. Confirm and sign the transaction.
+
+<img
+  src={require('/static/img/send_evm4.PNG').default}
+  alt="Example 2"
+  width="50%"
+  height="automatic"
 />
