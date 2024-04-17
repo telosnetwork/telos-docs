@@ -21,7 +21,15 @@ const sidebars = {
   // What does Telos offer and how does the EVM on top of Zero add an advantage
   devBar: [
     'overview/what-is-telos/introduction',
-    'build-on-telos',
+    {
+      type: 'category',
+      collapsible: false,
+      label: 'Build On Telos',
+      items: [
+        'network-info',
+        'tools',
+      ],
+    },
     {
       type: 'category',
       label: 'Overview',

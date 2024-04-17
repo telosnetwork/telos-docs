@@ -146,11 +146,18 @@ html[data-theme='light'] .navbar__logo {
   display: none;
 }
 
-.theme-doc-sidebar-menu .theme-doc-sidebar-item-link a[href="/build-on-telos/"] {
+/* Underline only the 'Build On Telos' section heading based on its position */
+.theme-doc-sidebar-menu > .theme-doc-sidebar-item-category:nth-of-type(2) > .menu__list-item-collapsible > .menu__link {
+  text-decoration: underline;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* .theme-doc-sidebar-menu .theme-doc-sidebar-item-link a[href="/build-on-telos/"] {
   font-weight: bold;
   font-size: 16px;
   text-decoration: underline;
-}
+} */
 
 .theme-doc-sidebar-menu .theme-doc-sidebar-item-link a[href="/overview/what-is-telos/introduction/"] {
   font-weight: bold !important;
