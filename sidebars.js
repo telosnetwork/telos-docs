@@ -29,6 +29,16 @@ const sidebars = {
         'network-info',
         'tools',
         'telos-contracts',
+        'block-explorers',
+        {
+          type: 'category',
+          label: 'Toolchain',
+          collapsed: true,
+          items: [
+            'toolchains/hardhat',
+            'toolchains/thirdweb',
+          ],
+        },
       ],
     },
     {

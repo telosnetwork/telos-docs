@@ -1,0 +1,37 @@
+---
+displayed_sidebar: devBar
+hide_table_of_contents: true
+description: >-
+    Quickstart for using Hardhat.
+title: "Hardhat"
+---
+
+Hardhat is an Ethereum development environment for flexible, extensible, and fast smart contract development.
+
+You can use Hardhat to edit, compile, debug, and deploy your smart contracts to Telos.
+
+## Using Hardhat with Telos
+
+To configure Hardhat to deploy smart contracts to Telos, update your project’s hardhat.config.ts file by adding Telos as a network:
+
+```
+networks: {
+    telos_mainnet: {
+        url: "https://mainnet.telos.net/evm",
+        accounts: [process.env.TELOS_MAINNET_PRIVATE_KEY],
+        chainId: 40,
+    },
+    telos_testnet: {
+        url: "https://testnet.telos.net/evm",
+        accounts: [process.env.TELOS_TESTNET_PRIVATE_KEY],
+        chainId: 41,
+    },
+},
+defaultNetwork: "telos_testnet",
+```
+
+:::info
+
+For a complete guide on how to use Hardhat to deploy and verify contracts on Telos, see [Deploy and Verify Smart Contracts with Hardhat Deploy plugin](/evm/smart-contracts/hardhat_sourcify/).
+
+:::
