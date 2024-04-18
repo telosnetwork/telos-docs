@@ -28,6 +28,7 @@ const sidebars = {
       items: [
         'network-info',
         'tools',
+        'telos-contracts',
       ],
     },
     {
