@@ -27,9 +27,12 @@ const sidebars = {
       label: 'Build On Telos',
       items: [
         'network-info',
-        'tools',
         'telos-contracts',
         'block-explorers',
+        'oracles',
+        'indexers',
+        'bridges',
+        'telos-nodes',
         {
           type: 'category',
           label: 'Toolchain',
@@ -39,6 +42,7 @@ const sidebars = {
             'toolchains/thirdweb',
           ],
         },
+        'tutorials',
       ],
     },
     {
@@ -104,7 +108,7 @@ const sidebars = {
         },
         {
           type: 'link',
-          href: '/nodes/non-bp-nodes/tevmc/',
+          href: 'https://docs.telos.net/nodes/non-bp-nodes/tevmc/',
           label: 'Telos EVM Docker',
         },
         {
