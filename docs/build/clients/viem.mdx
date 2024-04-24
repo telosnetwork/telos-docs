@@ -1,0 +1,79 @@
+---
+displayed_sidebar: devBar
+hide_table_of_contents: true
+description: >-
+    Quickstart for using viem on Telos.
+title: "viem"
+---
+
+[viem](https://viem.sh/) is a TypeScript Interface for Ethereum that provides low-level stateless primitives for interacting with Ethereum. An alternative to ethers.js and web3.js with a focus on reliability, efficiency, and excellent developer experience.
+
+## Instsall
+
+``` bash
+npm i viem
+``` 
+
+## Setup
+
+Before you can start using viem, you need to setup a [Client](https://viem.sh/docs/clients/intro.html) with a desired [Transport](https://viem.sh/docs/clients/intro.html) and [Chain](https://viem.sh/docs/chains/introduction).
+
+``` javascript
+// 1. Import modules.
+import { createPublicClient, http } from 'viem'
+import { telos } from 'viem/chains'
+// import { telosTestnet } from 'viem/chains' for Telos testnet
+
+// 2. Set up your client with desired chain & transport.
+const client = createPublicClient({
+  chain: telos,
+  transport: http(),
+})
+``` 
+
+## Reading Data
+
+Now that the Client is set up, you can perform traditional RPC calls, or what viem calls [Public Actions](https://viem.sh/docs/actions/public/introduction.html) like getting the block number.
+
+``` javascript 
+const blockNumber = await client.getBlockNumber()
+```
+
+## Writing Data
+
+In order to write data to Telos, you need to create a [Wallet Client](https://viem.sh/docs/clients/wallet) and specify an Account to use.
+
+``` javascript 
+import { createWalletClient, custom } from 'viem'
+import { telos } from 'viem/chains'
+
+const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' })
+
+const client = createWalletClient({
+  account,
+  chain: telos,
+  transport: custom(window.ethereum)
+})
+
+client.sendTransaction({ ... })
+```
+
+## Interacting With Smart Contracts
+
+You can use viem to interact with a smart contract on Base by creating a Contract instance using [`getContract`](https://viem.sh/docs/contract/getContract.html) and passing it the contract ABI, contract address, and [Public](https://viem.sh/docs/clients/public.html) and/or [Wallet](https://viem.sh/docs/clients/wallet.html) Client:
+
+``` javascript 
+import { getContract } from 'viem';
+import { wagmiAbi } from './abi';
+import { publicClient } from './client';
+
+// 1. Create contract instance
+const contract = getContract({
+  address: 'CONTRACT_ADDRESS',
+  abi: wagmiAbi,
+  publicClient,
+});
+
+// 2. Call contract methods, listen to events, etc.
+const result = await contract.read.totalSupply();
+```

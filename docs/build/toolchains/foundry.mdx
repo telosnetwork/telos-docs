@@ -1,0 +1,76 @@
+---
+displayed_sidebar: devBar
+hide_table_of_contents: true
+description: >-
+    Quickstart for using Foundry.
+title: "Foundry"
+---
+
+Foundry is a smart contract development toolchain.
+
+Foundry manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line and via Solidity scripts.
+
+For full info check out the [Foundry Book](https://book.getfoundry.sh/) to get started with using Foundry with Telos.  
+
+If you haven't done so already, [install Foundry](https://book.getfoundry.sh/getting-started/installation).
+
+## Using Foundry with Telos
+
+Just provide the Base RPC URL and Chain ID when deploying and verifying your contracts.
+
+## Mainnet
+
+### Deploy and Verify Smart Contract
+
+``` bash
+
+forge create --rpc-url "https://mainnet.telos.net/" --private-key <your_private_key>  --verify src/MyContract.sol:MyContract
+
+```
+
+### Verify an Existing Smart Contract 
+
+``` bash
+
+forge verify-contract \
+    --chain-id 40 \
+    --num-of-optimizations 200 \ 
+    --compiler-version v0.8.10+commit.fc410830 \
+    <the_contract_address> \
+    src/MyToken.sol:MyToken 
+
+```
+
+:::note
+
+--num-of-optimizations will default to 0 if not set on verification, while it defaults to 200 if not set on deployment, so make sure you pass --num-of-optimizations 200 if you left the default compilation settings.
+
+:::
+
+## Testnet
+
+### Deploy and Verify Smart Contract
+
+``` bash
+
+forge create --rpc-url "https://testnet.telos.net/" --private-key <your_private_key>  --verify src/MyContract.sol:MyContract
+
+```
+
+### Verify an Existing Smart Contract 
+
+``` bash
+
+forge verify-contract \
+    --chain-id 41 \
+    --num-of-optimizations 200 \ 
+    --compiler-version v0.8.10+commit.fc410830 \
+    <the_contract_address> \
+    src/MyToken.sol:MyToken 
+
+```
+:::note
+
+--num-of-optimizations will default to 0 if not set on verification, while it defaults to 200 if not set on deployment, so make sure you pass --num-of-optimizations 200 if you left the default compilation settings.
+
+:::
