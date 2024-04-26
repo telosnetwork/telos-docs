@@ -1,0 +1,149 @@
+---
+displayed_sidebar: devBar
+hide_table_of_contents: true
+description: >-
+    Quickstart for using web3.js on Telos.
+title: "web3.js"
+---
+
+[web3.js](https://docs.web3js.org/) is a JavaScript library for building on EVM blockchains. 
+
+## Install
+
+To install web3.js run the following command:
+
+``` bash
+npm i web3
+```
+
+## Setup
+
+web3.js v4 supports both CJS ( CommonJS ) and native ESM module imports. For importing the main Web3 class in CJS you can use:
+
+``` javascript
+const { Web3 } = require('web3');
+```
+and for ESM style imports, you can use:
+``` javascript
+import { Web3 } from 'web3';
+```
+
+## Connecting to Telos
+
+:::warning
+
+You must initialize the Web3 object with a provider, otherwise, you won't be able to fully use web3.js functionalities. Here is an example of creating a web3 instance with an HTTP provider:
+
+:::
+
+``` javascript
+import { Web3 } from 'web3';
+
+// RPC endpoint
+// use https://testnet.telos.net for testnet
+const web3 = new Web3('https://mainnet.telos.net'); 
+```
+
+## Interacting With Telos 
+
+### Querying State
+
+After instantiating the web3 instance with a new Web3 provider, we can access the web3.eth package to fetch data from the blockchain:
+
+``` javascript
+// get last block number
+await web3.eth.getBlockNumber();
+// ↳ 338037822
+
+// get the chain id of the current provider
+await web3.eth.getChainId();
+// ↳ 40
+```
+
+### Sending Transactions
+
+``` javascript
+//add an account to a wallet
+const account = web3.eth.accounts.wallet.add('0x50d349f5cf627d44858d6fcb6fbf15d27457d35c58ba2d5cfeaf455f25db5bec');
+
+//create transaction object to send 1 tlos to '0xa32...c94' address from the account[0]
+const tx = 
+{ 
+    from: account[0].address,
+    to: '0xa3286628134bad128faeef82f44e99aa64085c94', 
+    value: web3.utils.toWei('1', 'ether')
+};
+//the `from` address must match the one previously added with wallet.add
+
+//send the transaction
+const txReceipt = await web3.eth.sendTransaction(tx);
+
+console.log('Tx hash:', txReceipt.transactionHash)
+// ↳ Tx hash: 0x03c844b069646e08af1b6f31519a36e3e08452b198ef9f6ce0f0ccafd5e3ae0e
+```
+
+### Interacting With a Smart Contract
+
+#### Instantiate a Contract
+
+The first step to interact with a contract is to instantiate the contract, for which we will need the ABI and the address of the contract
+
+``` javascript
+//WTLOS token example
+const address = '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E'
+
+//you can find the complete ABI in teloscan.io
+const ABI = 
+[
+    //EXample contract ABI
+    {
+      name: 'symbol',
+      outputs: [{ type: 'string' }],
+      type: 'function',
+    },
+    {
+      name: 'totalSupply',
+      outputs: [{ type: 'uint256' }],
+      type: 'function',
+    },
+];
+
+//instantiate the contract
+const tokenContract = new web3.eth.Contract(abi, address);
+```
+
+#### Read
+
+``` javascript
+//make the call to the contract (assuming its an ERC20)
+const symbol = await tokenContract.methods.symbol().call();
+
+console.log('Token symbol:',symbol);
+// ↳ Token symbol: WTLOS
+
+//make the call to the contract
+const totalSupply = await tokenContract.methods.totalSupply().call();
+
+console.log('Token Total supply:', totalSupply);
+// ↳ Uniswap Total Supply: TOTAL SUPPLY
+
+//use web3 utils to format the units
+console.log(web3.utils.fromWei(totalSupply, 'ether'))
+// ↳ 1000000000
+```
+
+#### Write 
+
+``` javascript
+//address to send the token
+const to = '0xcf185f2F3Fe19D82bFdcee59E3330FD7ba5f27ce';
+
+//value to transfer (1 with 18 decimals)
+const value = web3.utils.toWei('1','ether');
+
+//send the transaction => return the Tx receipt
+const txReceipt = await tokenContract.methods.transfer(to,value).send({from: account[0].address});
+
+console.log('Tx hash:',txReceipt.transactionHash);
+// ↳ Tx hash: HASH
+```

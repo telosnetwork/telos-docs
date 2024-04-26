@@ -1,0 +1,73 @@
+---
+displayed_sidebar: devBar
+hide_table_of_contents: true
+description: >-
+    Quickstart for using Alloy on Telos.
+title: "Alloy"
+---
+
+[Alloy](https://github.com/alloy-rs) is a comprehensive Rust-based toolkit designed for interfacing applications with Ethereum-compatible blockchains. It offers a full suite of tools, including JSON-RPC client implementations, smart contract interaction, and network abstraction layers, all optimized for high performance and robustness.  
+
+Alloy is a rewrite of [ethers-rs](https://github.com/gakonst/ethers-rs) from the ground up, with exciting new features, high performance, and excellent docs.  
+
+:::info
+For more examples on using Alloy, see their official examples [here](https://github.com/alloy-rs/examples).
+:::
+
+## Usage
+
+To start using Alloy in your Rust project, add it to your Cargo.toml
+
+``` rust
+[dependencies]
+alloy = { git = "https://github.com/alloy-rs/alloy" }
+```
+
+## Setup
+
+Next, you will need to configure your client with the desired network and transport layer.
+
+``` rust
+// 1. Import necessary modules from Alloy.
+use alloy::ProviderBuilder;
+use alloy_network::Network;
+
+// 2. Set up your provider to connect to Telos Mainnet
+// to connect to Telos Tesnet use https://testnet.telos.net
+let provider = ProviderBuilder::new().connect("https://mainnet.telos.net").await?;
+```
+
+## Reading Data
+
+Once your provider is configured, you can easily make RPC calls to fetch data from the blockchain.
+
+``` rust
+// Retrieve the latest block number.
+let block_number = provider.get_block_number().await?;
+```
+
+## Writing Data
+
+To write data to the blockchain, configure a Wallet provider and specify an account for transactions.
+
+``` rust
+use alloy::Wallet;
+use alloy::ProviderBuilder;
+use alloy_network::Ethereum;
+
+let wallet = Wallet::new_from_private_key("your_private_key_here", &provider);
+let signed_tx = wallet.send_transaction(tx_request).await?;
+```
+
+## Interacting With Smart Contracts
+
+Alloy facilitates interaction with smart contracts through simple and intuitive methods. Start by creating a Contract instance.
+
+``` rust
+use alloy_contract::Contract;
+
+let contract = Contract::new("contract_address_here", "contract_abi_here", &provider);
+
+// Call a contract method.
+let result = contract.method("methodName", (arg1, arg2)).call().await?;
+```

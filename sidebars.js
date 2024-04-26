@@ -20,6 +20,49 @@ const sidebars = {
 
   // What does Telos offer and how does the EVM on top of Zero add an advantage
   devBar: [
+    'overview/what-is-telos/introduction',
+    {
+      type: 'category',
+      collapsible: false,
+      label: 'Build On Telos',
+      items: [
+        'build/network-info',
+        'build/telos-contracts',
+        'build/block-explorers',
+        'build/faucets',
+        'build/oracles',
+        'build/indexers',
+        {
+          type: 'link',
+          label: 'Onramp',
+          href: 'https://www.telos.net/buy',
+        },
+        'build/bridges',
+        'build/telos-nodes',
+        {
+          type: 'category',
+          label: 'Toolchain',
+          collapsed: true,
+          items: [
+            'build/toolchains/hardhat',
+            'build/toolchains/foundry',
+            'build/toolchains/thirdweb-cli',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Clients',
+          collapsed: true,
+          items: [
+            'build/clients/ethers-js',
+            'build/clients/web3-js',
+            'build/clients/alloy',
+            'build/clients/viem'
+          ],
+        },
+        'build/tutorials',
+      ],
+    },
     {
       type: 'category',
       label: 'Overview',
@@ -30,7 +73,6 @@ const sidebars = {
           label: 'What is Telos',
           collapsed: true,
           items: [
-            'overview/what-is-telos/introduction',
             'overview/what-is-telos/evm',
             'overview/what-is-telos/zero',
             'overview/what-is-telos/token',
@@ -63,7 +105,6 @@ const sidebars = {
             },
           ],
         },
-        'overview/resources',
       ],
     },
     {
@@ -84,7 +125,7 @@ const sidebars = {
         },
         {
           type: 'link',
-          href: '/nodes/non-bp-nodes/tevmc/',
+          href: 'https://docs.telos.net/nodes/non-bp-nodes/tevmc/',
           label: 'Telos EVM Docker',
         },
         {

@@ -1,0 +1,121 @@
+---
+displayed_sidebar: devBar
+hide_table_of_contents: true
+description: >-
+    Quickstart for using ethers.js on Telos.
+title: "ethers.js"
+---
+
+[ethers.js](https://docs.ethers.org/) is a JavaScript library that allows developers to interact with EVM-compatible blockchain networks.
+
+You can use ethers.js to interact with smart contracts deployed on the Telos network.
+
+## Installing ethers.js
+
+If using NPM, you must first install ethers.
+
+``` bash
+npm install --save ethers
+``` 
+
+## Setup
+
+Before you can start using ethers.js, you need to import it into your project.  
+
+You can choose to import all of ethers, or just select specific items.
+
+``` javascript
+// Import everything
+import { ethers } from "ethers";
+
+// Import just a few select items
+import { BrowserProvider, parseUnits } from "ethers";
+
+// Import from a specific export
+import { HDNodeWallet } from "ethers/wallet";
+``` 
+
+## Connecting to Telos
+
+You can connect to Telos by instantiating a new ethers.js JsonRpcProvider object with a RPC URL of the Telos network.
+
+``` javascript
+// for Telos Testnet, use https://testnet.telos.net
+const url = 'https://mainnet.telos.net'
+provider = new ethers.JsonRpcProvider(url)
+``` 
+
+
+## Interacting With Telos
+
+### Querying State
+
+Now that we have our provider set up from the previous step, we can query the blockchain!
+
+``` javascript
+// Look up the current block number (i.e. height)
+await provider.getBlockNumber()
+// 338037822
+
+// Get the current balance of an account
+balance = await provider.getBalance("ethers.eth")
+// 4085267032476673080n
+
+// Since the balance is in wei, you may wish to display it
+// in ether instead.
+formatEther(balance)
+// '10.08526703247667308'
+
+// Get the next nonce required to send a transaction
+await provider.getTransactionCount("ethers.eth")
+// 2
+``` 
+
+### Sending Transactions
+
+To send a transaction in this example, we use a [signer](https://docs.ethers.org/v6/api/providers/#Signer) like [MetaMask](https://metamask.io/). Because the usrs private keys are not accessible directly to your code, we instead make the requests via a Signer.
+
+``` javascript
+// When sending a transaction, the value is in wei, so parseEther
+// converts ether to wei.
+tx = await signer.sendTransaction({
+  to: "ethers.eth",
+  value: parseEther("1.0")
+});
+
+// Often you may wish to wait until the transaction is mined
+receipt = await tx.wait();
+```
+
+### Interacting With a Smart Contract
+
+You can use ethers.js to interact with a smart contract on Telos by instantiating a Contract object using the ABI and address of a deployed contract:
+
+``` javascript
+abi = [
+  // ABI of deployed contract
+]
+
+// Create a contract object that is read only
+contract = new Contract("CONTRACT_ADDRESS", abi, provider)
+```
+
+To include functions that will change state on the blockchain, just swap the provider for the signer when creating the contract object.
+
+``` javascript
+// Create a contract object that can change state
+contract = new Contract("CONTRACT_ADDRESS", abi, signer)
+```
+
+Now you can read and write data on the Telos blockchain! The example below assumes a contract like an ERC20 and sends a transaction! 
+
+``` javascript
+// Send 1 Token
+amount = parseUnits("1.0", 18);
+
+// Send the transaction
+tx = await contract.transfer("ethers.eth", amount)
+
+// ...wait for the transaction to be included.
+await tx.wait()
+```
