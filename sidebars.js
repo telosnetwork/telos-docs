@@ -105,7 +105,6 @@ const sidebars = {
             },
           ],
         },
-        'overview/resources',
       ],
     },
     {
