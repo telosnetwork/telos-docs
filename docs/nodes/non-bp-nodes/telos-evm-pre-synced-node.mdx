@@ -17,10 +17,10 @@ Starting the sync process for a Telos EVM node from the beginning can take sever
 ## Versions in this release
 The following list is the current versions of software running in this pre-packaged release.
 * Telos EVM RPC v1.5 - https://github.com/telosnetwork/telos-evm-rpc
-* Telos EVM Translator v1.0 - https://github.com/telosnetwork/telosevm-translator
-* Elastic Search v8.10.2 - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.10.2-linux-x86_64.tar.gz
-* Nodeos v4.0.4-sub - https://github.com/telosnetwork/leap/releases/tag/v4.0.4-1.0.0-dev
-* Kibana v8.10.2 - https://artifacts.elastic.co/downloads/kibana/kibana-8.10.2-linux-x86_64.tar.gz
+* Telos EVM Translator v1.5 - https://github.com/telosnetwork/telosevm-translator
+* Elastic Search v8.13.2 - https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.13.2-linux-x86_64.tar.gz
+* Nodeos v4.0.6-sub - https://github.com/telosnetwork/leap/releases/tag/v4.0.6-1.1.0
+* Kibana v8.13.2 - https://artifacts.elastic.co/downloads/kibana/kibana-8.13.2-linux-x86_64.tar.gz
 
 ## Recommended Machine Specs:
 * 1TB SSD (nvme preferred)
@@ -43,10 +43,10 @@ The following list is the current versions of software running in this pre-packa
 ## Download the full, pre-synced repository and untar. 
 Contact the Telos Core Developers team for an updated link.
 
-untar/gzip the telosevm.tgz file: `tar -zxvf /path/to/file/telosevm.tgz -C /destination/path`
+untar/zstd the telosevm.tar.zst file: `tar -I zstd -xvf /path/to/file/telosevm.tar.zst -C /destination/path`
 
 * Contents:
-  * **data** - Contains all **nodeos_data** (266GB) and all **elastic_data** (64GB)
+  * **data** - Contains all **nodeos_data** (290GB) and all **elastic_data** (184GB)
   * **elastic** - Elastic Search 8.x binaries and configuration
   * **kibana** - Kibana 8.x binaries and configuration.
   * **nodeos** - Telos Nodeos binary and configuration
@@ -69,7 +69,7 @@ It is recommended to run all the following services under a common account and d
 Important configuration files are as follows:
 
 * Elastic
-  * /telosevm/elastic/es1/config/elasticsearc.yml
+  * /telosevm/elastic/es1/config/elasticsearch.yml
     * Set `cluster.name` to whatever you desire. Changing this will also change the log file names.
     * By default the data path is set to: `path.data: /telosevm/data/elastic_data/es1`
     * By default the log path is set to: `path.logs: /telosevm/elastic/es1/logs`
