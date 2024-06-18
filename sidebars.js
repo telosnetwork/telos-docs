@@ -288,6 +288,7 @@ const sidebars = {
         'nodes/Nodes and Clients',
         'nodes/types-of-nodes',
         'nodes/nodeos',
+        "nodes/node_providers",
         {
           type: 'category',
           label: 'Block Producing Nodes',
