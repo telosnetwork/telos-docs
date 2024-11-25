@@ -17,12 +17,12 @@ To configure Hardhat to deploy smart contracts to Telos, update your project’s
 ```
 networks: {
     telos_mainnet: {
-        url: "https://mainnet.telos.net/evm",
+        url: "https://rpc.telos.net",
         accounts: [process.env.TELOS_MAINNET_PRIVATE_KEY],
         chainId: 40,
     },
     telos_testnet: {
-        url: "https://testnet.telos.net/evm",
+        url: "https://rpc.testnet.telos.net",
         accounts: [process.env.TELOS_TESTNET_PRIVATE_KEY],
         chainId: 41,
     },
