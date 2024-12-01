@@ -24,7 +24,12 @@ Just provide the Telos RPC URL and Chain ID when deploying and verifying your co
 
 ``` bash
 
-forge create --rpc-url "https://mainnet.telos.net/evm" --private-key <your_private_key>  --verify src/MyContract.sol:MyContract
+forge create --rpc-url https://mainnet.telos.net/evm \
+  --private-key <your_private_key> \
+  src/MyContract.sol:MyContract \
+  --legacy \
+  --verify \
+  --verifier sourcify
 
 ```
 
@@ -32,18 +37,17 @@ forge create --rpc-url "https://mainnet.telos.net/evm" --private-key <your_priva
 
 ``` bash
 
-forge verify-contract \
-    --chain-id 40 \
-    --num-of-optimizations 200 \ 
-    --compiler-version v0.8.10+commit.fc410830 \
-    <the_contract_address> \
-    src/MyToken.sol:MyToken 
+forge verify-contract <the_contract_address> \
+  src/MyContract.sol:MyContract \
+  --chain-id 40 \
+  --verifier sourcify
 
 ```
 
 :::note
 
---num-of-optimizations will default to 0 if not set on verification, while it defaults to 200 if not set on deployment, so make sure you pass --num-of-optimizations 200 if you left the default compilation settings.
+- Since it needs to be deployed on the Telos EVM instead of Ethereum, you need to specify the Telos corresponding validator `sourcify` instead of the default `etherscan`;
+- You need to wait a few minutes to see the verification result.
 
 :::
 
@@ -53,7 +57,12 @@ forge verify-contract \
 
 ``` bash
 
-forge create --rpc-url "https://testnet.telos.net/evm" --private-key <your_private_key>  --verify src/MyContract.sol:MyContract
+forge create --rpc-url https://testnet.telos.net/evm \
+  --private-key <your_private_key> \
+  src/MyContract.sol:MyContract \
+  --legacy \
+  --verify \
+  --verifier sourcify
 
 ```
 
@@ -61,16 +70,15 @@ forge create --rpc-url "https://testnet.telos.net/evm" --private-key <your_priva
 
 ``` bash
 
-forge verify-contract \
-    --chain-id 41 \
-    --num-of-optimizations 200 \ 
-    --compiler-version v0.8.10+commit.fc410830 \
-    <the_contract_address> \
-    src/MyToken.sol:MyToken 
+forge verify-contract <the_contract_address> \
+  src/MyContract.sol:MyContract \
+  --chain-id 41 \
+  --verifier sourcify
 
 ```
 :::note
 
---num-of-optimizations will default to 0 if not set on verification, while it defaults to 200 if not set on deployment, so make sure you pass --num-of-optimizations 200 if you left the default compilation settings.
+- Since it needs to be deployed on the Telos EVM instead of Ethereum, you need to specify the Telos corresponding validator `sourcify` instead of the default `etherscan`;
+- You need to wait a few minutes to see the verification result.
 
 :::
