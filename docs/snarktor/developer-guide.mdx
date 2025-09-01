@@ -1,0 +1,529 @@
+---
+sidebar_position: 1
+title: SNARKtor Developer Guide
+description: Complete guide to ZK proof aggregation on Telos Network
+---
+
+# SNARKtor Developer Guide
+
+## Complete Guide to ZK Proof Aggregation on Telos Network
+
+SNARKtor is the Telos Network's zero-knowledge proof aggregator that enables developers to submit individual ZK proofs for aggregation into a single, more efficient proof that can be verified on-chain with reduced costs and improved scalability.
+
+## Table of Contents
+
+1. [System Overview](#system-overview)
+2. [Architecture Components](#architecture-components)
+3. [Development Setup](#development-setup)
+4. [Submitting ZK Proofs for Aggregation](#submitting-zk-proofs-for-aggregation)
+5. [Using the SDK for Proof Verification](#using-the-sdk-for-proof-verification)
+6. [Network Endpoints](#network-endpoints)
+7. [Code Examples](#code-examples)
+8. [API Reference](#api-reference)
+9. [Troubleshooting](#troubleshooting)
+
+## System Overview
+
+SNARKtor implements a decentralized protocol for recursive proof aggregation that allows multiple independent ZK proofs to be combined into a single aggregated proof. This dramatically reduces on-chain verification costs and increases throughput.
+
+### Key Benefits
+
+- **Cost Reduction**: Multiple proofs are verified together with constant verification cost
+- **Scalability**: Higher throughput for ZK-enabled applications 
+- **Compatibility**: Works with various proving systems (Plonky2, Risc0)
+- **Decentralization**: No single point of failure in the aggregation process
+
+### How It Works
+
+1. **Proof Submission**: Developers submit individual ZK proofs to the SNARKtor network
+2. **Aggregation**: Multiple proofs are combined into Merkle trees and recursively aggregated
+3. **On-chain Submission**: Final aggregated proofs are submitted to the blockchain
+4. **Verification**: Developers can verify their proof was included using SNARKtor certificates
+
+## Architecture Components
+
+### Core Components
+
+1. **SNARKtor SDK** (`snarktor-sdk-main/`)
+   - **Client**: Converts user proofs to SNARKtor-compatible base proofs
+   - **Connector**: Submits proofs and retrieves certificates 
+   - **Contracts**: On-chain verification utilities
+
+2. **SNARKtor Aggregator** (`snarktor-aggregator-main/`)
+   - **Scheduler**: Coordinates proof aggregation process
+   - **Prover**: Performs actual proof aggregation computation
+   - **Submitter**: Submits final aggregated proofs on-chain
+
+3. **SNARKtor Contracts** (`snarktor-contracts-main/`)
+   - **Receiver Contract**: Handles user accounts and fee collection
+   - **Verifier Contract**: Verifies aggregated proofs on-chain
+
+4. **Plonky2 Goldibear** (`plonky2_goldibear-main/`)
+   - Custom Plonky2 implementation optimized for SNARKtor
+
+5. **Merkle Tower** (`snarktor-merkle-tower-main/`)
+   - Merkle tree implementation for proof aggregation structure
+
+## Development Setup
+
+### Prerequisites
+
+1. **Rust Nightly**
+   ```bash
+   rustup override set nightly
+   ```
+
+2. **Protocol Buffers Compiler**
+   
+   **macOS:**
+   ```bash
+   brew install protobuf
+   ```
+   
+   **Ubuntu:**
+   ```bash
+   sudo apt install protobuf-compiler
+   ```
+
+### Installing the SNARKtor SDK
+
+Add to your `Cargo.toml`:
+
+```toml
+[dependencies]
+snarktor-sdk-client = { git = "https://github.com/telosnetwork/snarktor-sdk", tag = "v0.3.5" }
+snarktor-sdk-connector = { git = "https://github.com/telosnetwork/snarktor-sdk", tag = "v0.3.5" }
+snarktor-sdk-contracts = { git = "https://github.com/telosnetwork/snarktor-sdk", tag = "v0.3.5" }
+```
+
+## Submitting ZK Proofs for Aggregation
+
+### Step 1: Prepare Your ZK Proof
+
+First, ensure your proof is in a compatible format. SNARKtor supports:
+- **Plonky2 proofs** (Goldilocks and BabyBear field configurations)
+- **Risc0 proofs** (via wrapper conversion)
+
+### Step 2: Convert to SNARKtor Base Proof
+
+```rust
+use snarktor_sdk_client::snarktor_base_proof_wrapper::{
+    GoldilocksBaseProofWrapper, SnarktorBaseProofWrapper
+};
+
+// Create the base proof wrapper
+let wrapper = GoldilocksBaseProofWrapper::new();
+
+// Convert your user proof to a SNARKtor base proof
+let base_proof = wrapper.generate_snarktor_base_proof_from_plonky2_user_proof(
+    your_user_proof,
+    your_verifier_data
+);
+
+// Serialize the base proof
+let proof_bytes = base_proof.to_bytes();
+```
+
+### Step 3: Create Aggregation Request
+
+```rust
+use antelope::{chain::{name::Name, transaction::TransactionHeader}, name};
+use snarktor_aggregator_core::aggregator_request::AggregationRequest;
+
+// Define transaction parameters
+let sender = name!("youraccount");
+let nonce = 1; // Increment for each request
+let fee = 1000; // Fee in the smallest unit
+let chain_id = [75, 228, 192, 251, 167, 108, 89, 177, 114, 187, 74, 20, 103, 30, 226, 3, 44, 14, 209, 54, 110, 249, 22, 159, 202, 188, 155, 52, 52, 74, 36, 18]; // Telos mainnet
+let telos_aggreq_contract = name!("snarktoraggr");
+
+// Create transaction header
+let tx_header = TransactionHeader {
+    expiration: (chrono::Utc::now() + chrono::Duration::minutes(30)).timestamp() as u32,
+    ref_block_num: 0,
+    ref_block_prefix: 0,
+    max_net_usage_words: 0,
+    max_cpu_usage_ms: 0,
+    delay_sec: 0,
+};
+
+// Create the aggregation request
+let aggregation_request = AggregationRequest::new(
+    proof_bytes,
+    "your_private_key_here",
+    tx_header,
+    sender,
+    nonce,
+    fee,
+    chain_id,
+    telos_aggreq_contract,
+)?;
+```
+
+### Step 4: Submit to SNARKtor Network
+
+```rust
+use snarktor_sdk_connector::snarktor_connector::SnarktorConnector;
+
+// Connect to SNARKtor aggregator
+let connector = SnarktorConnector::new(
+    "wss://your-snarktor-endpoint".to_string()
+).await?;
+
+// Submit the aggregation request
+let proof_id = connector.submit_snarktor_aggregation_request(
+    aggregation_request
+).await?;
+
+println!("Proof submitted with ID: {}", proof_id);
+```
+
+## Using the SDK for Proof Verification
+
+### Step 1: Wait for Aggregation
+
+```rust
+// Option 1: Synchronously wait for completion (blocks until done)
+let certificate_bytes = connector.sync_get_snarktor_certificate_from_aggregator(
+    proof_id.clone()
+).await?;
+
+// Option 2: Asynchronously check status (non-blocking)
+loop {
+    match connector.async_get_snarktor_certificate_from_aggregator(
+        proof_id.clone()
+    ).await? {
+        Some(certificate) => {
+            println!("Certificate ready!");
+            break;
+        }
+        None => {
+            println!("Still processing...");
+            tokio::time::sleep(tokio::time::Duration::from_secs(5)).await;
+        }
+    }
+}
+```
+
+### Step 2: Verify Certificate
+
+```rust
+use snarktor_sdk_contracts::certificate::{
+    verify_snarktor_certificate, PublicInput
+};
+use p3_goldilocks::Goldilocks;
+use plonky2::field::GOLDILOCKS_NUM_HASH_OUT_ELTS;
+
+// Prepare expected circuit digest (specific to your application)
+let circuit_digest: [u64; GOLDILOCKS_NUM_HASH_OUT_ELTS] = [
+    // Your circuit's digest values
+];
+
+// Verify the certificate
+verify_snarktor_certificate::<
+    Goldilocks,
+    2, // Extension field degree
+    GOLDILOCKS_NUM_HASH_OUT_ELTS,
+>(
+    circuit_digest.try_into()?,
+    &your_user_proof_data_bytes,
+    &certificate_bytes,
+)?;
+
+println!("Certificate verified! Your proof was successfully aggregated.");
+```
+
+### Step 3: Verify On-Chain Inclusion (Optional)
+
+```rust
+use snarktor_sdk_contracts::submission::{verify_submission_proof, Uint256};
+
+// Download the submission proof from the blockchain
+let submission_proof_bytes = get_submission_proof_from_chain().await?;
+
+// Verify the submission proof
+let (public_input_hash, proof_inputs) = verify_submission_proof::<
+    Goldilocks,
+    snarktor_circuits_core::sha256::Sha256GoldilocksConfig,
+    2,
+    GOLDILOCKS_NUM_HASH_OUT_ELTS,
+>(
+    &submission_proof_bytes
+)?;
+
+println!("Submission proof verified with hash: {:?}", public_input_hash);
+```
+
+## Network Endpoints
+
+### Mainnet
+- **Aggregator RPC**: `wss://snarktor-mainnet.telos.net/ws`
+- **Telos RPC**: `https://mainnet.telos.net/eosio/`
+- **Contract**: `snarktoraggr`
+
+### Testnet  
+- **Aggregator RPC**: `wss://snarktor-testnet.telos.net/ws`
+- **Telos RPC**: `https://testnet.telos.net/eosio/`
+- **Contract**: `snarktoraggr`
+
+## Code Examples
+
+### Complete Example: Submit and Verify
+
+```rust
+use anyhow::Result;
+use snarktor_sdk_client::snarktor_base_proof_wrapper::GoldilocksBaseProofWrapper;
+use snarktor_sdk_connector::snarktor_connector::SnarktorConnector;
+use snarktor_aggregator_core::aggregator_request::AggregationRequest;
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    // 1. Convert your proof to base proof
+    let wrapper = GoldilocksBaseProofWrapper::new();
+    let base_proof = wrapper.generate_snarktor_base_proof_from_plonky2_user_proof(
+        your_user_proof,
+        your_verifier_data,
+    );
+    let proof_bytes = base_proof.to_bytes();
+
+    // 2. Create aggregation request
+    let aggregation_request = AggregationRequest::new(
+        proof_bytes,
+        "your_private_key",
+        create_transaction_header(),
+        name!("youraccount"),
+        1, // nonce
+        1000, // fee
+        TELOS_CHAIN_ID,
+        name!("snarktoraggr"),
+    )?;
+
+    // 3. Submit to SNARKtor
+    let connector = SnarktorConnector::new(
+        "wss://snarktor-mainnet.telos.net/ws".to_string()
+    ).await?;
+    
+    let proof_id = connector.submit_snarktor_aggregation_request(
+        aggregation_request
+    ).await?;
+    
+    println!("Submitted with ID: {}", proof_id);
+
+    // 4. Wait for completion and get certificate
+    let certificate = connector.sync_get_snarktor_certificate_from_aggregator(
+        proof_id
+    ).await?;
+
+    // 5. Verify certificate
+    verify_snarktor_certificate::<Goldilocks, 2, 4>(
+        your_circuit_digest.try_into()?,
+        &your_proof_data,
+        &certificate,
+    )?;
+
+    println!("✅ Proof successfully aggregated and verified!");
+    Ok(())
+}
+```
+
+### BabyBear Field Example
+
+```rust
+use snarktor_sdk_client::snarktor_base_proof_wrapper::BabyBearBaseProofWrapper;
+use p3_babybear::BabyBear;
+use plonky2::field::BABYBEAR_NUM_HASH_OUT_ELTS;
+
+let wrapper = BabyBearBaseProofWrapper::new();
+
+// Convert proof
+let base_proof = wrapper.generate_snarktor_base_proof_from_plonky2_user_proof(
+    your_babybear_proof,
+    your_babybear_verifier_data,
+);
+
+// Verify certificate later
+verify_snarktor_certificate::<
+    BabyBear,
+    4, // BabyBear extension degree  
+    BABYBEAR_NUM_HASH_OUT_ELTS,
+>(
+    circuit_digest.try_into()?,
+    &user_data,
+    &certificate,
+)?;
+```
+
+## API Reference
+
+### SnarktorConnector Methods
+
+```rust
+impl SnarktorConnector {
+    // Create new connector instance
+    pub async fn new(aggregator_url: String) -> Result<SnarktorConnector, SnarktorConnectorError>;
+
+    // Submit proof for aggregation
+    pub async fn submit_snarktor_aggregation_request(
+        &self,
+        aggregation_request: AggregationRequest,
+    ) -> Result<String, SnarktorConnectorError>;
+
+    // Wait for certificate (blocking)
+    pub async fn sync_get_snarktor_certificate_from_aggregator(
+        &self,
+        proof_id: String,
+    ) -> Result<Vec<u8>, SnarktorConnectorError>;
+
+    // Check for certificate (non-blocking)  
+    pub async fn async_get_snarktor_certificate_from_aggregator(
+        &self,
+        proof_id: String,
+    ) -> Result<Option<Vec<u8>>, SnarktorConnectorError>;
+}
+```
+
+### AggregationRequest Methods
+
+```rust
+impl AggregationRequest {
+    pub fn new(
+        base_proof: Vec<u8>,
+        private_key: &str,
+        tx_header: TransactionHeader,
+        sender: Name,
+        nonce: u64,
+        fee: u64,
+        chain_id: [u8; 32],
+        telos_aggreq_contract: Name,
+    ) -> Result<Self>;
+}
+```
+
+### Certificate Verification
+
+```rust
+// Main verification function
+pub fn verify_snarktor_certificate<F, const D: usize, const NUM_HASH_OUT_ELTS: usize>(
+    circuit_digest: PublicInput,
+    user_data_bytes: &[u8],
+    snarktor_certificate_bytes: &[u8],
+) -> Result<(), SnarktorCertificateError>;
+
+// Submission proof verification
+pub fn verify_submission_proof<F, C, const D: usize, const NUM_HASH_OUT_ELTS: usize>(
+    proof_bytes: &[u8],
+) -> Result<(Uint256, Vec<u64>), ProofVerificationError>;
+```
+
+## Troubleshooting
+
+### Common Issues
+
+#### "Invalid proof data" Error
+- Ensure your proof is properly serialized to bytes
+- Verify the proof is valid before submission
+- Check that you're using compatible field types (Goldilocks or BabyBear)
+
+#### "Invalid transaction signature" Error  
+- Verify your private key is correctly formatted
+- Ensure the transaction header values are valid
+- Check that the chain ID matches the target network
+
+#### "Missing required funds" Error
+- Ensure your account has sufficient balance in the SNARKtor contract
+- Top up your account balance before submitting proofs
+- Check that the fee amount is reasonable
+
+#### Connection Issues
+- Verify the aggregator endpoint URL is correct and reachable
+- Check network connectivity
+- Ensure WebSocket connections are supported in your environment
+
+#### Certificate Not Found
+- Wait longer for aggregation to complete (it can take several minutes)
+- Verify the proof_id is correct
+- Check that the proof was successfully submitted initially
+
+### Debug Tips
+
+1. **Enable Logging**
+   ```rust
+   env_logger::init();
+   // Set RUST_LOG=debug environment variable
+   ```
+
+2. **Check Proof Status**
+   ```rust
+   // Use the async method to monitor progress
+   let status = connector.async_get_snarktor_certificate_from_aggregator(proof_id).await?;
+   ```
+
+3. **Validate Locally First**
+   ```rust
+   // Verify your proof locally before submission
+   base_circuit_data.verify(your_proof.clone())?;
+   ```
+
+### Support Channels
+
+- **GitHub Issues**: [SNARKtor SDK Issues](https://github.com/telosnetwork/snarktor-sdk/issues)
+- **Telos Discord**: #snarktor-support channel
+- **Documentation**: [SNARKtor Whitepaper](/65d69f2fd7d126b862d91db2_Snarktor Whitepaper.pdf)
+
+## Advanced Usage
+
+### Custom Circuit Integration
+
+For applications with custom circuits, you'll need to:
+
+1. **Generate Circuit Digest**
+   ```rust
+   let circuit_digest = compute_circuit_digest(&your_circuit_data);
+   ```
+
+2. **Handle Public Inputs**
+   ```rust
+   let user_data_bytes = serialize_public_inputs(&your_public_inputs);
+   ```
+
+3. **Verify with Custom Parameters**
+   ```rust
+   verify_snarktor_certificate::<YourField, D, NUM_HASH>(
+       circuit_digest.try_into()?,
+       &user_data_bytes,
+       &certificate,
+   )?;
+   ```
+
+### Batch Processing
+
+For submitting multiple proofs efficiently:
+
+```rust
+let mut proof_ids = Vec::new();
+
+for (i, proof) in your_proofs.iter().enumerate() {
+    let request = AggregationRequest::new(
+        proof.clone(),
+        private_key,
+        create_header(),
+        sender,
+        nonce + i as u64, // Increment nonce
+        fee,
+        chain_id,
+        contract,
+    )?;
+    
+    let id = connector.submit_snarktor_aggregation_request(request).await?;
+    proof_ids.push(id);
+}
+
+// Wait for all certificates
+let certificates = futures::future::join_all(
+    proof_ids.into_iter().map(|id| {
+        connector.sync_get_snarktor_certificate_from_aggregator(id)
+    })
+).await;
+```
+
+This completes the comprehensive developer guide for using SNARKtor's ZK proof aggregation system on the Telos Network.
