@@ -134,3 +134,415 @@ Install something like nginx or haproxy and point DNS at it for your API endpoin
 A popular option is to put nginx in front of it using auto-renewing and free SSL certs from Let's Encrypt - https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04.
 
 You'll want to configure nginx in this case for a reverse proxy, and point it at your `http-server-address`.
+
+# Telos LEAP 5.0 Upgrade Guide
+
+This guide provides step-by-step instructions for upgrading Telos nodes running nodeos versions older than LEAP 5.0 to version 5.0 or later, while maintaining all block and state history.
+
+For the latest LEAP 5.0 release notes, visit the [AntelopeIO LEAP Releases](https://github.com/AntelopeIO/leap/releases/tag/v5.0.3).
+
+---
+
+## Important Notice
+
+**LEAP 5.0 requires a restart from snapshot** due to structural changes in state memory storage. This is a mandatory requirement - you cannot simply upgrade the binary in place. Plan for downtime during this upgrade process.
+
+---
+
+## Pre-Upgrade Checklist
+
+Before beginning the upgrade process, ensure you have:
+
+- [ ] A stable backup of your current node configuration
+- [ ] Sufficient disk space for the snapshot (typically 1-3 GB for Telos Mainnet)
+- [ ] Access to your node's configuration files
+- [ ] Reviewed your current `config.ini` for deprecated parameters
+- [ ] Scheduled maintenance window with appropriate downtime
+- [ ] Downloaded the latest LEAP 5.x release for your platform
+
+---
+
+## Key Changes in LEAP 5.0
+
+### Deprecations & Removals
+
+#### Deferred Transactions Removed
+Deferred transactions were previously deprecated and have been **completely removed** in LEAP 5.0. No new deferred transactions may be created, and existing deferred transactions will be blocked from executing.
+
+#### Get Block Header State Deprecated
+As of LEAP v5.0.0, the `v1/chain/get_block_header_state` endpoint is deprecated and will be removed in LEAP v6.0.0. Update any applications or scripts that rely on this endpoint.
+
+---
+
+## Upgrade Process
+
+### Step 1: Download Latest LEAP Release
+
+Download the appropriate LEAP 5.x package for your operating system from the [AntelopeIO LEAP Releases](https://github.com/AntelopeIO/leap/releases) page.
+
+### Step 2: Create Snapshot from Current Node
+
+While your current node is still running, create a snapshot:
+
+```bash
+curl -X POST http://127.0.0.1:8888/v1/producer/create_snapshot
+```
+
+Wait for the response containing the snapshot filename. The output will look like:
+```json
+{
+  "snapshot_name": "snapshot-0abc123...xyz.bin"
+}
+```
+
+**Important:** Make note of this filename - you'll need it in Step 6.
+
+**Alternative:** You can also download a recent snapshot from Telos community providers:
+- [Telos Mainnet Snapshots](https://snapshots.eosnation.io/)
+- Be sure to select a snapshot from Telos Mainnet v6
+
+### Step 3: Stop Your Node
+
+Stop the currently running nodeos process:
+
+```bash
+# If using systemd
+sudo systemctl stop nodeos
+
+# Or if running manually, find and kill the process
+pkill nodeos
+```
+
+Wait until the process has fully terminated before proceeding.
+
+### Step 4: Remove Old LEAP Package
+
+For Ubuntu/Debian:
+```bash
+sudo apt-get remove -y leap
+```
+
+For other package managers, use the appropriate removal command. If running nodeos from a local bin, delete it to avoid confusion.
+
+### Step 5: Remove State Memory File
+
+Remove **only** the `shared_memory.bin` file from your nodeos data directory:
+
+```bash
+# Default location
+rm ~/.local/share/eosio/nodeos/data/state/shared_memory.bin
+
+# Or if using custom data directory specified by --data-dir
+rm /path/to/your/data-dir/state/shared_memory.bin
+```
+
+**Important:** Do NOT remove other files in the data directory, especially:
+- `blocks/` directory (contains your block log)
+- `state-history/` directory (if running state history plugin)
+- `snapshots/` directory
+
+### Step 6: Install New LEAP Package
+
+Install the LEAP 5.0.3 package:
+
+For Ubuntu/Debian:
+```bash
+sudo apt-get install -y ./leap_5.0.3_amd64.deb
+```
+
+### Step 7: Update Configuration File
+
+Edit your `config.ini` file to comply with LEAP 5.0 requirements (see Configuration Changes section below).
+
+### Step 8: Restart Node with Snapshot
+
+Start nodeos with the snapshot file from Step 2:
+
+```bash
+nodeos --snapshot /path/to/snapshots/snapshot-0abc123...xyz.bin \
+       --data-dir /path/to/your/data-dir \
+       --config-dir /path/to/your/config-dir \
+       [... other existing arguments ...]
+```
+
+**Note:** The `--snapshot` argument only needs to be provided on the **first launch** after upgrading to LEAP 5.x. Remove it from subsequent starts. If you are utilizing the node startup script found here (https://github.com/telosnetwork/node-template) you can pass ./run.sh --snapshot /path/to/snapshot.bin
+
+### Step 9: Verify Node Operation
+
+Monitor your node's log output and verify:
+
+- Node is replaying from the snapshot
+- Blocks are syncing properly
+- No configuration errors appear
+- API endpoints are responding (if configured)
+
+```bash
+# Check node info
+curl http://127.0.0.1:8888/v1/chain/get_info
+
+# Monitor logs
+tail -f /path/to/nodeos.log
+```
+
+---
+
+## Required Configuration Changes
+
+The following configuration changes are **mandatory** for LEAP 5.0 nodes.
+
+### Remove Unsupported Parameters
+
+**Remove or comment out** the following parameters from your `config.ini`. These parameters are no longer supported and will prevent nodeos from starting:
+
+```ini
+# REMOVE THESE PARAMETERS:
+# cpu-effort-percent
+# last-block-cpu-effort-percent
+# last-block-time-offset-us
+# produce-time-offset-us
+# max-nonprivileged-inline-action-size
+# max-scheduled-transaction-time-per-block-ms
+# disable-subjective-billing
+```
+
+### Enable Subjective Billing (APIs and Block Relays)
+
+If you're running an API node or block relay, you must enable subjective billing by adding:
+
+```ini
+disable-subjective-api-billing = false
+disable-subjective-p2p-billing = false
+```
+
+---
+
+## Recommended Configuration Changes
+
+### Transaction Time Windows
+
+Based on production testing and performance data:
+
+```ini
+# Comment out or remove max-transaction-time
+# max-transaction-time = 30
+
+# Set read-only window time (for LEAP 4.x and later)
+read-only-read-window-time-us = 165000
+```
+
+**Rationale:** Transactions can exceed the default 30ms limit in production. Removing `max-transaction-time` allows the on-chain transaction deadline to be the limiting factor. The read-only window needs to be larger because read actions execute in parallel.
+
+---
+
+## New Features & Options in LEAP 5.0
+
+### New Command Line Options
+
+**Sync Peer Limit:**
+```bash
+--sync-peer-limit 3
+```
+Limits the number of peers to sync from. Default is 3.
+
+**EOS-VM-OC Auto Mode:**
+```bash
+--eos-vm-oc-enable auto
+```
+The new `auto` mode automatically uses optimized compilation (OC) when building blocks, applying blocks, executing transactions, and executing contracts on `eosio.*` accounts. This is now the **default behavior**.
+
+### New Config Options
+
+**HTTP Category Address:**
+```ini
+http-category-address = 127.0.0.1:8888
+```
+Can be specified multiple times to configure different category addresses.
+
+### Modified Option Behaviors
+
+**Multiple P2P Endpoints:**
+```ini
+p2p-listen-endpoint = 0.0.0.0:9876
+p2p-listen-endpoint = 0.0.0.0:9877
+p2p-server-address = your-node.telos.net:9876
+p2p-server-address = your-node.telos.net:9877
+```
+
+**Sync Fetch Span:**
+- Default changed from 100 to 1000 blocks
+
+**Disable Replay Opts:**
+- Automatically set to `true` if state history plugin is enabled
+
+**Read-Only Threads:**
+- Can now be set to a maximum of 128 (increased from previous limits)
+
+**HTTP Max Response Time:**
+- Default changed from 30ms to 15ms
+
+---
+
+## Telos-Specific Considerations
+
+### Chain ID
+
+Ensure your configuration has the correct chain ID for your target network:
+
+**Telos Mainnet:**
+```ini
+chain-id = 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
+```
+
+**Telos Testnet:**
+```ini
+chain-id = 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
+```
+
+### P2P Peer List
+
+Update your P2P peers for Telos networks:
+
+**Telos Mainnet P2P Peers:**
+```ini
+# amsterdam: NL, Amsterdam
+p2p-peer-address = telos.eu.eosamsterdam.net:9120
+# bp.adex: DE, Falkenstein
+p2p-peer-address = p2p-telos.a-dex.xyz:9976
+# bp.boid: ES, Tenerife, Canary Islands, Spain
+p2p-peer-address = telos.p2p.boid.animus.is:5252
+# eosauthority: DE, Falkenstein
+p2p-peer-address = node-telos.eosauthority.com:10311
+# eosphereiobp: AU, Sydney
+p2p-peer-address = peer1-telos.eosphere.io:9876
+# eosphereiobp: AU, Sydney
+p2p-peer-address = peer2-telos.eosphere.io:9876
+# eosriobrazil: BR, Rio de Janeiro
+p2p-peer-address = telos.eosrio.io:8092
+# guild.nefty: FI, Finland
+p2p-peer-address = telos-public-seed.neftyblocks.com:9877
+# kainosblkpro: US, Texas
+p2p-peer-address = p2p.kainosbp.com:9876
+# mosaicblocks: FI, Helsinki
+p2p-peer-address = mainnet.mosaicblocks.com:9876
+# nation.tlos: CA, Canada
+p2p-peer-address = telos.seed.eosnation.io:9876
+# orbitalblock: CA, Beauharnois
+p2p-peer-address = p2p-telos-mainnet.orbitalblock.com:9876
+# telosarabia1: DE, Munich
+p2p-peer-address = p2p.telosarabia.net:9876
+# telosindiabp: US, US
+p2p-peer-address = p2p.telos.blocksindia.com:7776
+# telosunlimit: US, St.Louis
+p2p-peer-address = p2p.telosunlimited.com:9876
+# veradox12321: FI, Finland
+p2p-peer-address = veradox.xyz:9877
+# votetelosusa: US, Greenville,SC,USA
+p2p-peer-address = telos.p2p.eosusa.io:9876
+# Add additional reliable Telos peers
+```
+
+### State History Configuration
+
+If maintaining full state history for Telos dApps and indexers:
+
+```ini
+plugin = eosio::state_history_plugin
+state-history-dir = /path/to/state-history
+trace-history = true
+chain-state-history = true
+state-history-endpoint = 0.0.0.0:8080
+```
+
+---
+
+## Troubleshooting
+
+### Node Won't Start
+
+**Error: Unsupported configuration parameter**
+- Solution: Remove all deprecated parameters listed in the Required Configuration Changes section
+
+**Error: Cannot load snapshot**
+- Solution: Verify snapshot file exists and path is correct
+- Solution: Ensure snapshot is compatible (any version snapshot works with LEAP 5.0)
+
+**Error: Shared memory file exists**
+- Solution: Ensure you removed `shared_memory.bin` in Step 5
+
+### Performance Issues
+
+**Slow sync speed:**
+- Increase `sync-peer-limit` to allow more sync peers
+- Verify `sync-fetch-span = 1000` in config
+- Check network connectivity to P2P peers
+
+**API timeouts:**
+- Adjust `read-only-read-window-time-us` to 165000 or higher
+- Increase `read-only-threads` based on CPU availability
+- Consider adjusting `http-max-response-time-ms` if needed
+
+---
+
+## Post-Upgrade Verification
+
+After upgrading, verify your node is functioning correctly:
+
+### Check Node Info
+```bash
+curl http://127.0.0.1:8888/v1/chain/get_info
+```
+
+Verify the output shows:
+- Correct `chain_id` for Telos Mainnet or Testnet
+- `head_block_num` is increasing
+- `server_version` matches your LEAP 5.x version
+
+### Test API Endpoints
+```bash
+# Get account info
+curl -X POST http://127.0.0.1:8888/v1/chain/get_account \
+  -d '{"account_name":"eosio"}'
+
+# Get table rows
+curl -X POST http://127.0.0.1:8888/v1/chain/get_table_rows \
+  -d '{"code":"eosio.token","scope":"eosio.token","table":"stat"}'
+```
+
+### Monitor Logs
+```bash
+tail -f /path/to/nodeos.log
+```
+
+Look for:
+- No error messages
+- Successful block processing
+- P2P connection messages
+- State history updates (if enabled)
+
+### Verify State History (if applicable)
+```bash
+curl http://127.0.0.1:8080/v1/chain/get_info
+```
+
+---
+
+## Support & Resources
+
+### Telos Resources
+- **Website:** https://www.telos.net/
+- **Documentation:** https://docs.telos.net/
+- **GitHub:** https://github.com/telosnetwork
+- **Telegram:** Telos Network Telegram Dev Topic
+
+### LEAP Resources
+- **LEAP GitHub:** https://github.com/AntelopeIO/leap
+- **LEAP Releases:** https://github.com/AntelopeIO/leap/releases
+
+---
+
+Upgrading to LEAP 5.0 provides improved performance, better resource management, and sets the foundation for future Telos network enhancements. While the snapshot requirement adds complexity to the upgrade process, following this guide will ensure a smooth transition while maintaining all your block and state history.
+
+Always test the upgrade process in a non-production environment first, and ensure you have proper backups before proceeding with production nodes.
+
+**Good luck with your upgrade, and welcome to LEAP 5.0 on Telos!**
+
