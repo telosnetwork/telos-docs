@@ -1,18 +1,85 @@
 ---
-title: 'Telos EVM Pre-Synced Package'
+title: 'Telos EVM Pre-Synced Node'
 displayed_sidebar: devBar
 description: >-
-    Learn how to set up and run
-    a Telos node from a pre-synced
-    package
+    Learn how to quickly set up a Telos EVM node
+    using pre-synced data from an existing node.
 sidebar_position: 2
 hide_table_of_contents: true
 ---
 
-# Telos EVM Pre-Synced Package
+# Telos EVM Pre-Synced Node
+
+:::info Updated Stack
+Telos EVM nodes now use **telos-reth** (a Rust Ethereum client) with the **telos-consensus-client**. The legacy Elasticsearch-based stack described below has been retired. See the [telos-reth setup guide](/nodes/non-bp-nodes/telos-reth/) for the current installation method.
+:::
 
 ## Intro
-Starting the sync process for a Telos EVM node from the beginning can take several days and sometimes even weeks depending on the bandwidth and power of the system running the sync process. This pre-synced package should cut your sync time to 1 day or less by pre-syncing much of the chain data and offering it up as a download. This package assumes you are running Ubuntu Server 22.04. No other OS has been tested. 
+
+Starting a Telos EVM node sync from genesis can take several days depending on hardware and bandwidth. Using pre-synced reth data from an existing node reduces this to hours.
+
+## Current Method: rsync from Existing Node
+
+The fastest way to bootstrap a new Telos EVM node:
+
+### 1. Set Up Your Node
+
+Follow the [telos-reth guide](/nodes/non-bp-nodes/telos-reth/) to install nodeos, telos-reth, and the consensus client.
+
+### 2. Copy Data from a Synced Node
+
+```bash
+# Stop reth on the SOURCE node first, then:
+rsync -av --progress source-node:/path/to/reth-data/ /path/to/reth-data/
+```
+
+### 3. Start Your Node
+
+Start reth and the consensus client as described in the [telos-reth guide](/nodes/non-bp-nodes/telos-reth/). The consensus client will automatically resume from the last synced block and catch up to head.
+
+### Components
+
+| Component | Repository | Description |
+|-----------|-----------|-------------|
+| telos-reth | [telosnetwork/telos-reth](https://github.com/telosnetwork/telos-reth) | EVM execution client (Reth fork) |
+| telos-consensus-client | [telosnetwork/telos-consensus-client](https://github.com/telosnetwork/telos-consensus-client) | Bridges nodeos ↔ reth |
+| Nodeos (Leap) | [AntelopeIO/leap](https://github.com/AntelopeIO/leap) | Native Telos blockchain node |
+
+### Recommended Machine Specs
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| Storage | 1 TB NVMe SSD | 2 TB NVMe SSD |
+| RAM | 32 GB | 64 GB |
+| CPU | 8 cores, fast clock speed | 16+ cores |
+| OS | Ubuntu 22.04+ | Ubuntu 22.04+ |
+
+### Verifying Sync
+
+```bash
+# Check reth block
+curl -s -X POST -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' \
+  http://127.0.0.1:8545 | jq -r '.result' | xargs printf '%d\n'
+
+# Check nodeos block
+curl -s http://127.0.0.1:8889/v1/chain/get_info | jq '.head_block_num'
+```
+
+When both numbers match (within a few blocks), your node is fully synced.
+
+:::tip Community Support
+Contact the Telos community on [Discord](https://discord.gg/telos) or [Telegram](https://t.me/HelloTelos) for access to pre-synced reth data snapshots.
+:::
+
+---
+
+## Legacy Pre-Synced Package (Deprecated)
+
+<details>
+<summary>Click to expand legacy documentation (Elasticsearch-based stack)</summary>
+
+The following documentation describes the old Elasticsearch-based EVM stack. **This is no longer maintained.**
 
 ## Versions in this release
 The following list is the current versions of software running in this pre-packaged release.
@@ -130,3 +197,5 @@ This package is meant to serve as an all-in-one RPC node. If services are going 
 
 
 
+
+</details>

@@ -11,6 +11,8 @@ Telos uses Antelope platform-specific components and libraries (`nodeos`, `cleos
 
 All Telos nodes must implement the client service daemon protocol called **nodeos**. It is a product of Antelope.io and is responsible for processing smart contracts, validating transactions, producing blocks, and confirming blocks on the Telos blockchain.
 
+For **EVM RPC nodes**, Telos uses [telos-reth](/nodes/non-bp-nodes/telos-reth/) — a fork of Reth (Rust Ethereum) — paired with a consensus client that bridges the native layer to the EVM execution layer.
+
 ## Node Types
 
 If you are interested in running a Telos node or a Dapp developer, you should consider running a Telos node and understand the differences between validators and block producers. 
