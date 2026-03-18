@@ -1,0 +1,248 @@
+---
+title: "Telos EVM Node (telos-reth)"
+displayed_sidebar: devBar
+description: >-
+  Run a Telos EVM node using telos-reth (Rust Ethereum) and the Telos consensus client.
+  This is the current recommended method for running Telos EVM infrastructure.
+hide_table_of_contents: true
+sidebar_position: 1
+---
+
+# Telos EVM Node (telos-reth)
+
+Telos EVM nodes are now powered by **telos-reth**, a fork of [Reth](https://github.com/paradigmxyz/reth) — the Rust implementation of the Ethereum protocol. This replaces the legacy Docker-based `tevmc` setup.
+
+## Architecture Overview
+
+A Telos EVM node consists of three components:
+
+1. **Nodeos** — The Telos Zero (native) blockchain node, providing the base layer
+2. **telos-reth** — The EVM execution client, storing and serving EVM state
+3. **telos-consensus-client** — Bridges nodeos and reth, translating native blocks into EVM blocks
+
+```
+┌─────────────┐     ┌──────────────────────┐     ┌─────────────┐
+│   Nodeos    │────▶│  Consensus Client    │────▶│  telos-reth  │
+│  (Native)   │SHIP │  (Translator/Bridge) │JWT  │   (EVM)     │
+│  port 8888  │     │                      │     │  port 8545  │
+└─────────────┘     └──────────────────────┘     └─────────────┘
+```
+
+## Requirements
+
+### Hardware (Mainnet)
+
+| Component | Minimum | Recommended |
+|-----------|---------|-------------|
+| CPU | 8 cores | 16+ cores |
+| RAM | 32 GB | 64 GB |
+| Storage | 1 TB NVMe SSD | 2 TB NVMe SSD |
+| Network | 100 Mbps | 1 Gbps |
+
+### Software
+
+- Ubuntu 22.04+ (or compatible Linux)
+- Rust toolchain (for building from source)
+- Nodeos (Leap v4.0.6+ with SHIP enabled)
+
+## Quick Start
+
+### 1. Set Up Nodeos
+
+If you don't already have a nodeos instance running, follow the [Telos node setup guide](/nodes/non-bp-nodes/run_a_telos_node).
+
+Ensure your nodeos config includes:
+
+```ini
+# Required for consensus client
+plugin = eosio::state_history_plugin
+state-history-endpoint = 127.0.0.1:19000
+trace-history = true
+chain-state-history = true
+
+# HTTP endpoint for consensus client
+plugin = eosio::http_plugin
+http-server-address = 127.0.0.1:8889
+```
+
+### 2. Build telos-reth
+
+```bash
+# Clone the repository
+git clone https://github.com/telosnetwork/telos-reth.git
+cd telos-reth
+
+# Checkout the production branch
+git checkout production
+
+# Build the release binary
+cargo build --release
+
+# The binary will be at ./target/release/telos-reth
+```
+
+:::caution
+Always build from the `production` branch, not `telos-main` (HEAD). The main branch may contain breaking changes that are incompatible with the current network.
+:::
+
+### 3. Build the Consensus Client
+
+```bash
+# Clone the consensus client
+git clone https://github.com/telosnetwork/telos-consensus-client.git
+cd telos-consensus-client
+
+# Build
+cargo build --release
+```
+
+### 4. Generate JWT Secret
+
+The consensus client communicates with reth via an authenticated (JWT) Engine API.
+
+```bash
+openssl rand -hex 32 > /path/to/jwt.hex
+```
+
+### 5. Configure the Consensus Client
+
+Create `config.toml`:
+
+```toml
+# EVM Chain ID: Telos mainnet = 40, testnet = 41
+chain_id = 40
+
+# Execution API endpoint (JWT-protected endpoint on reth)
+execution_endpoint = "http://127.0.0.1:8555"
+
+# JWT secret for authenticating with reth
+jwt_secret = "<contents of jwt.hex>"
+
+# Nodeos SHIP WebSocket endpoint
+ship_endpoint = "ws://127.0.0.1:19000"
+
+# Nodeos HTTP endpoint
+chain_endpoint = "http://127.0.0.1:8889"
+
+# Block processing batch size during sync
+batch_size = 500
+
+# The parent hash of the start block (get from a synced node or snapshot)
+prev_hash = "0x..."
+
+# The block number to start from
+start_block = 0
+```
+
+### 6. Start telos-reth
+
+```bash
+./target/release/telos-reth node \
+  --chain telos \
+  --datadir /path/to/reth-data \
+  --http \
+  --http.addr 0.0.0.0 \
+  --http.port 8545 \
+  --http.api eth,net,web3,txpool,debug,trace \
+  --authrpc.addr 127.0.0.1 \
+  --authrpc.port 8555 \
+  --authrpc.jwtsecret /path/to/jwt.hex \
+  --telos.telos_endpoint http://127.0.0.1:8889
+```
+
+### 7. Start the Consensus Client
+
+```bash
+cd /path/to/telos-consensus-client
+./target/release/telos-consensus-client --config config.toml
+```
+
+The consensus client will begin translating nodeos blocks into EVM blocks and pushing them to reth. You should see log output like:
+
+```
+INFO telos_translator_rs::tasks::final_processor: Block #456000000 - processed 3800.0 blocks/sec
+```
+
+## Syncing from Snapshot
+
+Syncing from genesis takes a very long time. To speed this up, you can copy reth data from an already-synced node:
+
+```bash
+# On the synced node, stop reth first, then rsync:
+rsync -av /path/to/reth-data/ user@new-node:/path/to/reth-data/
+
+# Then start reth and consensus client on the new node
+# The consensus client will resume from the last synced block
+```
+
+## Ports Reference
+
+| Service | Default Port | Protocol | Description |
+|---------|-------------|----------|-------------|
+| Reth HTTP RPC | 8545 | HTTP | EVM JSON-RPC endpoint |
+| Reth Auth RPC | 8555 | HTTP (JWT) | Engine API for consensus client |
+| Nodeos HTTP | 8889 | HTTP | Native chain API |
+| Nodeos SHIP | 19000 | WebSocket | State History Plugin |
+| Nodeos P2P | 9876 | TCP | Peer-to-peer networking |
+
+## Monitoring
+
+Check sync status:
+
+```bash
+# Reth block height
+curl -s -X POST -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' \
+  http://127.0.0.1:8545
+
+# Nodeos block height
+curl -s http://127.0.0.1:8889/v1/chain/get_info | jq '.head_block_num'
+
+# Peer count
+curl -s -X POST -H 'Content-Type: application/json' \
+  -d '{"jsonrpc":"2.0","method":"net_peerCount","params":[],"id":1}' \
+  http://127.0.0.1:8545
+```
+
+Your node is synced when the reth block height matches the nodeos block height (within a few blocks).
+
+## Testnet Configuration
+
+For testnet, adjust the following:
+
+- Chain ID: `41`
+- Reth HTTP port: `9545` (convention)
+- Reth Auth RPC port: `9551` (convention)
+- Nodeos HTTP port: `7779` (convention)
+- Nodeos SHIP port: `19001` (convention)
+- Use `--chain telos-testnet` flag with reth
+
+## Troubleshooting
+
+### Executor Hash Mismatch
+
+```
+Error: Executor hash mismatch
+```
+
+This means reth's state diverged from what the consensus client expects. Usually caused by an interrupted sync or data corruption. **Solution:** Stop reth, rsync data from a healthy node, restart.
+
+### Gas Price Errors
+
+```
+Transaction gas price X is less than the current fixed gas price of Y
+```
+
+These are warnings about rejected transactions with incorrect gas prices. They don't affect sync but indicate someone is submitting malformed transactions.
+
+### Consensus Client Won't Start
+
+Ensure:
+1. Nodeos is running and SHIP is active on the configured port
+2. The JWT secret matches between reth and consensus client configs
+3. The `prev_hash` in config.toml matches the actual parent hash of `start_block`
+
+## Source Code
+
+- **telos-reth**: [github.com/telosnetwork/telos-reth](https://github.com/telosnetwork/telos-reth) (branch: `production`)
+- **telos-consensus-client**: [github.com/telosnetwork/telos-consensus-client](https://github.com/telosnetwork/telos-consensus-client)
