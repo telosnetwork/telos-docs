@@ -65,6 +65,19 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Telos Privacy',
+      collapsed: true,
+      items: [
+        'privacy/overview',
+        'privacy/using-the-wallet',
+        'privacy/shielded-accounts',
+        'privacy/direct-deposits',
+        'privacy/contracts',
+        'privacy/compliance',
+      ],
+    },
+    {
+      type: 'category',
       label: 'SNARKtor',
       collapsed: true,
       items: [

@@ -1,0 +1,66 @@
+---
+sidebar_position: 1
+title: Telos Privacy
+description: Private transactions on Telos EVM using zero-knowledge proofs
+---
+
+# Telos Privacy
+
+Telos Privacy is a zero-knowledge privacy layer built natively on Telos EVM. It enables users to send and receive tokens privately — shielding sender, receiver, and amount from public view — while remaining fully compliant and non-custodial.
+
+Telos Privacy is powered by the [zkBob](https://zkbob.com) protocol, adapted and deployed on Telos with support for **WTLOS** and **USDC.e**.
+
+## How It Works
+
+Telos Privacy uses zkSNARKs (Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge) to process transactions inside a shielded pool. When you deposit tokens into the pool, they are represented as private notes. You can transfer these notes to other users or withdraw them — all without revealing any transaction details on-chain.
+
+Three operations are supported:
+
+| Operation | Description |
+|-----------|-------------|
+| **Deposit** | Move tokens from your public wallet into the shielded pool |
+| **Transfer** | Send tokens privately to another shielded account |
+| **Withdrawal** | Move tokens from the shielded pool back to a public wallet |
+
+All operations are processed by a **relayer** — a node that submits transactions on your behalf, abstracting gas fees and preventing address linkage.
+
+## Key Properties
+
+- **Private by default** — amounts and addresses are never revealed on-chain
+- **Non-custodial** — you control your shielded account with a private key derived from your wallet
+- **Compliant** — built-in compliance tools deter illicit use without compromising user privacy
+- **No gas required** — transaction fees are paid in the token being transferred, via the relayer
+
+## Supported Tokens
+
+| Token | Pool ID | Contract |
+|-------|---------|----------|
+| WTLOS | 40001 | `0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E` |
+| USDC.e | 40002 | `0xF1815bd50389c46847f0Bda824eC8da914045D14` |
+
+## Architecture
+
+```
+User Wallet
+    │
+    ▼
+Telos Privacy App (UI)
+    │
+    ├──► Shielded Pool Contract (on Telos EVM)
+    │         │
+    │         ├── ZkBobPool (main pool logic)
+    │         ├── DirectDepositQueue (fast deposits)
+    │         └── Verifier Contracts (ZK proof verification)
+    │
+    └──► Relayer Node
+              │
+              └──► Submits proofs to Telos EVM
+```
+
+## Getting Started
+
+- [Using the Privacy Wallet](./using-the-wallet.mdx) — Deposits, transfers, and withdrawals
+- [Shielded Accounts](./shielded-accounts.mdx) — How accounts and keys work
+- [Direct Deposits](./direct-deposits.mdx) — Fast deposits from other contracts
+- [Deployed Contracts](./contracts.mdx) — All contract addresses on Telos EVM
+- [Compliance & Security](./compliance.mdx) — How privacy and compliance coexist

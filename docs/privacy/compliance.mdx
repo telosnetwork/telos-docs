@@ -1,0 +1,62 @@
+---
+sidebar_position: 6
+title: Compliance & Security
+description: How Telos Privacy balances user privacy with regulatory compliance
+---
+
+# Compliance & Security
+
+Telos Privacy is designed to provide genuine financial privacy for legitimate users while deterring illicit activity. Privacy and compliance are not mutually exclusive.
+
+## Compliance Tools
+
+### Viewing Keys
+
+Every shielded account has a **viewing key** that provides read-only access to the account's transaction history and balance. Users can voluntarily share this key with:
+
+- Accountants or auditors
+- Tax authorities
+- Employers (for payroll verification)
+
+The viewing key reveals the account's activity but does not allow spending. It is always under the user's control — it is never required and never shared automatically.
+
+### Compliance Provider Integration
+
+The pool supports integration with compliance screening providers (such as TRM Labs). Deposits from addresses flagged by screening providers can be blocked at the pool level, preventing sanctioned funds from entering the shielded pool.
+
+This screening happens at deposit time — the shielded pool itself cannot be used to launder funds that are blocked at entry.
+
+## Security Model
+
+### ZK Proofs
+
+Every operation in the pool requires a valid zero-knowledge proof:
+
+- **Transfer proof** — proves the sender has sufficient shielded balance and that the Merkle tree update is valid, without revealing any balances or addresses
+- **Tree update proof** — proves the Merkle tree was updated correctly when processing a batch
+- **Batch deposit proof** — proves a batch of direct deposits was processed correctly
+
+Proofs are verified on-chain by the Verifier contracts. Invalid proofs are rejected.
+
+### Non-Custodial
+
+The protocol is non-custodial. No third party — including the relayer or the Telos Foundation — can access, freeze, or move your shielded funds. Only the holder of the spending key can initiate transfers or withdrawals.
+
+### Audits
+
+The zkBob protocol smart contracts and circuits have undergone third-party security audits. Audit reports are available in the [zkBob documentation](https://docs.zkbob.com/resources/security-audit).
+
+The Telos-specific deployment will be audited prior to mainnet launch.
+
+## Privacy Limitations
+
+Telos Privacy protects transaction details inside the pool, but some information remains visible:
+
+| Visible on-chain | Not visible on-chain |
+|-----------------|---------------------|
+| Deposit amount (at deposit time) | Shielded transfer amounts |
+| Deposit source address | Shielded transfer recipients |
+| Withdrawal destination address | Internal pool balances |
+| Withdrawal amount | Linkage between deposits and withdrawals |
+
+For maximum privacy, consider using separate addresses for deposits and withdrawals.
