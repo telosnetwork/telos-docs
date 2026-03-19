@@ -1,0 +1,68 @@
+---
+sidebar_position: 3
+title: Accounts & Notes
+description: How shielded state is stored in the zkTelos protocol
+---
+
+# Accounts & Notes
+
+The zkTelos shielded state is stored as **accounts** and **notes** in the Merkle tree. These are the core data structures of the protocol.
+
+## Accounts
+
+An account represents a user's complete private wallet state. It is linked to the user via the intermediate key (η) derived from their spending key.
+
+An account is a 64-byte tuple `(d, Pd, i, b, e)`:
+
+| Field | Size | Description |
+|-------|------|-------------|
+| `d` | 10 bytes | Random diversifier — updated on every account change, acts as a salt |
+| `Pd` | 32 bytes | Diversified public key: `Pd = η × ToSubGroupHash(d)` |
+| `i` | 6 bytes | Spent offset — separates spent (index < i) from unspent notes |
+| `b` | 8 bytes | Current account balance |
+| `e` | 8 bytes | Energy/XP unit (integral balance, for future use) |
+
+Account data is **always encrypted** — it never appears unencrypted in any public field. Only the account owner can decrypt it using their spending key.
+
+:::info Zero Account
+When a user makes their first transaction, no account exists in the tree yet. A zero account is used (all fields zero except η). This is automatically handled by the wallet.
+:::
+
+## Notes
+
+Notes represent individual token amounts associated with a specific recipient. They are the equivalent of UTXOs (unspent transaction outputs) in the shielded pool.
+
+Each transaction can produce up to 127 notes alongside the updated account. Notes are encrypted for their recipient and stored as leaves in the Merkle tree.
+
+## Merkle Tree
+
+The Merkle tree is the central data structure of the pool. It links and sequences all encrypted accounts and notes.
+
+### Structure
+
+- **Total height:** 48
+- **Transaction subtree height:** 7 (supports 1 account + up to 127 notes per transaction)
+- **Commitment subtree height:** 41 (supports up to ~2.2 trillion transactions)
+- **Hash function:** [Poseidon](./merkle-tree.mdx) (ZK-friendly hash)
+
+```
+                    Root (commitment subtree root)
+                   /                              \
+          commitment[0]                    commitment[1]
+           /          \                    /           \
+   tx_root[0]      tx_root[1]    tx_root[2]      tx_root[3]
+    /      \         /     \      /      \         /      \
+account   note   account  note account  note  account   note
+          note            note          note            note
+          ...             ...           ...             ...
+```
+
+Each transaction occupies one subtree slot (128 leaves: 1 account + 127 notes). The root of each transaction subtree is stored as a commitment in the larger tree.
+
+### Why This Matters
+
+The Merkle tree root uniquely identifies the current pool state. When submitting a transaction, the ZK proof must reference the correct current root — if the root changes between proof generation and submission, the transaction is rejected. This is why the relayer is recommended: it manages root synchronization and queues transactions sequentially.
+
+The pool contract stores:
+- The current leaf count (transactions × 128)
+- Historical Merkle tree roots for all past transactions

@@ -74,6 +74,20 @@ const sidebars = {
         'privacy/direct-deposits',
         'privacy/contracts',
         'privacy/compliance',
+        {
+          type: 'category',
+          label: 'Technical Implementation',
+          collapsed: true,
+          items: [
+            'privacy/technical/architecture',
+            'privacy/technical/pool-contract',
+            'privacy/technical/accounts-and-notes',
+            'privacy/technical/relayer',
+            'privacy/technical/keys',
+            'privacy/technical/zksnarks',
+            'privacy/technical/merkle-tree',
+          ],
+        },
       ],
     },
     {
