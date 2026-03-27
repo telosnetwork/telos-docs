@@ -1,0 +1,218 @@
+---
+sidebar_position: 1
+title: Client SDK
+description: Build on top of Telos Privacy using the zkbob-client-js SDK
+---
+
+# Client SDK
+
+The `zkbob-client-js` library is the official SDK for interacting with the Telos Privacy pool from the client side. Use it to build custom wallets, DeFi integrations, or any application that needs to deposit, transfer, or withdraw shielded funds on Telos EVM.
+
+## Installation
+
+```sh
+npm install zkbob-client-js
+```
+
+or with yarn:
+
+```sh
+yarn add zkbob-client-js
+```
+
+Or pin a specific version in `package.json`:
+
+```json
+"dependencies": {
+    "zkbob-client-js": "5.4.0"
+}
+```
+
+## Modes
+
+The SDK operates in two modes:
+
+| Mode | Description |
+|------|-------------|
+| **Account-less** | Read-only. Fetch fees, limits, pool state, Merkle tree info — no user credentials required |
+| **Full** | Read + write. Attach a spending key to deposit, transfer, withdraw, and read shielded balances |
+
+## Telos Pool Configuration
+
+When initializing the client, use the Telos EVM pool configuration. The pool IDs and contract addresses for Telos are:
+
+| Pool | Pool ID | Pool Contract (proxy) | Token |
+|------|---------|-----------------------|-------|
+| WTLOS | `40001` | `0xB5340818eE78D6221f631495346E2e55DA5BcA58` | `0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E` |
+| USDC.e | `40002` | `0xe47A4F0099cA16d61C678Dc75911F91e11deDAa3` | `0xF1815bd50389c46847f0Bda824eC8da914045D14` |
+
+The relayer endpoint for Telos Privacy is provided by the zkWallet infrastructure. Contact the Telos Foundation or check the [zkWallet](https://zkwallet.telos.net) source for the current relayer URL.
+
+## Quickstart
+
+### 1. Initialize the client (account-less)
+
+```typescript
+import { ZkBobClient, ClientConfig } from 'zkbob-client-js';
+
+const config: ClientConfig = {
+  pools: {
+    'WTLOS': {
+      chainId: 40, // Telos EVM
+      poolAddress: '0xB5340818eE78D6221f631495346E2e55DA5BcA58',
+      tokenAddress: '0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E',
+      relayerUrl: 'https://relayer.telos.net', // check current URL with Telos Foundation
+    },
+    'USDC.e': {
+      chainId: 40,
+      poolAddress: '0xe47A4F0099cA16d61C678Dc75911F91e11deDAa3',
+      tokenAddress: '0xF1815bd50389c46847f0Bda824eC8da914045D14',
+      relayerUrl: 'https://relayer.telos.net',
+    },
+  },
+  snarkParams: {
+    transferParamsUrl: 'https://r2.zkbob.com/transfer_params_22022023.bin',
+    transferVkUrl: 'https://r2.zkbob.com/transfer_verification_key_22022023.json',
+  },
+};
+
+const client = await ZkBobClient.create(config, 'WTLOS');
+```
+
+:::note SNARK Parameters
+The CDN hosting SNARK parameters only allows requests from localhost and zkbob domains. For production use, download the parameter files and bundle them with your app. See the [react-template](https://github.com/zkBob/react-template) for an example.
+:::
+
+### 2. Fetch pool info (account-less)
+
+```typescript
+// Get transaction fee
+const fee = await client.atomicTxFee();
+
+// Get pool deposit/withdrawal limits
+const limits = await client.getLimits(userAddress);
+console.log('Deposit limit:', limits.deposit.total);
+console.log('Withdrawal limit:', limits.withdraw.total);
+```
+
+### 3. Attach a user account (full mode)
+
+Derive a spending key from a mnemonic or Web3 wallet signature:
+
+```typescript
+import { ZkBobClient, AccountConfig, ProverMode, deriveSpendingKeyZkBob } from 'zkbob-client-js';
+
+// From a mnemonic seed phrase
+const sk = deriveSpendingKeyZkBob('your twelve word mnemonic seed phrase goes here');
+
+const accountConfig: AccountConfig = {
+  sk,
+  pool: 'WTLOS',
+  proverMode: ProverMode.Local,
+};
+
+await client.login(accountConfig);
+```
+
+Or derive from a Web3 wallet (MetaMask):
+
+```typescript
+import { ethers } from 'ethers';
+
+// Sign the derivation message with the user's wallet
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+const signer = provider.getSigner();
+const signature = await signer.signMessage('Sign this message to derive your Telos Privacy account key');
+
+// Use the signature entropy as the mnemonic seed
+const mnemonic = ethers.utils.entropyToMnemonic(signature.slice(0, 66));
+const sk = deriveSpendingKeyZkBob(mnemonic);
+```
+
+### 4. Sync and read balance
+
+```typescript
+// Sync with the relayer (may take time for large pools)
+await client.updateState();
+
+// Get shielded balance (in pool token units)
+const balance = await client.getBalance();
+console.log('Shielded balance:', balance);
+
+// Get transaction history
+const history = await client.getAllHistory();
+```
+
+### 5. Generate a shielded address
+
+```typescript
+const zkAddress = await client.generateAddress();
+console.log('My zk-address:', zkAddress);
+// Share this address to receive private transfers
+```
+
+### 6. Deposit
+
+```typescript
+import { TxType } from 'zkbob-client-js';
+
+// Deposit 10 WTLOS into the shielded pool
+const amountInPoolUnits = BigInt(10 * 1e9); // pool uses 9 decimal precision
+
+const jobId = await client.deposit(amountInPoolUnits, async (data) => {
+  // Sign the deposit with the user's wallet
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  return provider.getSigner().signMessage(ethers.utils.arrayify(data));
+});
+
+console.log('Deposit submitted, job ID:', jobId);
+```
+
+### 7. Transfer (private)
+
+```typescript
+// Send 1 WTLOS privately to a zk-address
+const recipientZkAddress = 'zkAddress_of_recipient...';
+const amount = BigInt(1 * 1e9);
+
+const jobId = await client.transfer([{ to: recipientZkAddress, amount }]);
+console.log('Transfer submitted, job ID:', jobId);
+```
+
+### 8. Withdraw
+
+```typescript
+// Withdraw 5 WTLOS to a public EVM address
+const recipientAddress = '0xYourPublicEvmAddress';
+const amount = BigInt(5 * 1e9);
+
+const jobId = await client.withdraw(recipientAddress, amount);
+console.log('Withdrawal submitted, job ID:', jobId);
+```
+
+### 9. Check job status
+
+```typescript
+const status = await client.getJobStatus(jobId);
+console.log('Status:', status.state); // 'waiting' | 'proving' | 'sent' | 'mined' | 'failed'
+console.log('Tx hash:', status.txHash);
+```
+
+## Switching Pools
+
+You can switch between the WTLOS and USDC.e pools without reinitializing:
+
+```typescript
+await client.switchToPool('USDC.e', accountConfig);
+```
+
+## React Integration
+
+The SDK relies on Rust/WASM under the hood and requires custom webpack config. The easiest way to get started in React is the [react-template](https://github.com/zkBob/react-template), which uses `react-app-rewired` to handle the WASM setup. Alternatively, use **Next.js** or **Vite** which give direct webpack access.
+
+## Reference Implementations
+
+- [zkbob-client-js README](https://github.com/zkBob/zkbob-client-js/blob/main/README.md) — concise how-to example
+- [zkbob-console](https://github.com/zkBob/zkbob-console) — minimal jQuery Terminal client, always synced with latest SDK
+- [react-template](https://github.com/zkBob/react-template) — React app template with SDK integrated
+- [zkWallet](https://zkwallet.telos.net) — the reference Telos Privacy wallet (open source)
