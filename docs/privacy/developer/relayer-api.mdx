@@ -1,0 +1,233 @@
+---
+sidebar_position: 2
+title: Relayer REST API
+description: Interact directly with the Telos Privacy relayer via REST API
+---
+
+# Relayer REST API
+
+The Telos Privacy relayer is an intermediary between clients and the ZKTelosPool contract. It accepts transactions, builds the Merkle tree proof, and submits them on-chain. The relayer exposes a REST API you can use directly — useful if you're building a custom client without the SDK, or need low-level control.
+
+:::info Relayer URL
+Contact the Telos Foundation or check the [zkWallet](https://zkwallet.telos.net) source for the current production relayer URL.
+:::
+
+## Pool Addresses (Telos EVM, Chain ID: 40)
+
+| Pool | Contract (proxy) | Token |
+|------|-----------------|-------|
+| WTLOS | `0xB5340818eE78D6221f631495346E2e55DA5BcA58` | `0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E` |
+| USDC.e | `0xe47A4F0099cA16d61C678Dc75911F91e11deDAa3` | `0xF1815bd50389c46847f0Bda824eC8da914045D14` |
+
+---
+
+## Send a Transaction
+
+**`POST /transaction`**
+
+Validates the transaction, builds the zkSNARK Merkle tree proof, and queues it for submission to the ZKTelosPool contract. Returns a `jobId` immediately — transactions are processed serially.
+
+**Request body:**
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `proof` | Object | ✅ | ZK proof built by the client |
+| `memo` | String | ✅ | Memo block, Base64-encoded |
+| `tx_type` | Integer | ✅ | `0` = deposit, `1` = transfer, `2` = withdrawal |
+| `depositSignature` | String | — | Nullifier signature with the caller's EVM private key (required for deposit transactions) |
+
+**Response `201`:**
+```json
+{
+  "jobId": "42"
+}
+```
+
+**Response `400`:**
+```json
+{
+  "error": "Error while parsing the input JSON",
+  "description": "tx_type is incorrect"
+}
+```
+
+---
+
+## Get Job Status
+
+**`GET /job/:id`**
+
+Poll the status of a submitted transaction by its `jobId`.
+
+**Response `200`:**
+```json
+{
+  "state": "mined",
+  "txHash": "0xabc123..."
+}
+```
+
+Possible `state` values:
+
+| State | Description |
+|-------|-------------|
+| `waiting` | Queued, not yet processed |
+| `proving` | Building the Merkle proof |
+| `sent` | Submitted to Telos EVM |
+| `mined` | Confirmed on-chain |
+| `failed` | Transaction failed |
+
+**Response `404`:**
+```json
+"Job 2 not found"
+```
+
+---
+
+## Query Transactions
+
+**`GET /transactions/:limit/:offset`**
+
+Fetch memo blocks and out-commits for a range of transactions. Used by clients to synchronize local account state with the pool.
+
+| Param | Type | Description |
+|-------|------|-------------|
+| `limit` | Integer | Number of transactions to return |
+| `offset` | Integer | Starting index in the Merkle tree (must be a multiple of 128) |
+
+**Response `200`:** Array of transaction buffers (or `null` for empty slots).
+
+---
+
+## Get Merkle Tree Info
+
+**`GET /info`**
+
+Returns the current Merkle tree root and the next available index.
+
+**Response `200`:**
+```json
+{
+  "root": "11469701942666298368112882412133877458305516134926649826543144744382391691533",
+  "deltaIndex": 128
+}
+```
+
+---
+
+## Get Next Merkle Index
+
+**`GET /delta_index`**
+
+Returns the next available index in the Merkle tree as a plain integer.
+
+**Response `200`:**
+```
+128
+```
+
+---
+
+## Get Merkle Proof at Index
+
+**`GET /merkle/proof?index=<n>`**
+
+Returns the Merkle proof for a specific index. Used when building transaction proofs on the client side.
+
+**Response `200`:**
+```json
+{
+  "root": "114697...",
+  "deltaIndex": 128,
+  "proofs": [...]
+}
+```
+
+**Response `404`:** `"Incorrect index"` — index doesn't exist yet.
+
+---
+
+## Get Merkle Root at Index
+
+**`GET /merkle/root/:index`**
+
+Returns the historical Merkle tree root at a specific index. Useful for validating proofs against past pool states.
+
+**Response `200`:**
+```json
+"11469701942666298368112882412133877458305516134926649826543144744382391691533"
+```
+
+---
+
+## Calculate Transaction Proof (Debug Only)
+
+**`POST /proof_tx`**
+
+:::danger Development Only
+This endpoint exposes secret transaction inputs to the relayer — **never use in production**. It is intended for debugging and local development only.
+:::
+
+Builds a zkSNARK proof server-side given public and secret inputs. Reduces client computation overhead during development.
+
+**Request body:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `pub` | Object | Public circuit inputs |
+| `sec` | Object | Secret circuit inputs |
+
+**Response `200`:**
+```json
+{
+  "proof": { ... }
+}
+```
+
+---
+
+## Error Format
+
+All error responses follow this structure:
+
+```json
+{
+  "error": "Human-readable error message",
+  "description": "Optional detail"
+}
+```
+
+---
+
+## Example: Full Deposit Flow
+
+```typescript
+// 1. Build transaction proof client-side (using zkbob-client-js or raw circuits)
+const { proof, memo } = await buildDepositProof(amount, userAddress);
+
+// 2. Sign the deposit
+const depositSignature = await signer.signMessage(nullifierHash);
+
+// 3. Submit to relayer
+const response = await fetch('https://relayer.telos.net/transaction', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    proof,
+    memo: btoa(memo),
+    tx_type: 0,
+    depositSignature,
+  }),
+});
+const { jobId } = await response.json();
+
+// 4. Poll for confirmation
+let status;
+do {
+  await new Promise(r => setTimeout(r, 2000));
+  const res = await fetch(`https://relayer.telos.net/job/${jobId}`);
+  status = await res.json();
+} while (status.state === 'waiting' || status.state === 'proving' || status.state === 'sent');
+
+console.log('Final status:', status.state, status.txHash);
+```
