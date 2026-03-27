@@ -1,0 +1,112 @@
+---
+sidebar_position: 2
+title: Core Concepts
+description: Key concepts behind the Telos Privacy protocol
+---
+
+# Core Concepts
+
+This page explains the fundamental concepts behind Telos Privacy. For full technical details, see the [Developer Reference](../technical/architecture).
+
+---
+
+## Zero-Knowledge Proofs (zkSNARKs)
+
+Telos Privacy uses **zkSNARKs** (Zero-Knowledge Succinct Non-Interactive Arguments of Knowledge) to verify that a transaction is valid — without revealing anything about it.
+
+Every deposit, transfer, and withdrawal generates a ZK proof that confirms:
+- The sender has sufficient shielded balance
+- The Merkle tree update is correct
+- No double-spending has occurred
+
+The proof is verified on-chain by the Verifier contracts. No transaction can be processed without a valid proof — but the proof reveals nothing about amounts, senders, or recipients.
+
+---
+
+## The Shielded Pool
+
+The shielded pool is a smart contract on Telos EVM that holds all private balances. Inside the pool, tokens are represented as **encrypted notes** in a Merkle tree. The contract stores the tree root and leaf count — but cannot determine which notes belong to which account.
+
+When you deposit tokens, they enter the pool and are associated with your shielded account as encrypted notes. From that point on, all activity (transfers, withdrawals) is invisible to any outside observer.
+
+---
+
+## Shielded Accounts
+
+A shielded account is your identity inside the pool. It is entirely separate from your public EVM address.
+
+Accounts can be created two ways:
+1. **Wallet-derived** — deterministically from your existing EVM wallet signature (convenient, recoverable)
+2. **Independent** — from a standalone mnemonic with no EVM wallet link (maximum privacy)
+
+Your account is controlled by a **spending key** — a secret 256-bit key that never leaves your device. See [Shielded Accounts](./shielded-accounts.mdx) for full details.
+
+---
+
+## Shielded Addresses (zk-addresses)
+
+To receive funds privately, you share a **zk-address** — not your public 0x address. zk-addresses are encoded in base58 format:
+
+```
+5fkW3dXTvA8Kizt1EbuRyjWofuqR4Ud1YTjGgY1r8nGosDeSaUreq6bwfF61jWL
+```
+
+Key properties:
+- A new zk-address can be generated for each incoming transfer
+- Different zk-addresses from the same account **cannot be linked** to each other on-chain
+- Sharing a zk-address does not reveal your spending key or balance
+
+---
+
+## Three Operations
+
+| Operation | What happens |
+|-----------|-------------|
+| **Deposit** | Tokens move from your public wallet into the shielded pool. The deposit amount is visible on-chain at the moment of deposit, but hidden inside the pool thereafter |
+| **Transfer** | Tokens move privately between shielded accounts. Sender, recipient, and amount are never revealed |
+| **Withdrawal** | Tokens move from the shielded pool back to any public address. You can withdraw to a different address than you deposited from |
+
+---
+
+## The Relayer
+
+A **relayer** is an intermediary node that submits transactions to the pool contract on your behalf. The relayer:
+
+- Abstracts gas fees — you pay in the token being transferred, no TLOS needed
+- Builds the Merkle tree proof for each transaction
+- Queues and serialises transactions to the contract
+- **Cannot see** transaction amounts, senders, or recipients
+
+You interact with the relayer via its [REST API](../technical/relayer). In the zkWallet UI, this happens automatically.
+
+---
+
+## Privacy Guarantees
+
+| What is private | What is visible on-chain |
+|----------------|--------------------------|
+| Shielded transfer amounts | Deposit amount (at deposit time) |
+| Shielded transfer recipients | Deposit source address |
+| Internal pool balances | Withdrawal destination address |
+| Linkage between deposits and withdrawals | Withdrawal amount |
+
+For maximum privacy:
+- Use separate addresses for deposits and withdrawals
+- Use an [independent shielded account](./shielded-accounts.mdx#option-2--independent-account-maximum-privacy) with no EVM wallet link
+- Generate a fresh zk-address for each sender
+
+---
+
+## Base Layer Neutrality
+
+The protocol is designed to operate on a neutral base layer. Validators, sequencers, and relayers process transactions normally — they do not need to inspect or censor individual addresses. Privacy is enforced cryptographically at the protocol level.
+
+No participant in the transaction pipeline has visibility into your shielded activity.
+
+---
+
+## Non-Custodial
+
+No third party — including the relayer, Protofire, or the Telos Foundation — can access, freeze, or move your shielded funds. Only the holder of the spending key can initiate transfers or withdrawals.
+
+The protocol is open-source and runs entirely on Telos EVM smart contracts.

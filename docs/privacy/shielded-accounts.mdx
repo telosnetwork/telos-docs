@@ -6,43 +6,111 @@ description: How shielded accounts and keys work in Telos Privacy
 
 # Shielded Accounts
 
-A shielded account is your identity inside the Telos Privacy pool. It is separate from your public Telos EVM address and operates using a different key system designed for zero-knowledge proofs.
+A shielded account is your identity inside the Telos Privacy pool. It is completely separate from your public Telos EVM address and operates using a different key system designed for zero-knowledge proofs.
 
-## Key Derivation
+Accounts never appear unencrypted in any public field. Only the account owner can decrypt their own account state.
 
-Your shielded account keys are derived deterministically from a signature produced by your regular wallet. This means:
+---
 
-- You don't need a separate seed phrase for your shielded account
+## Creating a Shielded Account
+
+There are two ways to create a shielded account:
+
+### Option 1 — Wallet-Derived (Recommended)
+
+Your shielded account is derived deterministically from a signature produced by your regular EVM wallet (MetaMask, WalletConnect, etc.).
+
+**Advantages:**
+- No separate seed phrase to manage
 - The same wallet always produces the same shielded account
-- You can recover your account on any device by connecting the same wallet
+- Recover your account on any device by reconnecting the same wallet
 
-The derivation process:
+**How it works:**
 1. Your wallet signs a specific message (shown in the app)
 2. The signature is used to derive a **spending key**
-3. The spending key is stored locally in your browser — it is never sent to any server
+3. The spending key is stored locally in your browser — never sent to any server
+
+**Privacy note:** There is a one-time trusted link between your EVM wallet and your shielded account at derivation time. This link is never recorded on-chain — the shielded account cannot be traced back to your wallet address by any on-chain observer.
+
+---
+
+### Option 2 — Independent Account (Maximum privacy)
+
+For users who want no connection whatsoever to an existing EVM wallet, a shielded account can be created from a standalone secret phrase (mnemonic) with no link to any 0x address.
+
+**Advantages:**
+- Completely detached from any EVM identity
+- Maximum privacy — no derivation link of any kind
+
+**How it works:**
+1. Generate a fresh mnemonic (12 or 24 words) independently of any wallet
+2. Derive a spending key from the mnemonic
+3. Use the spending key to initialise your shielded account in the pool
+
+```typescript
+import { deriveSpendingKeyZkBob } from 'zkbob-client-js';
+
+// From an independently generated mnemonic (no EVM wallet involved)
+const mnemonic = 'your twelve word standalone mnemonic phrase goes here';
+const sk = deriveSpendingKeyZkBob(mnemonic);
+```
+
+Store the mnemonic securely — this is the only way to recover an independent account.
+
+---
 
 ## Spending Key
 
-Your spending key is used to sign shielded transactions (transfers and withdrawals). Keep it private — anyone with access to your spending key can move your shielded funds.
+The spending key (σ) is the root secret of your shielded account. It is a 256-bit number from which all other account keys are derived:
+
+| Key | Derived From | Purpose |
+|-----|-------------|---------|
+| **Spending key (σ)** | Root secret | Signs transactions, derives all other keys |
+| **Transaction verifier key (A)** | σ × G (JubJub curve) | Verifies transaction signatures |
+| **Intermediate key (η)** | Poseidon hash of A | Derives nullifiers, viewing keys, decrypts notes |
+| **Outgoing viewing key (κ)** | keccak256(η) | Decrypts your own sent transactions |
+
+The spending key is stored locally in your browser. It is **never** transmitted to the relayer or any server. Anyone with access to your spending key can move your shielded funds — keep it private.
+
+---
 
 ## Shielded Addresses (zk-addresses)
 
-Your shielded address is derived from your spending key and is what you share to receive private transfers. It looks different from a standard 0x address.
+Your shielded address is what others use to send you private transfers. It is derived from your spending key and is encoded in **base58 format** — it looks nothing like a standard 0x address:
 
-You can generate multiple zk-addresses from the same account for additional privacy — each can only be linked to your account by you.
+```
+5fkW3dXTvA8Kizt1EbuRyjWofuqR4Ud1YTjGgY1r8nGosDeSaUreq6bwfF61jWL
+```
+
+### Key properties
+
+- **Not fixed** — you generate a new zk-address for each incoming transfer (though reuse is possible)
+- **Unlinkable** — different zk-addresses from the same account cannot be linked to each other on-chain
+- **Owner-only** — only you can confirm that a given zk-address belongs to your account
+- **Share safely** — sharing a zk-address does not reveal your spending key or account balance
+
+For maximum privacy, generate a fresh zk-address for each sender.
+
+---
 
 ## Account Recovery
 
-If you clear your browser or switch devices:
-
+### Wallet-derived accounts
 1. Connect the same wallet that created the account
 2. Sign the same derivation message
 3. Your shielded account is restored — balance and history intact
 
-No backup file needed. Your shielded account lives in the pool contract; the keys are re-derived from your wallet.
+No backup file needed. Your shielded account state lives in the pool contract; the keys are re-derived from your wallet signature.
+
+### Independent accounts
+Recover using your standalone mnemonic phrase. Without this mnemonic, the account cannot be recovered — there is no fallback.
+
+---
 
 ## Privacy Guarantees
 
-- Your shielded account is not linked to your public wallet address on-chain
+- Your shielded account is **not linked** to your public wallet address on-chain
 - Shielded transfers do not reveal sender, receiver, or amount
-- The pool uses a Merkle tree of notes — even the contract cannot determine which notes belong to which account
+- The pool uses a Merkle tree of encrypted notes — even the pool contract cannot determine which notes belong to which account
+- Different zk-addresses generated from the same account cannot be linked on-chain
+- The relayer never sees spending keys, balances, or transaction counterparties
