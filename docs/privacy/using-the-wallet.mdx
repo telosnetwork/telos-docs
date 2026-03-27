@@ -1,82 +1,38 @@
 ---
 sidebar_position: 2
 title: Using the Privacy Wallet
-description: How to deposit, transfer, and withdraw using Telos Privacy
+description: How to deposit, transfer, and withdraw using zkWallet on Telos
 ---
 
 # Using the Privacy Wallet
 
-The Telos Privacy wallet lets you move tokens into a shielded pool, transfer them privately, and withdraw them back to your public wallet.
+The Telos Privacy wallet is available at **[zkwallet.telos.net](https://zkwallet.telos.net)**. It lets you move tokens into a shielded pool, transfer them privately, and withdraw them back to any public wallet.
+
+## Three Operations
+
+| Operation | What it does |
+|-----------|-------------|
+| **Deposit** | Move tokens from your public wallet into the shielded pool |
+| **Transfer** | Send tokens privately to another shielded account — sender, recipient, and amount hidden |
+| **Withdrawal** | Move tokens from the shielded pool back to any public address |
+
+No TLOS is needed for gas — fees are paid in the token being transferred, deducted automatically by the relayer.
 
 ## Creating a Shielded Account
 
-Your shielded account is derived from your existing Ethereum-compatible wallet (MetaMask, etc.) and is separate from your public address.
+Connect your wallet at [zkwallet.telos.net](https://zkwallet.telos.net) and sign the account creation message. This derives your shielded spending key locally — it never leaves your device.
 
 1. Go to the [zkWallet](https://zkwallet.telos.net)
 2. Connect your wallet
 3. Sign the account creation message — this derives your shielded private key
 4. Your shielded account is ready
 
-:::caution
-Your shielded account key is derived from your wallet signature. If you lose access to your wallet, you lose access to your shielded account. Back up your shielded account key.
-:::
+## Receiving Funds
 
-## Depositing
-
-Depositing moves tokens from your public wallet into the shielded pool.
-
-1. Select the token you want to deposit (WTLOS or USDC.e)
-2. Enter the amount
-3. Approve the token spend (first deposit only)
-4. Confirm the deposit transaction
-
-Your tokens will appear in your shielded balance after the transaction confirms. The deposit amount is visible on-chain during the deposit transaction, but is hidden inside the pool thereafter.
-
-:::info Deposit Limits
-Deposits may be subject to minimum and maximum limits per transaction and per time period. Check the app for current limits.
-:::
-
-## Transferring Privately
-
-Transfers move shielded tokens to another shielded account — the amount and recipient are never revealed.
-
-1. Go to the **Transfer** tab
-2. Enter the recipient's shielded address (a zk-address, not a regular 0x address)
-3. Enter the amount
-4. Confirm — the relayer submits the transaction on your behalf
-
-No gas is required from your wallet. A small fee (paid in the transferred token) is deducted to cover relayer costs.
-
-### Generating a Shielded Address
-
-To receive funds privately, share your **zk-address** — not your public wallet address.
-
-1. Go to **Receive** in the app
-2. Copy your zk-address or share the QR code
-
-A new zk-address can be generated for each transaction for additional privacy.
-
-## Withdrawing
-
-Withdrawing moves tokens from the shielded pool back to a public wallet.
-
-1. Go to the **Withdraw** tab
-2. Enter the destination address (any public 0x address)
-3. Enter the amount
-4. Confirm — the relayer processes the withdrawal
-
-:::tip
-You can withdraw to any public address, not just the one you deposited from. This is intentional — it allows you to break the link between deposit and withdrawal addresses.
-:::
+To receive a private transfer, share your **zk-address** — not your public 0x address. Generate a fresh zk-address for each sender for maximum privacy.
 
 ## Fees
 
-All fees are paid in the token being used (WTLOS or USDC.e) — no TLOS needed for gas.
+Fees are displayed in the app before you confirm any transaction. All fees are paid in the token being used (WTLOS or USDC.e).
 
-| Operation | Fee |
-|-----------|-----|
-| Deposit | Relayer fee (small, variable) |
-| Transfer | Relayer fee (small, variable) |
-| Withdrawal | Relayer fee (small, variable) |
-
-Current fee rates are displayed in the app before you confirm any transaction.
+For current fee rates, see [zkwallet.telos.net](https://zkwallet.telos.net).
