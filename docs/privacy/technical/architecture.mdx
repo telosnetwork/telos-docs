@@ -1,0 +1,99 @@
+---
+sidebar_position: 1
+title: Architecture Overview
+description: High-level architecture of the zkTelos privacy protocol
+---
+
+# Architecture Overview
+
+zkTelos is comprised of several interconnected components that together enable private transactions on Telos EVM.
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    User / Application                    │
+│              (zkTelos Wallet frontend)                   │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│                     Relayer Node                        │
+│  • Receives transactions from users                     │
+│  • Calculates Merkle tree proofs                        │
+│  • Submits transactions to the pool in serial order     │
+│  • Provides pool state to clients via REST API          │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+                           ▼
+┌─────────────────────────────────────────────────────────┐
+│                  Telos EVM (Chain ID: 40)                │
+│                                                         │
+│  ┌─────────────────┐   ┌──────────────────────────┐    │
+│  │  zkTelos Pool   │   │  DirectDepositQueue       │    │
+│  │  (main contract)│◄──│  (fast external deposits) │    │
+│  └────────┬────────┘   └──────────────────────────┘    │
+│           │                                             │
+│  ┌────────▼────────────────────────────────────────┐   │
+│  │              Verifier Contracts                  │   │
+│  │  • TransferVerifier                              │   │
+│  │  • TreeUpdateVerifier                            │   │
+│  │  • BatchDepositVerifier                          │   │
+│  └─────────────────────────────────────────────────┘   │
+└─────────────────────────────────────────────────────────┘
+```
+
+## Components
+
+### zkTelos Pool
+
+The main contract that holds the zero-knowledge state. All transactions (deposits, transfers, withdrawals) are ultimately submitted here. It maintains a Merkle tree of encrypted account and note data and verifies ZK proofs before accepting any state transition.
+
+### Relayer Node
+
+An intermediary between users and the pool contract. The relayer:
+- Receives user transactions
+- Computes Merkle tree proofs
+- Submits transactions to the pool in strict serial order (preventing collisions)
+- Provides fast pool state queries via REST API
+
+Users *can* interact with the pool directly, but using the relayer is strongly recommended — it handles proof computation, prevents race conditions, and abstracts gas payments (improving anonymity).
+
+:::info Security
+The relayer cannot steal funds or decrypt transactions. Due to the ZK infrastructure, the worst it can do is provide an incorrect state to the client. It cannot conduct man-in-the-middle attacks.
+:::
+
+### DirectDepositQueue
+
+Accepts deposits from external contracts and queues them for processing by the relayer. Enables integrations where tokens are deposited into the shielded pool programmatically (e.g., from DeFi protocols or payment flows).
+
+### Verifier Contracts
+
+Three on-chain verifier contracts validate ZK proofs before any state transition is accepted:
+- **TransferVerifier** — validates deposit, transfer, and withdrawal proofs
+- **TreeUpdateVerifier** — validates Merkle tree update proofs
+- **BatchDepositVerifier** — validates batched direct deposit proofs
+
+### zkTelos Wallet
+
+The front-end application. Handles account creation, transaction building, ZK proof generation (client-side), and synchronization with the relayer/pool state.
+
+## Transaction Flow
+
+1. User initiates a transaction in the zkTelos Wallet
+2. Wallet generates the ZK proof locally (never sent to any server)
+3. Wallet submits the transaction to the Relayer
+4. Relayer computes the Merkle tree proof and queues the transaction
+5. Relayer submits the transaction + proof to the zkTelos Pool on-chain
+6. Pool verifies the proof via Verifier contracts
+7. Pool updates its Merkle tree state
+8. Transaction is complete — user's shielded balance is updated
+
+## Two Token Pools
+
+zkTelos runs two independent pools on Telos EVM:
+
+| Pool | Token | Pool ID |
+|------|-------|---------|
+| WTLOS Pool | Wrapped TLOS | 40001 |
+| USDC.e Pool | Bridged USDC (Stargate) | 40002 |
+
+Each pool has its own set of contracts, state, and Merkle tree. Shielded balances in one pool cannot be transferred to the other.

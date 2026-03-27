@@ -1,0 +1,84 @@
+---
+sidebar_position: 2
+title: zkTelos Pool Contract
+description: Technical details of the zkTelos Pool smart contract
+---
+
+# zkTelos Pool Contract
+
+The zkTelos Pool is the core smart contract of the protocol. It receives transactions from the relayer (or directly from users), verifies ZK proofs, and updates the on-chain shielded state.
+
+## Contract Addresses
+
+See [Deployed Contracts](../contracts.mdx) for all pool and verifier addresses on Telos EVM.
+
+## Pool Initialization
+
+Each pool serves a single token and has a unique `pool_id` — an unsigned 24-bit integer.
+
+```solidity
+constructor(
+    uint256 __pool_id,
+    address _token,
+    ITransferVerifier _transfer_verifier,
+    ITreeVerifier _tree_verifier
+)
+```
+
+| Pool | Token | Pool ID |
+|------|-------|---------|
+| WTLOS Pool | `0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E` | 40001 |
+| USDC.e Pool | `0xF1815bd50389c46847f0Bda824eC8da914045D14` | 40002 |
+
+## Denominators
+
+Two denominators are used when translating between user-facing amounts and on-chain values:
+
+```solidity
+uint256 constant TOKEN_DENOMINATOR = 1 gwei;   // 1e9
+uint256 constant NATIVE_DENOMINATOR = 1 gwei;  // 1e9
+```
+
+When a user specifies an amount (e.g., `5` tokens), the pool multiplies by `TOKEN_DENOMINATOR` to get the actual token value in wei. This is also used to calculate deposit/withdrawal limits.
+
+## Merkle Tree Root
+
+The pool maintains a Merkle tree of height 48. The initial root for an empty tree (all leaves zero) is:
+
+```
+11469701942666298368112882412133877458305516134926649826543144744382391691533
+```
+
+## Transaction Processing
+
+All transactions are processed via the `transact()` method:
+
+```solidity
+function transact() external payable onlyOperator;
+```
+
+All transaction data is passed through calldata. Before processing, the ZK proofs are verified by the Verifier contracts. The `onlyOperator` modifier ensures only authorized relayers can submit transactions.
+
+Transaction types supported:
+- **Deposit (type 0)** — move tokens into the shielded pool
+- **Transfer (type 1)** — private transfer within the pool
+- **Withdrawal (type 2)** — move tokens out of the pool
+- **Permittable deposit (type 3)** — deposit using EIP-2612 permit signature
+
+## Limits
+
+The pool supports configurable limits to prevent large-scale transactions:
+
+```solidity
+function setLimits(
+    uint256 _tvlCap,            // max total value locked
+    uint256 _dailyDepositCap,   // max deposits per day
+    uint256 _dailyWithdrawalCap,// max withdrawals per day
+    uint256 _dailyUserDepositCap,// max per-user deposits per day
+    uint256 _depositCap         // max single deposit
+)
+```
+
+## Source Code
+
+The pool contract is based on [ZkBobPool.sol](https://github.com/zkBob/zkbob-contracts/blob/master/src/zkbob/ZkBobPool.sol) from the zkBob contracts repository.

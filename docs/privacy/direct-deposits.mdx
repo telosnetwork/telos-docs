@@ -1,0 +1,67 @@
+---
+sidebar_position: 4
+title: Direct Deposits
+description: Fast deposits into the Telos Privacy pool from other contracts
+---
+
+# Direct Deposits
+
+Direct deposits allow tokens to be sent into the Telos Privacy pool directly from other smart contracts — without requiring a separate approval and deposit transaction from the user's wallet.
+
+This is useful for:
+- Receiving payroll or payments directly into a shielded account
+- DeFi protocols that want to offer private withdrawals
+- Developers building privacy-native applications on Telos
+
+## How It Works
+
+Instead of interacting with the pool contract directly, a sender sends tokens to the **DirectDepositQueue** contract with a target zk-address. The queue batches these deposits and submits them to the pool, where they appear as shielded notes for the recipient.
+
+```
+Sender Contract / EOA
+        │
+        ▼
+DirectDepositQueue
+        │
+        ▼
+ZKTelosPool (shielded note credited to recipient's zk-address)
+```
+
+The recipient sees the deposit in their shielded balance without any action required on their part.
+
+## DirectDepositQueue Contracts
+
+| Token | Contract Address |
+|-------|-----------------|
+| WTLOS | `0xA2F29aE1f0f65cB7f88E90dDAc031aD2702c7720` |
+| USDC.e | `0xb3d18CD9891A403e4451385685037fA61e83af51` |
+
+## Developer Integration
+
+To send a direct deposit programmatically:
+
+```solidity
+interface IDirectDepositQueue {
+    function directDeposit(
+        address sender,
+        uint256 amount,
+        string calldata zkAddress
+    ) external;
+}
+```
+
+1. Approve the DirectDepositQueue to spend the token on behalf of the sender
+2. Call `directDeposit()` with the recipient's zk-address
+3. The deposit is queued and processed by the relayer
+
+:::info
+Direct deposits are processed in batches by the relayer. There may be a short delay (typically under a minute) before the deposit appears in the recipient's shielded balance.
+:::
+
+## Use Cases
+
+**Private Payroll**
+An employer can send salary directly to an employee's shielded zk-address. The amount and recipient are not visible on-chain after the deposit is processed.
+
+**DeFi Exit to Privacy**
+A DeFi protocol can route withdrawal proceeds directly into the privacy pool, allowing users to exit positions without revealing their destination.

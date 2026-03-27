@@ -1,0 +1,64 @@
+---
+sidebar_position: 7
+title: Merkle Tree & Poseidon Hash
+description: The Merkle tree data structure and Poseidon hash function used in zkTelos
+---
+
+# Merkle Tree & Poseidon Hash
+
+## Merkle Tree
+
+The Merkle tree is the core data structure of the zkTelos Pool. It stores all encrypted transaction data (accounts and notes) in a sequenced, tamper-evident structure.
+
+### Structure
+
+The tree has a total height of 48, split into two subtrees:
+
+```
+Total height: 48
+├── Commitment subtree height: 41  (holds transaction commitments)
+│       └── Supports up to 2^41 ≈ 2.2 trillion transactions
+└── Transaction subtree height: 7  (holds individual account + notes)
+        └── Supports 1 account + up to 127 notes per transaction
+```
+
+Each transaction occupies one full transaction subtree (128 leaves). The root of this subtree — the **transaction commitment** — is stored as a leaf in the larger commitment subtree.
+
+### How It's Used
+
+1. When a transaction is submitted, its account and notes are hashed and placed in a new transaction subtree
+2. The transaction commitment (subtree root) is added to the commitment subtree
+3. The overall tree root is updated
+4. The new root is stored on-chain by the pool contract
+
+The pool stores both the current leaf count (number of transactions × 128) and historical roots for all past transactions — enabling proof verification at any point in time.
+
+### Why It Matters for Developers
+
+When building a ZK proof, the user's local Merkle tree must be in sync with the on-chain state. If the root changes between proof generation and submission, the transaction is rejected. This is the primary reason to use the relayer rather than submitting directly.
+
+## Poseidon Hash Function
+
+Poseidon is a ZK-friendly hash function used throughout the zkTelos protocol — for Merkle tree nodes, key derivation, and nullifier computation.
+
+### Why Poseidon?
+
+Standard hash functions (SHA-256, Keccak) are computationally expensive to verify inside ZK circuits. Poseidon is specifically designed to be efficient in arithmetic circuits (ZK-friendly), dramatically reducing proof generation time and circuit complexity.
+
+### Usage in zkTelos
+
+| Use Case | Description |
+|----------|-------------|
+| Merkle tree nodes | Each node = Poseidon(left_child, right_child) |
+| Intermediate key derivation | η = Poseidon(A.x) |
+| Note hashing | Note commitments stored in tree leaves |
+| Nullifier computation | Prevents double-spending of notes |
+
+### Parameters
+
+Poseidon is parameterized for the specific field and security level needed. zkTelos uses the BN254 scalar field (matching the Groth16 proving system used for ZK proofs).
+
+### References
+
+- [Poseidon paper](https://eprint.iacr.org/2019/458.pdf)
+- [libzeropool implementation](https://github.com/zkBob/libzeropool)

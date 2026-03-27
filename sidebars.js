@@ -65,6 +65,33 @@ const sidebars = {
     },
     {
       type: 'category',
+      label: 'Telos Privacy',
+      collapsed: true,
+      items: [
+        'privacy/overview',
+        'privacy/using-the-wallet',
+        'privacy/shielded-accounts',
+        'privacy/direct-deposits',
+        'privacy/contracts',
+        'privacy/compliance',
+        {
+          type: 'category',
+          label: 'Technical Implementation',
+          collapsed: true,
+          items: [
+            'privacy/technical/architecture',
+            'privacy/technical/pool-contract',
+            'privacy/technical/accounts-and-notes',
+            'privacy/technical/relayer',
+            'privacy/technical/keys',
+            'privacy/technical/zksnarks',
+            'privacy/technical/merkle-tree',
+          ],
+        },
+      ],
+    },
+    {
+      type: 'category',
       label: 'SNARKtor',
       collapsed: true,
       items: [

@@ -1,0 +1,59 @@
+---
+sidebar_position: 6
+title: ZK Circuits
+description: Zero-knowledge proof circuits used in zkTelos
+---
+
+# ZK Circuits
+
+zkTelos uses two ZK proof circuits. Every transaction must produce valid proofs for both before the pool contract will accept it.
+
+## Transfer Verifier Circuit
+
+Verifies that a transaction is valid — that the sender has sufficient balance and that the transaction is correctly formed — without revealing any transaction details.
+
+**Who generates this proof:** The user's wallet (client-side), before submitting to the relayer.
+
+**Questions it answers:**
+- Does the sender have sufficient shielded balance for the transaction?
+- Are the input and output notes correctly formed?
+- Is the nullifier valid (preventing double-spend)?
+- Do the encrypted output amounts match the claimed amounts?
+
+The proof is generated entirely on the client side using the user's local spending key. It is never sent to the relayer or any external service — only the proof output is transmitted.
+
+## Tree Update Verifier Circuit
+
+Verifies that the Merkle tree was updated correctly after a transaction is added.
+
+**Who generates this proof:** The relayer (for normal transactions). The user if interacting with the pool directly.
+
+**Questions it answers:**
+- Was the new transaction subtree added at the correct position in the tree?
+- Does the resulting tree root match the expected value?
+
+## Proving System
+
+- **Framework:** [Fawkes-Crypto](https://github.com/zkBob/fawkes-crypto) — a lightweight zkSNARK framework using Groth16 and the BN254 curve
+- **Circuits library:** [libzeropool](https://github.com/zkBob/libzeropool)
+- **Client library:** [libzeropool-rs](https://github.com/zeropoolnetwork/libzeropool-rs) — Rust wrapper including Merkle tree implementation and user account/transaction building
+
+## Batch Deposit Verifier
+
+A third verifier handles batched direct deposits from the DirectDepositQueue:
+
+**Who generates this proof:** The relayer, when processing a batch of queued direct deposits.
+
+**Questions it answers:**
+- Were all deposits in the batch correctly applied to the Merkle tree?
+- Are all deposit amounts consistent with what was queued?
+
+## Proof Verification On-Chain
+
+All proofs are verified by dedicated Verifier contracts on Telos EVM before any state transition is accepted. See [Deployed Contracts](../contracts.mdx) for verifier addresses.
+
+| Proof Type | Verifier Contract |
+|-----------|-------------------|
+| Transfer | TransferVerifier |
+| Tree update | TreeUpdateVerifier |
+| Batch deposit | BatchDepositVerifier |

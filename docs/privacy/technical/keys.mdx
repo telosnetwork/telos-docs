@@ -1,0 +1,82 @@
+---
+sidebar_position: 5
+title: Key Hierarchy
+description: Cryptographic keys used in the zkTelos protocol
+---
+
+# Key Hierarchy
+
+zkTelos uses a hierarchy of cryptographic keys derived from a single root spending key. Each key serves a specific purpose in the protocol.
+
+## Key Derivation Chain
+
+```
+Spending Key (σ)
+      │
+      ▼ σ × G  (JubJub elliptic curve)
+Transaction Verifier Key (A)
+      │
+      ▼ Poseidon(A.x)
+Intermediate Key (η)
+      ├──► Nullifier calculation
+      ├──► Incoming note decryption (via Receiving Key)
+      ├──► Outgoing viewing key (κ) derivation
+      └──► Private payment address (d, Pd) derivation
+```
+
+## Key Types
+
+### Spending Key (σ)
+A 256-bit secret key — the root of the entire key hierarchy. Used to sign transactions and derive all other keys.
+
+In the zkTelos Wallet, the spending key is derived deterministically from a signature produced by the user's Web3 wallet (MetaMask, etc.), so no separate backup is needed.
+
+### Transaction Verifier Key (A)
+Derived from the spending key via scalar multiplication on the JubJub elliptic curve:
+
+```
+A = σ × G
+```
+
+Used to verify transaction signatures.
+
+### Intermediate Key (η)
+Derived from the transaction verifier key via the Poseidon hash function:
+
+```
+η = Poseidon(A.x)
+```
+
+Used for:
+- Computing account nullifiers (prevents double-spending)
+- Deriving the receiving key (to decrypt incoming notes)
+- Deriving the outgoing viewing key
+- Constructing private payment addresses
+
+### Receiving Key
+A combination of the intermediate key (η) and an ephemeral key generated per note. Used to decrypt incoming notes from the memo block.
+
+### Outgoing Viewing Key (κ)
+Derived from the intermediate key:
+
+```
+κ = keccak256(η, "this is the suffix for the symmetric encryption key")
+```
+
+Decrypts the memo block for transactions you initiated (outgoing). Not currently exposed as a user-facing feature in zkTelos.
+
+### Private Payment Address (d, Pd)
+A pair of values derived from η:
+
+```
+Pd = η × ToSubGroupHash(d)
+```
+
+Where `d` is a random diversifier. Multiple private addresses can be generated from the same account — they all resolve to the same recipient but are unlinkable on-chain.
+
+## Security Properties
+
+- All keys (except the private payment address) must be kept secret
+- The spending key is never transmitted — only used locally in the wallet
+- Compromising the intermediate key (η) reveals incoming note amounts but cannot be used to spend funds
+- Only the spending key (σ) can authorize transfers and withdrawals

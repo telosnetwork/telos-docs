@@ -1,0 +1,63 @@
+---
+sidebar_position: 4
+title: Relayer Node
+description: How the zkTelos relayer works and why it's used
+---
+
+# Relayer Node
+
+The relayer is an intermediary between users (via the zkTelos Wallet) and the zkTelos Pool contract. It handles proof computation, pool state synchronization, and transaction sequencing.
+
+## Why Use a Relayer?
+
+Users *can* interact with the pool directly, but two problems arise:
+
+1. **Stale state:** If the client's local Merkle tree is not continuously synced, it cannot generate a valid proof — the proof references an outdated root that the pool rejects.
+2. **Race conditions:** When multiple users submit transactions simultaneously, the Merkle tree root can change between when a user generates their proof and when it's submitted. The transaction is then rejected (but still consumes gas).
+
+The relayer solves both by:
+- Maintaining a continuously synced Merkle tree
+- Queuing transactions strictly in order — no race conditions
+- Handling all Merkle tree proof computation
+- Providing fast pool state via REST API (no need to reconstruct from calldata)
+
+### Privacy Benefit
+
+Using the relayer also improves anonymity. When interacting with the pool directly, your public wallet pays gas — creating a linkable on-chain footprint. The relayer pays gas on your behalf, abstracting this link.
+
+## Security
+
+The relayer **cannot**:
+- Steal shielded funds
+- Decrypt transaction amounts or recipients
+- Change transaction contents
+
+The ZK proof system ensures that even if the relayer is compromised, it cannot modify transactions without invalidating the proof. The worst a malicious relayer can do is provide an incorrect pool state to the client or refuse to process transactions.
+
+## Architecture
+
+The relayer consists of:
+
+- **Merkle tree instance** — a key-value database maintaining the current tree state, supporting leaf addition, root updates, and zkSNARK proof generation
+- **Transaction storage** — stores encrypted accounts and notes, enabling fast state sync responses to clients without requiring full calldata reconstruction
+- **REST API** — the client interface for submitting transactions and querying pool state
+
+## REST API
+
+Clients interact with the relayer via a REST API. Key endpoints:
+
+| Endpoint | Description |
+|----------|-------------|
+| `POST /transaction` | Submit a new shielded transaction |
+| `GET /transactions` | Get transaction history for sync |
+| `GET /info` | Pool state info (current root, leaf count, fee) |
+| `GET /fee` | Current relayer fee |
+| `GET /limits` | Current deposit/withdrawal limits |
+
+## Scalability Note
+
+The current implementation supports a **single relayer**. Multi-relayer configurations are architecturally supported by the protocol but not yet deployed for zkTelos.
+
+## Source Code
+
+- [Relayer GitHub repository](https://github.com/zkBob/zeropool-relayer)

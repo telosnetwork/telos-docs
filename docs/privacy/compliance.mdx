@@ -1,0 +1,44 @@
+---
+sidebar_position: 6
+title: Security
+description: Security model for Telos Privacy
+---
+
+# Security
+
+## ZK Proofs
+
+Every operation in the Telos Privacy pool requires a valid zero-knowledge proof:
+
+- **Transfer proof** — proves the sender has sufficient shielded balance and that the Merkle tree update is valid, without revealing any balances or addresses
+- **Tree update proof** — proves the Merkle tree was updated correctly when processing a batch of transactions
+- **Batch deposit proof** — proves a batch of direct deposits was processed correctly
+
+Proofs are verified on-chain by the Verifier contracts. Invalid proofs are rejected — no transaction can be processed without a valid proof.
+
+## Non-Custodial
+
+The protocol is non-custodial. No third party — including the relayer or the Telos Foundation — can access, freeze, or move your shielded funds. Only the holder of the spending key can initiate transfers or withdrawals.
+
+## Audits
+
+The zkTelos protocol smart contracts and circuits have undergone third-party security audits. Audit reports are available in the [zkTelos documentation](https://docs.zkbob.com/resources/security-audit).
+
+The Telos-specific deployment will be audited prior to mainnet launch.
+
+## Privacy Limitations
+
+Telos Privacy protects transaction details inside the pool, but some information remains visible on-chain:
+
+| Visible on-chain | Not visible on-chain |
+|-----------------|---------------------|
+| Deposit amount (at deposit time) | Shielded transfer amounts |
+| Deposit source address | Shielded transfer recipients |
+| Withdrawal destination address | Internal pool balances |
+| Withdrawal amount | Linkage between deposits and withdrawals |
+
+For maximum privacy, consider using separate addresses for deposits and withdrawals.
+
+## User Responsibility
+
+Use of Telos Privacy is at the sole risk of the user. The protocol is open-source and decentralized. Users are responsible for ensuring their use complies with applicable laws in their jurisdiction.

@@ -1,0 +1,48 @@
+---
+sidebar_position: 3
+title: Shielded Accounts
+description: How shielded accounts and keys work in Telos Privacy
+---
+
+# Shielded Accounts
+
+A shielded account is your identity inside the Telos Privacy pool. It is separate from your public Telos EVM address and operates using a different key system designed for zero-knowledge proofs.
+
+## Key Derivation
+
+Your shielded account keys are derived deterministically from a signature produced by your regular wallet. This means:
+
+- You don't need a separate seed phrase for your shielded account
+- The same wallet always produces the same shielded account
+- You can recover your account on any device by connecting the same wallet
+
+The derivation process:
+1. Your wallet signs a specific message (shown in the app)
+2. The signature is used to derive a **spending key**
+3. The spending key is stored locally in your browser — it is never sent to any server
+
+## Spending Key
+
+Your spending key is used to sign shielded transactions (transfers and withdrawals). Keep it private — anyone with access to your spending key can move your shielded funds.
+
+## Shielded Addresses (zk-addresses)
+
+Your shielded address is derived from your spending key and is what you share to receive private transfers. It looks different from a standard 0x address.
+
+You can generate multiple zk-addresses from the same account for additional privacy — each can only be linked to your account by you.
+
+## Account Recovery
+
+If you clear your browser or switch devices:
+
+1. Connect the same wallet that created the account
+2. Sign the same derivation message
+3. Your shielded account is restored — balance and history intact
+
+No backup file needed. Your shielded account lives in the pool contract; the keys are re-derived from your wallet.
+
+## Privacy Guarantees
+
+- Your shielded account is not linked to your public wallet address on-chain
+- Shielded transfers do not reveal sender, receiver, or amount
+- The pool uses a Merkle tree of notes — even the contract cannot determine which notes belong to which account

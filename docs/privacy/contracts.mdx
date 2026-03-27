@@ -1,0 +1,55 @@
+---
+sidebar_position: 5
+title: Deployed Contracts
+description: Telos Privacy contract addresses on Telos EVM
+---
+
+# Deployed Contracts
+
+All Telos Privacy contracts are deployed on Telos EVM (Chain ID: 40).
+
+## WTLOS Pool (Pool ID: 40001)
+
+| Contract | Address |
+|----------|---------|
+| ZKTelosPool (proxy) | `0xB5340818eE78D6221f631495346E2e55DA5BcA58` |
+| ZKTelosPool (implementation) | `0x1281Fb77171B3c3a8EA661DAc996CE10b735Cf66` |
+| DirectDepositQueue (proxy) | `0xA2F29aE1f0f65cB7f88E90dDAc031aD2702c7720` |
+| DirectDepositQueue (implementation) | `0xACfA83f66bD0538C7710A5Aa2F114DbAb6833927` |
+| TransferVerifier | `0x41182B4193008a2299784DA3649bB014127a6Ad0` |
+| TreeUpdateVerifier | `0x128F38A90149995f330e8B5e705402b26E774425` |
+| BatchDepositVerifier | `0x03b4aeE35Cf489dEBdB6C1e4e7E9526f8a2c35Fc` |
+| WTLOS Token | `0xD102cE6A4dB07D247fcc28F366A623Df0938CA9E` |
+
+## USDC.e Pool (Pool ID: 40002)
+
+| Contract | Address |
+|----------|---------|
+| ZKTelosPool (proxy) | `0xe47A4F0099cA16d61C678Dc75911F91e11deDAa3` |
+| ZKTelosPool (implementation) | `0x851feCe4DfBbE0615e01e880E179A55c5f8CEBDB` |
+| DirectDepositQueue (proxy) | `0xb3d18CD9891A403e4451385685037fA61e83af51` |
+| DirectDepositQueue (implementation) | `0x00AED9924444B08Dd56732377C8baC786091E1B3` |
+| TransferVerifier | `0x07CCdc76130067d975eBa5A31419D91ed54daf1B` |
+| TreeUpdateVerifier | `0x0dFb3782574D415148cC3549c56974db8407eDE5` |
+| BatchDepositVerifier | `0xf135e8aa4bEec30cb093af31B8CA593651b0933e` |
+| USDC.e Token | `0xF1815bd50389c46847f0Bda824eC8da914045D14` |
+
+## Contract Roles
+
+**ZKTelosPool** — The main pool contract. Manages the shielded state, processes deposits, transfers, and withdrawals, and verifies ZK proofs.
+
+**DirectDepositQueue** — Accepts direct deposits from external contracts and queues them for inclusion in the pool by the relayer.
+
+**TransferVerifier** — Verifies the ZK proof for shielded transfer transactions.
+
+**TreeUpdateVerifier** — Verifies the ZK proof for Merkle tree updates (used when processing batches of transactions).
+
+**BatchDepositVerifier** — Verifies the ZK proof for batched direct deposit operations.
+
+:::note Proxy Architecture
+The pool and deposit queue use an upgradeable proxy pattern. The proxy address is the permanent address you should use for integrations. The implementation address may change during upgrades.
+:::
+
+## Verifying Contracts
+
+All contracts are verified on [Teloscan](https://teloscan.io). Search by the contract addresses above to view the source code and ABI.
