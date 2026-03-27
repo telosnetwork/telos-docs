@@ -34,7 +34,7 @@ Validates the transaction, builds the zkSNARK Merkle tree proof, and queues it f
 | `proof` | Object | ✅ | ZK proof built by the client |
 | `memo` | String | ✅ | Memo block, Base64-encoded |
 | `tx_type` | Integer | ✅ | `0` = deposit, `1` = transfer, `2` = withdrawal |
-| `depositSignature` | String | — | Nullifier signature with the caller's EVM private key (deposit only) |
+| `depositSignature` | String | — | Nullifier signature with the caller's EVM private key (required for deposit transactions) |
 
 **Response `201`:**
 ```json
