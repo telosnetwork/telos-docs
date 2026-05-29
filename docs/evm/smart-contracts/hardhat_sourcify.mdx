@@ -4,128 +4,214 @@ displayed_sidebar: devBar
 hide_table_of_contents: true
 ---
 
-# Deploy and Verify Smart Contracts with Hardhat Deploy plugin
+# Deploy and Verify Smart Contracts with Hardhat 3
 
-** Refer to [this](https://github.com/nathanduft44/telos_hardhat_deploy) repository for project setup. **
+Hardhat is a development environment for compiling, testing, deploying, and verifying EVM smart contracts.
 
-Hardhat is a development environment to compile, deploy, test, and debug smart contracts for EVM compatible blockchains.
+This guide shows how to deploy a contract to Telos with **Hardhat 3** and verify it with Sourcify. It uses the current Telos RPC endpoints and the current Hardhat verification plugin. It does not use the legacy `hardhat-deploy` Sourcify task.
 
-This tutorial will cover how to use the [hardhat-deploy plugin](https://github.com/wighawag/hardhat-deploy) and verify deployed contracts on the Telos explorer on mainnet.
+## What you will do
 
-1. Setup Hardhat project with the Hardhat-deploy plug-in
-2. Deploy contracts using the plug-in
-3. Verify the contracts on sourcify
+1. Create a Hardhat 3 project.
+2. Configure Telos mainnet and testnet.
+3. Deploy a `Greeter` contract.
+4. Verify the deployed contract with Sourcify.
 
-### Setup Local Environment
+## Prerequisites
 
-The first step is to set up the local environment. If you are not familiar with how to set up a local hardhat project, refer to [this page](https://hardhat.org/tutorial/setting-up-the-environment.html).
+- Node.js 22 or newer
+- A Telos EVM wallet with TLOS for gas
+- A private key for the network you want to deploy to
 
-1. Add a deploy folder in the primary directory
+:::caution
+Never commit private keys. Store them in `.env`, add `.env` to `.gitignore`, and use a funded testnet wallet while learning.
+:::
 
-Insert the following code block into the deploy folder under filename - deploy.js
+## Create the project
 
-```js title="hardhat_project/deploy/00_deploy_my_contract.js"
-module.exports = async ({ getNamedAccounts, deployments }) => {
-  const { deploy } = deployments;
-  const { deployer } = await getNamedAccounts();
-  await deploy("Greeter", {
-    from: deployer,
-    args: ["Hello"],
-    log: true,
-  });
-};
+```bash
+mkdir telos-hardhat
+cd telos-hardhat
+npm init -y
+npm pkg set type=module
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox-mocha-ethers dotenv
 ```
 
-2. Add a blank deployment folder in root directory. The JSON ABI and byte will be pasted here automatically when a deploy command is executed.
+Create these folders:
 
-## Installations
-
-### Package Checklist
-
-** Make sure these packages are included in your package.json list before running a deploy command.**
-
-- @nomiclabs/hardhat-ethers
-- @nomiclabs/hardhat-waffle
-- chai
-- ethereum-waffle
-- ethers
-- hardhat
-- @openzeppelin/contracts
-- dotenv
-
-Run `npm install <package_name>` if any of the above packages are missing.
-
-**Hardhat Plug-in**
-
-```js title="desktop/Basic_hardhat_project"
-npm install -D hardhat-deploy
+```bash
+mkdir contracts scripts
 ```
 
-Import the plug-in in your hardhat.config.js file
+## Configure Telos networks
 
-```js title="/hardhat.config.js"
-require("hardhat-deploy");
-```
+Create `hardhat.config.ts` in the project root:
 
-When taking into account that Hardhat-deploy-ethers is a fork of @nomiclabs/hardhat-ethers, and other plug-ins may have have an hardcoded dependency on @nomiclabs/hardhat-ethers, the best method to install hardhat-deploy-ethers and ensure compatibility is the following:
+```ts title="hardhat.config.ts"
+import "dotenv/config";
+import { defineConfig } from "hardhat/config";
+import hardhatToolboxMochaEthers from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
 
-```js title="/Basic_hardhat_project"
-npm install --save-dev  @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
-```
+const telosPrivateKey = process.env.TELOS_PRIVATE_KEY;
+const telosTestnetPrivateKey = process.env.TELOS_TESTNET_PRIVATE_KEY;
 
-Remember to add: `require("@nomiclabs/hardhat-ethers");` at the top of your hardhat.config.js file.
-
-### Deploy
-
-The following is what the Hardhat config file should like:
-
-```js title="/hardhat.config.js"
-require("@nomiclabs/hardhat-waffle");
-require("dotenv").config({ path: ".env" });
-require("hardhat-deploy");
-require("@nomiclabs/hardhat-ethers");
-
-module.exports = {
-  solidity: "0.8.1",
-  defaultNetwork: "telos_testnet",
-  namedAccounts: {
-    deployer: 0,
+export default defineConfig({
+  plugins: [hardhatToolboxMochaEthers],
+  solidity: {
+    version: "0.8.28",
   },
   networks: {
-    telos_testnet: {
-      url: "https://testnet.telos.net/evm",
-      accounts: [process.env.TELOS_TESTNET_PRIVATE_KEY],
+    telos: {
+      type: "http",
+      url: "https://rpc.telos.net",
+      chainId: 40,
+      accounts: telosPrivateKey ? [telosPrivateKey] : [],
+    },
+    telosTestnet: {
+      type: "http",
+      url: "https://rpc.testnet.telos.net",
       chainId: 41,
+      accounts: telosTestnetPrivateKey ? [telosTestnetPrivateKey] : [],
     },
   },
-};
+});
 ```
 
-### Run Deploy command
+Create `.env` and add the private key for the network you will use:
 
-```
-npx hardhat --network telos_testnet deploy
-```
-
-**Output**
-
-```
-deploying "Greeter" (tx: 0xc800f2bfa3ef75768045d885210a8dfc4148ba2f9838f27113d40db7d26e0024)...: deployed at 0x5C94BA8feC1a9FedE0a1Fdd55f2a860Ad97467ce with 496906 gas
+```bash title=".env"
+TELOS_TESTNET_PRIVATE_KEY=0xYOUR_TESTNET_PRIVATE_KEY
+TELOS_PRIVATE_KEY=0xYOUR_MAINNET_PRIVATE_KEY
 ```
 
-### Verify
+Add `.env` to `.gitignore`:
 
-You can easily verify smart contracts with the hardhat deploy sourcify command from the plugin.
+```bash
+printf "\n.env\n" >> .gitignore
+```
 
-` npx hardhat --network telos_testnet sourcify`
+## Add the contract
 
-Console output should result in contract printed and green verification text printed.
+Create `contracts/Greeter.sol`:
 
-Following these steps will enable you to successfully verify the contract.
+```solidity title="contracts/Greeter.sol"
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
 
-<img
-    src={require('/static/img/verify.png').default}
-    alt="hardhat"
-    width="70%"
-    height="automatic"
-/>
+contract Greeter {
+    string private greeting;
+
+    constructor(string memory initialGreeting) {
+        greeting = initialGreeting;
+    }
+
+    function greet() public view returns (string memory) {
+        return greeting;
+    }
+}
+```
+
+Compile the contract:
+
+```bash
+npx hardhat compile
+```
+
+Expected result:
+
+```bash
+Compiled 1 Solidity file with solc 0.8.28
+```
+
+## Add the deploy script
+
+Create `scripts/deploy.ts`:
+
+```ts title="scripts/deploy.ts"
+import { network } from "hardhat";
+
+const { ethers } = await network.create();
+
+const greeter = await ethers.deployContract("Greeter", ["Hello, Telos!"]);
+await greeter.waitForDeployment();
+
+console.log(`Greeter deployed to ${await greeter.getAddress()}`);
+```
+
+## Deploy to Telos testnet
+
+Run the deployment script against Telos testnet:
+
+```bash
+npx hardhat --network telosTestnet run scripts/deploy.ts
+```
+
+Expected result:
+
+```bash
+Greeter deployed to 0x...
+```
+
+Save the deployed address. You need it for verification.
+
+To deploy to mainnet instead, use:
+
+```bash
+npx hardhat --network telos run scripts/deploy.ts
+```
+
+## Verify with Sourcify
+
+Verify the testnet deployment:
+
+```bash
+npx hardhat --network telosTestnet verify sourcify DEPLOYED_CONTRACT_ADDRESS "Hello, Telos!"
+```
+
+Verify the mainnet deployment:
+
+```bash
+npx hardhat --network telos verify sourcify DEPLOYED_CONTRACT_ADDRESS "Hello, Telos!"
+```
+
+Replace `DEPLOYED_CONTRACT_ADDRESS` with the address printed by the deployment script.
+
+The constructor arguments passed to `verify sourcify` must exactly match the constructor arguments used during deployment. In this guide, the constructor argument is `"Hello, Telos!"`.
+
+## Check the contract in the explorer
+
+- Mainnet explorer: [https://www.teloscan.io/](https://www.teloscan.io/)
+- Testnet explorer: [https://testnet.teloscan.io/](https://testnet.teloscan.io/)
+
+Paste the deployed address into the explorer search bar. After verification is indexed, the contract source and ABI should be visible on the contract page.
+
+## Telos network reference
+
+| Network | RPC URL | Chain ID | Explorer |
+| --- | --- | --- | --- |
+| Telos mainnet | `https://rpc.telos.net` | `40` | `https://www.teloscan.io/` |
+| Telos testnet | `https://rpc.testnet.telos.net` | `41` | `https://testnet.teloscan.io/` |
+
+## Troubleshooting
+
+### `https://testnet.telos.net/evm` or `https://mainnet.telos.net/evm` returns 404
+
+Those are legacy endpoints. Use the current RPC URLs:
+
+- Mainnet: `https://rpc.telos.net`
+- Testnet: `https://rpc.testnet.telos.net`
+
+### Hardhat cannot find an account
+
+Check that your `.env` file exists, the variable name matches the network, and the private key starts with `0x`.
+
+- `telosTestnet` uses `TELOS_TESTNET_PRIVATE_KEY`
+- `telos` uses `TELOS_PRIVATE_KEY`
+
+### Sourcify says the bytecode does not match
+
+Recompile and verify with the same Solidity version and constructor arguments used for deployment. If you changed compiler settings after deploying, restore the deployment settings before verifying.
+
+### Verification is accepted but the explorer does not show the source immediately
+
+Wait a few minutes and refresh the contract page. Indexing can lag behind the Sourcify response.
