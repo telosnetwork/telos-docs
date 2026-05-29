@@ -6,199 +6,177 @@ hide_table_of_contents: true
 
 # ERC721 NFT
 
-This section will explain how to write an NFT minting smart contract that encapsulates all of the logic based on the NFTs you want to mint, followed by hosting images and metadata on decentralized file storage.
+This guide shows how to deploy an ERC721 NFT contract to Telos testnet with Hardhat 3 and the current OpenZeppelin contracts package.
 
-## Setup Local Dev Environment
+## Prerequisites
 
-**Prerequsites** follow this [link](https://hardhat.org/tutorial/setting-up-the-environment.html) NodeJS version 16 or Hardhat is not already installed on your device.
+- Node.js 22 or newer
+- A Telos testnet wallet with testnet TLOS for gas
+- A hosted NFT metadata JSON URI, such as an `ipfs://...` URI
 
 :::caution
-NodeJS version 16 or less is mandatory.
+Never commit private keys. Store them in `.env`, add `.env` to `.gitignore`, and use a funded testnet wallet while learning.
 :::
 
-First, initialize a local project and install Hardhat tools for testing, compiling, and deploying smart contracts.
+## Create the project
 
-Open a terminal and proceed to the directory you want to create an NFT minter.
-
-```
+```bash
 mkdir telos_nft_minter
 cd telos_nft_minter
 npm init -y
-npm install --save-dev hardhat
+npm pkg set type=module
+npm install --save-dev hardhat @nomicfoundation/hardhat-toolbox-mocha-ethers dotenv @openzeppelin/contracts
+mkdir contracts scripts
 ```
 
-## Hardhat Setup Walkthrough
+## Configure Hardhat
 
+Create `hardhat.config.ts`:
+
+```ts title="hardhat.config.ts"
+import "dotenv/config";
+import { defineConfig } from "hardhat/config";
+import hardhatToolboxMochaEthers from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
+
+const telosPrivateKey = process.env.TELOS_PRIVATE_KEY;
+const telosTestnetPrivateKey = process.env.TELOS_TESTNET_PRIVATE_KEY;
+
+export default defineConfig({
+  plugins: [hardhatToolboxMochaEthers],
+  solidity: {
+    version: "0.8.28",
+  },
+  networks: {
+    telos: {
+      type: "http",
+      url: "https://rpc.telos.net",
+      chainId: 40,
+      accounts: telosPrivateKey ? [telosPrivateKey] : [],
+    },
+    telosTestnet: {
+      type: "http",
+      url: "https://rpc.testnet.telos.net",
+      chainId: 41,
+      accounts: telosTestnetPrivateKey ? [telosTestnetPrivateKey] : [],
+    },
+  },
+});
 ```
-npx hardhat
+
+Create `.env` and add your deployment private key:
+
+```bash title=".env"
+TELOS_TESTNET_PRIVATE_KEY=0xYOUR_TESTNET_PRIVATE_KEY
+TELOS_PRIVATE_KEY=0xYOUR_MAINNET_PRIVATE_KEY
 ```
 
-Select "create a sample project" and press "return" to bypass all the questions asked in the terminal. The system will then ask you to install `hardhat-waffle` and `hardhat-ethers`. These are the plug-ins utilized to test and deploy smart contracts.
+Add `.env` to `.gitignore`:
 
-**If not installed then download here**
-
-```
-npm install --save-dev @nomiclabs/hardhat-waffle ethereum-waffle chai @nomiclabs/hardhat-ethers ethers
-
+```bash
+printf "\n.env\n" >> .gitignore
 ```
 
-### Using the OpenZeppelin contracts Library API
+## Add the ERC721 contract
 
-Benefits: Reusable Solidity components to build custom contracts, contracts are audited, flexible role based permissioning scheme
+Create `contracts/TelosNFTMinter.sol`:
 
-```
-npm install @openzeppelin/contracts
-```
+```solidity title="contracts/TelosNFTMinter.sol"
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
 
-## Solidity ERC721 Smart Contract
+import {ERC721URIStorage, ERC721} from "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-The first step is to write a smart contract in a .sol file under the contracts folder.
-
-```js title="/contracts/TelosNFTMinter.sol"
-// SPDX-License-Identifier: UNLICENSED
-
-pragma solidity ^0.8.1;
-
-// Imports
-import "hardhat/console.sol";
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-
-// Contract inherits methods from ERC721 Contract OpenZeppelin Library.
 contract TelosNFTMinter is ERC721URIStorage {
-    // Using Counter Method to keep track of token Ids.
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
+    uint256 private _nextTokenId;
 
+    constructor() ERC721("TelosNFT", "SURF") {}
 
-    // Pass name and symbol to ERC721 contract.
-    constructor() ERC721 ("TelosNFT", "SURF") {
+    function mintNFT(string memory tokenURI) public returns (uint256) {
+        uint256 tokenId = _nextTokenId;
+        _nextTokenId++;
+
+        _safeMint(msg.sender, tokenId);
+        _setTokenURI(tokenId, tokenURI);
+
+        return tokenId;
     }
-    // Mint function for users to get their NFT.
-    function mintNFT() public {
-        uint newItemId = _tokenIds.current();
-
-        // Mints NFT to the sender using msg.sender global variable
-        _safeMint(msg.sender, newItemId);
-
-        // This sets the NFT metadata put a photo of your favorite pet for now...
-        _setTokenURI(newItemId, "insert JSON url here");
-
-        console.log("#%s NFT has been minted to %s", newItemId, msg.sender);
-
-        // This uses the Counters method inherited by Open Zeppelin library
-        _tokenIds.increment();
-    }
-
 }
 ```
 
-## Setting up a run.js File in Hardhat Project
+This example uses a simple `uint256` counter. Older tutorials may use OpenZeppelin `Counters`, but that utility is not included in current OpenZeppelin Contracts releases.
 
-A run.js file is set up to use a local instance of the blockchain created by Hardhat. This enables developers to test their contracts to ensure they are compiling and the overall dApp runs as intended.
+Compile the contract:
 
-```js title="scripts/run.js"
-const main = async () => {
-  const nftContractFactory = await hre.ethers.getContractFactory(
-    "TelosNFTMinter"
-  );
-  const nftContract = await nftContractFactory.deploy();
-  await nftContract.deployed();
-  console.log("Contract deployed to:", nftContract.address);
-
-  // Call the function.
-  let txn = await nftContract.mintNFT();
-  // Wait for it to be mined.
-  await txn.wait();
-};
-
-const runMain = async () => {
-  try {
-    await main();
-    process.exit(0);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
-
-runMain();
+```bash
+npx hardhat compile
 ```
 
-### Deploy on Local Testnet
+## Test deployment locally
 
-```
-npx hardhat run scripts/run.js
-```
+Create `scripts/deploy.ts`:
 
-### Deploy on Telos Testnet
+```ts title="scripts/deploy.ts"
+import { network } from "hardhat";
 
-To deploy on telos_testnet, wallet credentials must be provided to sign the transaction.
+const metadataUri = "ipfs://REPLACE_WITH_YOUR_METADATA_CID";
+const { ethers } = await network.create();
 
-## Setup Deploy.js File in /scripts Folder
+const nft = await ethers.deployContract("TelosNFTMinter");
+await nft.waitForDeployment();
 
-```js title="scripts/deploy.js"
-const main = async () => {
-  const nftContractFactory = await hre.ethers.getContractFactory(
-    "TelosNFTMinter"
-  );
-  const nftContract = await nftContractFactory.deploy();
-  await nftContract.deployed();
-  console.log("Contract deployed to:", nftContract.address);
+const tx = await nft.mintNFT(metadataUri);
+await tx.wait();
 
-  // Call the function.
-  let txn = await nftContract.mintNFT();
-  // wait for contract to be mined .5seconds
-  await txn.wait();
-  console.log("Minted NFT #1");
-};
-
-const runMain = async () => {
-  try {
-    await main();
-    process.exit(0);
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-};
-
-runMain();
+console.log(`TelosNFTMinter deployed to ${await nft.getAddress()}`);
+console.log("Minted token 0");
 ```
 
-Follow steps to deploy on telos_testnet
+Run it on the local Hardhat network first:
 
-1. `npm install dotenv` Telos utilizes a dotenv plug-in to load environment variables from .env file.  
-   **Note** .env file contains sensitive information and can be included in .gitignore to follow best practices.
-2. Create a seperate .env file to hide and paste all private keys.
-
-<img
-    src={require('/static/img/dotenv.png').default}
-    alt="nft minter"
-    width="70%"
-    height="automatic"
-/>
-
-3. Open hardhat.config.js file and add the network configuration for telos_testnet.  
-   Make sure to add `require("dotenv").config({ path: ".env" });` at the top of file.  
-   `telos_tesnet rpc = "https://testnet.telos.net/evm"`  
-   `accounts: [process.env.TELOS]`  
-
-```js title="Telos_NFT_MINTER/hardhat.config.js"
-require("@nomiclabs/hardhat-waffle");
-require("dotenv").config({ path: ".env" });
-
-module.exports = {
-  solidity: "0.8.1",
-  networks: {
-    telos_testnet: {
-      url: "https://testnet.telos.net/evm",
-      accounts: [process.env.TELOS_TESTNET_PRIVATEKEY],
-    },
-  },
-};
+```bash
+npx hardhat run scripts/deploy.ts
 ```
 
-run `npx hardhat run scripts/deploy.js --network telos_testnet`
+Expected result:
 
-After completing these steps you will have minted an NFT using hardhat on the Telos Testnet.
+```bash
+TelosNFTMinter deployed to 0x...
+Minted token 0
+```
+
+## Deploy to Telos testnet
+
+Replace `ipfs://REPLACE_WITH_YOUR_METADATA_CID` in `scripts/deploy.ts` with your NFT metadata URI, then deploy:
+
+```bash
+npx hardhat --network telosTestnet run scripts/deploy.ts
+```
+
+To deploy to Telos mainnet, use:
+
+```bash
+npx hardhat --network telos run scripts/deploy.ts
+```
+
+## Verify the contract
+
+Verify the testnet deployment with Sourcify:
+
+```bash
+npx hardhat --network telosTestnet verify sourcify DEPLOYED_CONTRACT_ADDRESS
+```
+
+Verify the mainnet deployment with Sourcify:
+
+```bash
+npx hardhat --network telos verify sourcify DEPLOYED_CONTRACT_ADDRESS
+```
+
+The `TelosNFTMinter` constructor has no arguments, so the verify command only needs the deployed address.
+
+## View the NFT contract
+
+- Testnet explorer: [https://testnet.teloscan.io/](https://testnet.teloscan.io/)
+- Mainnet explorer: [https://www.teloscan.io/](https://www.teloscan.io/)
+
+Paste the deployed contract address into the explorer to inspect transactions, source verification, and token activity.

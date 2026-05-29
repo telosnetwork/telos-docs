@@ -137,14 +137,14 @@ var PrivateKeyProvider = require("truffle-privatekey-provider");
 var privateKey = "private key"; // NOTE: Only use a Dev Wallet with Telos testnet otherwise in production or with real value use .env file and make sure to add .env to gitignore it so its not commited into github.
 var provider = new PrivateKeyProvider(
   privateKey,
-  "https://testnet.telos.net/evm"
+  "https://rpc.testnet.telos.net"
 );
 
 module.exports = {
   networks: {
     telos_testnet: {
       provider: () =>
-        new PrivateKeyProvider(privateKey, `https://testnet.telos.net/evm`),
+        new PrivateKeyProvider(privateKey, `https://rpc.testnet.telos.net`),
       network_id: 41, // Ropsten's id
     },
   },

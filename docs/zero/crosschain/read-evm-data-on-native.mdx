@@ -26,7 +26,7 @@ Once you got the slot index you are looking for you can use a library like ether
 You can use a library like ethers or web3js to call `getStorageAt`.
 
 ```
-const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
+const provider = ethers.getDefaultProvider("https://rpc.testnet.telos.net");
 
 const addr =  "0x10b95d422f2c9714c331b1a14829886b0910f55d"; // Our contract address
 const owner_slot = "0x00"; // Our first slot index "owner"
@@ -51,7 +51,7 @@ Request[] public requests;
  
 We can access each member of that array and its properties like so:
 ```
-const provider = ethers.getDefaultProvider("https://testnet.telos.net/evm");
+const provider = ethers.getDefaultProvider("https://rpc.testnet.telos.net");
 
 const addr = "0x10b95d422f2c9714c331b1a14829886b0910f55d";
 
