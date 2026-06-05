@@ -1,5 +1,5 @@
 ---
-title: 'Bridge TLOS'
+title: 'Bridge Assets'
 displayed_sidebar: userBar
 description: >-
     Learn how to bridge assets
@@ -8,9 +8,20 @@ sidebar_position: 3
 hide_table_of_contents: true
 ---
 
-# Bridging TLOS
+# Bridging Assets
 
 ## Bridging to Telos EVM
+
+### Suggested Core Assets
+
+For new bridge flows into Telos EVM, use the [Telos Bridge](https://bridge.telos.net/) and prefer the core assets below. Always verify the Telos EVM contract address, especially if your wallet also shows older wrapped assets.
+
+| Asset | Telos EVM contract | On-chain symbol | Background |
+| --- | --- | --- | --- |
+| USDC | [`0xF1815bd50389c46847f0Bda824eC8da914045D14`](https://www.teloscan.io/address/0xF1815bd50389c46847f0Bda824eC8da914045D14) | `USDC.e` | Circle issues USDC. On Telos, the bridge asset is Bridged USDC (Stargate), a bridged USDC form aligned with Circle's Bridged USDC Standard. |
+| USDT | [`0x674843C06FF83502ddb4D37c2E09C01cdA38cbc8`](https://www.teloscan.io/address/0x674843C06FF83502ddb4D37c2E09C01cdA38cbc8) | `USDT` | Tether issues USDt. On Telos, the bridge asset is Bridged stgUSDT through Stargate/LayerZero. |
+| ETH / WETH | [`0xBAb93B7ad7fE8692A878B95a8e689423437cc500`](https://www.teloscan.io/address/0xBAb93B7ad7fE8692A878B95a8e689423437cc500) | `WETH` | ETH bridged to Telos EVM is represented as WETH and uses the Stargate/LayerZero ETH route. |
+| WBTC | [`0x0555E30da8f98308EdB960aa94C0Db47230d2B9c`](https://www.teloscan.io/address/0x0555E30da8f98308EdB960aa94C0Db47230d2B9c) | `WBTC` | WBTC is tokenized Bitcoin associated with BitGo's WBTC custody and issuance model. On Telos, use this LayerZero/Stargate-compatible WBTC contract. |
 
 ### How To Move Assets With The Telos Bridge, Powered By LayerZero
 
