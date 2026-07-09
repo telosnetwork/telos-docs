@@ -378,10 +378,10 @@ Use this profile if your exchange only needs to submit transactions, read balanc
 
 ```ini
 # Do NOT load the state_history_plugin
-# Prune the block log to save disk (keep only recent blocks)
-block-log-retain-blocks = 0          # 0 = do not maintain a persistent block log
-# Or keep a rolling window, e.g. ~2 days of blocks (2 blocks/sec):
-# block-log-retain-blocks = 345600
+# Save disk by not keeping a full block log:
+block-log-retain-blocks = 0          # 0 = disable the block log (blocks.log removed after startup)
+# Or keep a rolling window instead, e.g. ~2 days of blocks (2 blocks/sec):
+# block-log-retain-blocks = 345600   # prune to the N most recent blocks
 
 # Keep transaction traces available briefly for confirmations
 # (chain_api_plugin exposes get_transaction_status without full history)
@@ -418,7 +418,10 @@ state-history-endpoint = 0.0.0.0:18999   # SHiP websocket (consumed by Hyperion/
 # finality-data-history = true
 
 # --- Full block log from genesis ---
-block-log-retain-blocks = 0          # keep the full persistent block log (do not prune)
+# Do NOT set block-log-retain-blocks on a full-history node.
+# Omit it entirely to keep the complete block log from genesis (the default).
+#   block-log-retain-blocks = 0    -> DISABLES the block log (blocks.log removed after startup)
+#   block-log-retain-blocks = N>0  -> prunes the block log to the N most recent blocks
 ```
 
 ### Important: SHiP log compression was removed
