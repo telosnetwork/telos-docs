@@ -344,6 +344,7 @@ const sidebars = {
           collapsed: false,
           items: [
               'nodes/non-bp-nodes/run_a_telos_node',
+              'nodes/non-bp-nodes/exchange-teloszero-upgrade-guide',
               'nodes/non-bp-nodes/telos-evm-pre-synced-node',
               {
                 type: 'category',
@@ -446,7 +447,7 @@ const sidebars = {
       ],
     },
   ],
- 
+
 
   // ---- Community Docs ----
 

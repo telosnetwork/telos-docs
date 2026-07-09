@@ -1,0 +1,538 @@
+---
+title: 'Exchange Guide: Updating Your Telos Zero Node Software to the Latest Release'
+displayed_sidebar: devBar
+sidebar_position: 3
+hide_table_of_contents: true
+---
+
+# Exchange Guide: Updating Your Telos Zero Node Software to the Latest Release
+
+This guide is written specifically for **exchanges that list the TLOS token** and operate their own **Telos Zero (native / Antelope) API nodes** for deposits, withdrawals, balance checks and transaction confirmation.
+
+It walks through updating the node software on those API nodes to the latest **[TelosZero Core](https://github.com/telosnetwork/teloszero-core)** release — the Telos-maintained node software that succeeds Antelope Spring and Leap — and covers **both** deployment profiles:
+
+- **Path A — API node *without* full history:** a lightweight chain-API node for submitting transactions, reading balances/tables and confirming irreversibility. Fastest to sync, smallest disk footprint.
+- **Path B — API node *with* full history:** a node that also serves **State History (SHiP)** and/or a full block log from genesis, for reconstructing deposit/withdrawal history (e.g. via `v1/history`, Hyperion, or a custom indexer).
+
+If you only need to credit deposits and process withdrawals, **Path A** is usually sufficient. If you reconstruct account history directly from your own node, use **Path B**.
+
+:::info Runtime compatibility
+TelosZero Core is the Telos-maintained continuation of **Antelope Spring** (which itself succeeded Leap). The runtime binary names are unchanged: `nodeos`, `cleos`, `keosd`, and `spring-util`. If you previously ran Leap or Spring, your operational tooling continues to work.
+:::
+
+---
+
+## What is TelosZero Core?
+
+[TelosZero Core](https://github.com/telosnetwork/teloszero-core) is the node software maintained by Telos Network for Telos Zero operators, infrastructure providers, exchanges and tooling teams. It preserves Antelope Spring runtime compatibility while moving release authority, packaging, provenance and long-term maintenance under Telos stewardship.
+
+- **Latest production release:** [`teloszero-v1.2.2`](https://github.com/telosnetwork/teloszero-core/releases/latest) (based on Antelope Spring `v1.2.2`).
+- **Production release branch:** `release/1.2-teloszero`.
+- **Operator package:** `teloszero-core_1.2.2_amd64.deb`.
+
+:::warning Do not run `main` in production
+`main` is the development branch. Always deploy a **tagged release** (`teloszero-v1.2.2` or later) from the [releases page](https://github.com/telosnetwork/teloszero-core/releases/latest).
+:::
+
+### Exchanges do **not** need finalizer (BLS) keys
+
+Spring/Savanna finalizer keys and the `signature-provider` / `regfinkey` / `actfinkey` workflow apply **only to block producers**. As an exchange running non-producing API nodes, you can ignore all finalizer-key steps. `vote-threads` can be left at its **default of `4`** on API nodes — you do not need to change it.
+
+---
+
+## Before you begin
+
+- **Do not upgrade a production node in place first.** Validate the process on a test node, then roll it out to production.
+- **Supported operating systems:** Ubuntu **22.04** (Jammy, recommended) or Ubuntu **20.04** (Focal). Older releases are not supported.
+- **Take a backup** of your `config.ini`, `genesis.json`, startup scripts and (for Path B) your `blocks/` and `state-history/` directories.
+- **Plan for downtime.** The upgrade requires a restart from snapshot (see below).
+- **Confirm your data directory location.** Default is `~/.local/share/eosio/nodeos/data`, or the path set with `--data-dir`.
+
+### A restart from snapshot is mandatory
+
+Moving from Leap (4.x / 5.x) to the Spring-based TelosZero Core changes the on-disk state format. You **cannot** simply swap the binary. You must remove `shared_memory.bin` and restart from a **snapshot**. Your **block log**, **state-history logs** and **trace logs** from prior versions remain compatible and do **not** need to be regenerated. TelosZero Core (Spring 1.2.x) reads v4, v6 and v7 snapshot formats, so a snapshot produced by a recent Leap or Spring node will load correctly.
+
+---
+
+## Where to find the resources you need
+
+| Resource | Where to get it |
+|---|---|
+| **Latest node software** | [TelosZero Core releases](https://github.com/telosnetwork/teloszero-core/releases/latest) |
+| **Active P2P peers (live)** | [validators.telos.net](https://validators.telos.net/) → *Endpoints* tab, or the machine‑readable [latest.json](https://validators.telos.net/validation/latest.json) |
+| **Public API endpoints (live)** | [validators.telos.net](https://validators.telos.net/) → *API Endpoints* tab (see [Using public endpoints](#using-public-api-endpoints-optional)) |
+| **Snapshots (mainnet)** | [snapshots.eosusa.io/snapshots/telos](https://snapshots.eosusa.io/snapshots/telos/), [snapshots.telosunlimited.com](https://snapshots.telosunlimited.com/), [snapshots.eosnation.io](https://snapshots.eosnation.io/) — or [create your own](#obtaining-a-snapshot) |
+| **Snapshots (testnet)** | [snapshots.eosnation.io](https://snapshots.eosnation.io/) |
+| **Node template & peers.ini** | [telosnetwork/node-template](https://github.com/telosnetwork/node-template) |
+| **Genesis & chain IDs** | See [Network reference](#network-reference) below and the node-template repo |
+
+Always treat **[validators.telos.net](https://validators.telos.net/)** as the authoritative, continuously-updated source for peers and public endpoints — the lists reproduced in this guide are point-in-time snapshots for convenience.
+
+---
+
+## Using public API endpoints (optional)
+
+Running your own node is the recommended setup for an exchange, because it gives you full control over uptime, rate limits and data integrity for deposit crediting and withdrawal processing. However, public endpoints are useful as a **secondary/fallback**, for **cross-checking** your own node, or to get running quickly before your node is fully synced.
+
+### Telos Foundation endpoint
+
+The Telos Foundation maintains a public endpoint that also exposes a **Hyperion v2 history API**:
+
+- Base: `https://mainnet.telos.net`
+- Health: [`https://mainnet.telos.net/v2/health`](https://mainnet.telos.net/v2/health)
+- Chain API: `https://mainnet.telos.net/v1/chain/get_info`
+- History (Hyperion): `https://mainnet.telos.net/v2/history/get_actions?account=<account>`
+
+Because it serves Hyperion `v2`, this endpoint can answer **historical action queries** (e.g. reconstructing deposits) that a [Path A](#path-a-api-node-without-full-history) node cannot — a convenient alternative to running your own full-history node.
+
+```bash
+# Health / sync status
+curl -s https://mainnet.telos.net/v2/health
+
+# Recent TLOS transfers into an account (Hyperion)
+curl -s "https://mainnet.telos.net/v2/history/get_actions?account=<youraccount>&filter=eosio.token:transfer&limit=25"
+```
+
+### Validator-verified BP endpoints
+
+The [validators.telos.net → **API Endpoints** tab](https://validators.telos.net/) lists all block-producer public endpoints with live pass/fail status, and a **Copy** button that exports them as a plain list. A point-in-time set of passing mainnet endpoints:
+
+```text
+https://mainnet.telos.net            # Telos Foundation (Hyperion v2)
+https://api-telos.eosauthority.com   # eosauthority – EOS Authority
+https://api.bigironbp.io             # bigironbptex – Big Iron
+https://api.telos.blocksindia.com    # telosindiabp – TelosIndiaBP
+https://api.telos.telosgreen.com     # telosgreenbp – TelosGreen
+https://api.telosarabia.net          # telosarabia1 – EOSArabia
+https://api.telosunlimited.com       # telosunlimit – TelosUnlimited
+https://api.theteloscope.io          # theteloscope – TheTeloscope
+https://bp-telos.y-knot.io           # bp.yknot
+```
+
+:::tip
+Before relying on any public endpoint in production, confirm its current pass/fail status and the full up-to-date list via the [validators.telos.net API Endpoints tab](https://validators.telos.net/). Use more than one endpoint for redundancy, and prefer your own node as the primary source of truth.
+:::
+
+---
+
+## Obtaining a snapshot
+
+Because the upgrade requires a [restart from snapshot](#a-restart-from-snapshot-is-mandatory), you need a recent snapshot before you begin. You have two options.
+
+### Option 1 — Create your own snapshot (recommended)
+
+If you already run a synced node, produce a snapshot from it. This gives you a snapshot you fully control and can verify. Enable the `producer_api_plugin` (add `plugin = eosio::producer_api_plugin` to `config.ini` and restart if it is not already loaded), then, **while the node is running and receiving blocks**:
+
+```bash
+curl -X POST http://127.0.0.1:8888/v1/producer/create_snapshot
+```
+
+`nodeos` returns JSON with the path and filename of the new snapshot:
+
+```json
+{
+  "snapshot_name": "/telos/nodes/mainnet/snapshots/snapshot-0abc...xyz.bin",
+  "head_block_num": 380000000,
+  "head_block_time": "2026-07-07T00:00:00.000"
+}
+```
+
+Note the `snapshot_name` — you start from this file in [Step 7](#step-7--restart-from-the-snapshot). Snapshots are written to the `snapshots/` directory inside your `--data-dir`.
+
+:::note
+The node must be receiving blocks from the p2p network for `create_snapshot` to return. `producer_api_plugin` should be bound to localhost only (or behind a proxy that filters `/v1/producer/`) — never expose it publicly. If it was not part of your normal setup, disable it again after taking the snapshot.
+:::
+
+### Option 2 — Download a snapshot
+
+If you are building a new node, or cannot produce one locally, download a recent mainnet snapshot from a community provider:
+
+- <https://snapshots.eosusa.io/snapshots/telos/>
+- <https://snapshots.telosunlimited.com/>
+- <https://snapshots.eosnation.io/>
+
+```bash
+cd /telos/nodes/mainnet/snapshots
+# Pick the latest file listed by the provider, then:
+wget https://snapshots.eosusa.io/snapshots/telos/<latest-snapshot-file>
+# Snapshots are commonly gzip-compressed; decompress if needed:
+# gunzip <latest-snapshot-file>.gz      (produces a .bin)
+# or:  tar -zxvf <latest-snapshot-file>.tar.gz
+```
+
+TelosZero Core (Spring 1.2.x) loads **v4, v6 and v7** snapshot formats, so any recent snapshot from a Leap 5.x or Spring/TelosZero node will work. A plain state snapshot restores chain **state** only; for a **full-history** ([Path B](#path-b-api-node-with-full-history)) node you also need the block log and/or state-history logs — request a full-history archive from a provider or replay from genesis.
+
+---
+
+## Upgrade procedure (common to both paths)
+
+Perform steps 1–7 for **every** node you operate. The path-specific configuration follows in [Path A](#path-a-api-node-without-full-history) and [Path B](#path-b-api-node-with-full-history).
+
+### Step 1 — Have a recent snapshot ready
+
+Follow [Obtaining a snapshot](#obtaining-a-snapshot) above: either create one from your running node with `create_snapshot` (recommended), or download a recent one from a provider. Note the snapshot filename — you will start from it in [Step 7](#step-7--restart-from-the-snapshot).
+
+### Step 2 — Stop nodeos
+
+```bash
+# systemd
+sudo systemctl stop nodeos
+# or, if started manually
+pkill nodeos
+```
+
+Wait until the process has fully terminated.
+
+### Step 3 — Remove the old package (if installed via apt)
+
+```bash
+sudo apt-get remove -y leap        # if upgrading from Leap
+# or
+sudo apt-get remove -y antelope-spring   # if upgrading from Spring
+```
+
+If you run `nodeos` from a versioned local path (e.g. `/telos/leap/<version>/nodeos` as in the node-template), you can instead keep the old binary in place and simply point your `node_config` at the new one after Step 4.
+
+### Step 4 — Install TelosZero Core
+
+Download the operator package from the [latest release](https://github.com/telosnetwork/teloszero-core/releases/latest) and install it on a supported Ubuntu host:
+
+```bash
+# Download teloszero-core_1.2.2_amd64.deb from the releases page, then:
+sudo apt-get update
+sudo apt-get install -y ./teloszero-core_1.2.2_amd64.deb
+```
+
+Verify the checksum against the value published on the release page before installing, e.g.:
+
+```bash
+sha256sum teloszero-core_1.2.2_amd64.deb
+# expected (v1.2.2):
+# 285fdfc1abde5104892d94b1f380c6d79aba35eac3413f139119ea88574c5007
+```
+
+Verify the install:
+
+```bash
+nodeos --full-version
+```
+
+<details>
+<summary>Alternative: build from source</summary>
+
+```bash
+git clone --recursive https://github.com/TelosNetwork/teloszero-core.git
+cd teloszero-core
+sudo apt-get update
+sudo apt-get install -y build-essential cmake git libcurl4-openssl-dev \
+  libgmp-dev llvm-11-dev python3-numpy file zlib1g-dev
+mkdir -p build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/lib/llvm-11 ..
+make -j "$(nproc)" package
+```
+
+On Ubuntu 20.04, install `g++-10` and pass `-DCMAKE_C_COMPILER=gcc-10 -DCMAKE_CXX_COMPILER=g++-10`. See the [repository README](https://github.com/telosnetwork/teloszero-core#build-from-source) for details.
+</details>
+
+### Step 5 — Remove the state memory file
+
+Remove **only** `shared_memory.bin`:
+
+```bash
+# default location
+rm ~/.local/share/eosio/nodeos/data/state/shared_memory.bin
+# or, with a custom data dir
+rm /path/to/your/data-dir/state/shared_memory.bin
+```
+
+Do **not** delete `blocks/`, `state-history/`, `snapshots/` or `trace/`. Optionally you may remove the `protocol_features` directory (it will be regenerated).
+
+### Step 6 — Update your configuration
+
+Apply the [common config changes](#common-configuration-changes) below, then the changes for your chosen path. Confirm no removed options remain, or `nodeos` will refuse to start.
+
+### Step 7 — Restart from the snapshot
+
+```bash
+nodeos --snapshot /path/to/snapshots/snapshot-0abc...xyz.bin \
+       --data-dir /path/to/your/data-dir \
+       --config-dir /path/to/your/config-dir \
+       [... your existing arguments ...]
+```
+
+The `--snapshot` flag is only needed on the **first** launch after the upgrade; remove it from subsequent restarts. If you use the [node-template](https://github.com/telosnetwork/node-template) scripts, pass `./start.sh --snapshot /path/to/snapshot.bin`.
+
+Then [verify the node](#verification-and-health-checks).
+
+---
+
+## Common configuration changes
+
+These apply to **all** exchange API nodes regardless of history profile.
+
+### Remove options that were dropped in Spring/Leap 5
+
+`nodeos` will **not start** if any of these are present. Remove or comment them out:
+
+```ini
+# Removed in Spring (Savanna line):
+# producer-threads
+
+# Removed/deprecated in Leap 5.0:
+# cpu-effort-percent
+# last-block-cpu-effort-percent
+# last-block-time-offset-us
+# produce-time-offset-us
+# max-nonprivileged-inline-action-size
+# max-scheduled-transaction-time-per-block-ms
+# disable-subjective-billing
+```
+
+### Recommended API-node settings
+
+```ini
+# --- Chain API (required for exchanges) ---
+plugin = eosio::chain_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::http_plugin
+
+# Bind the HTTP API locally; put nginx/haproxy in front for TLS
+http-server-address = 127.0.0.1:8888
+access-control-allow-origin = *
+http-validate-host = false
+http-max-response-time-ms = 100      # default lowered to 15ms in Leap 5+, raise for heavy calls
+
+# Subjective billing on API nodes (recommended)
+disable-subjective-api-billing = false
+disable-subjective-p2p-billing = false
+
+# Read-only execution window (parallel read actions)
+read-only-read-window-time-us = 165000
+# read-only-threads = 8              # tune to available CPU (max 128)
+
+# Optimized compilation is auto by default in Leap 5+/Spring
+# eos-vm-oc-enable = auto
+
+# State/DB sizing — size generously for an exchange node
+chain-state-db-size-mb = 32768
+```
+
+:::note
+`producer_api_plugin` is only needed to *take snapshots*. If it was not part of your normal configuration, disable it again after you have your snapshot.
+:::
+
+### Network reference
+
+```ini
+# --- Telos Mainnet ---
+chain-id = 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
+
+# --- Telos Testnet ---
+# chain-id = 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
+```
+
+Genesis files for both networks are included in the [node-template](https://github.com/telosnetwork/node-template) repo (and in the TelosZero Core `genesis/` directory).
+
+### A minimal `config.ini` for an exchange API node
+
+An API node needs very little. This lean **mainnet** config is enough to run and serve the chain API — set `agent-name`, append your [P2P peers](#appendix-current-mainnet-p2p-peers), and start:
+
+```ini
+# API HTTP port (put nginx/haproxy + SSL in front)
+http-server-address = 0.0.0.0:8888
+# P2P port (TCP only, no proxy/SSL)
+p2p-listen-endpoint = 0.0.0.0:9876
+agent-name = "your-exchange-telos-api"
+
+chain-id = 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
+chain-state-db-size-mb = 65536        # size to your RAM
+access-control-allow-origin = *
+http-validate-host = false
+
+plugin = eosio::http_plugin
+plugin = eosio::chain_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::net_plugin
+plugin = eosio::producer_plugin
+
+# Append your peers here (see appendix), e.g.:
+# p2p-peer-address = telos.caleos.io:9877
+# p2p-peer-address = telos.eosrio.io:8092
+```
+
+That is all a chain-API ([Path A](#path-a-api-node-without-full-history)) node requires. For **State History / Hyperion**, add the [Path B](#path-b-api-node-with-full-history) plugin block. For optional performance and billing tuning (`read-only-read-window-time-us`, `disable-subjective-*-billing`, etc.), see [Recommended API-node settings](#recommended-api-node-settings). To take snapshots, temporarily enable `eosio::producer_api_plugin` behind a proxy that filters `/v1/producer/`.
+
+:::caution
+Do not carry over `producer-threads` or any [option removed in Spring/Leap 5](#remove-options-that-were-dropped-in-springleap-5) — `nodeos` will refuse to start. For **testnet**, use `chain-id = 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f` with testnet peers/genesis.
+:::
+
+The full annotated reference is the official [node-template `config.ini`](https://github.com/telosnetwork/node-template/blob/master/config.ini).
+
+---
+
+## Path A: API node *without* full history
+
+Use this profile if your exchange only needs to submit transactions, read balances/tables, and confirm irreversibility. It is the smallest and fastest option.
+
+### Configuration
+
+A Path A node is just the [minimal `config.ini`](#a-minimal-configini-for-an-exchange-api-node) above: the chain-API plugins with **no** `state_history_plugin`. No special block-log options are needed.
+
+```ini
+# Chain API only — do NOT load eosio::state_history_plugin
+plugin = eosio::http_plugin
+plugin = eosio::chain_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::net_plugin
+plugin = eosio::producer_plugin
+```
+
+### Operational notes
+
+- **Confirming deposits:** poll `v1/chain/get_info` for `last_irreversible_block_num`, and confirm each incoming transfer's block number is `<=` LIB before crediting.
+- **Reading balances:** use `v1/chain/get_currency_balance` (code `eosio.token`, symbol `TLOS`) or `get_table_rows` against `eosio.token`/`accounts`.
+- **Submitting withdrawals:** use `v1/chain/push_transaction` / `send_transaction`.
+- This node **cannot** answer historical `get_actions` / `v1/history` queries. If you rely on action history from your own infrastructure, use **Path B**.
+
+### Sync
+
+Start from a snapshot (Step 7) and sync from the [current peers](#appendix-current-mainnet-p2p-peers). Because it starts from a recent snapshot and serves no State History, this node reaches head quickly and stays lightweight.
+
+---
+
+## Path B: API node *with* full history
+
+Use this profile if your exchange reconstructs deposit/withdrawal history directly from your own node — for example feeding a **Hyperion** deployment, a custom indexer, or querying State History (SHiP) directly.
+
+### Configuration
+
+```ini
+# --- State History (SHiP) ---
+plugin = eosio::state_history_plugin
+state-history-dir = /path/to/state-history
+trace-history = true
+chain-state-history = true
+state-history-endpoint = 0.0.0.0:18999   # SHiP websocket (consumed by Hyperion/indexers)
+
+# If this node supports IBC / finality data consumers, also set:
+# finality-data-history = true
+```
+
+The full block log from genesis is kept by default — no extra block-log option is required. Keep your existing `blocks/` directory in place across the upgrade.
+
+### Important: SHiP log compression was removed
+
+Starting with Spring, **built-in State History log compression is disabled**, and TelosZero Core inherits this. If you run SHiP, implement your own compression at the storage layer — most operators use **ZFS with LZ4** compression on the `state-history` dataset. SHiP logs written by Leap 4+ and Spring remain compatible and do **not** need regenerating.
+
+### Preserving history across the upgrade
+
+- Keep your existing `blocks/` and `state-history/` directories in place. Only `shared_memory.bin` is removed (Step 5).
+- After restarting from the snapshot, `nodeos` rebuilds state and continues appending to your existing block and SHiP logs.
+- If you are building a **new** full-history node from scratch, either replay from genesis (`--genesis-json`) or obtain a **full-history snapshot/block-log** from a provider — a standard state snapshot alone will not backfill history.
+
+### `disable-replay-opts`
+
+When the state_history_plugin is enabled, `disable-replay-opts` is automatically set to `true`. Expect longer restart/replay times on full-history nodes; size CPU and I/O accordingly.
+
+---
+
+## Verification and health checks
+
+### Confirm chain identity and sync
+
+```bash
+curl -s http://127.0.0.1:8888/v1/chain/get_info
+```
+
+Check that:
+
+- `chain_id` = `4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11` (mainnet)
+- `server_version_string` reflects the TelosZero Core / Spring `v1.2.2` line
+- `head_block_num` is increasing and close to `last_irreversible_block_num`
+
+### Exercise the exchange-critical endpoints
+
+```bash
+# TLOS balance
+curl -s -X POST http://127.0.0.1:8888/v1/chain/get_currency_balance \
+  -d '{"code":"eosio.token","account":"<youraccount>","symbol":"TLOS"}'
+
+# Account details
+curl -s -X POST http://127.0.0.1:8888/v1/chain/get_account \
+  -d '{"account_name":"eosio"}'
+```
+
+### Verify State History (Path B only)
+
+The `state-history-endpoint` is a **websocket** (SHiP), not an HTTP endpoint — you cannot `curl` a chain call against it. Confirm the port is listening and that your consumer streams blocks:
+
+```bash
+# Confirm the SHiP port is open
+ss -lntp | grep 18999
+
+# Confirm history is being served (via your node's chain API)
+curl -s http://127.0.0.1:8888/v1/chain/get_info | grep -E 'block_num|id'
+```
+
+Then verify your SHiP consumer (Hyperion/indexer) connects to `ws://<host>:18999` and streams blocks without gaps.
+
+---
+
+## Rollback
+
+If the upgrade fails validation:
+
+1. Stop `nodeos`.
+2. Reinstall your previous package version (or point `node_config` back at the old versioned binary).
+3. Restore the backed-up `config.ini`.
+4. Restart from a snapshot that predates the upgrade (or from your retained block log for Path B).
+
+Because your block/SHiP logs are untouched, rollback is low-risk provided you kept the pre-upgrade snapshot.
+
+---
+
+## Appendix: current mainnet P2P peers
+
+Point-in-time list from [validators.telos.net](https://validators.telos.net/validation/latest.json). Always confirm the live list before deploying.
+
+```ini
+# Telos Mainnet P2P peers
+p2p-peer-address = telos.caleos.io:9877
+p2p-peer-address = telos.eu.eosamsterdam.net:9120
+p2p-peer-address = p2p-telos.a-dex.xyz:9976
+p2p-peer-address = p2p-telos.y-knot.io
+p2p-peer-address = node-telos.eosauthority.com:10311
+p2p-peer-address = peer1-telos.eosphere.io:9876
+p2p-peer-address = telos.eosrio.io:8092
+p2p-peer-address = telos.cryptolions.io:9871
+p2p-peer-address = p2p.telosarabia.net:9876
+p2p-peer-address = p2p.telosgermany.genereos.io:9876
+p2p-peer-address = p2p.telosunlimited.com:9876
+p2p-peer-address = p2p.theteloscope.io:9876
+p2p-peer-address = p2p2.telos.telosgreen.com:9877
+p2p-peer-address = peer-telos-mainnet.infinitybloc.io:9876
+p2p-peer-address = telosp2p.ledgerwise.io:23877
+p2p-peer-address = tlos-p2p.katalyo.com:11877
+p2p-peer-address = p2p-telos-mainnet.orbitalblock.com:9876
+p2p-peer-address = p2p.telos.eosdetroit.io:1337
+p2p-peer-address = telos.p2p.eosusa.io:9876
+p2p-peer-address = mainnet.persiantelos.com:8880
+p2p-peer-address = mainnet.smartelos.com:8880
+p2p-peer-address = p2p.bigironbp.io:9876
+p2p-peer-address = seed.telosmadrid.io:9878
+p2p-peer-address = sslapi.teloscentral.com:9876
+p2p-peer-address = p2p-mainnet.tlos.news:9876
+```
+
+---
+
+## Support and resources
+
+- **TelosZero Core:** <https://github.com/telosnetwork/teloszero-core>
+- **Telos validator / endpoints dashboard:** <https://validators.telos.net/>
+- **Node template:** <https://github.com/telosnetwork/node-template>
+- **Telos docs:** <https://docs.telos.net/>
+- **Telos GitHub:** <https://github.com/telosnetwork>
+- **Developer Telegram:** [Telos Zero / Dapps development](https://t.me/dappstelos)
+
+For the general (non-exchange) node walkthrough and the earlier Leap 5.0 migration notes, see [Run a Non Block Producing Node](https://docs.telos.net/nodes/non-bp-nodes/run_a_telos_node/).
