@@ -376,15 +376,15 @@ Use this profile if your exchange only needs to submit transactions, read balanc
 
 ### Configuration
 
-```ini
-# Do NOT load the state_history_plugin
-# Save disk by not keeping a full block log:
-block-log-retain-blocks = 0          # 0 = disable the block log (blocks.log removed after startup)
-# Or keep a rolling window instead, e.g. ~2 days of blocks (2 blocks/sec):
-# block-log-retain-blocks = 345600   # prune to the N most recent blocks
+A Path A node is just the [minimal `config.ini`](#a-minimal-configini-for-an-exchange-api-node) above: the chain-API plugins with **no** `state_history_plugin`. No special block-log options are needed.
 
-# Keep transaction traces available briefly for confirmations
-# (chain_api_plugin exposes get_transaction_status without full history)
+```ini
+# Chain API only — do NOT load eosio::state_history_plugin
+plugin = eosio::http_plugin
+plugin = eosio::chain_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::net_plugin
+plugin = eosio::producer_plugin
 ```
 
 ### Operational notes
@@ -396,7 +396,7 @@ block-log-retain-blocks = 0          # 0 = disable the block log (blocks.log rem
 
 ### Sync
 
-Start from a snapshot (Step 7). Sync from the [current peers](#appendix-current-mainnet-p2p-peers). A pruned API node reaches head quickly because it does not replay or retain full history.
+Start from a snapshot (Step 7) and sync from the [current peers](#appendix-current-mainnet-p2p-peers). Because it starts from a recent snapshot and serves no State History, this node reaches head quickly and stays lightweight.
 
 ---
 
@@ -416,13 +416,9 @@ state-history-endpoint = 0.0.0.0:18999   # SHiP websocket (consumed by Hyperion/
 
 # If this node supports IBC / finality data consumers, also set:
 # finality-data-history = true
-
-# --- Full block log from genesis ---
-# Do NOT set block-log-retain-blocks on a full-history node.
-# Omit it entirely to keep the complete block log from genesis (the default).
-#   block-log-retain-blocks = 0    -> DISABLES the block log (blocks.log removed after startup)
-#   block-log-retain-blocks = N>0  -> prunes the block log to the N most recent blocks
 ```
+
+The full block log from genesis is kept by default — no extra block-log option is required. Keep your existing `blocks/` directory in place across the upgrade.
 
 ### Important: SHiP log compression was removed
 
