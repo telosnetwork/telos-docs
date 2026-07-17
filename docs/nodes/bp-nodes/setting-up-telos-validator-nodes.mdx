@@ -1,473 +1,263 @@
 ---
-title: 'Setting up a Telos Block Producer Node'
+title: 'Set Up a Telos Block Producer'
 displayed_sidebar: devBar
-description: This section describes all the steps needed to set up a Telos Block Producer
+description: Configure, start, register, and verify a TelosZero block producer after Savanna activation.
 sidebar_position: 3
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
 
-# Setting up a Telos Block Producer Node
+# Set Up a Telos Block Producer
 
-## Run Nodeos
+This guide configures a new or replacement block producer on a Telos network where Savanna instant finality is already active.
 
-`nodeos` generally runs in 2 modes:
+A production BP has two separate signing responsibilities:
 
-### A. Producing/Active mode
+- a **K1 block-signing key** signs blocks produced during the BP's scheduled rounds;
+- a **BLS finalizer key** votes on blocks so the network can form quorum certificates and finalize them.
 
-`Producing Validator Nodes` are configured for block production. They connect to the peer-to-peer (p2p) network and actively produce new blocks. Loose transactions are also validated and relayed. On mainnet, Producing Validator Nodes only produce blocks if their assigned block producer is part of an active schedule.
+The finalizer is part of the producer's `nodeos` process. It is not a separate daemon.
 
-> NOTE: System contracts required - These instructions assume you want to launch a producing validator node on a network with system contracts loaded. These instructions will not work on a default development node using native functionality, or one without system contracts loaded.
+## Before you begin
 
-#### Goal
+Complete these prerequisites:
 
-This section describes how to set up a producing node within the Telos network. A producing node, as its name implies, is a node that is configured to produce blocks on the Telos blockchain. This functionality is provided through the producer\_plugin as well as other Nodeos Plugins.
+- [Review the producer system requirements](/nodes/bp-nodes/node-system-requirements/).
+- [Install TelosZero Core](/nodes/bp-nodes/installing-node-software/).
+- Obtain a registered Telos account for the BP.
+- Keep the account owner and active keys on a separate control/signing host. Do not store them on the producer.
+- Generate a dedicated K1 block-signing key. Never use the BP account's active key to sign blocks.
+- Prepare at least two private relay/sentry paths to the public Telos P2P network.
+- Publish the BP's `chains.json` and `bp.json` metadata over HTTPS.
 
-**nodeos plugins**
+:::warning Do not expose the producer
+The producer HTTP API should bind only to localhost. Its P2P listener should be reachable only by the BP's private relays or explicitly allowed peers. Run public API, SHiP, and history workloads on separate nodes.
+:::
 
-* Plugins extend the core functionality implemented in `nodeos`. Some plugins are mandatory, such as `chain_plugin`, `net_plugin`, and `producer_plugin`, which reflect the modular design of `nodeos`. The other plugins are optional as they provide nice-to-have features, but are non-essential for the node's operation.
-* The list of specific plugins is as follows:
-  * `blockvault_client_plugin`
-  * `chain_api_plugin`
-  * `chain_plugin`
-  * `db_size_api_plugin`
-  * `history_api_plugin`
-  * `history_plugin`
-  * `http_client_plugin`
-  * `http_plugin`
-  * `login_plugin`
-  * `net_api_plugin`
-  * `net_plugin`
-  * `producer_plugin`
-  * `state_history_plugin`
-  * `trace_api_plugin`
-  * `txn_test_gen_plugin`
+## 1. Prepare BP metadata
 
-> Nodeos is modular: Plugins add incremental functionality to `nodeos`. Unlike runtime plugins, nodeos plugins are built at compile-time.
+Host `chains.json` and `bp.json` under the base URL you will register on-chain. Include the BP organization, location, public API endpoints, public P2P endpoints, and producer information. Follow the [BP metadata standard](https://github.com/eosrio/bp-info-standard) and validate the published files as JSON.
 
-#### Pre-requisites
+The registered URL is the base website URL, not the full path to `bp.json`.
 
-* Install the [Leap software](/nodes/bp-nodes/installing-node-software) before starting this section.
-* It is assumed that `nodeos`, `cleos`, and `keosd` are accessible through the path. If you built Leap using shell scripts, make sure to run the Install Script.
-* Know how to pass Nodeos options to enable or disable functionality.
-
-#### Steps
-
-Please follow the steps below to set up a producing node:
-
-1. Local Wallet
-2. Create your `bp.json` for your Telos validator
-3. Register your account as a producing validator
-4. Set Producer Name
-5. Set the Producer's signature-provider
-6. Define a peer list
-7. Load the Required Plugins
-
-**1. Local Wallet**
-
-**a. Create Telos Wallet locally. Record the password and keep secure.**
-
-```
-cleos wallet create -n <wallet_name> --to-console
-<!-- OR -->
-cleos wallet create -n <wallet_name> --file <filename_with_extension>
+```text
+Registered URL: https://bp.example
+Metadata:       https://bp.example/bp.json
 ```
 
-**b. Unlock EOS Wallet. Paste your wallet password**
+The [Telos validator dashboard](https://validators.telos.net/) discovers public API and P2P endpoints from this metadata. It cannot inspect the private producer host.
 
-```
-cleos wallet unlock -n <wallet_name> --password <wallet_password>
-```
+## 2. Configure the private producer
 
-**c. Account creation:**
+Create `/etc/telos/mainnet-primary/config.ini` and replace every placeholder:
 
-* M-1: Use services like [Telos account creator](https://app.telos.net/accounts/add) to create your account.
-* M-2: Using CLI
+```ini
+# Private management API only
+http-server-address = 127.0.0.1:8888
+http-validate-host = false
 
-```
-cleos -u <api_endpoint> system newaccount --stake-net <telos_net_amount> --stake-cpu <telos_cpu_amount> --buy-ram-kbytes <telos_ram_amount> <telos_existing_account_name> <telos_existing_account_name> <owner-publickey> <active-publickey>
-```
+# Bind this to a private interface reachable by your relays
+p2p-listen-endpoint = <PRIVATE_PRODUCER_IP>:9876
+agent-name = "<BP_ACCOUNT>-producer"
 
-**d. Load new account private key into your wallet**
+# The TelosZero 1024 MiB default is too small for current Telos state.
+chain-state-db-size-mb = 32768
+protocol-features-dir = /var/lib/telos/mainnet-primary/protocol_features
 
-```
-cleos wallet import -n <wallet_name> <privkey>
-```
-
-**2. Create your bp.json for your Telos validator**
-
-This will be used by voting portals and websites to identify validators. The `bp.json` contains location info for your Block Validator, nodes, and also contains other identifiable information such as your Block Producer public key.
-
-For instance, [http://yourwebsite.com/bp.json](http://yourwebsite.com/bp.json) When you register your validator, the URL field should be filled with [http://yourwebsite.com](http://yourwebsite.com). Do not put the `bp.json` file in the URL.
-
-For instance, for Aloha, the `bp.json` is located at [https://www.alohaeos.com/bp.json](https://www.alohaeos.com/bp.json), the URL to locate this will be [https://www.alohaeos.com](https://www.alohaeos.com).
-
-* [Template for the standard bp\_info.json format for the EOS Mainnet.](https://github.com/eosrio/bp-info-standard)
-* You can find most Validator's bp.json on their websites.
-* Please conform to the [JSON format standard](https://www.w3schools.com/js/js\_json\_syntax.asp).
-* Here is an excellent [JSON validator](https://jsonformatter.org).
-
-**3. Register your account as a producing validator**
-
-In order for your account to be eligible as a producing validator, you will need to register the account as a producing validator:
-
-```
-<!-- cleos -u <api_endpoint> system regproducer <producer_account_name> <producer_signature_public_key> <producer_website> <producer-geo-location> -->
-cleos -u http://api.main.alohaeos.com system regproducer alohaeosprod EOS87wJkSDXLDVVoJUaBYd4tjg8F8chMWY5nPo8Mb5F919TpbjJvz https://www.alohaeos.com Honolulu
-```
-
-> NOTE: separate key pair used only for signing blocks and can not perform any other operation.
->
-> If you currently have your active key listed in your `config.ini` for signing blocks — you need to stop it and replace it with a separate Signature key
-
-Just follow this in order to replace the existing active (or insecure key) with a separate signature key
-
-* Create a new key pair using `cleos create key --to-console`
-* Replace the signature provider record in your `config.ini` with the new key: `signature-provider = EOS-SIGNATURE-PUBLIC-KEY=KEY:SIGNATURE-PRIVATE-KEY`
-* Call regproducer command with the new signature key: `cleos system regproducer [PRODUCER-NAME] [EOS-SIGNATURE-PUBLIC-KEY] {PRODUCER_URL] [COUNTRY_CODE]`
-
-**4. Set Producer Name**
-
-Set the `validator_name` option in `config.ini` to your account, as follows:
-
-```
-# config.ini:
-
-# ID of producer controlled by this node (e.g. inita; may specify multiple times) (eosio::producer_plugin)
-producer-name = alohaeosprod
-```
-
-**5. Set the Producer's signature-provider**
-
-You will need to set the separate private key for your validator. The public key should have an authority for the validator account defined above.
-
-`signature-provider` is defined with a 3-field tuple:
-
-* `public-key` - A valid EOSIO public key in form of a string.
-* `provider-spec` - It's a string formatted like :
-* `provider-type` - KEY or KEOSD
-
-**Using a Key:**
-
-```
-# config.ini:
-
-signature-provider = PUBLIC_SIGNING_KEY=KEY:PRIVATE_SIGNING_KEY
-
-//Example
-//signature-provider = EOS51PsUQXRKphEBPBP8iH8ZRGNvyqJ13hbR8yXGSPKEf5TQH27TF=KEY:5KgV1HsxEm3qKYdLaUgpdZvJcAV2AA7zVDJYBL7nVoE4mdcqQR1
-```
-
-**Using Keosd:**
-
-```
-# config.ini:
-
-signature-provider = KEOSD:<data>   
-
-//Example
-//EOS51PsUQXRKphEBPBP8iH8ZRGNvyqJ13hbR8yXGSPKEf5TQH27TF=KEOSD:https://127.0.0.1:88888
-```
-
-**6. Define a peers list**
-
-```
-# config.ini:
-
-# Default p2p port is 9876
-p2p-peer-address = 195.201.82.181:9876
-p2p-peer-address = 47.52.71.18:9876
-p2p-peer-address = 207.180.220.203:9876
-p2p-peer-address = 149.28.254.141:9876
-p2p-peer-address = p2p-telos.blckchnd.com:19876
-p2p-peer-address = p2p.blindblocart.io:9877
-p2p-peer-address = telos.caleos.io:9880
-p2p-peer-address = p2p.telos.cryptosuvi.io:2222
-```
-
-For more, visit here for [Telos Mainnet](https://github.com/telosnetwork/api-p2p-nodes/blob/master/TelosMainNet.csv) & [Telos Testnet](https://github.com/telosnetwork/api-p2p-nodes/blob/master/TelosTestnet.csv)
-
-**7. Load the Required Plugins**
-
-In your `config.ini`, confirm the following plugins are loading or append them if necessary.
-
-```
-# config.ini:
-
-plugin = eosio::chain_plugin
-plugin = eosio::producer_plugin
-```
-
-### B. Non-Producing or Standby mode
-
-`Non-Producing Validator Nodes` connect to the peer-to-peer (p2p) network but do not actively produce new blocks; they are useful for acting as proxy nodes, relaying API calls, validating transactions, broadcasting information to other nodes, etc. `Non-Producing Validator Nodes` are also useful for monitoring the blockchain state.
-
-#### Goal
-
-This section describes how to set up a non-producing validator node within the Telos network. A non-producing validator node is a node that is not configured to produce blocks, instead, it is connected and synchronized with other peers from the Telos blockchain, exposing one or more services publicly or privately by enabling one or more Nodeos Plugins, except the producer\_plugin.
-
-#### Pre-requisites
-
-* Install the [EOSIO software](https://github.com/EOSIO/eos) before starting this section.
-* It is assumed that `nodeos`, `cleos`, and `keosd` are accessible through the path. If you built Leap using shell scripts, make sure to run the Install Script.
-* Know how to pass Nodeos options to enable or disable functionality.
-
-#### Steps
-
-Please follow the steps below to set up a non-producing node:
-
-1. Set Peers
-2. Enable one or more available plugins
-
-**1. Set Peers**
-
-You need to set some peers in your config ini, for example:
-
-```
-# config.ini:
-
-# Default p2p port is 9876
-p2p-peer-address = 195.201.82.181:9876
-p2p-peer-address = 47.52.71.18:9876
-p2p-peer-address = 207.180.220.203:9876
-p2p-peer-address = 149.28.254.141:9876
-p2p-peer-address = p2p-telos.blckchnd.com:19876
-p2p-peer-address = p2p.blindblocart.io:9877
-p2p-peer-address = telos.caleos.io:9880
-p2p-peer-address = p2p.telos.cryptosuvi.io:2222
-```
-
-For more, visit here for [Telos Mainnet](https://github.com/telosnetwork/api-p2p-nodes/blob/master/TelosMainNet.csv) & [Telos Testnet](https://github.com/telosnetwork/api-p2p-nodes/blob/master/TelosTestnet.csv)
-
-Or you can include the peer in as a boot flag when running `nodeos`, as follows:
-
-```
-nodeos ... --p2p-peer-address=106.10.42.238:9876
-```
-
-**2. Enable one or more available plugins**
-
-Each available plugin is listed and detailed in the Nodeos Plugins section. When `nodeos` starts, it will expose the functionality provided by the enabled plugins it was started with. For example, if you start `nodeos` with `state_history_plugin` enabled, you will have a non-producing node that offers full blockchain history. If you start `nodeos` with `http_plugin` enabled, you will have a non-producing node which exposes the Telos RPC API. Therefore, you can extend the basic functionality provided by a non-producing node by enabling any number of existing plugins on top of it. Another aspect to consider is that some plugins have dependencies to other plugins. Therefore, you need to satisfy all dependencies for a plugin in order to enable it.
-
-## Configuration Files
-
-### Mainnet
-
-#### genesis.json
-
-```javascript
-{
- "initial_key": "EOS52vfcN43YHHU8Akh7VyfBdnDiMg15dPTELosWG9SR86ssBoU1T",
- "initial_configuration": {
-   "max_transaction_delay": 3888000,
-   "min_transaction_cpu_usage": 100,
-   "net_usage_leeway": 500,
-   "context_free_discount_net_usage_den": 100,
-   "max_transaction_net_usage": 524288,
-   "context_free_discount_net_usage_num": 20,
-   "max_transaction_lifetime": 3600,
-   "deferred_trx_expiration_window": 600,
-   "max_authority_depth": 6,
-   "max_transaction_cpu_usage": 5000000,
-   "max_block_net_usage": 1048576,
-   "target_block_net_usage_pct": 1000,
-   "max_generated_transaction_count": 16,
-   "max_inline_action_size": 4096,
-   "target_block_cpu_usage_pct": 1000,
-   "base_per_transaction_net_usage": 12,
-   "max_block_cpu_usage": 50000000,
-   "max_inline_action_depth": 4
- },
- "initial_timestamp": "2018-12-12T10:29:00.000"
-}
-```
-
-#### config.ini
-
-```
-###### producer plugin options - enable if running producer node
-plugin = eosio::producer_plugin
-## sig provider keys should match the key on your producer-name
-signature-provider = <pubkey>=KEY:<privkey>
-producer-name = <your unique telos account name>
-
-## additional producer plugin options can be left default
-max-transaction-time = 10000
-max-irreversible-block-age = -1
-abi-serializer-max-time-ms = 2000
-enable-stale-production = true
-pause-on-startup = false
-
-###### chain plugin options
-plugin = eosio::chain_plugin
-wasm-runtime = wabt
-reversible-blocks-db-size-mb = 340
-contracts-console = false
-## set chain-state-db-size-mb to equal the size of your RAM
-chain-state-db-size-mb = 98304
-
-###### http plugin options
+# Minimal producer plugins
 plugin = eosio::http_plugin
-http-server-address = 0.0.0.0:1880
-access-control-allow-origin = *
-access-control-allow-credentials = false
-https-client-validate-peers = 1 
-verbose-http-errors = true
-http-validate-host = 0
-## enable if using https
-# https-server-address = 0.0.0.0:443
-# https-certificate-chain-file
-
-# nodeos general config
-p2p-server-address = 0.0.0.0:9876
-p2p-listen-endpoint = 0.0.0.0:9876
-p2p-max-nodes-per-host = 1
-max-clients = 250
-connection-cleanup-period = 30
-sync-fetch-span = 100
-txn-reference-block-lag = 0
-allowed-connection = any
-agent-name = bensigcoolconfig
-
-###### additional plugins
-plugin = eosio::chain_api_plugin
-plugin = eosio::history_plugin
-
-###### p2p peer address
-p2p-peer-address = 159.69.63.222:7776
-p2p-peer-address = 109.237.25.217:3876
-p2p-peer-address = testnet.telos.caleos.io:9879
-p2p-peer-address = p2p.testnet.telos.eosdetroit.io:1337
-p2p-peer-address = telosafrique.eosnairobi.io:9376
-p2p-peer-address = telos.eosbcn.com:9876
-p2p-peer-address = testnet.telos.eosindex.io:9876
-```
-
-### Testnet
-
-#### genesis.json
-
-```javascript
-{
-"initial_key": "EOS7xyPWfh6743fhZ46zQQcXSctddoqG65d44YsyRnCJCs54mJLrH",
-"initial_configuration": {
-   "max_block_net_usage": 1048576,
-   "target_block_net_usage_pct": 1000,
-   "max_transaction_net_usage": 524288,
-   "base_per_transaction_net_usage": 12,
-   "net_usage_leeway": 500,
-   "context_free_discount_net_usage_num": 20,
-   "context_free_discount_net_usage_den": 100,
-   "max_block_cpu_usage": 5000000,
-   "target_block_cpu_usage_pct": 1000,
-   "max_transaction_cpu_usage": 150000,
-   "min_transaction_cpu_usage": 100,
-   "max_transaction_lifetime": 3600,
-   "deferred_trx_expiration_window": 600,
-   "max_transaction_delay": 3888000,
-   "max_inline_action_size": 4096,
-   "max_inline_action_depth": 4,
-   "max_authority_depth": 6
- },
-"initial_timestamp": "2019–08–07T12:00:00.000"
-}
-```
-
-#### config.ini
-
-```
-###### producer plugin options - enable if running producer node
-plugin = eosio::producer_plugin
-## sig provider keys should match the key on your producer-name
-signature-provider = <pubkey>=KEY:<privkey>
-producer-name = <your unique telos account name>
-
-## additional producer plugin options can be left default
-max-transaction-time = 10000
-max-irreversible-block-age = -1
-abi-serializer-max-time-ms = 2000
-enable-stale-production = true
-pause-on-startup = false
-
-###### chain plugin options
 plugin = eosio::chain_plugin
-wasm-runtime = wabt
-reversible-blocks-db-size-mb = 340
-contracts-console = false
-## set chain-state-db-size-mb to equal the size of your RAM
-chain-state-db-size-mb = 98304
-
-###### http plugin options
-plugin = eosio::http_plugin
-http-server-address = 0.0.0.0:1880
-access-control-allow-origin = *
-access-control-allow-credentials = false
-https-client-validate-peers = 1 
-verbose-http-errors = true
-http-validate-host = 0
-## enable if using https
-# https-server-address = 0.0.0.0:443
-# https-certificate-chain-file
-
-# nodeos general config
-p2p-server-address = 0.0.0.0:9876
-p2p-listen-endpoint = 0.0.0.0:9876
-p2p-max-nodes-per-host = 1
-max-clients = 250
-connection-cleanup-period = 30
-sync-fetch-span = 100
-txn-reference-block-lag = 0
-allowed-connection = any
-agent-name = bensigcoolconfig
-
-###### additional plugins
 plugin = eosio::chain_api_plugin
-plugin = eosio::history_plugin
+plugin = eosio::net_plugin
+plugin = eosio::producer_plugin
 
-###### p2p peer address
-p2p-peer-address=testnet2.telos.eosusa.news:59877
-p2p-peer-address=node1.testnet2.telosglobal.io:9876
-p2p-peer-address=node2.testnet2.telosglobal.io:9876
-p2p-peer-address=basho.eos.barcelona:9899
-p2p-peer-address=sslapi.teloscentral.com:9875
-p2p-peer-address=145.239.133.188:5566
-p2p-peer-address=testnet.telos.eclipse24.io:6789
-p2p-peer-address=testnet2.telos.eosdetroit.io:1337
-p2p-peer-address=basho-p2p.telosuk.io:19876
-p2p-peer-address=telos-testnet.atticlab.net:7876
-p2p-peer-address=testnet.eossweden.eu:8022
-p2p-peer-address=testnet.telos.cryptosuvi.io:2223
-p2p-peer-address=nickfury.tlos.goodblock.io:9876
-p2p-peer-address=telosapi.eosmetal.io:59877
-p2p-peer-address=207.148.6.75:9877
-p2p-peer-address=p2p.testnet.telosgermany.io
-p2p-peer-address=176.9.86.214:9877
-p2p-peer-address=telos-testnet-b.eosphere.io:9876
-p2p-peer-address=testnet.telos.africa:9875
-p2p-peer-address=p2p.testnet.telosgreen.com:9876
-p2p-peer-address=testnet2p2p.telosarabia.net:9876
-p2p-peer-address=peer.tlostest.alohaeos.com:9876
-p2p-peer-address=157.230.29.117:9876
+# Producer identity and the dedicated K1 block-signing key
+producer-name = <BP_ACCOUNT>
+signature-provider = <PUB_K1_BLOCK_KEY>=KEY:<PVT_K1_BLOCK_KEY>
+
+# Savanna finalizer; generate these values in the next guide
+signature-provider = <PUB_BLS_FINALIZER_KEY>=KEY:<PVT_BLS_FINALIZER_KEY>
+vote-threads = 4
+finalizers-dir = /var/lib/telos/finalizers/mainnet-primary
+production-pause-vote-timeout-ms = 6000
+
+# Connect only to BP-controlled relay/sentry nodes
+p2p-peer-address = <PRIVATE_RELAY_A>:9876
+p2p-peer-address = <PRIVATE_RELAY_B>:9876
 ```
 
-## Frequently Asked Questions (FAQs)
+`chain-id` is not a valid `nodeos` configuration option. The chain is selected
+by the node's genesis or snapshot state. Verify the resulting `chain_id` through
+`get_info` after startup as shown below.
 
-#### Q. How does a Validator create a new account on Telos Blockchain?
+The 32768 MiB chain-state capacity is a reviewed starting point for a host with
+the recommended 64 GB RAM. Keep it below usable physical memory and raise it
+deliberately as measured chain state grows.
 
-#### A. There are 2 ways to create an account on Telos Blockchain:
+Protect the file because it contains signing material:
 
-a. [Telos account creator](https://app.telos.net/accounts/add) b. [Using CLEOS](/zero/developer-environment/cleos)
+```bash
+sudo chown root:telos /etc/telos/mainnet-primary/config.ini
+sudo chmod 0640 /etc/telos/mainnet-primary/config.ini
+```
 
-#### Q. What is the difference between Telos Mainnet and Testnet?
+The explicit `protocol-features-dir` keeps nodeos's writable generated protocol
+feature files under the instance data directory, so the key-bearing
+configuration can remain root-owned and read-only to the service account.
 
-#### A. The differences are as follows:
+Do not copy any of these legacy settings from the old BP guide:
 
-a. The mainnet of a blockchain launches when the protocol is fully developed and is the network where the project's functionalities, such as transactions with the native tokens, are carried out. Here is where transactions are being broadcasted, verified, and recorded on a distributed ledger technology. Whereas the testnet is a safe, separate network where developers carry out tests in the code without risking the main blockchain. The Telos Testnets are a sandbox for testing newly implemented features, finding bugs within the network and developing DApps. a. Testnet is for testing code updates, other functionalities, bug identification, new projects and program development, among many other uses. b. People associate a testnet with the initial developing of a blockchain where all the codes run, and we test everything before the final deployment of the protocol to the mainnet. c. the Telos testnets have one prominent advantage over the other testnets: it is a duplicate of the mainnet so it includes all its smart contracts and functionalities in the testnets. Because of this, developers and BPs obtain complete, accurate results when they run their tests, while reducing the work they have to do before running them. e. Testnet is designed to be as close to the code/features of the Telos Mainnet, with exception to any new innovations being tested in preparation for deployment on Mainnet.
+```ini
+# Invalid, removed, or unsafe for a current production BP:
+# wasm-runtime = wabt
+# plugin = eosio::history_plugin
+# producer-threads = ...
+# enable-stale-production = true
+```
 
-#### Q. When a new upgrade or anything different will be tested before launch, what test strategies the Telos Validators follow?
+`vote-threads = 4` is the producer default in TelosZero Core, but keep it explicit so the intended finalizer role is auditable. A relay that must forward votes also needs an explicit non-zero value; see [Configure vote relays](/nodes/bp-nodes/finalizer-setup/#configure-vote-relays).
 
-#### A. Telos Validators follow a 4-tier test strategy, as it allows “to properly test/vet things at each respective level, and as it progresses through the tiers, additional testing/testers stress-test the system until its final deployment to the Telos Mainnet.” The stages are:
+Keep `production-pause-vote-timeout-ms = 6000`. Setting it to `0` disables the
+guard that pauses block production when recent finalizer votes disappear.
 
-* Internal Dev Testing: closed-loop testing of all code changes before presenting to any public tier.
-* Stagenet Testing: initial selected access, testing ran dedicated nodes.
-* Testnet Testing: this is where most public testing of features will occur before completing deployment to Mainnet. Code changes/activation at this level require 15/21 approval of the Testnet BPs.
-* Mainnet Deployment: once all testing has been completed, a deployment date agreed upon, a 15/21 BP approval is needed to activate all code changes/features on the Mainnet.
+## 3. Add logging
+
+Create `/etc/telos/mainnet-primary/logging.json` using your normal centralized logging policy. At minimum, retain `nodeos`, P2P, producer, and vote/finality logs long enough to investigate missed blocks, missed votes, forks, and failovers.
+
+If `logging.json` is stored in the config directory, `nodeos` loads it automatically.
+
+## 4. Create a systemd service
+
+Create `/etc/systemd/system/telos-nodeos@.service`:
+
+```ini
+[Unit]
+Description=TelosZero Core node (%i)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=telos
+Group=telos
+UMask=0077
+WorkingDirectory=/var/lib/telos/%i
+ExecStart=/usr/bin/nodeos --config-dir=/etc/telos/%i --data-dir=/var/lib/telos/%i
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=300
+LimitNOFILE=1048576
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Load the service definition, but do not start it until the finalizer key is present in `config.ini`:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable telos-nodeos@mainnet-primary
+```
+
+## 5. Generate and configure the finalizer
+
+Complete the first two sections of [Initial finalizer setup](/nodes/bp-nodes/finalizer-setup/#initial-finalizer-setup) now:
+
+1. generate a unique BLS key and proof of possession for this instance;
+2. place its `signature-provider` entry in `config.ini`;
+3. confirm the persistent `finalizers-dir` permissions.
+
+Then return here to start and sync the node. Register the BP account before submitting `regfinkey`.
+
+The first `regfinkey` for a producer becomes that producer's active finalizer key automatically. Do not run `actfinkey` for an initial key. `actfinkey` is for switching to a second, already registered key.
+
+## 6. Start and sync the node
+
+:::warning Replacing an already scheduled producer
+Start the replacement with `pause-on-startup = true`. This pauses K1 block
+production while still allowing finalizer voting. Prove the old K1 signer is
+stopped and fenced, and use a new BLS key with its own safety history, before
+removing the pause and restarting. Never enable the same K1 key on two hosts at
+once, and never share or reuse a BLS key between hosts.
+:::
+
+For a new data directory, perform the one-time snapshot start from the [installation guide](/nodes/bp-nodes/installing-node-software/#5-first-start-from-the-snapshot). For subsequent starts:
+
+```bash
+sudo systemctl start telos-nodeos@mainnet-primary
+sudo systemctl status telos-nodeos@mainnet-primary
+sudo journalctl -u telos-nodeos@mainnet-primary -f
+```
+
+Confirm the local node is on mainnet and at head:
+
+```bash
+curl -s http://127.0.0.1:8888/v1/chain/get_info \
+  | jq '{chain_id, server_full_version_string, head_block_num, last_irreversible_block_num, head_block_time, head_block_producer}'
+```
+
+Required checks:
+
+- `chain_id` exactly matches the Telos mainnet chain ID;
+- `head_block_num` advances continuously;
+- `head_block_time` is current;
+- the node remains close to the network head and irreversible block;
+- logs show no key parsing, finalizer safety, fork, or persistent P2P errors.
+
+Do not register the first finalizer key until this process is running with the BLS key loaded.
+
+## 7. Register the producer
+
+Run governance transactions from the separate control/signing host. Set the public values:
+
+```bash
+export RPC=https://mainnet.telos.net
+export BP_ACCOUNT=<BP_ACCOUNT>
+export BLOCK_SIGNING_PUBLIC_KEY=<PUB_K1_BLOCK_KEY>
+export BP_URL=https://bp.example
+export BP_LOCATION=<UINT16_LOCATION>
+```
+
+Register or update the producer:
+
+```bash
+cleos -u "$RPC" system regproducer \
+  "$BP_ACCOUNT" \
+  "$BLOCK_SIGNING_PUBLIC_KEY" \
+  "$BP_URL" \
+  "$BP_LOCATION" \
+  -p "$BP_ACCOUNT@active"
+```
+
+`BP_LOCATION` is a numeric `uint16` value. A city name is invalid. Use the value chosen for the BP's published location policy; use `0` only when no location value is being declared.
+
+Confirm the producer row:
+
+```bash
+cleos -u "$RPC" system listproducers -l 200 \
+  | grep "$BP_ACCOUNT"
+```
+
+## 8. Register and verify the finalizer
+
+Return to [Register the first finalizer key](/nodes/bp-nodes/finalizer-setup/#5-register-the-first-finalizer-key). The first registration automatically selects that key in the contract table. Complete the table, native-policy, vote, relay, and backup checks before the BP enters the active schedule.
+
+## 9. Production readiness checklist
+
+Before accepting an active schedule slot, confirm all of the following:
+
+- [ ] The producer runs the approved TelosZero Core artifact and checksum.
+- [ ] Mainnet chain ID, head, and irreversible block are correct and advancing.
+- [ ] Account owner/active keys are absent from the producer host.
+- [ ] The K1 block-signing key is dedicated to block production.
+- [ ] The BLS key is unique to this `nodeos` instance and active on-chain.
+- [ ] `vote-threads = 4` is set on the producer and every required relay hop.
+- [ ] `production-pause-vote-timeout-ms = 6000` remains enabled.
+- [ ] `finalizers-dir` is persistent, local, mode `0700`, and not on `tmpfs`.
+- [ ] No `safety.dat` or BLS key was copied from another host.
+- [ ] At least two independent relay paths carry blocks, transactions, and votes.
+- [ ] Producer HTTP and P2P ports are not exposed to the public internet.
+- [ ] The backup producer has its own pre-generated and pre-registered BLS key and starts with K1 production paused.
+- [ ] Block production, missed votes, finality, peer count, clock, disk, and process health are monitored.
+- [ ] Published `chains.json`/`bp.json`, API, SSL, and public P2P endpoints pass [validators.telos.net](https://validators.telos.net/).
+
+The public validator checker cannot prove private key custody, producer configuration, relay vote propagation, or the integrity of `safety.dat`; those remain operator responsibilities.

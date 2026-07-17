@@ -1,50 +1,131 @@
 ---
-title: "Node System Requirements"
+title: 'Block Producer System Requirements'
 displayed_sidebar: devBar
-description: >-
-    System requirements to run a 
-    node on Telos
-sidebar_position: 4
-hide_table_of_contents: true
+description: Infrastructure, security, storage, relay, and monitoring requirements for a Telos block producer and Savanna finalizer.
+sidebar_position: 5
+hide_table_of_contents: false
 ---
 
-# Node System Requirements
+# Block Producer System Requirements
 
-This document outlines the technical requirements for running various types of nodes on Telos, with a focus on optimizing performance and reliability within the Telos Blockchain Network.
+A post-Savanna BP is responsible for both scheduled block production and continuous finalizer voting. Size and secure the complete producer path, not only the `nodeos` process.
 
-## General Recommendations
+## Required topology
 
-### CPU Speeds for API Nodes
+A production BP should operate these separate roles:
 
-It is recommended not to exceed CPU speeds of 5 GHz for API nodes. Higher speeds may cause discrepancies in subjective billing, potentially leading to situations where transactions are initially accepted but ultimately rejected by nodes with slower CPUs.
+| Role | Purpose | Public exposure | Finalizer configuration |
+|---|---|---|---|
+| Primary producer | Produces blocks and signs finalizer votes | Private only | Unique BLS key, `vote-threads = 4`, persistent `finalizers-dir` |
+| Backup producer | Fully synced failover, with block production paused until handoff | Private only | Different pre-registered BLS key, its own safety state, and `pause-on-startup = true` |
+| Relay/sentry nodes | Isolate producers and carry P2P blocks, transactions, and votes | P2P as required | No BLS key; `vote-threads = 4` on every vote path |
+| Control/signing host | Holds BP account authority and submits on-chain actions | Restricted administration | No `nodeos` finalizer |
+| Public API/SHiP nodes | Serve applications, indexers, and public RPC | Public through a hardened proxy | No BLS key; no vote threads unless intentionally on a vote path |
 
-### Use of tmpfs File System
+Use at least two independent relay paths. Avoid a single firewall, provider, switch, transit link, or relay that can isolate the producer from peer finalizers.
 
-All nodes are advised to utilize the tmpfs file system for their node state folder. This approach requires the mounting of the node state folder onto a tmpfs partition, necessitating a large swap partition and at least 32GB of RAM. The tmpfs system operates entirely in virtual memory, ensuring fast access to data but also meaning that data is not persistently stored on disk and will be lost if the tmpfs instance is unmounted.
+## Producer hardware baseline
 
-### Storage for State History Nodes
+These are operational planning baselines, not consensus constants. Benchmark the approved TelosZero build and leave capacity for peak transaction load, replay, vote processing, monitoring, and failover.
 
-For nodes handling significant State History requests, it's recommended to use SSD or NVMe drives to accommodate the high throughput and storage access speed required.
+| Resource | Production baseline |
+|---|---|
+| CPU | Modern high-clock x86-64 CPU with at least 8 dedicated cores; reserve capacity for four vote threads and chain processing |
+| Memory | 64 GB ECC RAM recommended; never configure `chain-state-db-size-mb` above usable physical memory |
+| Storage | Enterprise NVMe SSD with power-loss protection; size for chain state, blocks, snapshots, logs, and growth |
+| Network | Redundant low-latency 1 Gbit/s or better connectivity with stable public and private routes |
+| Clock | Multiple reliable NTP sources with drift alerting |
+| Power | Redundant power where available and a tested graceful-shutdown path |
+| OS | Supported Ubuntu release for the approved TelosZero package; minimal services and current security updates |
 
-## Node Configuration Requirements
+Do not co-locate public API, SHiP, Hyperion, build, or analytics workloads on the private producer.
 
-### API Node without Blocks Log
+## Persistent finalizer storage
 
-CPU: 2 cores, each >= 3.7 GHz  
-RAM: 16 GB, with an additional 16 GB swap (32GB recommended)  
-Storage: 1024 GB HDD  
-Internet Connection: 100 Mb/s  
+`finalizers-dir` contains `safety.dat`, the voting history that prevents a BLS key from voting inconsistently.
 
-### API Node with Blocks Log
+Required properties:
 
-CPU: 4 cores, each >= 3.8 GHz  
-RAM: 32 GB  
-Storage: 1024 GB HDD  
-Internet Connection: 100 Mb/s or higher  
+- local persistent storage, not `tmpfs`;
+- owned by the `nodeos` service account and mode `0700`;
+- low-latency and monitored for write, checksum, permission, and capacity failures;
+- excluded from cross-host replication and generic backup-restore automation;
+- preserved in place through ordinary restarts, replays, and state snapshot recovery.
 
-### State History Node with Blocks Log
+Do not roll `safety.dat` back, copy it to a backup producer, or reuse its BLS key on a different host. If continuity is uncertain, use a never-used replacement key and follow the [finalizer recovery procedure](/nodes/bp-nodes/finalizer-setup/#recover-from-a-missing-or-corrupt-safetydat).
 
-CPU: 4 cores, each >= 3.8 GHz  
-RAM: 32 GB  
-Storage: 2048 GB HDD  
-Internet Connection: 100 Mb/s or higher  
+Node state may use a performance-oriented filesystem, but the finalizer directory must remain durable and independent of any process that recreates or clears `state/shared_memory.bin`.
+
+## Key custody
+
+Keep these key classes separate:
+
+- **BP owner/active authorities:** offline, multisig, or a hardened control/signing system; never on the producer.
+- **K1 block-signing key:** dedicated to producer block signing; not the account active key.
+- **BLS finalizer key:** unique to one `nodeos` host; never copied to primary/backup peers.
+
+Install any `config.ini` containing `PVT_K1` or `PVT_BLS` as `root:telos`
+with mode `0640`, so the service can read but cannot rewrite it. Put the writable
+`protocol-features-dir` under the instance data directory. Prefer an
+operator-approved remote signer/HSM for K1 signing when supported. In TelosZero
+1.2.x, the BLS provider is configured with `KEY`, so protect the host and file
+accordingly.
+
+Pre-generate and register a distinct backup BLS key before it is needed. The safest recovery model is key rotation, not restoration of an old finalizer key and partial voting history.
+
+## Network and relay requirements
+
+- Bind the producer HTTP API to `127.0.0.1`.
+- Permit producer P2P only from BP-controlled relays or an explicit allowlist.
+- Carry finalizer votes across every relay hop by setting `vote-threads = 4` on those relays.
+- Maintain independent inbound and outbound P2P paths.
+- Use current peer information from [validators.telos.net](https://validators.telos.net/) or its [machine-readable validation data](https://validators.telos.net/validation/latest.json), not a copied static peer list.
+- Test block, transaction, and vote propagation; a TCP handshake alone is insufficient.
+- Rate-limit and proxy public HTTP APIs on separate nodes. Never expose `producer_api_plugin` or `net_api_plugin` directly to the internet.
+
+## Monitoring and alerting
+
+Monitor the private producer, backup, relays, and public chain independently.
+
+Required signals include:
+
+- process uptime, restarts, version, and binary checksum;
+- head block, irreversible block, and sustained LIB lag;
+- active/pending finalizer policy and tracked vote freshness;
+- strong, weak, and missing-vote patterns;
+- scheduled rounds, missed blocks, and production handoffs;
+- P2P peer count, connection churn, latency, and both relay paths;
+- CPU saturation, memory pressure, filesystem latency, disk capacity, and inode use;
+- finalizer directory write/checksum/permission errors;
+- NTP offset and host clock jumps;
+- configuration and signing-key changes;
+- unexpected on-chain finalizer actions.
+
+Alerting must reach an operator who can execute the tested key-rotation and failover runbook at any time the BP is scheduled.
+
+## Backup and failover testing
+
+At least quarterly and before any major node release:
+
+1. Confirm the backup is on the approved artifact and synced.
+2. Confirm its BLS key is registered but inactive.
+3. Confirm `pause-on-startup = true` prevents the backup from publishing with the primary's K1 key.
+4. Exercise finalizer activation and the stop-primary/unpause-backup K1 handoff on testnet.
+5. Verify votes pass through both relay paths.
+6. Rehearse snapshot recovery with a new BLS key when safety history is unavailable.
+7. Verify owner/active authority recovery without copying those keys to producer hosts.
+
+Never run the same K1 block-signing key concurrently on two unpaused producers.
+BLS keys must remain unique per host, network, and `nodeos` instance even when
+K1 production is paused.
+
+## Public metadata requirements
+
+Maintain valid HTTPS-hosted `chains.json` and `bp.json` files with current:
+
+- organization and location details;
+- public API endpoints;
+- public P2P endpoints;
+- producer account and service information.
+
+Use the [Telos validator dashboard](https://validators.telos.net/) to validate published endpoints, SSL, active schedule, contract finalizer rows, and visible node versions. Private producer settings, BLS custody, relay propagation, and `safety.dat` continuity require separate operator evidence.

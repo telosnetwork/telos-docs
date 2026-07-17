@@ -1,550 +1,234 @@
 ---
-title: 'Run a Non Block Producing Node'
+title: 'Run a Non-Block-Producing Node'
 displayed_sidebar: devBar
+description: Configure a TelosZero vote relay, read-only API, or State History node after Savanna activation.
 sidebar_position: 1
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
 
-# Run a Node
+# Run a Non-Block-Producing Node
 
-[This](https://github.com/telosnetwork/node-template)  repo contains scripts for easy management of the node, some helpful readme notes, and the P2P list for both mainnet and testnet.
+This guide covers steady-state nodes on a Telos network where Savanna instant
+finality is already active. Use it for vote relays, read-only APIs, and State
+History (SHiP) services. A backup producer is a producer-capable host and must
+instead follow the [BP setup guide](/nodes/bp-nodes/setting-up-telos-validator-nodes/)
+and [finalizer safety rules](/nodes/bp-nodes/finalizer-setup/).
 
+## Choose one role
 
-## Telos node template files
+| Role | Finalizer votes | Signing keys | Intended workload |
+| --- | ---: | --- | --- |
+| Vote relay / sentry | `vote-threads = 4` | None | Carry P2P blocks, transactions, and finalizer votes between private producers and public peers |
+| Read-only API | `vote-threads = 0` | None | Serve chain API calls behind a TLS reverse proxy |
+| SHiP | `vote-threads = 0` | None | Stream traces, chain state, and finality data to trusted indexers |
 
-To simplify the process of running a Telos node, the following example will use node template files. These examples assume you're running Ubuntu 22.04.
+Only relays on a finalizer's P2P path need vote processing. Pure API and SHiP
+nodes should not load a BLS key, `producer-name`, `producer_plugin`, or a
+`finalizers-dir`.
 
-For a local dev node, check out the [Dev setup](https://github.com/telosnetwork/node-template/blob/master/DEV_SETUP.md).
+## 1. Install TelosZero Core
 
-## Setup directories
+Follow [Install TelosZero Core](/nodes/bp-nodes/installing-node-software/) and
+verify the approved package checksum and full version. The current templates
+target [TelosZero Core 1.2.2](https://github.com/telosnetwork/teloszero-core/releases/tag/teloszero-v1.2.2).
 
-Create a directory to store nodes and binaries in, setup a log directory and set their permissions. Let's assume your user is named `telos` and you want to store everything in a directory named `/telos`.
+Do not install Leap 4/5 for a new Telos node, and do not carry forward removed
+options such as `producer-threads`, `chain-id`, `wasm-runtime = wabt`, or the
+legacy `history_plugin`.
 
-Note, if you wish to have the node keep it's logs in it's own node directory, you can skip the creation and chown of the /var/log/nodeos directory.
+## 2. Prepare an instance
 
-```shell
-sudo mkdir /telos
-sudo mkdir /var/log/nodeos
-sudo chown telos: /telos
-sudo chown telos: /var/log/nodeos
-```
-
-## Install packages
-``` shell
-sudo apt install schedtool
-```
-
-## Download this template
-To create a new node at /telos/nodes/testnet1:
-```shell
-mkdir -p /telos/nodes/testnet1
-cd /telos/nodes/testnet1
-curl -L https://api.github.com/repos/telosnetwork/node-template/tarball/master | tar -xvz --strip=1
-```
-
-## Setup peers
-
-Copy the contents of the peers.ini from mainnet/testnet directory into the config.ini from the template, adding/removing peers to suit your region/needs.
-```shell
-echo >> config.ini
-echo "#TESTNET PEERS:" >> config.ini
-cat testnet/peers.ini >> config.ini
-```
-
-Pick a version to download from https://github.com/EOSIO/eos/releases.
-You can find more up to date peers via the [EOS Nation](https://eosnation.io/) BP validator tool for either [testnet](https://validate.eosnation.io/telostest/) or [mainnet](https://validate.eosnation.io/telos/).
-
-## Install latest Leap AntelopeIO binaries (if needed)
-
-Pick a version to download from https://github.com/AntelopeIO/leap/releases.
-
-Select a stable release, likely the `latest` tagged one (not RC/Release Candidate) which is built for your OS Version.
-```shell
-wget https://github.com/AntelopeIO/leap/releases/download/v4.0.1/leap_4.0.1-ubuntu22.04_amd64.deb
-sudo apt install ./leap_4.0.1-ubuntu22.04_amd64.deb
-```
-
-## Move binaries
-Now find where the binaries installed and move the nodeos binary to somewhere that won't be changed when you install the next version, it's likely they are in `/usr/bin`, this will allow you to run a different version on this same machine.
-
-The strategy here is that in the `/telos/leap` directory you have a directory for each version you may want to run on this machine, inside each directory is the `nodeos` binary matching that version.  To update nodes you'll just have to change the version in the specific node's `node_config` file and restart it, as well as take any other measures needed for that version upgrade (reindex, etc..).
-
-Note, installing the `.deb` file will put all the binaries (`nodeos`,`cleos`,`keosd`) in your path, if you simply use the binary name (e.g. `nodeos` without a path) it will use the most recently installed version.  For the purposes of running a node, the only binary which needs to be copied and versioned in this way would be `nodeos`.
-```shell
-mkdir -p /telos/leap/4.0.1
-cp -a /usr/bin/nodeos /telos/leap/4.0.1/
-```
-
-### Set node version
-Now you know the path to the binaries, change that in the `node_config` file, set the `BUILD_ROOT` variable
-```
-BUILD_ROOT="/telos/leap/4.0.1"
-```
-
-### Distribute CPU load
-The `start.sh` script will pin the `nodeos` process to a specific CPU core, this optimizes performance.  If you are running multiple nodes on the same host and do not change this setting you will have all nodes fighting over the same CPU core so you should make sure each node has a different value set.
-
-To determine how many cores you have, run `cat /proc/cpuinfo | grep processor` and then pick one that's not already configured on other nodes and set it in the `node_config` file:
-```
-CPU="0"
-```
-
-__Optional: Configure to write logs locally to the node's directory if you prefer instead of the system-wide `/var/log/nodeos` path as mentioned above__
-Set the `LOCALIZE_LOG` flag to true in the `node_config` file.
-```
-LOCALIZE_LOG=true
-```
-
-## Setup config.ini
-### Review
-Review the config.ini file to get familiar with it, adjust as needed.
-
-### Set the ports
-Make sure you set the ports to ones that are not already in use on this server by other nodes.
-
-## Start the node
-To start the node you have two options:
-
- - Start from genesis and sync the whole history
- - Start from a given snapshot
-  
-### Start from genesis
-```shell
-cd /telos/nodes/testnet1
-./start.sh --genesis-json ./testnet/genesis.json
-```
-### Start from snapshot
-Be sure to get the latest snapshot for either [mainnet](https://snapshots.telosunlimited.io/) or [testnet](https://snapshots.eosnation.io/)
-```shell
-cd /telos/nodes/testnet1
-wget https://snapshots.telosunlimited.io/telos-mainet-20230615-blk-283714511.tar.gz | tar -zxvf
-```
-From there you are ready to start your node! Run `./start.sh` with the `--snapshot` flag and the name of the snapshot binary.
-```shell
-./start.sh --snapshot /snapshot-10e680cfae6365b7839abffc5239cb874b61b64274a6cafd051a1610a9d0c08f.bin
-```
-
-## Configure public access
-This assumes the node operator has reasonable system administration skills, which should be expected of a Telos block producer.
-### P2P
-Point DNS at the server and expose the p2p port (`p2p-listen-endpoint`), this is your seed/p2p endpoint and is only tcp, it does not require anything in front of it.  If you wish you can use a tcp load balancer such as haproxy in front of the p2p, then you'll point the DNS at the load balancer.
-### API
-Install something like nginx or haproxy and point DNS at it for your API endpoint, configure it for SSL.
-
-A popular option is to put nginx in front of it using auto-renewing and free SSL certs from Let's Encrypt - https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-18-04.
-
-You'll want to configure nginx in this case for a reverse proxy, and point it at your `http-server-address`.
-
----
-
-## Telos LEAP v5.0 Upgrade Guide
-
-This guide provides step-by-step instructions for upgrading Telos nodes running nodeos versions older than LEAP 5.0 to version 5.0 or later, while maintaining all block and state history.
-
-For the latest LEAP 5.0 release notes, visit the [AntelopeIO LEAP Releases](https://github.com/AntelopeIO/leap/releases/tag/v5.0.3).
-
----
-
-## Important Notice
-
-**LEAP 5.0 requires a restart from snapshot** due to structural changes in state memory storage. This is a mandatory requirement - you cannot simply upgrade the binary in place. Plan for downtime during this upgrade process.
-
----
-
-## Pre-Upgrade Checklist
-
-Before beginning the upgrade process, ensure you have:
-
-- [ ] A stable backup of your current node configuration
-- [ ] Sufficient disk space for the snapshot (typically 1-3 GB for Telos Mainnet)
-- [ ] Access to your node's configuration files
-- [ ] Reviewed your current `config.ini` for deprecated parameters
-- [ ] Scheduled maintenance window with appropriate downtime
-- [ ] Downloaded the latest LEAP 5.x release for your platform
-
----
-
-## Key Changes in LEAP 5.0
-
-### Deprecations & Removals
-
-#### Deferred Transactions Removed
-Deferred transactions were previously deprecated and have been **completely removed** in LEAP 5.0. No new deferred transactions may be created, and existing deferred transactions will be blocked from executing.
-
-#### Get Block Header State Deprecated
-As of LEAP v5.0.0, the `v1/chain/get_block_header_state` endpoint is deprecated and will be removed in LEAP v6.0.0. Update any applications or scripts that rely on this endpoint.
-
----
-
-## Upgrade Process
-
-### Step 1: Download Latest LEAP Release
-
-Download the appropriate LEAP 5.x package for your operating system from the [AntelopeIO LEAP Releases](https://github.com/AntelopeIO/leap/releases) page.
-
-### Step 2: Create Snapshot from Current Node
-
-While your current node is still running, create a snapshot:
+The maintained [Telos node-template repository](https://github.com/telosnetwork/node-template)
+contains separate profiles for vote relays, APIs, and SHiP. Clone it and create
+a service account:
 
 ```bash
-curl -X POST http://127.0.0.1:8888/v1/producer/create_snapshot
+git clone https://github.com/telosnetwork/node-template.git
+cd node-template
+
+id -u telos >/dev/null 2>&1 \
+  || sudo useradd --system --home-dir /var/lib/telos --shell /usr/sbin/nologin telos
 ```
 
-Wait for the response containing the snapshot filename. The output will look like:
-```json
-{
-  "snapshot_name": "snapshot-0abc123...xyz.bin"
-}
-```
-
-**Important:** Make note of this filename - you'll need it in Step 6.
-
-**Alternative:** You can also download a recent snapshot from Telos community providers:
-- [Telos Mainnet Snapshots](https://snapshots.eosnation.io/)
-- Be sure to select a snapshot from Telos Mainnet v6
-
-### Step 3: Stop Your Node
-
-Stop the currently running nodeos process:
+Choose an instance name prefixed by its network, such as `mainnet-relay-a`,
+`mainnet-api`, or `mainnet-ship`. Create root-owned configuration and writable
+instance data directories:
 
 ```bash
-# If using systemd
-sudo systemctl stop nodeos
+export INSTANCE=mainnet-api
 
-# Or if running manually, find and kill the process
-pkill nodeos
+sudo install -d -o root -g telos -m 0750 "/etc/telos/$INSTANCE"
+sudo install -d -o telos -g telos -m 0750 "/var/lib/telos/$INSTANCE"
 ```
 
-Wait until the process has fully terminated before proceeding.
+## 3. Render and review the role profile
 
-### Step 4: Remove Old LEAP Package
-
-For Ubuntu/Debian:
-```bash
-sudo apt-get remove -y leap
-```
-
-For other package managers, use the appropriate removal command. If running nodeos from a local bin, delete it to avoid confusion.
-
-### Step 5: Remove State Memory File
-
-Remove **only** the `shared_memory.bin` file from your nodeos data directory:
+Render exactly one network and role:
 
 ```bash
-# Default location
-rm ~/.local/share/eosio/nodeos/data/state/shared_memory.bin
-
-# Or if using custom data directory specified by --data-dir
-rm /path/to/your/data-dir/state/shared_memory.bin
+./scripts/render-config.sh mainnet api "$INSTANCE" /tmp/telos-config.ini
 ```
 
-**Important:** Do NOT remove other files in the data directory, especially:
-- `blocks/` directory (contains your block log)
-- `state-history/` directory (if running state history plugin)
-- `snapshots/` directory
+Valid roles are `vote-relay`, `api`, and `ship`. The renderer appends endpoints
+currently marked verified by the Telos validator service. Treat that list as a
+starting point: curate for operator and geographic diversity and monitor every
+peer.
 
-### Step 6: Install New LEAP Package
-
-Install the LEAP 5.0.3 package:
-
-For Ubuntu/Debian:
-```bash
-sudo apt-get install -y ./leap_5.0.3_amd64.deb
-```
-
-### Step 7: Update Configuration File
-
-Edit your `config.ini` file to comply with LEAP 5.0 requirements (see Configuration Changes section below).
-
-### Step 8: Restart Node with Snapshot
-
-Start nodeos with the snapshot file from Step 2:
-
-```bash
-nodeos --snapshot /path/to/snapshots/snapshot-0abc123...xyz.bin \
-       --data-dir /path/to/your/data-dir \
-       --config-dir /path/to/your/config-dir \
-       [... other existing arguments ...]
-```
-
-**Note:** The `--snapshot` argument only needs to be provided on the **first launch** after upgrading to LEAP 5.x. Remove it from subsequent starts. If you are utilizing the node startup script found here (https://github.com/telosnetwork/node-template) you can pass ./run.sh --snapshot /path/to/snapshot.bin
-
-### Step 9: Verify Node Operation
-
-Monitor your node's log output and verify:
-
-- Node is replaying from the snapshot
-- Blocks are syncing properly
-- No configuration errors appear
-- API endpoints are responding (if configured)
-
-```bash
-# Check node info
-curl http://127.0.0.1:8888/v1/chain/get_info
-
-# Monitor logs
-tail -f /path/to/nodeos.log
-```
-
----
-
-## Required Configuration Changes
-
-The following configuration changes are **mandatory** for LEAP 5.0 nodes.
-
-### Remove Unsupported Parameters
-
-**Remove or comment out** the following parameters from your `config.ini`. These parameters are no longer supported and will prevent nodeos from starting:
+Review the rendered configuration before installation. Every role uses:
 
 ```ini
-# REMOVE THESE PARAMETERS:
-# cpu-effort-percent
-# last-block-cpu-effort-percent
-# last-block-time-offset-us
-# produce-time-offset-us
-# max-nonprivileged-inline-action-size
-# max-scheduled-transaction-time-per-block-ms
-# disable-subjective-billing
+chain-state-db-size-mb = 32768
+protocol-features-dir = /var/lib/telos/<INSTANCE>/protocol_features
+plugin = eosio::chain_plugin
+plugin = eosio::net_plugin
 ```
 
-### Enable Subjective Billing (APIs and Block Relays)
+The 32768 MiB chain-state capacity is a starting point for a host with 64 GB RAM.
+Keep it below usable physical memory and increase it deliberately as measured
+state grows.
 
-If you're running an API node or block relay, you must enable subjective billing by adding:
+### Vote relay
+
+A vote relay must accept and forward finalizer votes but has no signing keys:
 
 ```ini
-disable-subjective-api-billing = false
-disable-subjective-p2p-billing = false
-```
-
----
-
-## Recommended Configuration Changes
-
-### Transaction Time Windows
-
-Based on production testing and performance data:
-
-```ini
-# Comment out or remove max-transaction-time
-# max-transaction-time = 30
-
-# Set read-only window time (for LEAP 4.x and later)
-read-only-read-window-time-us = 165000
-```
-
-**Rationale:** Transactions can exceed the default 30ms limit in production. Removing `max-transaction-time` allows the on-chain transaction deadline to be the limiting factor. The read-only window needs to be larger because read actions execute in parallel.
-
----
-
-## New Features & Options in LEAP 5.0
-
-### New Command Line Options
-
-**Sync Peer Limit:**
-```bash
---sync-peer-limit 3
-```
-Limits the number of peers to sync from. Default is 3.
-
-**EOS-VM-OC Auto Mode:**
-```bash
---eos-vm-oc-enable auto
-```
-The new `auto` mode automatically uses optimized compilation (OC) when building blocks, applying blocks, executing transactions, and executing contracts on `eosio.*` accounts. This is now the **default behavior**.
-
-### New Config Options
-
-**HTTP Category Address:**
-```ini
-http-category-address = 127.0.0.1:8888
-```
-Can be specified multiple times to configure different category addresses.
-
-### Modified Option Behaviors
-
-**Multiple P2P Endpoints:**
-```ini
+http-server-address = 127.0.0.1:8888
 p2p-listen-endpoint = 0.0.0.0:9876
-p2p-listen-endpoint = 0.0.0.0:9877
-p2p-server-address = your-node.telos.net:9876
-p2p-server-address = your-node.telos.net:9877
+vote-threads = 4
+
+plugin = eosio::http_plugin
+plugin = eosio::chain_plugin
+plugin = eosio::net_plugin
 ```
 
-**Sync Fetch Span:**
-- Default changed from 100 to 1000 blocks
+Place public peers only on relays and other non-producing nodes. A private
+producer should connect only to BP-controlled relays.
 
-**Disable Replay Opts:**
-- Automatically set to `true` if state history plugin is enabled
+### Read-only API
 
-**Read-Only Threads:**
-- Can now be set to a maximum of 128 (increased from previous limits)
+Bind `nodeos` to loopback and expose it through a hardened TLS reverse proxy:
 
-**HTTP Max Response Time:**
-- Default changed from 30ms to 15ms
-
----
-
-## Telos-Specific Considerations
-
-### Chain ID
-
-Ensure your configuration has the correct chain ID for your target network:
-
-**Telos Mainnet:**
 ```ini
-chain-id = 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
+http-server-address = 127.0.0.1:8888
+p2p-listen-endpoint = 0.0.0.0:9876
+vote-threads = 0
+api-accept-transactions = false
+
+plugin = eosio::http_plugin
+plugin = eosio::chain_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::net_plugin
 ```
 
-**Telos Testnet:**
-```ini
-chain-id = 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
-```
+Do not enable wildcard CORS on a public RPC. Configure exact trusted origins at
+the reverse proxy only when a browser application requires them.
 
-### P2P Peer List
+### State History (SHiP)
 
-Update your P2P peers for Telos networks:
-
-**Telos Mainnet P2P Peers:**
-```ini
-# amsterdam: NL, Amsterdam
-p2p-peer-address = telos.eu.eosamsterdam.net:9120
-# bp.adex: DE, Falkenstein
-p2p-peer-address = p2p-telos.a-dex.xyz:9976
-# bp.boid: ES, Tenerife, Canary Islands, Spain
-p2p-peer-address = telos.p2p.boid.animus.is:5252
-# eosauthority: DE, Falkenstein
-p2p-peer-address = node-telos.eosauthority.com:10311
-# eosphereiobp: AU, Sydney
-p2p-peer-address = peer1-telos.eosphere.io:9876
-# eosphereiobp: AU, Sydney
-p2p-peer-address = peer2-telos.eosphere.io:9876
-# eosriobrazil: BR, Rio de Janeiro
-p2p-peer-address = telos.eosrio.io:8092
-# guild.nefty: FI, Finland
-p2p-peer-address = telos-public-seed.neftyblocks.com:9877
-# kainosblkpro: US, Texas
-p2p-peer-address = p2p.kainosbp.com:9876
-# mosaicblocks: FI, Helsinki
-p2p-peer-address = mainnet.mosaicblocks.com:9876
-# nation.tlos: CA, Canada
-p2p-peer-address = telos.seed.eosnation.io:9876
-# orbitalblock: CA, Beauharnois
-p2p-peer-address = p2p-telos-mainnet.orbitalblock.com:9876
-# telosarabia1: DE, Munich
-p2p-peer-address = p2p.telosarabia.net:9876
-# telosindiabp: US, US
-p2p-peer-address = p2p.telos.blocksindia.com:7776
-# telosunlimit: US, St.Louis
-p2p-peer-address = p2p.telosunlimited.com:9876
-# veradox12321: FI, Finland
-p2p-peer-address = veradox.xyz:9877
-# votetelosusa: US, Greenville,SC,USA
-p2p-peer-address = telos.p2p.eosusa.io:9876
-# Add additional reliable Telos peers
-```
-
-### State History Configuration
-
-If maintaining full state history for Telos dApps and indexers:
+Use SHiP only on a dedicated indexing node and keep its WebSocket endpoint on
+loopback or a private interface:
 
 ```ini
+vote-threads = 0
+api-accept-transactions = false
+
+plugin = eosio::http_plugin
+plugin = eosio::chain_plugin
+plugin = eosio::chain_api_plugin
+plugin = eosio::net_plugin
 plugin = eosio::state_history_plugin
-state-history-dir = /path/to/state-history
+
+state-history-endpoint = 127.0.0.1:8080
 trace-history = true
 chain-state-history = true
-state-history-endpoint = 0.0.0.0:8080
+finality-data-history = true
+state-history-dir = state-history
 ```
 
----
+`finality-data-history = true` makes Savanna finality data available to SHiP
+consumers. Plan storage and retention for the full history workload.
 
-## Troubleshooting
+Install the reviewed profile read-only to the service account:
 
-### Node Won't Start
-
-**Error: Unsupported configuration parameter**
-- Solution: Remove all deprecated parameters listed in the Required Configuration Changes section
-
-**Error: Cannot load snapshot**
-- Solution: Verify snapshot file exists and path is correct
-- Solution: Ensure snapshot is compatible (any version snapshot works with LEAP 5.0)
-
-**Error: Shared memory file exists**
-- Solution: Ensure you removed `shared_memory.bin` in Step 5
-
-### Performance Issues
-
-**Slow sync speed:**
-- Increase `sync-peer-limit` to allow more sync peers
-- Verify `sync-fetch-span = 1000` in config
-- Check network connectivity to P2P peers
-
-**API timeouts:**
-- Adjust `read-only-read-window-time-us` to 165000 or higher
-- Increase `read-only-threads` based on CPU availability
-- Consider adjusting `http-max-response-time-ms` if needed
-
----
-
-## Post-Upgrade Verification
-
-After upgrading, verify your node is functioning correctly:
-
-### Check Node Info
 ```bash
-curl http://127.0.0.1:8888/v1/chain/get_info
+sudo install -o root -g telos -m 0640 /tmp/telos-config.ini \
+  "/etc/telos/$INSTANCE/config.ini"
+sudo install -o root -g telos -m 0640 logging.json \
+  "/etc/telos/$INSTANCE/logging.json"
 ```
 
-Verify the output shows:
-- Correct `chain_id` for Telos Mainnet or Testnet
-- `head_block_num` is increasing
-- `server_version` matches your LEAP 5.x version
+## 4. Bootstrap from trusted chain state
 
-### Test API Endpoints
+`chain-id` is not a valid `nodeos` option. The genesis or snapshot state selects
+the network. For a new mainnet or testnet data directory, obtain a recent
+snapshot from a trusted provider, verify its published checksum, and start it
+once in the foreground:
+
 ```bash
-# Get account info
-curl -X POST http://127.0.0.1:8888/v1/chain/get_account \
-  -d '{"account_name":"eosio"}'
-
-# Get table rows
-curl -X POST http://127.0.0.1:8888/v1/chain/get_table_rows \
-  -d '{"code":"eosio.token","scope":"eosio.token","table":"stat"}'
+sudo -u telos /usr/bin/nodeos \
+  --config-dir "/etc/telos/$INSTANCE" \
+  --data-dir "/var/lib/telos/$INSTANCE" \
+  --snapshot "/var/lib/telos/$INSTANCE/snapshots/<snapshot-file>.bin"
 ```
 
-### Monitor Logs
+Stop cleanly after the snapshot loads. Do not retain `--snapshot` for normal
+restarts.
+
+## 5. Run the instance with systemd
+
+Install the instance service supplied by node-template:
+
 ```bash
-tail -f /path/to/nodeos.log
+sudo install -o root -g root -m 0644 systemd/telos-nodeos@.service \
+  /etc/systemd/system/telos-nodeos@.service
+sudo systemctl daemon-reload
+sudo systemctl enable --now "telos-nodeos@$INSTANCE"
+sudo systemctl status "telos-nodeos@$INSTANCE"
+sudo journalctl -u "telos-nodeos@$INSTANCE" -f
 ```
 
-Look for:
-- No error messages
-- Successful block processing
-- P2P connection messages
-- State history updates (if enabled)
+The instance service uses `/etc/telos/%i` and `/var/lib/telos/%i`, preventing a
+mainnet, testnet, API, relay, or SHiP process from accidentally sharing runtime
+state.
 
-### Verify State History (if applicable)
+## 6. Verify network, sync, and finality
+
+Query the loopback API:
+
 ```bash
-curl http://127.0.0.1:8080/v1/chain/get_info
+curl -s http://127.0.0.1:8888/v1/chain/get_info | jq '{
+  chain_id,
+  server_full_version_string,
+  head_block_num,
+  last_irreversible_block_num,
+  head_block_time,
+  lib_lag: (.head_block_num - .last_irreversible_block_num)
+}'
 ```
 
----
+Expected chain IDs:
 
-## Support & Resources
+```text
+Mainnet: 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
+Testnet: 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
+```
 
-### Telos Resources
-- **Website:** https://www.telos.net/
-- **Documentation:** https://docs.telos.net/
-- **GitHub:** https://github.com/telosnetwork
-- **Telegram:** Telos Network Telegram Dev Topic
+Confirm that:
 
-### LEAP Resources
-- **LEAP GitHub:** https://github.com/AntelopeIO/leap
-- **LEAP Releases:** https://github.com/AntelopeIO/leap/releases
+- the chain ID and approved full version are exact;
+- head and irreversible blocks advance and the node reaches network head;
+- P2P peers remain diverse and stable;
+- a vote relay carries live vote traffic in both directions;
+- API nodes reject transaction submission as intended;
+- SHiP consumers receive traces, chain state, and finality data;
+- logs contain no persistent fork, database, vote, or peer errors.
 
----
+Alert on sustained deviations from the network's normal head-to-LIB lag rather
+than one hard-coded threshold.
 
-Upgrading to LEAP 5.0 provides improved performance, better resource management, and sets the foundation for future Telos network enhancements. While the snapshot requirement adds complexity to the upgrade process, following this guide will ensure a smooth transition while maintaining all your block and state history.
+## Ongoing operations
 
-Always test the upgrade process in a non-production environment first, and ensure you have proper backups before proceeding with production nodes.
-
-**Good luck with your upgrade, and welcome to LEAP 5.0 on Telos!**
-
+- Refresh and review public peers through node-template's peer updater.
+- Keep TelosZero upgrades, snapshot procedures, and storage growth under change control.
+- Back up configuration and indexing data according to role, but never introduce a BLS key or `safety.dat` on these non-producing profiles.
+- Keep public RPC, P2P, and SHiP firewall policies separate and least-privileged.

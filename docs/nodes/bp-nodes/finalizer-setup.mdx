@@ -1,0 +1,330 @@
+---
+title: 'Finalizer Setup and Operations'
+displayed_sidebar: devBar
+description: Generate, register, verify, rotate, fail over, and recover Telos Savanna finalizer keys safely.
+sidebar_position: 4
+hide_table_of_contents: false
+---
+
+# Finalizer Setup and Operations
+
+Savanna separates block publishing from finalizer voting. A Telos BP's producer `nodeos` performs both roles:
+
+- the K1 key signs produced blocks;
+- the BLS key signs finalizer votes;
+- a quorum of BLS votes forms the certificate that makes blocks irreversible.
+
+The BLS key is configured as a second `signature-provider`. There is no separate finalizer service.
+
+## Non-negotiable safety rules
+
+1. Generate a unique BLS key for every producer-capable `nodeos` instance.
+2. Never share a BLS private key across hosts, networks, or instances.
+3. Keep `finalizers/safety.dat` on persistent local storage.
+4. Never copy `safety.dat` between hosts or restore an older backup of it.
+5. If `safety.dat` is missing, corrupt, stale, or uncertain for a previously used key, retire that key and activate a never-used key.
+6. Configure and start a node with a replacement key **before** activating that key on-chain.
+7. Never delete the current or last active key as a routine operation. Rotate first and verify the new native policy and votes.
+
+These rules prevent a finalizer from signing conflicting branches with incomplete voting history.
+
+## Initial finalizer setup
+
+### 1. Generate the key on the producer host
+
+Create a protected key directory and generate the BLS key, public key, and proof of possession:
+
+```bash
+sudo install -d -o telos -g telos -m 0700 /var/lib/telos/keys
+
+sudo -u telos sh -c '
+  umask 077
+  key_file=/var/lib/telos/keys/finalizer-mainnet-primary.txt
+  test ! -e "$key_file" || { echo "Refusing to overwrite $key_file" >&2; exit 1; }
+  spring-util bls create key --file "$key_file"
+'
+```
+
+The file contains three values:
+
+```text
+Private key: PVT_BLS_...
+Public key: PUB_BLS_...
+Proof of Possession: SIG_BLS_...
+```
+
+`spring-util bls create key` already creates the proof of possession. Do not pass this three-line file to `spring-util bls create pop`; that command expects a file containing only a raw private key.
+
+Record the public key and proof of possession in the BP's secure operations system. Restrict access to the private key.
+
+### 2. Configure the key and safety directory
+
+Add the BLS provider alongside the existing K1 block-signing provider in `/etc/telos/mainnet-primary/config.ini`:
+
+```ini
+producer-name = <BP_ACCOUNT>
+
+signature-provider = <PUB_K1_BLOCK_KEY>=KEY:<PVT_K1_BLOCK_KEY>
+signature-provider = <PUB_BLS_FINALIZER_KEY>=KEY:<PVT_BLS_FINALIZER_KEY>
+
+vote-threads = 4
+finalizers-dir = /var/lib/telos/finalizers/mainnet-primary
+```
+
+TelosZero's BLS provider uses `KEY`; it is not loaded through `keosd`.
+
+Confirm permissions:
+
+```bash
+sudo chown root:telos /etc/telos/mainnet-primary/config.ini
+sudo chmod 0640 /etc/telos/mainnet-primary/config.ini
+sudo chown telos:telos /var/lib/telos/finalizers/mainnet-primary
+sudo chmod 0700 /var/lib/telos/finalizers/mainnet-primary
+```
+
+On the first start of a never-used BLS key, a missing `safety.dat` is expected. `nodeos` creates and advances it as the key votes. Once used, the key and its complete safety history must remain together on this host.
+
+### 3. Start and sync before registration
+
+```bash
+sudo systemctl restart telos-nodeos@mainnet-primary
+sudo journalctl -u telos-nodeos@mainnet-primary -f
+```
+
+Resolve all key parsing, finalizer directory, P2P, fork, and sync errors before continuing. The node must be running, at head, and connected to vote-capable peers before its first BLS key becomes active.
+
+### 4. Register the producer first
+
+`regfinkey` accepts only a registered producer. Complete [producer registration](/nodes/bp-nodes/setting-up-telos-validator-nodes/#7-register-the-producer) before registering the BLS key.
+
+Run all on-chain key actions from the separate control/signing host, not from the producer host.
+
+### 5. Register the first finalizer key
+
+Set public values on the control host:
+
+```bash
+export RPC=https://mainnet.telos.net
+export BP_ACCOUNT=<BP_ACCOUNT>
+export FINALIZER_PUBLIC_KEY=<PUB_BLS_FINALIZER_KEY>
+export FINALIZER_POP=<SIG_BLS_PROOF_OF_POSSESSION>
+```
+
+Submit `regfinkey` with the BP's account authority:
+
+```bash
+cleos -u "$RPC" push action eosio regfinkey \
+  "$(jq -nc \
+    --arg name "$BP_ACCOUNT" \
+    --arg key "$FINALIZER_PUBLIC_KEY" \
+    --arg pop "$FINALIZER_POP" \
+    '{finalizer_name:$name,finalizer_key:$key,proof_of_possession:$pop}')" \
+  -p "$BP_ACCOUNT@active"
+```
+
+The first registered key for a producer automatically becomes active in the `eosio::finalizers` contract table.
+
+:::warning Do not activate the first key twice
+Do not call `actfinkey` after the first registration. That action is only for switching to a later, already registered key and will reject a key that is already active.
+:::
+
+## Verify registration, policy, and votes
+
+### Contract tables
+
+Find the producer's active key ID and join it to the corresponding registered key:
+
+```bash
+ACTIVE_ID="$(
+  cleos -u "$RPC" get table eosio eosio finalizers --limit 1000 \
+    | jq -r --arg bp "$BP_ACCOUNT" \
+      '.rows[] | select(.finalizer_name == $bp) | .active_key_id'
+)"
+
+cleos -u "$RPC" get table eosio eosio finkeys --limit 1000 \
+  | jq --arg bp "$BP_ACCOUNT" --arg id "$ACTIVE_ID" '
+      .rows[]
+      | select(.finalizer_name == $bp and (.id | tostring) == $id)
+    '
+```
+
+The returned `finalizer_key` must equal `FINALIZER_PUBLIC_KEY`.
+
+`finkeys` includes registered active and standby keys. A row in `finkeys` alone does not prove that the key is active.
+
+### Native finalizer policy and live voting
+
+```bash
+cleos -u "$RPC" get finalizer_info \
+  | jq --arg bp "$BP_ACCOUNT" '{
+      active_generation: .active_finalizer_policy.generation,
+      threshold: .active_finalizer_policy.threshold,
+      active: [
+        .active_finalizer_policy.finalizers[]?
+        | select(.description == $bp)
+      ],
+      pending: [
+        .pending_finalizer_policy.finalizers[]?
+        | select(.description == $bp)
+      ],
+      last_vote: [
+        .last_tracked_votes[]?
+        | select(.description == $bp)
+      ]
+    }'
+```
+
+For an active-schedule BP, verify that:
+
+- the expected public key appears in the active policy;
+- a pending policy appears only during a schedule or key transition;
+- `last_vote[].public_key` matches the active key;
+- `voted_for_block_num` and `voted_for_block_timestamp` advance on repeated checks;
+- the vote's policy generation converges to the active generation;
+- head and irreversible blocks continue advancing.
+
+A registered standby BP will not appear in the native active finalizer policy until it enters the producer schedule.
+
+Monitor chain finality separately:
+
+```bash
+cleos -u "$RPC" get info \
+  | jq '{
+      head_block_num,
+      last_irreversible_block_num,
+      lib_lag: (.head_block_num - .last_irreversible_block_num)
+    }'
+```
+
+Healthy Savanna finality keeps LIB advancing close to head, but operators should not alert on one hard-coded lag value. Alert on sustained deviation from the network baseline, stale votes, or a non-advancing LIB.
+
+## Configure vote relays
+
+Votes travel over the P2P network. Every `nodeos` hop between a private producer and peer finalizers must accept and forward them.
+
+On each intermediate relay/sentry node in that path:
+
+```ini
+plugin = eosio::chain_plugin
+plugin = eosio::net_plugin
+
+vote-threads = 4
+```
+
+A relay needs vote threads but **does not** need a BLS key or `producer-name`.
+
+- Producer nodes default to four vote threads, but this guide sets the value explicitly.
+- Relay nodes must explicitly set a positive value; use `4` unless a tested operator profile says otherwise.
+- Pure API and SHiP nodes outside the vote path can leave vote processing disabled.
+
+Verify bidirectional vote propagation through every firewall, private link, and relay. A successful TCP P2P connection alone does not prove that finalizer votes are reaching peer finalizers.
+
+## Pre-stage a backup producer
+
+Every producer-capable backup host needs its **own** never-shared BLS key and local safety directory.
+
+1. Generate the backup BLS key on the backup host.
+2. Configure only that host with the backup key.
+3. Add `pause-on-startup = true` to the backup's producer configuration so it cannot publish blocks while the primary is running.
+4. Start, sync, and peer the backup node; confirm logs report that production is paused.
+5. Register the backup key with `regfinkey` while the primary key remains active.
+6. Confirm the new key appears in `finkeys` but does not replace `active_key_id`.
+7. Exercise the failover runbook on testnet.
+
+Because the producer already has an active key, registering another key does not activate it.
+
+`pause-on-startup` pauses K1 block production; it does not replace the distinct BLS-key requirement. During failover, activate and verify the backup BLS key, stop the primary producer, remove the startup pause, and restart the backup. Never allow primary and backup hosts to publish blocks with the same K1 key concurrently.
+
+## Rotate a finalizer key
+
+Use this sequence for planned same-host rotation or to activate a pre-staged backup key.
+
+### 1. Prepare and register the replacement
+
+Generate a never-used key on the target host, load it in that host's `signature-provider`, restart, sync, and verify connectivity. Then register it with `regfinkey` as shown above.
+
+### 2. Activate the replacement
+
+```bash
+export NEW_FINALIZER_PUBLIC_KEY=<PUB_BLS_NEW_KEY>
+
+cleos -u "$RPC" push action eosio actfinkey \
+  "$(jq -nc \
+    --arg name "$BP_ACCOUNT" \
+    --arg key "$NEW_FINALIZER_PUBLIC_KEY" \
+    '{finalizer_name:$name,finalizer_key:$key}')" \
+  -p "$BP_ACCOUNT@active"
+```
+
+### 3. Wait for native-policy activation
+
+Do not treat transaction inclusion or the `finalizers` table update as the end of the rotation. Re-run `cleos get finalizer_info` until:
+
+- the new public key has moved through any pending policy into the active policy;
+- tracked votes for the BP use the new key and advance;
+- network finality remains healthy.
+
+For host failover, keep the primary voting until the paused backup is ready, activate the backup key, and verify native-policy activation and votes. Then stop the primary producer, remove `pause-on-startup = true` from the backup, restart it, and verify the exclusive K1 block-production handoff. Never copy the primary's `safety.dat` to the backup.
+
+### 4. Retire the old inactive key
+
+Only after the new key is active and voting may you delete the old, now-inactive registration:
+
+```bash
+export OLD_FINALIZER_PUBLIC_KEY=<PUB_BLS_OLD_KEY>
+
+cleos -u "$RPC" push action eosio delfinkey \
+  "$(jq -nc \
+    --arg name "$BP_ACCOUNT" \
+    --arg key "$OLD_FINALIZER_PUBLIC_KEY" \
+    '{finalizer_name:$name,finalizer_key:$key}')" \
+  -p "$BP_ACCOUNT@active"
+```
+
+Remove the old private provider from the old host when operationally safe. Retain logs and quarantine retired safety state according to the incident-retention policy; never reuse the old BLS key on another host.
+
+## Recover from a missing or corrupt `safety.dat`
+
+If `safety.dat` is missing, corrupt, restored from an older backup, or has uncertain continuity for a previously used BLS key:
+
+1. Stop the affected `nodeos` immediately.
+2. Do not restart voting with that BLS key.
+3. Quarantine the old finalizer directory for investigation; do not copy it to another host.
+4. Generate or select a never-used, pre-registered BLS key.
+5. Configure that key on the recovery host with a fresh local finalizer directory.
+6. Restart from a trusted snapshot if state recovery is required, then fully sync the node with the replacement key loaded. Keep K1 block production paused during a producer-host recovery.
+7. Register the replacement key if needed, then activate it with `actfinkey` from the control host.
+8. Verify the active native policy, advancing votes, head, and LIB.
+9. Delete the retired key registration only after the replacement is active and voting.
+
+A private-key backup by itself is not sufficient recovery state. Reusing that key without its complete voting history can cause unsafe or non-contributing votes.
+
+## Decommission a BP safely
+
+There is no routine standalone "turn off finalizer" action. Coordinate retirement with Telos operators:
+
+1. Ensure the replacement producer/finalizer capacity is active and healthy.
+2. Continue voting until the departing BP is absent from both the producer schedule and native active finalizer policy.
+3. Confirm removal with `cleos get finalizer_info`.
+4. Delete only inactive registered keys.
+5. Remove local BLS providers and securely retire their safety state.
+
+Do not immediately unregister a scheduled producer and delete its current/last key. Contract guards are a last line of defense, not an operating procedure.
+
+## Monitoring checklist
+
+Alert on:
+
+- `nodeos` process exit or repeated restart;
+- unexpected binary/version or checksum drift;
+- stale head or LIB, or sustained LIB lag above the network baseline;
+- a missing BP/key in the active or pending finalizer policy;
+- non-advancing, weak, or missing tracked votes;
+- production pause caused by a lack of recent votes;
+- P2P peer loss on either relay path;
+- missed blocks or handoff failures;
+- finalizer directory permission, disk, checksum, or write errors;
+- clock synchronization drift;
+- unexpected `regfinkey`, `actfinkey`, or `delfinkey` actions.
+
+The [Telos validator dashboard](https://validators.telos.net/) is useful for public-chain and endpoint checks. It does not replace private-host, relay, key-custody, or `safety.dat` monitoring.

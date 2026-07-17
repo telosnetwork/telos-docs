@@ -2,24 +2,30 @@
 id: 'Nodes and Clients'
 displayed_sidebar: devBar
 sidebar_position: 1
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
 
-A guide to understanding, building, and maintaining nodes on the Telos Blockchain Network
+# Telos Nodes and Clients
 
-Telos uses Antelope platform-specific components and libraries (`nodeos`, `cleos`, `keosd`, `EOSIO.CDT`, and `EOSJS`) to operate blockchain nodes, collect blockchain data, interact with nodes, and build smart contracts.
+Telos Zero nodes run **TelosZero Core**, the Telos-maintained `nodeos` distribution with Savanna instant-finality support. The package also provides `cleos`, `keosd`, and `spring-util`.
 
-All Telos nodes must implement the client service daemon protocol called **nodeos**. It is a product of Antelope.io and is responsible for processing smart contracts, validating transactions, producing blocks, and confirming blocks on the Telos blockchain.
+Every Telos Zero `nodeos` validates the chain, but operators configure different roles:
 
-For **EVM RPC nodes**, Telos uses [telos-reth](/nodes/non-bp-nodes/telos-reth/) — a fork of Reth (Rust Ethereum) — paired with a consensus client that bridges the native layer to the EVM execution layer.
+- **Block producer/finalizer:** publishes scheduled blocks with a K1 key and votes on blocks with a BLS key.
+- **Vote relay/sentry:** isolates private producers and forwards blocks, transactions, and finalizer votes.
+- **API node:** serves chain RPC to applications without production keys.
+- **State History (SHiP) node:** streams block, trace, state, and optional finality data to indexers.
+- **Seed/P2P node:** provides stable entry points to the peer network.
 
-## Node Types
+See [Types of Nodes](/nodes/types-of-nodes/) for role boundaries and [Block Producing Nodes](/nodes/bp-nodes/what-is-a-telos-block-producer-node/) for the post-Savanna producer runbook.
 
-If you are interested in running a Telos node or a Dapp developer, you should consider running a Telos node and understand the differences between validators and block producers. 
+For Telos EVM RPC, Telos uses [telos-reth](/nodes/non-bp-nodes/telos-reth/) with the Telos consensus client. That stack consumes Telos Zero/SHiP data; it does not replace the Telos Zero consensus node.
 
-1. Producing Nodes: Configured for block production. Each active producing node top-21(DPOS) validates all blocks and transactions it receives
+## Operator sources
 
-2. Non-producing Nodes: These nodes verify each block and maintain copies of the blockchain. Non-producing nodes mainly operate in standby mode. At a high level, they do much more than checking and verifying the blockchain in Core consensus, including: 
-    - Proxy, gateway to Blockchain data;
-    - Relaying API calls (API endpoints);
-    - Securing the network and boost RPC call performance.
+- [TelosZero Core releases](https://github.com/telosnetwork/teloszero-core/releases/latest)
+- [Telos node templates, genesis files, and peer files](https://github.com/telosnetwork/node-template)
+- [Live Telos validators and endpoints](https://validators.telos.net/)
+- [Non-BP TelosZero upgrade guide](/nodes/non-bp-nodes/exchange-teloszero-upgrade-guide/)
+
+Always use the tagged release and checksum approved for the target network. Do not select a producer binary solely from the version string returned by a public RPC endpoint.
