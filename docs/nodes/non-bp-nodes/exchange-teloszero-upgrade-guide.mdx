@@ -36,7 +36,7 @@ TelosZero Core is the Telos-maintained continuation of **Antelope Spring** (whic
 
 ### Exchanges do **not** need finalizer (BLS) keys
 
-Spring/Savanna finalizer keys and the `signature-provider` / `regfinkey` / `actfinkey` workflow apply **only to block producers**. As an exchange running non-producing API nodes, you can ignore all finalizer-key steps. `vote-threads` can be left at its **default of `4`** on API nodes — you do not need to change it.
+Savanna finalizer keys and the BLS `signature-provider` / `regfinkey` / `actfinkey` workflow apply **only to block producers**. As an exchange running non-producing API nodes, you can ignore all finalizer-key steps. Pure API and SHiP nodes outside a BP vote path can leave vote processing disabled (the non-producer default). Only an intentional intermediate vote relay should set `vote-threads = 4`; that relay still does not need a BLS key.
 
 ---
 
@@ -298,7 +298,6 @@ plugin = eosio::http_plugin
 
 # Bind the HTTP API locally; put nginx/haproxy in front for TLS
 http-server-address = 127.0.0.1:8888
-access-control-allow-origin = *
 http-validate-host = false
 http-max-response-time-ms = 100      # default lowered to 15ms in Leap 5+, raise for heavy calls
 
@@ -315,7 +314,12 @@ read-only-read-window-time-us = 165000
 
 # State/DB sizing — size generously for an exchange node
 chain-state-db-size-mb = 32768
+protocol-features-dir = /var/lib/telos/mainnet-api/protocol_features
 ```
+
+Do not enable wildcard CORS on a public RPC. If a browser application requires
+CORS, configure its exact trusted origin at the reverse proxy and keep `nodeos`
+bound to localhost.
 
 :::note
 `producer_api_plugin` is only needed to *take snapshots*. If it was not part of your normal configuration, disable it again after you have your snapshot.
@@ -323,13 +327,11 @@ chain-state-db-size-mb = 32768
 
 ### Network reference
 
-```ini
-# --- Telos Mainnet ---
-chain-id = 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
-
-# --- Telos Testnet ---
-# chain-id = 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f
-```
+`chain-id` is not a valid `nodeos` configuration option. The genesis or snapshot
+selects the chain; verify `chain_id` after startup. Expected values are mainnet
+`4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11`
+and testnet
+`1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f`.
 
 Genesis files for both networks are included in the [node-template](https://github.com/telosnetwork/node-template) repo (and in the TelosZero Core `genesis/` directory).
 
@@ -338,35 +340,36 @@ Genesis files for both networks are included in the [node-template](https://gith
 An API node needs very little. This lean **mainnet** config is enough to run and serve the chain API — set `agent-name`, append your [P2P peers](#appendix-current-mainnet-p2p-peers), and start:
 
 ```ini
-# API HTTP port (put nginx/haproxy + SSL in front)
-http-server-address = 0.0.0.0:8888
+# API HTTP port (put nginx/haproxy + TLS in front)
+http-server-address = 127.0.0.1:8888
+http-validate-host = false
 # P2P port (TCP only, no proxy/SSL)
 p2p-listen-endpoint = 0.0.0.0:9876
 agent-name = "your-exchange-telos-api"
-
-chain-id = 4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
-chain-state-db-size-mb = 65536        # size to your RAM
-access-control-allow-origin = *
-http-validate-host = false
+chain-state-db-size-mb = 32768
+protocol-features-dir = /var/lib/telos/mainnet-api/protocol_features
 
 plugin = eosio::http_plugin
 plugin = eosio::chain_plugin
 plugin = eosio::chain_api_plugin
 plugin = eosio::net_plugin
-plugin = eosio::producer_plugin
+
+vote-threads = 0
+api-accept-transactions = false
 
 # Append your peers here (see appendix), e.g.:
 # p2p-peer-address = telos.caleos.io:9877
 # p2p-peer-address = telos.eosrio.io:8092
 ```
 
-That is all a chain-API ([Path A](#path-a-api-node-without-full-history)) node requires. For **State History / Hyperion**, add the [Path B](#path-b-api-node-with-full-history) plugin block. For optional performance and billing tuning (`read-only-read-window-time-us`, `disable-subjective-*-billing`, etc.), see [Recommended API-node settings](#recommended-api-node-settings). To take snapshots, temporarily enable `eosio::producer_api_plugin` behind a proxy that filters `/v1/producer/`.
+That is all a read-only chain-API ([Path A](#path-a-api-node-without-full-history)) node requires. For **State History / Hyperion**, add the [Path B](#path-b-api-node-with-full-history) plugin block. For optional performance and billing tuning (`read-only-read-window-time-us`, `disable-subjective-*-billing`, etc.), see [Recommended API-node settings](#recommended-api-node-settings). To take snapshots, temporarily enable `eosio::producer_plugin` plus `eosio::producer_api_plugin` while the API remains private, then remove both again.
 
 :::caution
-Do not carry over `producer-threads` or any [option removed in Spring/Leap 5](#remove-options-that-were-dropped-in-springleap-5) — `nodeos` will refuse to start. For **testnet**, use `chain-id = 1eaa0824707c8c16bd25145493bf062aecddfeb56c736f6ba6397f3195f33c9f` with testnet peers/genesis.
+Do not carry over `producer-threads`, `chain-id`, or any [option removed in Spring/Leap 5](#remove-options-that-were-dropped-in-springleap-5) — `nodeos` will refuse to start. For **testnet**, use trusted testnet genesis/snapshot state and peers, then verify the expected testnet ID through `get_info`.
 :::
 
-The full annotated reference is the official [node-template `config.ini`](https://github.com/telosnetwork/node-template/blob/master/config.ini).
+The maintained read-only role profiles are in the official
+[Telos node-template repository](https://github.com/telosnetwork/node-template).
 
 ---
 
@@ -412,10 +415,9 @@ plugin = eosio::state_history_plugin
 state-history-dir = /path/to/state-history
 trace-history = true
 chain-state-history = true
-state-history-endpoint = 0.0.0.0:18999   # SHiP websocket (consumed by Hyperion/indexers)
-
-# If this node supports IBC / finality data consumers, also set:
-# finality-data-history = true
+finality-data-history = true
+vote-threads = 0
+state-history-endpoint = 127.0.0.1:18999 # use a private IP for remote indexers
 ```
 
 The full block log from genesis is kept by default — no extra block-log option is required. Keep your existing `blocks/` directory in place across the upgrade.
@@ -535,4 +537,5 @@ p2p-peer-address = p2p-mainnet.tlos.news:9876
 - **Telos GitHub:** [github.com/telosnetwork](https://github.com/telosnetwork)
 - **Developer Telegram:** [Telos Zero / Dapps development](https://t.me/dappstelos)
 
-For the general (non-exchange) node walkthrough and the earlier Leap 5.0 migration notes, see [Run a Non Block Producing Node](https://docs.telos.net/nodes/non-bp-nodes/run_a_telos_node/).
+For the current relay, read-only API, and SHiP role walkthrough, see
+[Run a Non-Block-Producing Node](/nodes/non-bp-nodes/run_a_telos_node/).

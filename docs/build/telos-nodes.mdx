@@ -1,23 +1,31 @@
 ---
 displayed_sidebar: devBar
-hide_table_of_contents: true
-description: >-
-    Quickstart to setting up a node on the Telos Network!
+hide_table_of_contents: false
+description: Choose and configure the correct Telos node role.
 title: "Nodes"
 ---
 
-## [Telos EVM Docker](/nodes/non-bp-nodes/tevmc/)
+# Telos Node Quickstart
 
-The Telos EVM Docker lets you easily set up a local EVM node for development.
+Telos Zero nodes run **TelosZero Core**. The same `nodeos` binary can be configured as a private producer/finalizer, vote relay, public API node, State History node, or P2P seed. Start with [Types of Nodes](/nodes/types-of-nodes/) to keep security, storage, and plugin responsibilities separate.
 
-## [Telos EVM Pre-Synced Package](/nodes/non-bp-nodes/telos-evm-pre-synced-node/)
+## Block producer and Savanna finalizer
 
-Starting the sync process for a Telos EVM node from the beginning can take several days and sometimes even weeks depending on the bandwidth and power of the system running the sync process. This pre-synced package should cut your sync time to 1 day or less by pre-syncing much of the chain data and offering it up as a download.
+A post-Savanna BP signs scheduled blocks with a K1 key and finalizer votes with a separate BLS key. Instant finality is part of the normal producer role, not an optional activation step or separate service.
 
-## [Block Producer](/nodes/bp-nodes/setting-up-telos-validator-nodes/)
+1. [Review the producer role](/nodes/bp-nodes/what-is-a-telos-block-producer-node/).
+2. [Install the approved TelosZero Core release](/nodes/bp-nodes/installing-node-software/).
+3. [Configure and register the private producer](/nodes/bp-nodes/setting-up-telos-validator-nodes/).
+4. [Set up, register, verify, rotate, and recover the finalizer](/nodes/bp-nodes/finalizer-setup/).
 
-Learn how to set up and run a block-producing node on Telos. Because Telos is a Delegated Proof Of Stake (DPOS) network, block producers have to be voted into the production schedule. Learn more about DPOS and the [Telos consensus mechanism](/overview/advanced/consensus/).
+## API, SHiP, relay, and exchange nodes
 
-## [Node Providers](/evm/nodes/overview)
+Non-producing nodes do not need BLS keys. Pure API and SHiP nodes outside a BP vote path can leave vote processing disabled; an intermediate vote relay needs positive `vote-threads` but no finalizer key.
 
-View details on node providers [here](/nodes/node_providers).
+- [Run a non-block-producing Telos Zero node](/nodes/non-bp-nodes/run_a_telos_node/)
+- [Upgrade an exchange/API node to TelosZero Core](/nodes/non-bp-nodes/exchange-teloszero-upgrade-guide/)
+- [Review public node providers](/nodes/node_providers/)
+
+## Telos EVM data nodes
+
+Telos EVM RPC and indexing use the Telos consensus/SHiP stream with an EVM execution and history stack. See [telos-reth](/nodes/non-bp-nodes/telos-reth/) and the [Telos EVM Docker controller](/nodes/non-bp-nodes/tevmc/) for those deployment paths.

@@ -1,59 +1,45 @@
 ---
 sidebar_position: 2
 displayed_sidebar: devBar
-title: "Types of Nodes"
-hide_table_of_contents: true
+title: 'Types of Nodes'
+hide_table_of_contents: false
 ---
 
 # Types of Nodes
 
-The main component of the Telos blockchain network is `nodeos` (node + Antelope). `nodeos` is the core node daemon that runs on every Telos node in the network and is distributed as part of the Antelope software suite. Each node can be configured to function as a
+The same TelosZero Core `nodeos` binary can serve several roles. Security, plugins, storage, and finalizer settings differ by role, so production operators should not combine every workload on one host.
 
-1. Block Producing node, or
-2. Non-producing node (depending on the plugin's implemented).
+| Role | Produces blocks | BLS key | Vote threads | Public service |
+|---|---:|---:|---:|---|
+| Private producer/finalizer | Yes, when scheduled | One unique key per host | `4` | No |
+| Backup producer/finalizer | Paused until an exclusive failover | Different pre-registered key | `4` | No |
+| Vote relay/sentry | No | No | `4` | P2P as required |
+| Chain API | No | No | `0`/unset | HTTP through a hardened proxy |
+| State History (SHiP) | No | No | `0`/unset unless also a vote relay | WebSocket to trusted consumers |
+| Seed/P2P | No | No | `0`/unset unless also a vote relay | P2P |
 
-### Producing Nodes
-Producing nodes are configured for block production. They connect to the Telos peer-to-peer network and actively produce new blocks. Producing nodes produce blocks on the mainnet, if they are an assigned block producer as part of the active block producing schedule.
+## Producer/finalizer nodes
 
-Each producer node (top-21 DPoS) validates all blocks and transactions it receives. The nodes of elected (top-21 DPoS) producers take turns in bundling new transactions into blocks and broadcasting them to the network.
+An active BP's private producer signs scheduled blocks with a K1 key and finalizer votes with a BLS key. The BLS key, `vote-threads`, and persistent `finalizers-dir` make this role different from a legacy producer configuration.
 
-### Non-producing nodes
-Non-producing nodes also connect to the Telos peer-to-peer network, but they are not actively producing blocks. Instead, they are connected and synchronised with other peers from the Telos network.  Non-producing nodes are useful for:
-- proxy nodes, 
-- relaying API calls (API endpoints), 
-- validating transactions, 
-- monitoring the blockchain state history, and 
-- broadcasting information to other nodes.
+Use minimal plugins and private networking. Public RPC, history, and indexing workloads belong on separate hosts. See [Set Up a Telos Block Producer](/nodes/bp-nodes/setting-up-telos-validator-nodes/).
 
-`nodeos` enables you to set up a device for local development as a single node blockchain network.
-Non-producing nodes exposes one or more services publicly or privately by enabling one or more `nodeos` plug-ins, except the `producer_plugin`.
+## Vote relay/sentry nodes
 
-The behaviour of `nodeos` is determined mainly by which plug-ins are loaded and which plug-in options are selected. Some plug-ins are mandatory (`chain_plugin`, `net_plugin`, and `producer_plugin`) while others are optional. 
+Relays protect private producers from direct internet exposure and provide redundant P2P paths. Every intermediate relay that must carry Savanna votes needs a positive `vote-threads` setting, normally `4`, but it does not hold a BLS key.
 
-## Leap
-Leap is the blockchain node software and supporting tools that impelments the Antelope protocol. Download the source [here](https://github.com/AntelopeIO/leap).
+A generic public seed that is not on a producer's vote path can leave vote processing disabled.
 
-## Telos Nodes
-It's not uncommon to encounter a variety of different nodes such as: API node, Producer node, History node, and Seed node. All nodes update an internal database by applying the transactions as they arrive on incoming blocks. The difference between the node type lies in the amount of history they keep track of and the functionality they provide.
+## API nodes
 
-After proper installation of released Antelope.io core software, each node is implemented by the same executable, however, each node would need to set up different configurations to start. Although a block producing node can have full state history or run as an API endpoint, this would be a waste of resources. Block producing nodes should run with minimal plug-ins. Also, producing nodes should not have open network ports. We strongly recommend all node service providers to run and maintain their own nodes for reliability and security reasons.
+API nodes expose the chain API used by wallets, applications, exchanges, and monitoring. Bind `nodeos` HTTP locally and place TLS, access control, rate limits, and caching on a reverse proxy. API nodes do not need producer or finalizer keys.
 
-### API Node
----------                                       --------
-API nodes provide network services to client applications. They typically have account transaction histories accessible though API calls, but can vary in the amount of available history.
+## State History nodes
 
-### History API Node
---------                                        ---------
-State History (or History API) nodes are API nodes with a complete transaction history of all accounts that are used for querying transaction and account data from. There are various types of history API nodes, Hyperion being the most common on Telos.
+SHiP nodes enable `eosio::state_history_plugin` and stream block, trace, table-delta, and optional finality history to Hyperion or other indexers. They require substantially more storage and I/O than a chain-only API node.
 
-### Seed Node   
------------                                     --------------
-Seed nodes are for peering with other nodes on the P2P network. They offer blocks to peers over the P2P protocol and accept incoming P2P connections. Seed nodes are the first nodes contacted by a freshly started node. In that sense, they serve as an entry point into the network.
+Do not use the removed `history_plugin`. For EVM history, see [telos-reth](/nodes/non-bp-nodes/telos-reth/).
 
-Once a node has entered the network it will receive additional node addresses from its peers so all nodes can connect to each other. A seed node can also be an API node. The seed nodes are used only to locate or find complete nodes that are running the Telos Blockchain client.
+## Seed/P2P nodes
 
-When a new node wants to gain access to the network, it must connect with a seed node, which is a Telos client that is always active and has a static IP address. This client operates as a gateway to the Telos network. It is one of the first connections that Telos clients make at the beginning.
-
-Seed nodes play an important role within the network, operating from highly trusted servers. They enable new clients to connect to the Telos network automatically and without the need for manual intervention by a user. There remaains a risk that a node may engage in malpractice that would result in a negative mpact on the network. Therefore, it is not recommended to place trust in a single seed node.
-
-A seed node can also be an API node and the P2P list for mainnet and testnet can be found at the [node-template repo](https://github.com/telosnetwork/node-template). The genesis.json is also available there.
+Seed nodes accept P2P connections and help new nodes discover and synchronize with the network. Use multiple independently operated peers and obtain the current list from [validators.telos.net](https://validators.telos.net/) or the [Telos node-template repository](https://github.com/telosnetwork/node-template). Avoid copying static peer lists from old guides.

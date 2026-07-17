@@ -1,24 +1,50 @@
 ---
 sidebar_position: 3
 displayed_sidebar: devBar
-title: "Nodeos"
-hide_table_of_contents: true
+title: 'Nodeos'
+hide_table_of_contents: false
 ---
 
 # Nodeos
 
-`Nodeos` is distributed as part of the Antelope.io software suite. Each node can be configured (with specific functional plugins) to function as a:
-1. Block Producing node; or as 
-2. Non-producing node.
+`nodeos` is the Telos Zero node daemon. On Telos it is distributed in [TelosZero Core](https://github.com/telosnetwork/teloszero-core), the Telos-maintained continuation of Antelope Spring with Savanna consensus support.
 
-The behaviour of nodeos is determined mainly by which plug-ins are loaded and which plug-in options are used. Some plug-ins are mandatory (`chain_plugin`, `net_plugin`, and `producer_plugin`) while others are optional. For a full list of plug-ins, please visit [Nodeos Plug-ins](https://developers.eos.io/manuals/eos/latest/nodeos/plugins/index) for more details.
+TelosZero Core keeps the established runtime command names:
 
-`cleos` (CLI + EOS) is a command line interface with REST APIs exposed by `nodeos`. `cleos`. It is required to interact with the blockchain (via `nodeos`) and manages wallets (via `keosd`). Developers can also use cleos to deploy and test Telos smart contracts.
+- `nodeos` processes blocks and transactions, participates in P2P, serves APIs, produces blocks, and signs finalizer votes according to configuration;
+- `cleos` queries chain APIs and creates/signs transactions;
+- `keosd` manages supported wallet keys for `cleos`;
+- `spring-util` provides block-log, snapshot, chain-state, and BLS finalizer-key utilities.
 
-`keosd` (Key + EOS)  is a key manager service daemon for storing private keys and signing digital messages. It provides a secure key storage medium for keys to be encrypted at rest in the associated wallet file. `keosd` also defines a secure enclave for signing transaction created by cleos or a third part library.
+## Plugins and roles
 
-# Nodeos Getting Started
+`nodeos` functionality is selected through plugins and configuration options. Common plugins include:
 
-To install `nodeos` visit [Antelope.io Software Installation section](https://developers.eos.io/manuals/eos/latest/install/index), and follow the instructions provided. If you are new to Antelope, it is recommended that you install the [Antelope Prebuilt Binaries](https://github.com/AntelopeIO/leap), then proceed to the Getting Started section of the Antelope Developer Portal. 
+- `eosio::chain_plugin`
+- `eosio::net_plugin`
+- `eosio::producer_plugin`
+- `eosio::http_plugin`
+- `eosio::chain_api_plugin`
+- `eosio::state_history_plugin`
 
-If you are an advanced developer, a block producer, or no binaries are available for your platform, you may need to Build Antelope from source instead.
+The legacy `history_plugin` is not part of the supported post-Savanna setup. Use State History for indexers and keep public API/SHiP workloads off private producers.
+
+## Finalizer support
+
+When a producer configures a `PUB_BLS_...` signature provider, `vote-threads`, and `finalizers-dir`, the same `nodeos` process can sign Savanna finalizer votes. Relays on the vote path need vote threads but no BLS key. Pure API/SHiP nodes do not need to process votes.
+
+See [Finalizer Setup and Operations](/nodes/bp-nodes/finalizer-setup/) for the full lifecycle and safety rules.
+
+## Install and verify
+
+- BPs: [Install TelosZero Core](/nodes/bp-nodes/installing-node-software/)
+- Non-producing/exchange nodes: [TelosZero upgrade guide](/nodes/non-bp-nodes/exchange-teloszero-upgrade-guide/)
+- Releases: [github.com/telosnetwork/teloszero-core/releases](https://github.com/telosnetwork/teloszero-core/releases/latest)
+
+```bash
+nodeos --full-version
+cleos version client
+spring-util version full
+```
+
+Use only the tagged artifact and checksum approved for the target network.

@@ -1,297 +1,150 @@
 ---
-title: 'Installing Node Software'
+title: 'Install TelosZero Core'
 displayed_sidebar: devBar
-description: >-
-    This section describes all the steps
-    needed to install the software for a
-    Telos Block Producer
+description: Install and verify the supported TelosZero Core software for a Telos block producer.
 sidebar_position: 2
-hide_table_of_contents: true
+hide_table_of_contents: false
 ---
 
-# Installing Node Software
+# Install TelosZero Core
 
-## Installing Leap
+Telos block producers run **TelosZero Core**, the Telos-maintained continuation of Antelope Spring. The package provides the familiar `nodeos`, `cleos`, `keosd`, and `spring-util` commands and includes Savanna instant-finality support.
 
-Leap is a C++ implementation of the Antelope protocol, which Telos is built on. It contains blockchain node software and supporting tools for developers and node operators.
+:::info Post-Savanna guide
+This is the steady-state installation path for a network where Savanna instant finality is already active. It does not cover the one-time Lightspeed/Savanna activation or `switchtosvnn` process.
+:::
 
-Leap currently supports the following operating systems:
-  * Ubuntu 22.04 Jammy
-  * Ubuntu 20.04 Focal
+## Supported release
 
-Other Unix derivatives such as macOS are tended to on a best-effort basis and may not be full featured. If you aren't using Ubuntu, please visit the [Build Unsupported OS](https://github.com/AntelopeIO/leap/blob/main/docs/00_install/01_build-from-source/00_build-unsupported-os.md) page to explore your options.
+The current public production package is:
 
-If you are running an unsupported Ubuntu derivative, such as Linux Mint, you can find the version of Ubuntu your distribution was based on by using this command:
+| Item | Value |
+|---|---|
+| Release | [`teloszero-v1.2.2`](https://github.com/telosnetwork/teloszero-core/releases/tag/teloszero-v1.2.2) |
+| Package | `teloszero-core_1.2.2_amd64.deb` |
+| SHA-256 | `285fdfc1abde5104892d94b1f380c6d79aba35eac3413f139119ea88574c5007` |
+| Release-validated host | Ubuntu 22.04, x86-64 |
+
+Always use a **tagged TelosZero Core release approved for the target Telos network**. Do not deploy the repository's `main` branch or silently substitute a newer release without an operator notice and validation.
+
+The project source also documents Ubuntu 20.04 builds, but the `teloszero-v1.2.2` release notes record the package install smoke test on Ubuntu 22.04. Treat another host OS as an explicitly tested operator exception, not an assumed production target.
+
+## 1. Download and verify the package
 
 ```bash
-cat /etc/upstream-release/lsb-release
+cd /tmp
+curl -fLO https://github.com/telosnetwork/teloszero-core/releases/download/teloszero-v1.2.2/teloszero-core_1.2.2_amd64.deb
+
+echo '285fdfc1abde5104892d94b1f380c6d79aba35eac3413f139119ea88574c5007  teloszero-core_1.2.2_amd64.deb' \
+  | sha256sum --check --strict
 ```
 
-If you are running an unsupported Ubuntu derivative, such as Linux Mint, you can find the version of Ubuntu your distribution was based on by using this command:
+The checksum command must print `OK`. Stop if it does not.
 
-> NOTE: If you are new to EOSIO, it is recommended that you install the EOSIO Prebuilt Binaries. If you are an advanced developer, a block producer, or no binaries are available for your platform, you may need to Build EOSIO from source depending on your OS.
-
-### Binary Installation
-
-This is the fastest way to get started. From the [latest release](https://github.com/AntelopeIO/leap/releases/latest) page, download a binary for one of our [supported operating systems](#supported-operating-systems), or visit the [release tags](https://github.com/AntelopeIO/leap/releases) page to download a binary for a specific version of Leap.
-
-Once you have a `*.deb` file downloaded for your version of Ubuntu, you can install it as follows:
+## 2. Install TelosZero Core
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y ~/Downloads/leap*.deb
+sudo apt-get install -y ./teloszero-core_1.2.2_amd64.deb
 ```
 
-Your download path may vary. If you are in an Ubuntu docker container, omit `sudo` because you run as `root` by default.
+The package conflicts with historical `leap`, `spring`, and `antelope-spring` packages because they install the same command names. `apt` may replace an older package during installation.
 
-Finally, verify Leap was installed correctly:
+Verify the installed binaries:
 
 ```bash
 nodeos --full-version
-```
-You should see a [semantic version](https://semver.org) string followed by a `git` commit hash with no errors. For example:
-
-```
-v3.1.2-0b64f879e3ebe2e4df09d2e62f1fc164cc1125d1
+cleos version client
+spring-util version full
 ```
 
-### Build and Install from Source
+The version may contain a Telos-specific patch suffix when an operator-approved hotfix is deployed. Match the complete version and artifact checksum to the current Telos operator notice; do not infer the approved producer build from a random public RPC endpoint.
 
-You can also build and install Leap from source.
+## 3. Create a dedicated service account and directories
 
-#### Prerequisites
-You will need to build on a [supported operating system](#supported-operating-systems).
+The examples in the BP guides use these paths:
 
-Requirements to build:
-- C++20 compiler and standard library
-- CMake 3.16+
-- LLVM 7 - 11 - for Linux only
-  - newer versions do not work
-- libcurl 7.40.0+
-- git
-- GMP
-- Python 3
-- python3-numpy
-- zlib
+```text
+/etc/telos/mainnet-primary/     configuration
+/var/lib/telos/mainnet-primary/ node data, blocks, and snapshots
+/var/lib/telos/finalizers/mainnet-primary/ finalizer voting safety state
+```
 
-#### Step 1 - Clone
-
-If you don't have the Leap repo cloned to your computer yet, [open a terminal](https://itsfoss.com/open-terminal-ubuntu) and navigate to the folder where you want to clone the Leap repository:
+Create them with restrictive ownership:
 
 ```bash
-cd ~/Downloads
+id -u telos >/dev/null 2>&1 \
+  || sudo useradd --system --home-dir /var/lib/telos --shell /usr/sbin/nologin telos
+
+sudo install -d -o root -g telos -m 0750 /etc/telos/mainnet-primary
+sudo install -d -o telos -g telos -m 0750 /var/lib/telos/mainnet-primary
+sudo install -d -o telos -g telos -m 0700 /var/lib/telos/finalizers/mainnet-primary
 ```
 
-Clone Leap using either HTTPS...
+The instance-specific finalizer directory must be on persistent local storage.
+Never place it on `tmpfs` or a shared filesystem, and never share one directory
+between mainnet, testnet, primary, or backup instances.
+
+## 4. Obtain a current snapshot
+
+A new producer should start from a recent snapshot supplied by a trusted provider and then sync to head through multiple trusted peers.
+
+- [EOS USA Telos snapshots](https://snapshots.eosusa.io/snapshots/telos/)
+- [Telos Unlimited snapshots](https://snapshots.telosunlimited.com/)
+- [EOS Nation snapshots](https://snapshots.eosnation.io/)
+
+Use a provider-published checksum when available. Place the decompressed `.bin` file under `/var/lib/telos/mainnet-primary/snapshots/` and make it readable by the `telos` user.
 
 ```bash
-git clone --recursive https://github.com/AntelopeIO/leap.git
+sudo install -d -o telos -g telos -m 0750 /var/lib/telos/mainnet-primary/snapshots
+sudo chown telos:telos /var/lib/telos/mainnet-primary/snapshots/<snapshot-file>.bin
 ```
 
-...or SSH:
+The Telos mainnet chain ID is:
 
-```bash
-git clone --recursive git@github.com:AntelopeIO/leap.git
+```text
+4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11
 ```
 
-:::note
-**HTTPS vs. SSH Clone**   
-Both an HTTPS or SSH git clone will yield the same result - a folder named `leap` containing our source code. It doesn't matter which type you use.
+Create the producer configuration before starting the snapshot; continue with [Set Up a Telos Block Producer](/nodes/bp-nodes/setting-up-telos-validator-nodes/).
+
+## 5. First start from the snapshot
+
+:::warning Scheduled replacement hosts
+If this host replaces a producer that may still be scheduled, set
+`pause-on-startup = true` before the snapshot import. Do not enable K1 block
+production until the old signer is stopped and fenced. Use a new BLS key and
+fresh local finalizer safety state on the replacement.
 :::
 
-Navigate into that folder:
+After creating `config.ini`, perform the first launch in the foreground:
 
 ```bash
-cd leap
+sudo -u telos /usr/bin/nodeos \
+  --config-dir /etc/telos/mainnet-primary \
+  --data-dir /var/lib/telos/mainnet-primary \
+  --snapshot /var/lib/telos/mainnet-primary/snapshots/<snapshot-file>.bin
 ```
 
-#### Step 2 - Checkout Release Tag or Branch
+Use `--snapshot` only on this first launch. Stop the foreground process cleanly after it has loaded the snapshot, then start the systemd service described in the setup guide without the flag.
 
-Choose which [release](https://github.com/AntelopeIO/leap/releases) or [branch](#branches) you would like to build, then check it out. If you are not sure, use the [latest release](https://github.com/AntelopeIO/leap/releases/latest). For example, if you want to build release 3.1.2 then you would check it out using its tag, `v3.1.2`. In the example below, replace `v0.0.0` with your selected release tag accordingly:
+## Existing producer nodes
 
-```bash
-git fetch --all --tags
-git checkout v0.0.0
-```
+For a normal package update:
 
-Once you are on the branch or release tag you want to build, make sure everything is up-to-date:
+1. Confirm the approved release and checksum.
+2. Stop `nodeos` cleanly.
+3. Preserve the configuration, block log, and the live finalizer directory.
+4. Install the tagged package.
+5. Follow any release-specific replay or snapshot instruction.
+6. Restart and complete every verification check.
 
-```bash
-git pull
-git submodule update --init --recursive
-```
+:::danger Finalizer safety state
+An existing finalizer must retain the complete, current `finalizers/safety.dat` associated with its BLS key. Never restore an older copy, copy it to another host, or reuse the BLS key when this file is missing or uncertain. Follow [Finalizer Setup and Operations](/nodes/bp-nodes/finalizer-setup/#recover-from-a-missing-or-corrupt-safetydat) instead.
+:::
 
-#### Step 3 - Build
+If the node is still running Leap or pre-TelosZero Spring, use the [TelosZero upgrade guide](/nodes/non-bp-nodes/exchange-teloszero-upgrade-guide/) for the package and snapshot-format migration, then return to the BP configuration and finalizer guides.
 
-Select build instructions below for a [pinned build](#pinned-build) (preferred) or an [unpinned build](#unpinned-build).
+## Source builds
 
-**Pinned vs. Unpinned Build**  
-We have two types of builds for Leap: "pinned" and "unpinned." A pinned build is a reproducible build with the build environment and dependency versions fixed by the development team. In contrast, unpinned builds use the dependency versions provided by the build platform. Unpinned builds tend to be quicker because the pinned build environment must be built from scratch. Pinned builds, in addition to being reproducible, ensure the compiler remains the same between builds of different Leap major versions. Leap requires the compiler version to remain the same, otherwise its state might need to be recovered from a portable snapshot or the chain needs to be replayed.
-
-**A Warning On Parallel Compilation Jobs (`-j` flag)**  
-When building C/C++ software, often the build is performed in parallel via a command such as `make -j "$(nproc)"` which uses all available CPU threads. However, be aware that some compilation units (`*.cpp` files) in Leap will consume nearly 4GB of memory. Failures due to memory exhaustion will typically, but not always, manifest as compiler crashes. Using all available CPU threads may also prevent you from doing other things on your computer during compilation. For these reasons, consider reducing this value.
-
-**Docker and `sudo`**
-If you are in an Ubuntu docker container, omit `sudo` from all commands because you run as `root` by default. Most other docker containers also exclude `sudo`, especially Debian-family containers. If your shell prompt is a hash tag (`#`), omit `sudo`.
-
-
-##### Pinned Reproducible Build
-The pinned reproducible build requires Docker. Make sure you are in the root of the `leap` repo and then run
-
-```bash
-DOCKER_BUILDKIT=1 docker build -f tools/reproducible.Dockerfile -o . .
-```
-
-This command will take a substantial amount of time because a toolchain is built from scratch. Upon completion, the current directory will contain a built `.deb` and `.tar.gz` (you can change the `-o .` argument to place the output in a different directory). If needing to reduce the number of parallel jobs as warned above, run the command as,
-
-```bash
-DOCKER_BUILDKIT=1 docker build --build-arg LEAP_BUILD_JOBS=4 -f tools/reproducible.Dockerfile -o . .
-```
-
-##### Unpinned Build
-
-The following instructions are valid for this branch. Other release branches may have different requirements, so ensure you follow the directions in the branch or release you intend to build. If you are in an Ubuntu docker container, omit `sudo` because you run as `root` by default.
-
-Install dependencies:
-
-```bash
-sudo apt-get update
-sudo apt-get install -y \
-        build-essential \
-        cmake \
-        git \
-        libcurl4-openssl-dev \
-        libgmp-dev \
-        llvm-11-dev \
-        python3-numpy \
-        file \
-        zlib1g-dev
-```
-
-On Ubuntu 20.04, install gcc-10 which has C++20 support:
-
-```bash
-sudo apt-get install -y g++-10
-```
-
-To build, make sure you are in the root of the `leap` repo, then run the following command:
-
-```bash
-mkdir -p build
-cd build
-
-## on Ubuntu 20, specify the gcc-10 compiler
-cmake -DCMAKE_C_COMPILER=gcc-10 -DCMAKE_CXX_COMPILER=g++-10 -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/lib/llvm-11 ..
-
-## on Ubuntu 22, the default gcc version is 11, using the default compiler is fine
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/lib/llvm-11 ..
-
-make -j "$(nproc)" package
-```
-
-Now you can optionally [test](#step-4---test) your build, or [install](#step-5---install) the `*.deb` binary packages, which will be in the root of your build directory.
-
-#### Step 4 - Test
-
-Leap supports the following test suites:
-
-Test Suite | Test Type | [Test Size](https://testing.googleblog.com/2010/12/test-sizes.html) | Notes
----|:---:|:---:|---
-[Parallelizable tests](#parallelizable-tests) | Unit tests | Small
-[WASM spec tests](#wasm-spec-tests) | Unit tests | Small | Unit tests for our WASM runtime, each short but _very_ CPU-intensive
-[Serial tests](#serial-tests) | Component/Integration | Medium
-[Long-running tests](#long-running-tests) | Integration | Medium-to-Large | Tests which take an extraordinarily long amount of time to run
-
-When building from source, we recommended running at least the [parallelizable tests](#parallelizable-tests).
-
-##### Parallelizable Tests
-
-This test suite consists of any test that does not require shared resources, such as file descriptors, specific folders, or ports, and can therefore be run concurrently in different threads without side effects (hence, easily parallelized). These are mostly unit tests and [small tests](https://testing.googleblog.com/2010/12/test-sizes.html) which complete in a short amount of time.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-
-```bash
-ctest -j "$(nproc)" -LE _tests
-```
-##### WASM Spec Tests
-The WASM spec tests verify that our WASM execution engine is compliant with the web assembly standard. These are very [small](https://testing.googleblog.com/2010/12/test-sizes.html), very fast unit tests. However, there are over a thousand of them so the suite can take a little time to run. These tests are extremely CPU-intensive.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-```bash
-ctest -j "$(nproc)" -L wasm_spec_tests
-```
-We have observed severe performance issues when multiple virtual machines are running this test suite on the same physical host at the same time, for example in a CICD system. This can be resolved by disabling hyperthreading on the host.
-
-##### Serial Tests
-
-The serial test suite consists of [medium](https://testing.googleblog.com/2010/12/test-sizes.html) component or integration tests that use specific paths, ports, rely on process names, or similar, and cannot be run concurrently with other tests. Serial tests can be sensitive to other software running on the same host and they may `SIGKILL` other `nodeos` processes. These tests take a moderate amount of time to complete, but we recommend running them.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-```bash
-ctest -L "nonparallelizable_tests"
-```
-
-##### Long-Running Tests
-The long-running tests are [medium-to-large](https://testing.googleblog.com/2010/12/test-sizes.html) integration tests that rely on shared resources and take a very long time to run.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-```bash
-ctest -L "long_running_tests"
-```
-
-##### WASM Spec Tests
-
-The WASM spec tests verify that our WASM execution engine is compliant with the web assembly standard. These are very [small](https://testing.googleblog.com/2010/12/test-sizes.html), very fast unit tests. However, there are over a thousand of them so the suite can take a little time to run. These tests are extremely CPU-intensive.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-
-```bash
-ctest -j "$(nproc)" -L wasm_spec_tests
-```
-
-We have observed severe performance issues when multiple virtual machines are running this test suite on the same physical host at the same time, for example in a CICD system. This can be resolved by disabling hyperthreading on the host.
-
-##### Serial Tests
-
-The serial test suite consists of [medium](https://testing.googleblog.com/2010/12/test-sizes.html) component or integration tests that use specific paths, ports, rely on process names, or similar, and cannot be run concurrently with other tests. Serial tests can be sensitive to other software running on the same host and they may `SIGKILL` other `nodeos` processes. These tests take a moderate amount of time to complete, but we recommend running them.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-
-```bash
-ctest -L "nonparallelizable_tests"
-```
-
-##### Long-Running Tests
-
-The long-running tests are [medium-to-large](https://testing.googleblog.com/2010/12/test-sizes.html) integration tests that rely on shared resources and take a very long time to run.
-
-You can invoke them by running `ctest` from a terminal in your Leap build directory and specifying the following arguments:
-
-```bash
-ctest -L "long_running_tests"
-```
-
-#### Step 5 - Install
-
-Once you have [built](#step-3---build-the-source-code) Leap and [tested](#step-4---test) your build, you can install Leap on your system. Don't forget to omit `sudo` if you are running in a docker container.
-
-We recommend installing the binary package you just built. Navigate to your Leap build directory in a terminal and run this command:
-
-```bash
-sudo apt-get update
-sudo apt-get install -y ./leap[-_][0-9]*.deb
-```
-
-It is also possible to install using `make` instead:
-
-```bash
-sudo make install
-```
-
-### Bash Autocomplete
-
-`cleos` and `leap-util` offer a substantial amount of functionality. Consider using bash's autocompletion support which makes it easier to discover all their various options.
-
-For our provided `.deb` packages simply install Ubuntu's `bash-completion` package: `apt-get install bash-completion` (you may need to log out/in after installing).
-
-If building from source install the `build/programs/cleos/bash-completion/completions/cleos` and `build/programs/leap-util/bash-completion/completions/leap-util` files to your bash-completion directory. Refer to [bash-completion's documentation](https://github.com/scop/bash-completion#faq) on the possible install locations.
+Production BPs should prefer the published package so every operator can verify the same artifact. If a source build is explicitly approved, use the exact tagged source and build instructions in the [TelosZero Core repository](https://github.com/telosnetwork/teloszero-core), record the commit, and publish a reproducible package checksum to the BP coordination channel before deployment.
