@@ -355,21 +355,24 @@ plugin = eosio::chain_api_plugin
 plugin = eosio::net_plugin
 
 vote-threads = 0
-api-accept-transactions = false
+api-accept-transactions = true
 
 # Append your peers here (see appendix), e.g.:
 # p2p-peer-address = telos.caleos.io:9877
 # p2p-peer-address = telos.eosrio.io:8092
 ```
 
-That is all a read-only chain-API ([Path A](#path-a-api-node-without-full-history)) node requires. For **State History / Hyperion**, add the [Path B](#path-b-api-node-with-full-history) plugin block. For optional performance and billing tuning (`read-only-read-window-time-us`, `disable-subjective-*-billing`, etc.), see [Recommended API-node settings](#recommended-api-node-settings). To take snapshots, temporarily enable `eosio::producer_plugin` plus `eosio::producer_api_plugin` while the API remains private, then remove both again.
+That is all a transaction-accepting chain-API ([Path A](#path-a-api-node-without-full-history)) node requires. For **State History / Hyperion**, add the [Path B](#path-b-api-node-with-full-history) plugin block. For optional performance and billing tuning (`read-only-read-window-time-us`, `disable-subjective-*-billing`, etc.), see [Recommended API-node settings](#recommended-api-node-settings). To take snapshots, temporarily enable `eosio::producer_api_plugin` while the API remains private, then remove that API plugin again. `nodeos` autostarts `eosio::producer_plugin`, so it does not need an explicit configuration entry.
 
 :::caution
 Do not carry over `producer-threads`, `chain-id`, or any [option removed in Spring/Leap 5](#remove-options-that-were-dropped-in-springleap-5) — `nodeos` will refuse to start. For **testnet**, use trusted testnet genesis/snapshot state and peers, then verify the expected testnet ID through `get_info`.
 :::
 
-The maintained read-only role profiles are in the official
-[Telos node-template repository](https://github.com/telosnetwork/node-template).
+The official [Telos node-template repository](https://github.com/telosnetwork/node-template)
+also provides hardened read-only API and SHiP profiles. Those profiles set
+`api-accept-transactions = false`; retain the transaction-accepting setting above
+on any exchange node used to submit withdrawals. Restrict its write endpoints to
+authenticated, allowlisted exchange systems at the reverse proxy.
 
 ---
 
@@ -387,7 +390,6 @@ plugin = eosio::http_plugin
 plugin = eosio::chain_plugin
 plugin = eosio::chain_api_plugin
 plugin = eosio::net_plugin
-plugin = eosio::producer_plugin
 ```
 
 ### Operational notes
