@@ -27,6 +27,7 @@ const sidebars = {
       label: 'Build On Telos',
       items: [
         'build/network-info',
+        'build/x402',
         'build/telos-contracts',
         'build/block-explorers',
         'build/faucets',
