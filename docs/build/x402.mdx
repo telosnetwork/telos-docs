@@ -1,0 +1,213 @@
+---
+displayed_sidebar: devBar
+title: "x402 Payments"
+description: >-
+  Accept and test HTTP-native x402 payments on Telos EVM.
+---
+
+[x402](https://docs.x402.org/introduction) is an open payment standard that lets an API,
+website, or AI agent request and complete payment as part of an HTTP exchange. A protected
+resource responds with `402 Payment Required`, the client signs a payment authorization, and
+the server returns the resource after the payment has been verified and settled.
+
+Telos EVM can be used with the x402 EVM implementation through its CAIP-2 network identifier,
+`eip155:40`. The Telos reference deployment uses USDC.e and the `exact` scheme for fixed-price,
+pay-per-request access.
+
+## Telos x402 configuration
+
+| Setting | Value |
+| --- | --- |
+| Network | Telos EVM Mainnet |
+| Chain ID | `40` |
+| x402 network identifier | `eip155:40` |
+| RPC URL | `https://rpc.telos.net` |
+| Gas token | `TLOS` |
+| Payment asset | USDC.e / Bridged USDC (Stargate) |
+| USDC.e contract | `0xF1815bd50389c46847f0Bda824eC8da914045D14` |
+| USDC.e decimals | `6` |
+| EIP-712 domain name | `Bridged USDC (Stargate)` |
+| EIP-712 domain version | `2` |
+| Live payment scheme | `exact` using EIP-3009 |
+
+The token name and version are part of the EIP-712 signature domain and must match the token
+contract exactly. The user-facing asset name is USDC.e, while the signature domain name is
+`Bridged USDC (Stargate)`.
+
+## Try the live mainnet demo
+
+The Telos x402 reference service is available at
+[x402.telos.net](https://x402.telos.net/):
+
+- [Interactive wallet demo](https://x402.telos.net/demo/)
+- [Paid weather endpoint](https://x402.telos.net/weather)
+- [Service health](https://x402.telos.net/health)
+
+:::warning[The demo uses real mainnet funds]
+
+Each successful demo request transfers **0.001 USDC.e** on Telos EVM. Connecting a wallet or
+inspecting the unpaid challenge does not transfer funds.
+
+:::
+
+To make a payment:
+
+1. Open the interactive demo in a browser with an injected EVM wallet such as MetaMask.
+2. Connect the wallet and switch to Telos EVM Mainnet when prompted.
+3. Make sure the connected account has at least `0.001 USDC.e` on Telos EVM.
+4. Select **Pay 0.001 USDC.e & fetch weather** and review the signature request.
+5. After settlement, use the displayed transaction link to inspect the transfer on Teloscan.
+
+The buyer signs an EIP-3009 `transferWithAuthorization` message and does not submit an onchain
+transaction. The reference facilitator submits the transfer and pays the TLOS gas, so the buyer
+does not need TLOS for this payment flow.
+
+## Inspect the HTTP 402 challenge
+
+An unpaid request is safe and returns the payment requirements without moving funds:
+
+```bash
+curl -i https://x402.telos.net/weather
+```
+
+The response has status `402` and a Base64-encoded `PAYMENT-REQUIRED` header. With Node.js 18 or
+newer, you can decode the current challenge as follows:
+
+```bash
+node -e 'fetch("https://x402.telos.net/weather").then(r => {
+  const value = r.headers.get("payment-required");
+  console.log("HTTP", r.status);
+  console.log(JSON.stringify(JSON.parse(Buffer.from(value, "base64").toString()), null, 2));
+})'
+```
+
+The decoded `accepts` entry includes the current scheme, network, amount, token contract,
+recipient, authorization timeout, and EIP-712 token metadata. Treat the runtime challenge as the
+source of truth for the current price and recipient.
+
+## How the payment flow works
+
+1. The client requests a protected resource without payment.
+2. The resource server returns `402 Payment Required` with a `PAYMENT-REQUIRED` header.
+3. The client validates the network, asset, amount, recipient, and expiry.
+4. The wallet signs a one-time EIP-3009 authorization for the advertised payment.
+5. The client repeats the request with the signed payload in `PAYMENT-SIGNATURE`.
+6. The server or facilitator verifies the authorization, settles it on Telos EVM, and waits for a
+   receipt.
+7. The server returns the protected response with settlement details in `PAYMENT-RESPONSE`.
+
+The facilitator is not a custodian: it can only execute the token authorization signed by the
+buyer. The signed values restrict the transfer amount, token, sender, recipient, validity window,
+and nonce.
+
+## Build an x402 endpoint on Telos
+
+The x402 TypeScript SDK includes middleware for Hono, Express, Fastify, and Next.js. This Hono
+example protects `GET /weather` with an exact `0.001 USDC.e` payment:
+
+```bash
+npm install @x402/core @x402/evm @x402/hono hono
+```
+
+```ts
+import { HTTPFacilitatorClient } from "@x402/core/server";
+import { ExactEvmScheme } from "@x402/evm/exact/server";
+import { paymentMiddleware, x402ResourceServer } from "@x402/hono";
+import { Hono } from "hono";
+
+const app = new Hono();
+const network = "eip155:40";
+
+const facilitator = new HTTPFacilitatorClient({
+  url: process.env.X402_FACILITATOR_URL!,
+});
+
+const resourceServer = new x402ResourceServer(facilitator).register(
+  network,
+  new ExactEvmScheme(),
+);
+
+app.use(
+  paymentMiddleware(
+    {
+      "GET /weather": {
+        accepts: {
+          scheme: "exact",
+          network,
+          payTo: process.env.PAY_TO_ADDRESS!,
+          price: {
+            amount: "1000", // 0.001 USDC.e in atomic units
+            asset: "0xF1815bd50389c46847f0Bda824eC8da914045D14",
+            extra: {
+              name: "Bridged USDC (Stargate)",
+              version: "2",
+            },
+          },
+        },
+        description: "Weather data paid with USDC.e on Telos EVM",
+        mimeType: "application/json",
+      },
+    },
+    resourceServer,
+  ),
+);
+
+app.get("/weather", context =>
+  context.json({ report: { condition: "sunny", temperatureF: 70 } }),
+);
+
+export default app;
+```
+
+Replace `PAY_TO_ADDRESS` with the Telos EVM address that should receive the USDC.e. Do not use a
+private key as the receiving address configuration.
+
+:::warning[Use a Telos-capable facilitator]
+
+Network support is a facilitator capability, not only an SDK capability. Before going live,
+confirm that the facilitator advertises the `exact` scheme on `eip155:40` and supports EIP-3009
+for the USDC.e contract above. If it does not, run a dedicated facilitator configured for Telos.
+
+The facilitator used by the reference demo is internal to that service and is not a shared public
+facilitator endpoint.
+
+:::
+
+## Facilitator requirements
+
+A facilitator that settles x402 payments on Telos should:
+
+- connect to `https://rpc.telos.net` and reject any unexpected chain ID;
+- register the `exact` EVM scheme for `eip155:40`;
+- verify the full payment requirements before broadcasting;
+- submit EIP-3009 `transferWithAuthorization` calls to the USDC.e contract;
+- keep enough TLOS in a dedicated, low-balance hot wallet for settlement gas;
+- coordinate transaction nonces when requests can settle concurrently;
+- wait for a successful Telos EVM receipt before reporting settlement;
+- return structured verification and settlement errors without logging private keys or full signed
+  payment payloads.
+
+Keep the facilitator signer separate from treasury custody. The `payTo` recipient can be a
+different address controlled by the seller or a Telos Safe.
+
+## Production checklist
+
+- Store the facilitator private key in a secret manager, never in source code or frontend code.
+- Fetch the current Telos gas price rather than hard-coding it.
+- Maintain a readiness check for RPC connectivity, chain ID, signer balance, and recent block
+  progress.
+- Use short authorization windows and enforce replay protection.
+- For browser clients, allow `PAYMENT-SIGNATURE` and expose `PAYMENT-REQUIRED` and
+  `PAYMENT-RESPONSE` in the CORS policy.
+- Monitor settlement receipts and alert on repeated verification, nonce, RPC, or reverted
+  transaction failures.
+- Test with a dedicated wallet and small value before accepting production traffic.
+
+## Related resources
+
+- [x402 documentation](https://docs.x402.org/introduction)
+- [x402 seller quickstart](https://docs.x402.org/getting-started/quickstart-for-sellers)
+- [x402 networks and token support](https://docs.x402.org/core-concepts/network-and-token-support)
+- [x402 reference implementation](https://github.com/x402-foundation/x402)
+- [Telos EVM network information](/build/network-info/)
+- [Teloscan](https://www.teloscan.io/)
