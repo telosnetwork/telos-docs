@@ -15,27 +15,31 @@ displayed_sidebar: devBar
 
 The DIA oracle on Telos EVM is free of use. dApps built on Telos EVM can leverage the oracles to access up-to-date asset price information. These oracles are designed for production environments and comes with a predefined list of feeds and settings. For dApps requiring a custom oracle with a different set of assets and configurations, they should [contact DIA on Telegram](https://t.me/DIAOracles_Support_Bot).
 
+:::warning[Oracle migration]
+DIA migrated the Telos Mainnet oracle to a new contract. Update integrations to **`0x0B4d6f1a81488F780196907688C74E078c93eec9`**.
+
+The previous address (`0xf774801c9f1b11e70966CE65EC7f95d7730F380d`) is legacy. The new contract uses the same `getValue(string)` interface and the same 0.2% / 24h update parameters, but returns prices with **18 decimals** (the legacy contract used 8).
+:::
+
 ### Deployed contracts
 
 Access the oracles in the smart contracts below:
 
-- **Telos Mainnet Oracle**: [https://www.teloscan.io/address/0xf774801c9f1b11e70966CE65EC7f95d7730F380d](https://www.teloscan.io/address/0xf774801c9f1b11e70966CE65EC7f95d7730F380d)
+- **Telos Mainnet Oracle (current)**: [`0x0B4d6f1a81488F780196907688C74E078c93eec9`](https://www.teloscan.io/address/0x0B4d6f1a81488F780196907688C74E078c93eec9)
+- **Telos Mainnet Oracle (legacy)**: [`0xf774801c9f1b11e70966CE65EC7f95d7730F380d`](https://www.teloscan.io/address/0xf774801c9f1b11e70966CE65EC7f95d7730F380d)
 
 ### Included price feeds + data sources
 
-The Telos oracle includes the following price feeds:
+The current Telos oracle includes the following price feeds:
 
-| Asset Ticker | Asset Blockchain    | Asset Address                              | Asset Markets Overview                                                                                                         |
-| ------------ | ------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------ |
-| USDT         | Ethereum            | 0xdAC17F958D2ee523a2206206994597C13D831ec7 | [USDT Asset Information](https://www.diadata.org/app/price/asset/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7/)         |
-| USDC         | Ethereum            | 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48 | [USDC Asset Information](https://www.diadata.org/app/price/asset/Ethereum/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/)         |
-| ETH          | Ethereum            | 0x0000000000000000000000000000000000000000 | [ETH Asset Information](https://www.diadata.org/app/price/asset/Ethereum/0x0000000000000000000000000000000000000000/)          |
-| BTC          | Bitcoin             | 0x0000000000000000000000000000000000000000 | [BTC Asset Information](https://www.diadata.org/app/price/asset/Bitcoin/0x0000000000000000000000000000000000000000/)           |
-| TLOS         | Telos               | 0x0000000000000000000000000000000000000000 | [TLOS Asset Information](https://www.diadata.org/app/price/asset/Telos/0x0000000000000000000000000000000000000000/)            |
-| MATIC        | Polygon             | 0x0000000000000000000000000000000000001010 | [MATIC Asset Information](https://www.diadata.org/app/price/asset/Polygon/0x0000000000000000000000000000000000001010/)         |
-| BNB          | Binance Smart Chain | 0x0000000000000000000000000000000000000000 | [BNB Asset Information](https://www.diadata.org/app/price/asset/BinanceSmartChain/0x0000000000000000000000000000000000000000/) |
-| AVAX         | Avalanche           | 0x0000000000000000000000000000000000000000 | [AVAX Asset Information](https://www.diadata.org/app/price/asset/Avalanche/0x0000000000000000000000000000000000000000/)        |
-| S            | Sonic               | 0x0000000000000000000000000000000000000000 | [S Asset Information](https://www.diadata.org/app/price/asset/Sonic/0x0000000000000000000000000000000000000000/)               |
+| Asset Ticker | Query key | Asset Markets Overview                                                                                                         |
+| ------------ | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| USDT         | USDT/USD  | [USDT Asset Information](https://www.diadata.org/app/price/asset/Ethereum/0xdAC17F958D2ee523a2206206994597C13D831ec7/)         |
+| USDC         | USDC/USD  | [USDC Asset Information](https://www.diadata.org/app/price/asset/Ethereum/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/)         |
+| ETH          | ETH/USD   | [ETH Asset Information](https://www.diadata.org/app/price/asset/Ethereum/0x0000000000000000000000000000000000000000/)          |
+| BTC          | BTC/USD   | [BTC Asset Information](https://www.diadata.org/app/price/asset/Bitcoin/0x0000000000000000000000000000000000000000/)           |
+| BNB          | BNB/USD   | [BNB Asset Information](https://www.diadata.org/app/price/asset/BinanceSmartChain/0x0000000000000000000000000000000000000000/) |
+| TLOS         | TLOS/USD  | [TLOS Asset Information](https://www.diadata.org/app/price/asset/Telos/0x0000000000000000000000000000000000000000/)            |
 
 ### Oracle configuration settings
 
@@ -51,13 +55,33 @@ The oracle operates a trade collection window of 2 minutes, distinct from the he
 
 ### How to access DIA oracles?
 
-Here is an example of how to access a price value on DIA oracles:
+Here is an example of how to access a price value on the current DIA oracle:
 
-1. Access your custom oracle smart contract on Telos.
-2. Call `getValue(pair_name)` with `pair_name` being the full pair name such as `BTC/USD`. You can use the "Read" section on the explorer to execute this call.
+1. Access the current oracle contract on Telos: [`0x0B4d6f1a81488F780196907688C74E078c93eec9`](https://www.teloscan.io/address/0x0B4d6f1a81488F780196907688C74E078c93eec9).
+2. Call `getValue(pair_name)` with `pair_name` being the full pair name such as `TLOS/USD` or `USDT/USD`. You can use the "Read" section on the explorer to execute this call.
 3. The response of the call contains two values:
-   1. The current asset price in USD with a fix-comma notation of 8 decimals.
+   1. The current asset price in USD with **18 decimals** (for example, `999050000000000000` is `$0.99905`).
    2. The UNIX timestamp of the last oracle update.
+
+```solidity
+pragma solidity 0.8.29;
+
+interface IDIAOracleV2 {
+    function getValue(string memory) external view returns (uint128, uint128);
+}
+
+contract DIAOracleV2Consumer {
+    address immutable ORACLE = 0x0B4d6f1a81488F780196907688C74E078c93eec9;
+
+    function getPrice(string memory key)
+        external
+        view
+        returns (uint128 latestPrice, uint128 timestampOfLatestPrice)
+    {
+        (latestPrice, timestampOfLatestPrice) = IDIAOracleV2(ORACLE).getValue(key);
+    }
+}
+```
 
 You can view the complete integration guide on Telos [here](https://www.diadata.org/docs/guides/chain-specific-guide/telos#telos).
 
