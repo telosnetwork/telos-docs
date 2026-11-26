@@ -26,12 +26,12 @@ TelosZero Core is the Telos-maintained continuation of **Antelope Spring** (whic
 
 [TelosZero Core](https://github.com/telosnetwork/teloszero-core) is the node software maintained by Telos Network for Telos Zero operators, infrastructure providers, exchanges and tooling teams. It preserves Antelope Spring runtime compatibility while moving release authority, packaging, provenance and long-term maintenance under Telos stewardship.
 
-- **Latest production release:** [`teloszero-v1.2.2`](https://github.com/telosnetwork/teloszero-core/releases/latest) (based on Antelope Spring `v1.2.2`).
-- **Production release branch:** `release/1.2-teloszero`.
-- **Operator package:** `teloszero-core_1.2.2_amd64.deb`.
+- **Latest published release:** [`teloszero-v1.4.1`](https://github.com/telosnetwork/teloszero-core/releases/tag/teloszero-v1.4.1) (based on Antelope Spring `v1.2.2` with Telos fixes).
+- **Maintenance branch:** `release/1.4.1-teloszero` (includes changes merged after the tag).
+- **Operator package:** `teloszero-core_1.4.1_amd64.deb`.
 
 :::warning Do not run `main` in production
-`main` is the development branch. Always deploy a **tagged release** (`teloszero-v1.2.2` or later) from the [releases page](https://github.com/telosnetwork/teloszero-core/releases/latest).
+`main` is the development branch. Always deploy a **tagged release** approved for your network from the [releases page](https://github.com/telosnetwork/teloszero-core/releases/latest).
 :::
 
 ### Exchanges do **not** need finalizer (BLS) keys
@@ -43,7 +43,7 @@ Savanna finalizer keys and the BLS `signature-provider` / `regfinkey` / `actfink
 ## Before you begin
 
 - **Do not upgrade a production node in place first.** Validate the process on a test node, then roll it out to production.
-- **Supported operating systems:** Ubuntu **22.04** (Jammy, recommended) or Ubuntu **20.04** (Focal). Older releases are not supported.
+- **Operating systems:** Ubuntu **22.04** remains supported. The published 1.4.1 package passed an [Ubuntu 24.04 install and startup check](https://github.com/telosnetwork/teloszero-core/actions/runs/45716262097). Ubuntu 20.04 is a legacy option requiring Ubuntu Pro/ESM for ongoing OS security updates.
 - **Take a backup** of your `config.ini`, `genesis.json`, startup scripts and (for Path B) your `blocks/` and `state-history/` directories.
 - **Plan for downtime.** The upgrade requires a restart from snapshot (see below).
 - **Confirm your data directory location.** Default is `~/.local/share/eosio/nodeos/data`, or the path set with `--data-dir`.
@@ -198,17 +198,17 @@ If you run `nodeos` from a versioned local path (e.g. `/telos/leap/<version>/nod
 Download the operator package from the [latest release](https://github.com/telosnetwork/teloszero-core/releases/latest) and install it on a supported Ubuntu host:
 
 ```bash
-# Download teloszero-core_1.2.2_amd64.deb from the releases page, then:
+# Download teloszero-core_1.4.1_amd64.deb from the release page, then:
 sudo apt-get update
-sudo apt-get install -y ./teloszero-core_1.2.2_amd64.deb
+sudo apt-get install -y ./teloszero-core_1.4.1_amd64.deb
 ```
 
 Verify the checksum against the value published on the release page before installing, e.g.:
 
 ```bash
-sha256sum teloszero-core_1.2.2_amd64.deb
-# expected (v1.2.2):
-# 285fdfc1abde5104892d94b1f380c6d79aba35eac3413f139119ea88574c5007
+sha256sum teloszero-core_1.4.1_amd64.deb
+# expected (v1.4.1):
+# d9c8b841690270ab65e3b7aa267417c19af0d629c88a60323bd79e798166ecdc
 ```
 
 Verify the install:
@@ -220,18 +220,7 @@ nodeos --full-version
 <details>
 <summary>Alternative: build from source</summary>
 
-```bash
-git clone --recursive https://github.com/TelosNetwork/teloszero-core.git
-cd teloszero-core
-sudo apt-get update
-sudo apt-get install -y build-essential cmake git libcurl4-openssl-dev \
-  libgmp-dev llvm-11-dev python3-numpy file zlib1g-dev
-mkdir -p build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=/usr/lib/llvm-11 ..
-make -j "$(nproc)" package
-```
-
-On Ubuntu 20.04, install `g++-10` and pass `-DCMAKE_C_COMPILER=gcc-10 -DCMAKE_CXX_COMPILER=g++-10`. See the [repository README](https://github.com/telosnetwork/teloszero-core#build-from-source) for details.
+For Ubuntu 24.04 with the OC runtime, use the `release/1.4.1-teloszero` branch and the [source-build commands in its README](https://github.com/telosnetwork/teloszero-core/blob/release/1.4.1-teloszero/README.md#build-from-source). The published 1.4.1 tag predates that LLVM 14 source-build change. Record the exact branch commit and qualify the resulting binary separately before production use.
 </details>
 
 ### Step 5 — Remove the state memory file
@@ -451,7 +440,7 @@ curl -s http://127.0.0.1:8888/v1/chain/get_info
 Check that:
 
 - `chain_id` = `4667b205c6838ef70ff7988f6e8257e8be0e1284a2f59699054a018f743b1d11` (mainnet)
-- `server_version_string` reflects the TelosZero Core / Spring `v1.2.2` line
+- `server_full_version_string` matches the approved TelosZero Core build
 - `head_block_num` is increasing and close to `last_irreversible_block_num`
 
 ### Exercise the exchange-critical endpoints
