@@ -16,26 +16,26 @@ This is the steady-state installation path for a network where Savanna instant f
 
 ## Supported release
 
-The current public production package is:
+The latest published TelosZero Core package is:
 
 | Item | Value |
 |---|---|
-| Release | [`teloszero-v1.2.2`](https://github.com/telosnetwork/teloszero-core/releases/tag/teloszero-v1.2.2) |
-| Package | `teloszero-core_1.2.2_amd64.deb` |
-| SHA-256 | `285fdfc1abde5104892d94b1f380c6d79aba35eac3413f139119ea88574c5007` |
-| Release-validated host | Ubuntu 22.04, x86-64 |
+| Release | [`teloszero-v1.4.1`](https://github.com/telosnetwork/teloszero-core/releases/tag/teloszero-v1.4.1) |
+| Package | `teloszero-core_1.4.1_amd64.deb` |
+| SHA-256 | `d9c8b841690270ab65e3b7aa267417c19af0d629c88a60323bd79e798166ecdc` |
+| Package-validated host | Ubuntu 24.04, x86-64 (install and local testnet startup) |
 
 Always use a **tagged TelosZero Core release approved for the target Telos network**. Do not deploy the repository's `main` branch or silently substitute a newer release without an operator notice and validation.
 
-The project source also documents Ubuntu 20.04 builds, but the `teloszero-v1.2.2` release notes record the package install smoke test on Ubuntu 22.04. Treat another host OS as an explicitly tested operator exception, not an assumed production target.
+The published 1.4.1 package passed an [Ubuntu 24.04 install and startup check](https://github.com/telosnetwork/teloszero-core/actions/runs/45716262097). Ubuntu 22.04 remains supported. Ubuntu 20.04 is a legacy option requiring Ubuntu Pro/ESM for ongoing OS security updates. Native Ubuntu 24.04 source builds with LLVM 14 are documented separately below; that change was merged after the 1.4.1 tag.
 
 ## 1. Download and verify the package
 
 ```bash
 cd /tmp
-curl -fLO https://github.com/telosnetwork/teloszero-core/releases/download/teloszero-v1.2.2/teloszero-core_1.2.2_amd64.deb
+curl -fLO https://github.com/telosnetwork/teloszero-core/releases/download/teloszero-v1.4.1/teloszero-core_1.4.1_amd64.deb
 
-echo '285fdfc1abde5104892d94b1f380c6d79aba35eac3413f139119ea88574c5007  teloszero-core_1.2.2_amd64.deb' \
+echo 'd9c8b841690270ab65e3b7aa267417c19af0d629c88a60323bd79e798166ecdc  teloszero-core_1.4.1_amd64.deb' \
   | sha256sum --check --strict
 ```
 
@@ -45,7 +45,7 @@ The checksum command must print `OK`. Stop if it does not.
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y ./teloszero-core_1.2.2_amd64.deb
+sudo apt-get install -y ./teloszero-core_1.4.1_amd64.deb
 ```
 
 The package conflicts with historical `leap`, `spring`, and `antelope-spring` packages because they install the same command names. `apt` may replace an older package during installation.
@@ -147,4 +147,6 @@ If the node is still running Leap or pre-TelosZero Spring, use the [TelosZero up
 
 ## Source builds
 
-Production BPs should prefer the published package so every operator can verify the same artifact. If a source build is explicitly approved, use the exact tagged source and build instructions in the [TelosZero Core repository](https://github.com/telosnetwork/teloszero-core), record the commit, and publish a reproducible package checksum to the BP coordination channel before deployment.
+Production BPs should prefer the published package so every operator can verify the same artifact. If a source build is explicitly approved, record the exact commit and package checksum before deployment.
+
+For a native Ubuntu 24.04 build with the OC runtime, use the `release/1.4.1-teloszero` branch and the [Core README build instructions](https://github.com/telosnetwork/teloszero-core/blob/release/1.4.1-teloszero/README.md#build-from-source). The published `teloszero-v1.4.1` tag predates the LLVM 14 source-build change, so a build from the branch is different from the tagged 1.4.1 package. Coordinate any branch build for production separately with the BP group.
